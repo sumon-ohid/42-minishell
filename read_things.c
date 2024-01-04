@@ -18,7 +18,6 @@ void	append_node(t_history **history, char *str)
 	t_history *entry;
 	t_history *proxy;
 
-	printf("Hello");
 	entry = malloc(sizeof(t_history));
 	entry->string = ft_strdup(str);
 	entry->next = NULL;
