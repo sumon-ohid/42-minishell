@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/01/03 20:19:32 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/01/04 15:40:15 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,18 @@ treat it like this*/
 
 //libft_helpers
 char	*ft_itoa(int n);
-char	**ft_split(char const *str, char c);
 int		ft_strstr(const char *big, const char *little);
 char	*ft_strjoin(char *s1, char *s2, int save_flag);
 int		ft_strlen(const char *str);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strdup(const char *src);
-int		ft_strcmp(char *s1, char *s2);
+int 	ft_strcmp(char *s1, char *s2);
+char	**ft_split(char const *s, char c, size_t i, size_t j);
 
-typedef struct	s_history {
+typedef struct	s_data {
 	char 				*string;
-	struct s_history	*next;
-}				t_history;
+	char				*path;
+	struct s_data	*next;
+}				t_data;
 
 #endif
