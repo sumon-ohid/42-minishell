@@ -19,6 +19,17 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
+//types of data
+/*
+# define COMMAND 6432
+
+if (seems to be a command)
+int type = COMMAND
+
+if type == COMMAND
+then
+treat it like this*/
+
 //libft_helpers
 char	*ft_itoa(int n);
 char	**ft_split(char const *str, char c);

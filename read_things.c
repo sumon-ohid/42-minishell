@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 #include <stdio.h>
-
+/*
 void	append_node(t_history **history, char *str)
 {
 	t_history *entry;
@@ -30,7 +30,7 @@ void	append_node(t_history **history, char *str)
 			proxy = proxy->next;
 		proxy->next = entry;
 	}
-}
+}*/
 /*
 int main(void)
 {
@@ -52,16 +52,17 @@ int main(void)
 int main(void)
 {
 	char		*input;
-	t_history	*history;
+	//t_history	*history;
 	
-	history = NULL;
+	//history = NULL;
 	while (1)
 	{
 		input = readline("minishell: ");
 		if (!input)
 			break ;
 		else if (*input)
-			append_node(&history, input);
+			add_history(input);
+			//append_node(&history, input);
 		free(input);
 	}
 	//clear_history(); TODO: freeing function
