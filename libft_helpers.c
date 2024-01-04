@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft_helpers.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 21:31:07 by mhuszar           #+#    #+#             */
-/*   Updated: 2023/12/14 21:31:10 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/01/04 15:29:54 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,4 +120,14 @@ char	*ft_strdup(const char *src)
 	}
 	ptr[counter2] = '\0';
 	return (ptr);
+}
+
+int	ft_strcmp(char *s1, char *s2)
+{
+	int i;
+
+	i = 0;
+	while (s1[i] == s2[i] && s1[i] != '\0' && s2[i] != '\0')
+		i++;
+	return (s1[i] - s2[i]);
 }
