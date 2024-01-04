@@ -3,20 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   read_things.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:17:43 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/01/03 20:17:54 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/01/04 12:41:38 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <stdio.h>
 
 void	append_node(t_history **history, char *str)
 {
 	t_history *entry;
 	t_history *proxy;
 
+	printf("Hello");
 	entry = malloc(sizeof(t_history));
 	entry->string = ft_strdup(str);
 	entry->next = NULL;
