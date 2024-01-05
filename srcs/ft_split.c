@@ -6,11 +6,11 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 07:40:56 by sumon             #+#    #+#             */
-/*   Updated: 2024/01/04 13:00:22 by msumon           ###   ########.fr       */
+/*   Updated: 2024/01/05 14:34:29 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../includes/minishell.h"
 
 static size_t	ft_counter(char const *s, char c)
 {

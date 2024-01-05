@@ -6,16 +6,21 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/01/04 15:40:15 by msumon           ###   ########.fr       */
+/*   Updated: 2024/01/05 14:48:57 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+#define GREEN "\033[32m"
+#define RESET "\033[0m"
+
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include <dirent.h>
+# include <sys/wait.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 
@@ -39,6 +44,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strdup(const char *src);
 int 	ft_strcmp(char *s1, char *s2);
 char	**ft_split(char const *s, char c, size_t i, size_t j);
+void	entry_check(char *str, char *line);
+char	**parse_input(char *line);
 
 typedef struct	s_data {
 	char 				*string;

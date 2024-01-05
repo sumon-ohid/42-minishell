@@ -6,27 +6,11 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:17:43 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/01/04 16:07:20 by msumon           ###   ########.fr       */
+/*   Updated: 2024/01/05 14:34:51 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-#include <stdio.h>
-
-void	entry_check(char *str, char *ter)
-{
-	char **input;
-
-	input = ft_split(ter, ' ', 0, 0);
-	if (!input)
-		write(2, "Error\n", 6);
-	if (ft_strcmp(input[0], "pwd") == 0)
-		printf("%s\n", str);
-	else if (ft_strcmp(input[0], "exit") == 0)
-		exit(0);
-	else
-		printf("shell: command not found: %s\n", ter);
-}
+#include "../includes/minishell.h"
 
 int main(void)
 {
@@ -51,7 +35,7 @@ int main(void)
 	// input = ft_strjoin("student@c0r0p0:~", input, 0);
     while (1)
 	{
-        input2 = readline("student@c0r0p0$ ");
+        input2 = readline(GREEN "student@minishell$ " RESET);
         if (!input2)
             break;
         else if (*input2)

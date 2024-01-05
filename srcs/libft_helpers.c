@@ -6,11 +6,11 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 21:31:07 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/01/04 15:29:54 by msumon           ###   ########.fr       */
+/*   Updated: 2024/01/05 14:34:42 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../includes/minishell.h"
 
 int	ft_strstr(const char *big, const char *little)
 {
