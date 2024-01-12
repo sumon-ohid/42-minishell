@@ -6,7 +6,7 @@
 /*   By: sumon <sumon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 11:33:12 by sumon             #+#    #+#             */
-/*   Updated: 2024/01/12 11:34:41 by sumon            ###   ########.fr       */
+/*   Updated: 2024/01/12 12:23:07 by sumon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	char		*d;
 	const char	*s;
 
-    s = src;
+	s = src;
 	d = dest;
 	while (n--)
 		*d++ = *s++;

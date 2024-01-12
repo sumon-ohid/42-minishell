@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft_helpers.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: sumon <sumon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 21:31:07 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/01/05 14:34:42 by msumon           ###   ########.fr       */
+/*   Updated: 2024/01/12 12:22:35 by sumon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char	*ft_strjoin(char *s1, char *s2, int save_flag)
 		new_str[ctr1++] = s2[ctr2++];
 	new_str[ctr1] = '\0';
 	if (save_flag)
-		free (s1);
+		free(s1);
 	return (new_str);
 }
 
@@ -73,9 +73,9 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	while (s[counter])
 		counter++;
 	if ((counter - start) < len)
-		sub_str = (char *)malloc(sizeof(char ) * ((counter - start) + 1));
+		sub_str = (char *)malloc(sizeof(char) * ((counter - start) + 1));
 	else
-		sub_str = (char *)malloc(sizeof(char ) * (len + 1));
+		sub_str = (char *)malloc(sizeof(char) * (len + 1));
 	if (!sub_str)
 		return (0);
 	counter = 0;
@@ -110,7 +110,7 @@ char	*ft_strdup(const char *src)
 	counter2 = 0;
 	while (src[counter])
 		counter++;
-	ptr = (char *) malloc(counter + 1);
+	ptr = (char *)malloc(counter + 1);
 	if (!ptr)
 		return (0);
 	while (counter2 < counter)

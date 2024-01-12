@@ -6,15 +6,15 @@
 /*   By: sumon <sumon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 14:32:03 by msumon            #+#    #+#             */
-/*   Updated: 2024/01/12 12:02:17 by sumon            ###   ########.fr       */
+/*   Updated: 2024/01/12 12:22:24 by sumon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void ft_env()
+void	ft_env(void)
 {
-	char *output;
+	char	*output;
 
 	output = getenv("PATH");
 	if (!output)
