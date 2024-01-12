@@ -16,7 +16,8 @@ MAGENTA = \033[0;95m
 CYAN = \033[0;96m
 WHITE = \033[0;97m
 
-SRC = read_things.c libft_helpers.c ft_split.c \
+SRC = srcs/main.c srcs/libft_helpers.c srcs/ft_split.c srcs/cmd.c \
+		srcs/libft_helpers2.c srcs/tokenize.c\
 
 OBJ = $(SRC:.c=.o)
 
