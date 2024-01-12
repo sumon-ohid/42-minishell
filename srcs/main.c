@@ -6,11 +6,12 @@
 /*   By: sumon <sumon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:17:43 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/01/12 11:20:16 by sumon            ###   ########.fr       */
+/*   Updated: 2024/01/12 12:10:49 by sumon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+#include <stdio.h>
 
 void handle_sigint(int sig)
 {
@@ -29,10 +30,9 @@ int main(void)
 	t_data *node;
     char *input;
 	char *input2;
-    size_t size = 1024;
 
 	node = (t_data *)malloc(sizeof(t_data));
-    input = (char *)malloc(size);
+    input = (char *)malloc(1024);
     if (input == NULL)
 	{
         perror("Failed to allocate memory");

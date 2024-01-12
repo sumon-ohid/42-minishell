@@ -17,7 +17,7 @@ CYAN = \033[0;96m
 WHITE = \033[0;97m
 
 SRC = srcs/main.c srcs/libft_helpers.c srcs/ft_split.c srcs/cmd.c \
-		srcs/libft_helpers2.c \
+		srcs/libft_helpers2.c srcs/tokenize.c\
 
 OBJ = $(SRC:.c=.o)
 

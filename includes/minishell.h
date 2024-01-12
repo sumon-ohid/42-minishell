@@ -6,7 +6,7 @@
 /*   By: sumon <sumon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/01/12 11:37:35 by sumon            ###   ########.fr       */
+/*   Updated: 2024/01/12 11:51:44 by sumon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,42 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
-# include <dirent.h>
-# include <sys/wait.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <fcntl.h>
+# include <sys/wait.h>
+# include <errno.h>
+# include <string.h>
+# include <stddef.h>
+# include <stdarg.h>
 
-//types of data
-/*
-# define COMMAND 6432
 
-if (seems to be a command)
-int type = COMMAND
+//TOKEN TYPES
+# define COMMAND 1
+# define FLAG 2
+# define REDIR_IN 3
+# define REDIR_OUT 4
+# define REDIR_OUT_APPEND 5
+# define INFILE 6
+# define OUTFILE 7
+# define OUTFILE_APPEND 8
+# define PIPE 9
+# define HEREDOC 10
 
-if type == COMMAND
-then
-treat it like this*/
+typedef struct	s_data
+{
+	char 				*string;
+	char				*path;
+	struct s_data	*next;
+}				t_data;
+
+typedef struct	s_token
+{
+	char 				*str;
+	int					type;
+	struct s_token		*previous;
+	struct s_token		*next;
+}			t_token;
 
 //libft_helpers
 char	*ft_itoa(int n);
@@ -52,11 +73,6 @@ void	*ft_memcpy(void *dest, const void *src, size_t n);
 //others
 void	entry_check(char *str, char *line);
 char	**parse_input(char *line);
-
-typedef struct	s_data {
-	char 				*string;
-	char				*path;
-	struct s_data	*next;
-}				t_data;
+t_token **tokenizer(char *str);
 
 #endif

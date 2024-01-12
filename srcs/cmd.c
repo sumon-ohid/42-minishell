@@ -6,11 +6,21 @@
 /*   By: sumon <sumon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 14:32:03 by msumon            #+#    #+#             */
-/*   Updated: 2024/01/12 11:40:10 by sumon            ###   ########.fr       */
+/*   Updated: 2024/01/12 12:02:17 by sumon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+void ft_env()
+{
+	char *output;
+
+	output = getenv("PATH");
+	if (!output)
+		output = ft_strdup("\n");
+	printf("%s\n", output);
+}
 
 void	ft_echo(char **arr)
 {
@@ -60,20 +70,6 @@ void	ft_cd(char *str)
 		chdir("/Users/new_dir");
 }
 
-void	ft_env(void)
-{
-	int			i;
-	extern char	**environ;
-
-	i = 0;
-	while (environ[i])
-	{
-		ft_putstr(environ[i]);
-		ft_putchar('\n');
-		i++;
-	}
-}
-
 void	ft_pwd(void)
 {
 	char	*pwd;
@@ -120,6 +116,8 @@ void	entry_check(char *str, char *line)
 		ft_pwd();
 	else if (ft_strcmp(arr[0], "exit") == 0)
 		exit(0);
+	else
+		printf("%s : command not found.\n", line);
 	while (arr[i])
 	{
 		free(arr[i]);
