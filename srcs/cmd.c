@@ -6,7 +6,7 @@
 /*   By: sumon <sumon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 14:32:03 by msumon            #+#    #+#             */
-/*   Updated: 2024/01/12 11:33:41 by sumon            ###   ########.fr       */
+/*   Updated: 2024/01/12 11:40:10 by sumon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ void	ft_echo(char **arr)
 	}
 	while (arr[i])
 	{
-		if (arr[i][0] == '"' && arr[i][ft_strlen(arr[i]) - 1] == '"')
+		if ((arr[i][0] == '"' && arr[i][ft_strlen(arr[i]) - 1] == '"')
+			|| (arr[i][0] == '\'' && arr[i][ft_strlen(arr[i]) - 1] == '\''))
 		{
-			// Print the contents inside the double quotes
 			inside_quotes = ft_strndup(arr[i] + 1, ft_strlen(arr[i]) - 2);
 			ft_putstr(inside_quotes);
 			free(inside_quotes);
