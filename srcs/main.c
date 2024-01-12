@@ -1,16 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read_things.c                                      :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: sumon <sumon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:17:43 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/01/05 14:34:51 by msumon           ###   ########.fr       */
+/*   Updated: 2024/01/12 11:20:16 by sumon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+void handle_sigint(int sig)
+{
+    (void)sig;
+    write(1, "\n", 1);
+}
+
+void handle_sigquit(int sig)
+{
+    (void)sig;
+    exit(0);
+}
 
 int main(void)
 {
@@ -26,18 +38,16 @@ int main(void)
         perror("Failed to allocate memory");
         exit(EXIT_FAILURE);
     }
-    if (getcwd(input, size) == NULL) 
-	{
-        perror("getcwd() error");
-        exit(EXIT_FAILURE);
-    }
-	// input = ft_strjoin(input, "$ ", 1);
-	// input = ft_strjoin("student@c0r0p0:~", input, 0);
+    signal(SIGINT, handle_sigint);
+    signal(SIGQUIT, handle_sigquit);
     while (1)
 	{
         input2 = readline(GREEN "student@minishell$ " RESET);
         if (!input2)
-            break;
+        {
+            printf("\n");
+            exit(0);
+        }
         else if (*input2)
         {
 			node->path = input;
@@ -47,6 +57,5 @@ int main(void)
     }
 	free(input); 
     free(input2);
-    write(1, "exiting minishell\n", 17);
     return 0;
 }

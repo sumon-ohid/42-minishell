@@ -1,46 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
+/*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: sumon <sumon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 14:32:03 by msumon            #+#    #+#             */
-/*   Updated: 2024/01/05 14:52:38 by msumon           ###   ########.fr       */
+/*   Updated: 2024/01/12 11:33:41 by sumon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	ft_putchar(char c)
-{
-	write(1, &c, 1);
-}
-
-void	ft_putstr(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		ft_putchar(str[i]);
-		i++;
-	}
-}
-
 void	ft_echo(char **arr)
 {
-	int	i;
+	int		i;
+	int		newline;
+	char	*inside_quotes;
 
 	i = 1;
-	while (arr[i])
+	newline = 1;
+	if (arr[i] && ft_strcmp(arr[i], "-n") == 0)
 	{
-		ft_putstr(arr[i]);
-		ft_putchar(' ');
+		newline = 0;
 		i++;
 	}
-	ft_putchar('\n');
+	while (arr[i])
+	{
+		if (arr[i][0] == '"' && arr[i][ft_strlen(arr[i]) - 1] == '"')
+		{
+			// Print the contents inside the double quotes
+			inside_quotes = ft_strndup(arr[i] + 1, ft_strlen(arr[i]) - 2);
+			ft_putstr(inside_quotes);
+			free(inside_quotes);
+		}
+		else if (ft_strcmp(arr[i], "\"\"") != 0 && ft_strcmp(arr[i], "''") != 0)
+		{
+			ft_putstr(arr[i]);
+		}
+		if (arr[i + 1])
+			ft_putchar(' ');
+		i++;
+	}
+	if (newline)
+		ft_putchar('\n');
 }
 
 void	ft_cd(char *str)
@@ -71,42 +74,13 @@ void	ft_env(void)
 	}
 }
 
-void	ft_execve(char **arr, char *str)
+void	ft_pwd(void)
 {
-	pid_t	pid;
-	int		status;
-	char	*path;
-	char	**env;
+	char	*pwd;
 
-	pid = fork();
-	if (pid == 0)
-	{
-		path = ft_strjoin(str, "|", 0);
-		path = ft_strjoin(path, arr[0], 1);
-		env = (char **)malloc(sizeof(char *) * 2);
-		env[0] = ft_strjoin("PATH=", str, 0);
-		env[1] = NULL;
-		if (execve(path, arr, env) == -1)
-			ft_putstr("command not found\n");
-	}
-	else
-		wait(&status);
-}
-
-void	ft_ls(void)
-{
-	DIR				*d;
-	struct dirent	*dir;
-
-	d = opendir(".");
-	if (d)
-	{
-		while ((dir = readdir(d)) != NULL)
-		{
-			printf("%s\n", dir->d_name);
-		}
-		closedir(d);
-	}
+	pwd = getcwd(NULL, 0);
+	ft_putstr(pwd);
+	ft_putchar('\n');
 }
 
 char	**parse_input(char *line)
@@ -128,6 +102,7 @@ void	entry_check(char *str, char *line)
 	int		i;
 
 	i = 0;
+	(void)str;
 	arr = parse_input(line);
 	if (!arr)
 		return ;
@@ -141,18 +116,10 @@ void	entry_check(char *str, char *line)
 		ft_env();
 	else if (ft_strcmp(arr[0], "clear") == 0)
 		write(1, "\033[H\033[J", 6);
-	else if (ft_strcmp(arr[0], "ls") == 0)
-		ft_ls();
 	else if (ft_strcmp(arr[0], "pwd") == 0)
-	{
-		getcwd(str, 1024);
-		ft_putstr(str);
-		ft_putchar('\n');
-	}
+		ft_pwd();
 	else if (ft_strcmp(arr[0], "exit") == 0)
 		exit(0);
-	else
-		ft_execve(arr, str);
 	while (arr[i])
 	{
 		free(arr[i]);

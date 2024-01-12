@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: sumon <sumon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/01/05 14:48:57 by msumon           ###   ########.fr       */
+/*   Updated: 2024/01/12 11:37:35 by sumon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,12 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strdup(const char *src);
 int 	ft_strcmp(char *s1, char *s2);
 char	**ft_split(char const *s, char c, size_t i, size_t j);
+void	ft_putstr(char *str);
+void	ft_putchar(char c);
+char	*ft_strndup(const char *s, size_t n);
+void	*ft_memcpy(void *dest, const void *src, size_t n);
+
+//others
 void	entry_check(char *str, char *line);
 char	**parse_input(char *line);
 
