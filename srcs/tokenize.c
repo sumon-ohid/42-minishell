@@ -65,28 +65,35 @@ t_token	**tokenizer(char *str)
 	int		counter;
 	t_token	**tokens;
 	t_token	*cur;
+	int		counter2;
 
 	words = parse_input(str);
 	counter = 0;
+	counter2 = 0;
 	tokens = NULL;
 	while (words[counter])
 	{
-		if (!tokens)
+		while (words[counter] && ft_strcmp(words[counter], "|") != 0)
 		{
-			*tokens = create_token(words[counter]);
-			(*tokens)->type = determine_type(words[counter], 0);
+			if (!tokens[counter2])
+			{
+				tokens[counter2] = create_token(words[counter]);
+				(tokens[counter2])->type = determine_type(words[counter], 0);
+			}
+			else
+			{
+				cur = tokens[counter2];
+				while (cur->next)
+					cur = cur->next;
+				cur->next = create_token(words[counter]);
+				cur->next->previous = cur;
+				cur->next->type = determine_type(words[counter], cur->type);
+			}
+			counter++;
+			// TODO: error management
 		}
-		else
-		{
-			cur = *tokens;
-			while (cur->next)
-				cur = cur->next;
-			cur->next = create_token(words[counter]);
-			cur->next->previous = cur;
-			cur->next->type = determine_type(words[counter], cur->type);
-		}
+		counter2++;
 		counter++;
-		// TODO: error management
 	}
 	return (tokens);
 }
