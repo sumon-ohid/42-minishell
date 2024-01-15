@@ -24,6 +24,25 @@ void	handle_sigquit(int sig)
 	(void)sig;
 	exit(0);
 }
+/*
+int main (void)
+{
+	t_token **proba = tokenizer("whatever | hi i'ma apple | pipessss");
+	t_token *proxy;
+	int counter = 0;
+	while (counter < pipe_counter("whatever | hi i'ma apple | pipessss"))
+	{
+		proxy = proba[counter];
+		while (proxy)
+		{
+			printf("Batch number %d next word: ", counter);
+			printf("%s\n", proxy->str);
+			proxy = proxy->next;
+		}
+		counter++;
+	}
+	exit(0);
+}*/
 
 int	main(void)
 {

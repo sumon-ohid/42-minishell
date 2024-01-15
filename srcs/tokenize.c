@@ -59,6 +59,24 @@ t_token	*create_token(char *word)
 	return (new);
 }
 
+int	pipe_counter(char *str)
+{
+	int	counter;
+	int	pipes;
+
+	if (!str)
+		return (0);
+	counter = 0;
+	pipes = 0;
+	while (str[counter])
+	{
+		if (str[counter] == '|')
+			pipes++;
+		counter++;
+	}
+	return (pipes + 1);
+}
+
 t_token	**tokenizer(char *str)
 {
 	char	**words;
@@ -70,8 +88,8 @@ t_token	**tokenizer(char *str)
 	words = parse_input(str);
 	counter = 0;
 	counter2 = 0;
-	tokens = NULL;
-	while (words[counter])
+	tokens = ft_calloc(sizeof(t_token *), pipe_counter(str));
+	while (counter2 < pipe_counter(str))
 	{
 		while (words[counter] && ft_strcmp(words[counter], "|") != 0)
 		{

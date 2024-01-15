@@ -56,3 +56,26 @@ void	ft_putstr(char *str)
 		i++;
 	}
 }
+
+void	*ft_calloc(size_t nmemb, size_t size)
+{
+	size_t	counter;
+	size_t	total_size;
+	void	*ptr;
+
+	if (!nmemb || !size)
+		return (NULL);
+	counter = 0;
+	total_size = nmemb * size;
+	if (total_size / nmemb != size)
+		return (NULL);
+	ptr = malloc(total_size);
+	if (!ptr)
+		return (NULL);
+	while (counter < total_size)
+	{
+		((unsigned char *)ptr)[counter] = 0;
+		counter++;
+	}
+	return (ptr);
+}

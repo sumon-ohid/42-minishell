@@ -68,10 +68,12 @@ void				ft_putstr(char *str);
 void				ft_putchar(char c);
 char				*ft_strndup(const char *s, size_t n);
 void				*ft_memcpy(void *dest, const void *src, size_t n);
+void				*ft_calloc(size_t nmemb, size_t size);
 
 // others
 void				entry_check(char *str, char *line);
 char				**parse_input(char *line);
 t_token				**tokenizer(char *str);
+int					pipe_counter(char *str);
 
 #endif
