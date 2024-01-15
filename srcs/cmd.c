@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sumon <sumon@student.42.fr>                +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 14:32:03 by msumon            #+#    #+#             */
-/*   Updated: 2024/01/12 12:22:24 by sumon            ###   ########.fr       */
+/*   Updated: 2024/01/15 13:36:17 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,15 @@
 
 void	ft_env(void)
 {
-	char	*output;
-
-	output = getenv("PATH");
-	if (!output)
-		output = ft_strdup("\n");
-	printf("%s\n", output);
+	extern char	**environ;
+	int i;
+	
+	i = 0;
+	while (environ[i])
+	{
+		printf("%s\n", environ[i]);
+		i++;
+	}
 }
 
 void	ft_echo(char **arr)
