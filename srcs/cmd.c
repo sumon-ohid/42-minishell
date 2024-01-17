@@ -139,11 +139,11 @@ void	executor(t_token **tokens, int processes, char *line)
 		if (pid == 0) //i'm the child
 		{
 			execute_chain(tokens[counter], line);
-			exit (-1);
+			exit (0);
 		}
 		else
 		{
-			waitpid(pid, &status, WNOHANG);
+			waitpid(pid, &status, 0);
 		}
 		counter++;
 	}
