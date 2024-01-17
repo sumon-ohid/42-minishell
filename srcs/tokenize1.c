@@ -22,3 +22,43 @@ char	*handle_envp(char *str)
 	free(str);
 	return (output);
 }
+
+int	check_builtins(char *word)
+{
+	if (!word)
+		return (-1);
+	else if (ft_strcmp(word, "cd") == 0)
+		return (0);
+	else if (ft_strcmp(word, "echo") == 0)
+		return (0);
+	else if (ft_strcmp(word, "env") == 0)
+		return (0);
+	else if (ft_strcmp(word, "clear") == 0)
+		return (0);
+	else if (ft_strcmp(word, "pwd") == 0)
+		return (0);
+	else if (ft_strcmp(word, "exit") == 0)
+		return (0);
+	else if (ft_strcmp(word, "ls") == 0)
+		return (0);
+	else
+		return (-1);
+}
+
+int	check_prevs(char *word, int prev_type)
+{
+	if (!word)
+		return (0);
+	else if (prev_type == HEREDOC)
+		return (DELIM);
+	else if (prev_type == REDIR_OUT)
+		return (OUTFILE);
+	else if (prev_type == REDIR_OUT_APPEND)
+		return (OUTFILE_APPEND);
+	else if (prev_type == REDIR_IN)
+		return (INFILE);
+	else if (prev_type == BUILTIN || prev_type == COMMAND || prev_type == FLAG)
+		return (FLAG);
+	else
+		return (COMMAND);
+}

@@ -51,7 +51,29 @@ char	**parse_input(char *line)
 	return (tokens);
 }
 
-void	entry_check2(char **arr, char *line, int i)
+void	entry_check2(t_token *head, char *line)
+{
+	if (ft_strcmp(head->str, "cd") == 0)
+		ft_cd(head->next->str);
+	else if (ft_strcmp(head->str, "echo") == 0)
+		return ;//ft_echo(arr); THIS will be a little complicated
+	else if (ft_strcmp(head->str, "env") == 0)
+		ft_env();
+	else if (ft_strcmp(head->str, "clear") == 0)
+		write(1, "\033[H\033[J", 6);
+	else if (ft_strcmp(head->str, "pwd") == 0)
+		ft_pwd();
+	else if (ft_strcmp(head->str, "exit") == 0)
+		exit(0);
+	else if (ft_strcmp(head->str, "exit") == 0)
+		exit(0);
+	else if (ft_strcmp(head->str, "ls") == 0)
+		ft_ls(".");
+	else
+		printf("%s : command not found.\n", line);
+}
+
+/*void	entry_check2(char **arr, char *line, int i)
 {
 	if (ft_strcmp(arr[0], "cd") == 0)
 		ft_cd(arr[1]);
@@ -77,17 +99,37 @@ void	entry_check2(char **arr, char *line, int i)
 		i++;
 	}
 	free(arr);
+}*/
+
+void	executor(t_token **tokens, int processes, char *line)
+{
+	//ima execute shit here but now let's just check for builtins in a simple way
+	(void)processes;
+	//printf("entered executor\n");
+	if (*tokens)
+	{
+		if (tokens[0]->type == BUILTIN)
+			entry_check2(tokens[0], line);
+	}
+	else
+		printf("im here to inform you that tokenizer sucks\n");
 }
 
 void	entry_check(char *str, char *line)
 {
 	char	**arr;
-	int		i;
+	//int		i;
+	t_token **tokens;
 
-	i = 0;
-	(void)str;
+	//i = 0;
+	(void)str; //what is str?
 	arr = parse_input(line);
 	if (!arr)
 		return ;
-	entry_check2(arr, line, i);
+	tokens = ft_calloc(sizeof(t_token *), pipe_counter(line));
+	process_words(&tokens, arr, line);
+	//free arr here
+	executor(tokens, pipe_counter(line), line);
+	//free tokens and line here
+	//entry_check2(arr, line, i);
 }
