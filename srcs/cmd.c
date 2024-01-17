@@ -101,7 +101,7 @@ void	entry_check2(t_token *head, char *line)
 	free(arr);
 }*/
 
-void	executor(t_token **tokens, int processes, char *line)
+/*void	executor(t_token **tokens, int processes, char *line)
 {
 	//ima execute shit here but now let's just check for builtins in a simple way
 	(void)processes;
@@ -113,6 +113,40 @@ void	executor(t_token **tokens, int processes, char *line)
 	}
 	else
 		printf("im here to inform you that tokenizer sucks\n");
+}*/
+
+void	execute_chain(t_token *chain, char *line)
+{
+	if (chain)
+	{
+		if (chain->type == BUILTIN)
+			entry_check2(chain, line);
+	}
+	else
+		printf("im here to inform you that tokenizer sucks\n");
+}
+
+void	executor(t_token **tokens, int processes, char *line)
+{
+	int counter;
+	int	pid;
+	int status;
+
+	counter = 0;
+	while (counter < processes)
+	{
+		pid = fork();
+		if (pid == 0) //i'm the child
+		{
+			execute_chain(tokens[counter], line);
+			exit (-1);
+		}
+		else
+		{
+			waitpid(pid, &status, WNOHANG);
+		}
+		counter++;
+	}
 }
 
 void	entry_check(char *str, char *line)
