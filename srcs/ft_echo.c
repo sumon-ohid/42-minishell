@@ -6,11 +6,40 @@
 /*   By: sumon <sumon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:25:07 by sumon             #+#    #+#             */
-/*   Updated: 2024/01/17 09:53:34 by sumon            ###   ########.fr       */
+/*   Updated: 2024/01/17 14:33:27 by sumon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+char	*get_env_value(char *arg)
+{
+	char	*env_name;
+	char	*env_value;
+	char	*env_value2;
+	int		i;
+	int		j;
+
+	i = 1;
+	j = 0;
+	while (arg[i] && arg[i] != '=')
+		i++;
+	env_name = ft_strndup(arg + 1, i - 1);
+	env_value = getenv(env_name);
+	if (env_value)
+	{
+		env_value2 = malloc(sizeof(char) * (ft_strlen(env_value) + 1));
+		while (env_value[j])
+		{
+			env_value2[j] = env_value[j];
+			j++;
+		}
+		env_value2[j] = '\0';
+		free(env_name);
+		return (env_value2);
+	}
+	return (free(env_name), "");
+}
 
 void	print_argument(char *arg)
 {
@@ -22,6 +51,14 @@ void	print_argument(char *arg)
 		inside_quotes = ft_strndup(arg + 1, ft_strlen(arg) - 2);
 		ft_putstr(inside_quotes);
 		free(inside_quotes);
+	}
+	else if (arg[0] == '$' && ft_strcmp(arg, "$") != 0)
+	{
+		ft_putstr(get_env_value(arg));
+	}
+	else if (arg[0] == '$' && ft_strcmp(arg, "$") == 0)
+	{
+		ft_putchar('$');
 	}
 	else if (ft_strcmp(arg, "\"\"") != 0 && ft_strcmp(arg, "''") != 0)
 	{

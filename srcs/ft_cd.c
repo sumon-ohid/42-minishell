@@ -6,7 +6,7 @@
 /*   By: sumon <sumon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:24:36 by sumon             #+#    #+#             */
-/*   Updated: 2024/01/17 09:24:44 by sumon            ###   ########.fr       */
+/*   Updated: 2024/01/17 14:11:22 by sumon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,8 @@ void	ft_cd(char *str)
 	{
 		if (chdir(str) == -1)
 		{
-			ft_putstr("cd: no such file or directory: ");
+			ft_putstr("cd: no such directory: ");
 			ft_putstr("\n");
 		}
 	}
-	else
-		chdir("/Users/new_dir");
 }
