@@ -6,7 +6,7 @@
 /*   By: sumon <sumon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:17:43 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/01/17 09:33:54 by sumon            ###   ########.fr       */
+/*   Updated: 2024/01/17 09:53:48 by sumon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,8 @@ void	handle_sigquit(int sig)
 	(void)sig;
 }
 
-int	main(void)
+void	ft_initialize(t_data *node, char *input, char *input2)
 {
-	t_data	*node;
-	char	*input;
-	char	*input2;
-
-	node = (t_data *)malloc(sizeof(t_data));
-	input = (char *)malloc(1024);
-	if (input == NULL)
-	{
-		perror("Failed to allocate memory");
-		exit(EXIT_FAILURE);
-	}
 	while (1)
 	{
 		signal(SIGINT, handle_sigint);
@@ -57,5 +46,27 @@ int	main(void)
 	}
 	free(input);
 	free(input2);
+}
+
+int	main(void)
+{
+	t_data	*node;
+	char	*input;
+	char	*input2;
+
+	input2 = NULL;
+	node = (t_data *)malloc(sizeof(t_data));
+	if (node == NULL)
+	{
+		perror("Failed to allocate memory");
+		exit(EXIT_FAILURE);
+	}
+	input = (char *)malloc(1024);
+	if (input == NULL)
+	{
+		perror("Failed to allocate memory");
+		exit(EXIT_FAILURE);
+	}
+	ft_initialize(node, input, input2);
 	return (0);
 }

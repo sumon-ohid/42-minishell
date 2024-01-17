@@ -23,6 +23,7 @@ SRC = 	srcs/main.c \
 		srcs/libft_helpers1.c \
 		srcs/libft_helpers2.c \
 		srcs/tokenize.c\
+		srcs/tokenize1.c\
 		srcs/ft_cd.c \
 		srcs/ft_echo.c \
 		srcs/ft_env.c \

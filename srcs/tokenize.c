@@ -6,24 +6,12 @@
 /*   By: sumon <sumon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:50:09 by sumon             #+#    #+#             */
-/*   Updated: 2024/01/12 12:22:51 by sumon            ###   ########.fr       */
+/*   Updated: 2024/01/17 10:01:11 by sumon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 #include <stdio.h>
-
-char	*handle_envp(char *str)
-{
-	char	*output;
-
-	output = getenv(str + 1);
-	if (!output)
-		output = ft_strdup("\n");
-	// malloc protection
-	free(str);
-	return (output);
-}
 
 int	determine_type(char *word, int prev_type)
 {
@@ -41,6 +29,8 @@ int	determine_type(char *word, int prev_type)
 	return (0);
 }
 
+// TODO: account for $?
+// malloc protection
 t_token	*create_token(char *word)
 {
 	t_token	*new;
@@ -51,10 +41,9 @@ t_token	*create_token(char *word)
 	new->previous = NULL;
 	new->next = NULL;
 	if (word[0] == '$')
-		new->str = handle_envp(word); // TODO: account for $?
+		new->str = handle_envp(word);
 	else
 		new->str = ft_strdup(word);
-	// malloc protection
 	new->type = 0;
 	return (new);
 }
@@ -77,41 +66,41 @@ int	pipe_counter(char *str)
 	return (pipes + 1);
 }
 
-t_token	**tokenizer(char *str)
+t_token	*create_and_link_token(t_token *cur, char *word)
 {
-	char	**words;
+	if (!cur)
+	{
+		cur = create_token(word);
+		cur->type = determine_type(word, 0);
+	}
+	else
+	{
+		while (cur->next)
+			cur = cur->next;
+		cur->next = create_token(word);
+		cur->next->previous = cur;
+		cur->next->type = determine_type(word, cur->type);
+	}
+	return (cur);
+}
+
+void	process_words(t_token **tokens, char **words, char *str)
+{
 	int		counter;
-	t_token	**tokens;
-	t_token	*cur;
 	int		counter2;
 
-	words = parse_input(str);
 	counter = 0;
 	counter2 = 0;
-	tokens = ft_calloc(sizeof(t_token *), pipe_counter(str));
 	while (counter2 < pipe_counter(str))
 	{
 		while (words[counter] && ft_strcmp(words[counter], "|") != 0)
 		{
-			if (!tokens[counter2])
-			{
-				tokens[counter2] = create_token(words[counter]);
-				(tokens[counter2])->type = determine_type(words[counter], 0);
-			}
-			else
-			{
-				cur = tokens[counter2];
-				while (cur->next)
-					cur = cur->next;
-				cur->next = create_token(words[counter]);
-				cur->next->previous = cur;
-				cur->next->type = determine_type(words[counter], cur->type);
-			}
+			tokens[counter2] = create_and_link_token(tokens[counter2],
+					words[counter]);
 			counter++;
 			// TODO: error management
 		}
 		counter2++;
 		counter++;
 	}
-	return (tokens);
 }

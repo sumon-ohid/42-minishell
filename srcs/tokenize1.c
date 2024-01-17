@@ -1,35 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_env.c                                           :+:      :+:    :+:   */
+/*   tokenizer1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sumon <sumon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/17 09:25:24 by sumon             #+#    #+#             */
-/*   Updated: 2024/01/17 09:52:40 by sumon            ###   ########.fr       */
+/*   Created: 2024/01/17 09:57:30 by sumon             #+#    #+#             */
+/*   Updated: 2024/01/17 09:58:32 by sumon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-char	**ft_env(void)
+char	*handle_envp(char *str)
 {
-	extern char	**environ;
-	int			i;
-	char		**envp;
-	char		**envp2;
+	char	*output;
 
-	envp = environ;
-	i = 0;
-	while (envp[i])
-		i++;
-	envp2 = malloc(sizeof(char *) * (i + 1));
-	i = 0;
-	while (envp[i])
-	{
-		envp2[i] = malloc(sizeof(char) * (ft_strlen(envp[i]) + 1));
-		printf("%s\n", envp[i]);
-		i++;
-	}
-	return (envp2);
+	output = getenv(str + 1);
+	if (!output)
+		output = ft_strdup("\n");
+	free(str);
+	return (output);
 }
