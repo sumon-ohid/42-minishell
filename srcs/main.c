@@ -6,7 +6,7 @@
 /*   By: sumon <sumon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:17:43 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/01/17 09:53:48 by sumon            ###   ########.fr       */
+/*   Updated: 2024/01/17 11:18:27 by sumon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ void	ft_initialize(t_data *node, char *input, char *input2)
 		{
 			printf("\n");
 			printf("exit\n");
+			free(input);
+			free(input2);
 			exit(0);
 		}
 		else if (*input2)
@@ -65,6 +67,7 @@ int	main(void)
 	if (input == NULL)
 	{
 		perror("Failed to allocate memory");
+		free(node);
 		exit(EXIT_FAILURE);
 	}
 	ft_initialize(node, input, input2);
