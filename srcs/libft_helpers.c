@@ -6,7 +6,7 @@
 /*   By: sumon <sumon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 21:31:07 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/01/12 12:22:35 by sumon            ###   ########.fr       */
+/*   Updated: 2024/01/17 09:02:24 by sumon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,14 +120,4 @@ char	*ft_strdup(const char *src)
 	}
 	ptr[counter2] = '\0';
 	return (ptr);
-}
-
-int	ft_strcmp(char *s1, char *s2)
-{
-	int i;
-
-	i = 0;
-	while (s1[i] == s2[i] && s1[i] != '\0' && s2[i] != '\0')
-		i++;
-	return (s1[i] - s2[i]);
 }

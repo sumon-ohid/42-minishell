@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: sumon <sumon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:17:43 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/01/15 13:18:23 by msumon           ###   ########.fr       */
+/*   Updated: 2024/01/17 09:33:54 by sumon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,33 +16,13 @@
 void	handle_sigint(int sig)
 {
 	(void)sig;
-	write(1, "\n", 1);
+	exit(0);
 }
 
 void	handle_sigquit(int sig)
 {
 	(void)sig;
-	exit(0);
 }
-/*
-int main (void)
-{
-	t_token **proba = tokenizer("whatever | hi i'ma apple | pipessss");
-	t_token *proxy;
-	int counter = 0;
-	while (counter < pipe_counter("whatever | hi i'ma apple | pipessss"))
-	{
-		proxy = proba[counter];
-		while (proxy)
-		{
-			printf("Batch number %d next word: ", counter);
-			printf("%s\n", proxy->str);
-			proxy = proxy->next;
-		}
-		counter++;
-	}
-	exit(0);
-}*/
 
 int	main(void)
 {
@@ -57,14 +37,15 @@ int	main(void)
 		perror("Failed to allocate memory");
 		exit(EXIT_FAILURE);
 	}
-	signal(SIGINT, handle_sigint);
-	signal(SIGQUIT, handle_sigquit);
 	while (1)
 	{
+		signal(SIGINT, handle_sigint);
+		signal(SIGQUIT, handle_sigquit);
 		input2 = readline(GREEN "student@minishell$ " RESET);
 		if (!input2)
 		{
 			printf("\n");
+			printf("exit\n");
 			exit(0);
 		}
 		else if (*input2)

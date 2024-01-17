@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft_helpers2.c                                   :+:      :+:    :+:   */
+/*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sumon <sumon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/17 09:02:15 by sumon             #+#    #+#             */
-/*   Updated: 2024/01/17 09:35:04 by sumon            ###   ########.fr       */
+/*   Created: 2024/01/17 09:24:36 by sumon             #+#    #+#             */
+/*   Updated: 2024/01/17 09:24:44 by sumon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	ft_strcmp(char *s1, char *s2)
+void	ft_cd(char *str)
 {
-	int	i;
-
-	i = 0;
-	while (s1[i] == s2[i] && s1[i] != '\0' && s2[i] != '\0')
-		i++;
-	return (s1[i] - s2[i]);
+	if (str)
+	{
+		if (chdir(str) == -1)
+		{
+			ft_putstr("cd: no such file or directory: ");
+			ft_putstr("\n");
+		}
+	}
+	else
+		chdir("/Users/new_dir");
 }

@@ -6,7 +6,7 @@
 /*   By: sumon <sumon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/01/12 12:22:28 by sumon            ###   ########.fr       */
+/*   Updated: 2024/01/17 09:30:55 by sumon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,14 @@ void				ft_putchar(char c);
 char				*ft_strndup(const char *s, size_t n);
 void				*ft_memcpy(void *dest, const void *src, size_t n);
 void				*ft_calloc(size_t nmemb, size_t size);
+
+// builtins
+void				ft_cd(char *str);
+void				ft_echo(char **arr);
+void				ft_env(void);
+void				ft_export(char *str);
+void				ft_pwd(void);
+void				ft_unset(char *str);
 
 // others
 void				entry_check(char *str, char *line);
