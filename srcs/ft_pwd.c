@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft_helpers2.c                                   :+:      :+:    :+:   */
+/*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sumon <sumon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/17 09:02:15 by sumon             #+#    #+#             */
-/*   Updated: 2024/01/17 09:35:04 by sumon            ###   ########.fr       */
+/*   Created: 2024/01/17 09:25:54 by sumon             #+#    #+#             */
+/*   Updated: 2024/01/17 09:25:58 by sumon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	ft_strcmp(char *s1, char *s2)
+void	ft_pwd(void)
 {
-	int	i;
+	char	*pwd;
 
-	i = 0;
-	while (s1[i] == s2[i] && s1[i] != '\0' && s2[i] != '\0')
-		i++;
-	return (s1[i] - s2[i]);
+	pwd = getcwd(NULL, 0);
+	ft_putstr(pwd);
+	ft_putchar('\n');
 }
