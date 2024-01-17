@@ -39,6 +39,8 @@
 # define OUTFILE_APPEND 8
 # define PIPE 9
 # define HEREDOC 10
+# define DELIM 11
+# define BUILTIN 12
 
 typedef struct s_data
 {
@@ -79,11 +81,14 @@ void				ft_export(char *str);
 void				ft_pwd(void);
 void				ft_unset(char *str);
 
-// others
+// take_input
 void				entry_check(char *str, char *line);
 char				**parse_input(char *line);
 t_token				**tokenizer(char *str);
 int					pipe_counter(char *str);
 char				*handle_envp(char *str);
+int					check_builtins(char *word);
+int					check_prevs(char *word, int prev_type);
+void				process_words(t_token ***origin, char **words, char *str);
 
 #endif
