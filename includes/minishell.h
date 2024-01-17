@@ -6,7 +6,7 @@
 /*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/01/17 16:33:21 by msumon           ###   ########.fr       */
+/*   Updated: 2024/01/17 19:13:53 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct s_token
 {
 	char			*str;
 	int				type;
+	char			**arr;
 	struct s_token	*previous;
 	struct s_token	*next;
 }					t_token;
@@ -75,14 +76,14 @@ char				**ft_malloc(int size, char **str);
 
 // builtins
 void				ft_cd(char *str);
-void				ft_echo(char **arr);
+void				ft_echo(char *arr);
 char				**ft_env(void);
 void				ft_export(char *str);
 void				ft_pwd(void);
 void				ft_unset(char *str);
 
 // take_input
-void				entry_check(char *str, char *line);
+void				entry_check(char *line);
 char				**parse_input(char *line);
 t_token				**tokenizer(char *str);
 int					pipe_counter(char *str);
@@ -90,5 +91,9 @@ char				*handle_envp(char *str);
 int					check_builtins(char *word);
 int					check_prevs(char *word, int prev_type);
 void				process_words(t_token ***origin, char **words, char *str);
+
+// free memory
+void				free_tokens(t_token **token);
+void				free_arr(char **arr);
 
 #endif

@@ -1,27 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_cd.c                                            :+:      :+:    :+:   */
+/*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/17 09:24:36 by msumon            #+#    #+#             */
-/*   Updated: 2024/01/17 19:16:34 by msumon           ###   ########.fr       */
+/*   Created: 2024/01/17 18:25:41 by msumon            #+#    #+#             */
+/*   Updated: 2024/01/17 19:11:59 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	ft_cd(char *str)
+void	free_arr(char **arr)
 {
-	if (str)
+	int	i;
+
+	i = 0;
+	while (arr[i])
 	{
-		if (chdir(str) == -1)
-		{
-			ft_putstr("cd: no such file or directory: ");
-			ft_putstr("\n");
-		}
+		free(arr[i]);
+		i++;
 	}
-	else
-		chdir("/Users/new_dir");
+	free(arr);
+}
+
+void	free_tokens(t_token **tokens)
+{
+	int	i;
+
+	i = 0;
+	while (tokens[i])
+	{
+		free(tokens[i]);
+		i++;
+	}
+	free(tokens);
 }

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/12 10:50:09 by msumon             #+#    #+#             */
-/*   Updated: 2024/01/17 16:34:52 by msumon           ###   ########.fr       */
+/*   Created: 2024/01/12 10:50:09 by msumon            #+#    #+#             */
+/*   Updated: 2024/01/17 19:17:16 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ t_token	*create_token(char *word)
 	new = malloc(sizeof(t_token));
 	new->previous = NULL;
 	new->next = NULL;
+	new->arr = NULL;
 	if (word[0] == '$')
 		new->str = handle_envp(word);
 	else
