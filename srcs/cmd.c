@@ -6,11 +6,37 @@
 /*   By: sumon <sumon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 14:32:03 by msumon            #+#    #+#             */
-/*   Updated: 2024/01/17 09:38:44 by sumon            ###   ########.fr       */
+/*   Updated: 2024/01/17 12:59:35 by sumon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+#include <dirent.h>
+
+void	ft_ls(char *dir_name)
+{
+	DIR				*dir;
+	struct dirent	*entry;
+
+	dir = opendir(dir_name);
+	if (!dir)
+	{
+		perror("minishell");
+		return ;
+	}
+	entry = readdir(dir);
+	while (entry != NULL)
+	{
+		if (entry->d_name[0] != '.')
+		{
+			ft_putstr(entry->d_name);
+			ft_putchar(' ');
+		}
+		entry = readdir(dir);
+	}
+	ft_putchar('\n');
+	closedir(dir);
+}
 
 char	**parse_input(char *line)
 {
@@ -41,6 +67,8 @@ void	entry_check2(char **arr, char *line, int i)
 		exit(0);
 	else if (ft_strcmp(arr[0], "exit") == 0)
 		exit(0);
+	else if (ft_strcmp(arr[0], "ls") == 0)
+		ft_ls(".");
 	else
 		printf("%s : command not found.\n", line);
 	while (arr[i])
