@@ -6,7 +6,7 @@
 /*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/01/17 19:13:53 by msumon           ###   ########.fr       */
+/*   Updated: 2024/01/17 19:29:10 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ char				**ft_env(void);
 void				ft_export(char *str);
 void				ft_pwd(void);
 void				ft_unset(char *str);
+void 				ft_whoami(void);
+
 
 // take_input
 void				entry_check(char *line);

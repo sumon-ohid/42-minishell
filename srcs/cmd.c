@@ -6,7 +6,7 @@
 /*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 14:32:03 by msumon            #+#    #+#             */
-/*   Updated: 2024/01/17 19:16:17 by msumon           ###   ########.fr       */
+/*   Updated: 2024/01/17 19:36:29 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,9 @@ char	**parse_input(char *line)
 
 void	entry_check2(t_token *head, char *line)
 {
-	if (ft_strcmp(head->str, "cd") == 0)
+	if (ft_strcmp(head->str, "whoami") == 0)
+		printf("%s\n", getenv("USER"));
+	else if (ft_strcmp(head->str, "cd") == 0)
 		ft_cd(head->next->str);
 	else if (ft_strcmp(head->str, "echo") == 0)
 		ft_echo(line);
@@ -71,7 +73,6 @@ void	entry_check2(t_token *head, char *line)
 		ft_ls(".");
 	else
 		printf("%s : command not found.\n", line);
-	free(head->str);
 }
 
 void	executor(t_token **tokens, int processes, char *line)
