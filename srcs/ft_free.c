@@ -1,40 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft_helpers2.c                                   :+:      :+:    :+:   */
+/*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/17 09:02:15 by msumon            #+#    #+#             */
-/*   Updated: 2024/01/17 19:16:38 by msumon           ###   ########.fr       */
+/*   Created: 2024/01/17 18:25:41 by msumon            #+#    #+#             */
+/*   Updated: 2024/01/17 19:11:59 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	ft_strcmp(char *s1, char *s2)
+void	free_arr(char **arr)
 {
 	int	i;
 
 	i = 0;
-	while (s1[i] == s2[i] && s1[i] != '\0' && s2[i] != '\0')
-		i++;
-	return (s1[i] - s2[i]);
-}
-
-char	**ft_malloc(int size, char **str)
-{
-	char	**str2;
-	int		i;
-
-	i = 0;
-	str2 = malloc(sizeof(char *) * (size + 1));
-	if (!str2)
-		return (NULL);
-	while (i < size)
+	while (arr[i])
 	{
-		str2[i] = malloc(sizeof(char) * (ft_strlen(str[i]) + 1));
+		free(arr[i]);
 		i++;
 	}
-	return (str);
+	free(arr);
+}
+
+void	free_tokens(t_token **tokens)
+{
+	int	i;
+
+	i = 0;
+	while (tokens[i])
+	{
+		free(tokens[i]);
+		i++;
+	}
+	free(tokens);
 }

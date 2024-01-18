@@ -6,7 +6,7 @@
 /*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 14:32:03 by msumon            #+#    #+#             */
-/*   Updated: 2024/01/17 16:33:26 by msumon           ###   ########.fr       */
+/*   Updated: 2024/01/18 08:09:54 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,12 @@ char	**parse_input(char *line)
 
 void	entry_check2(t_token *head, char *line)
 {
-	if (ft_strcmp(head->str, "cd") == 0)
+	if (ft_strcmp(head->str, "whoami") == 0)
+		printf("%s\n", getenv("USER"));
+	else if (ft_strcmp(head->str, "cd") == 0)
 		ft_cd(head->next->str);
 	else if (ft_strcmp(head->str, "echo") == 0)
-		return ;//ft_echo(arr); THIS will be a little complicated
+		ft_echo(line);
 	else if (ft_strcmp(head->str, "env") == 0)
 		ft_env();
 	else if (ft_strcmp(head->str, "clear") == 0)
@@ -64,7 +66,7 @@ void	entry_check2(t_token *head, char *line)
 	else if (ft_strcmp(head->str, "pwd") == 0)
 		ft_pwd();
 	else if (ft_strcmp(head->str, "exit") == 0)
-		exit(0);
+		exit(127);
 	else if (ft_strcmp(head->str, "exit") == 0)
 		exit(0);
 	else if (ft_strcmp(head->str, "ls") == 0)
@@ -73,39 +75,12 @@ void	entry_check2(t_token *head, char *line)
 		printf("%s : command not found.\n", line);
 }
 
-/*void	entry_check2(char **arr, char *line, int i)
+void	executor(t_token **tokens, int processes, char *line)
 {
-	if (ft_strcmp(arr[0], "cd") == 0)
-		ft_cd(arr[1]);
-	else if (ft_strcmp(arr[0], "echo") == 0)
-		ft_echo(arr);
-	else if (ft_strcmp(arr[0], "env") == 0)
-		ft_env();
-	else if (ft_strcmp(arr[0], "clear") == 0)
-		write(1, "\033[H\033[J", 6);
-	else if (ft_strcmp(arr[0], "pwd") == 0)
-		ft_pwd();
-	else if (ft_strcmp(arr[0], "exit") == 0)
-		exit(0);
-	else if (ft_strcmp(arr[0], "exit") == 0)
-		exit(0);
-	else if (ft_strcmp(arr[0], "ls") == 0)
-		ft_ls(".");
-	else
-		printf("%s : command not found.\n", line);
-	while (arr[i])
-	{
-		free(arr[i]);
-		i++;
-	}
-	free(arr);
-}*/
-
-/*void	executor(t_token **tokens, int processes, char *line)
-{
-	//ima execute shit here but now let's just check for builtins in a simple way
+	// ima execute shit here but now 
+	//let's just check for builtins in a simple way
 	(void)processes;
-	//printf("entered executor\n");
+	// printf("entered executor\n");
 	if (*tokens)
 	{
 		if (tokens[0]->type == BUILTIN)
@@ -149,21 +124,17 @@ void	executor(t_token **tokens, int processes, char *line)
 	}
 }
 
-void	entry_check(char *str, char *line)
+void	entry_check(char *line)
 {
 	char	**arr;
-	//int		i;
-	t_token **tokens;
+	t_token	**tokens;
 
-	//i = 0;
-	(void)str; //what is str?
+	tokens = ft_calloc(sizeof(t_token *), pipe_counter(line));
 	arr = parse_input(line);
 	if (!arr)
 		return ;
-	tokens = ft_calloc(sizeof(t_token *), pipe_counter(line));
 	process_words(&tokens, arr, line);
-	//free arr here
 	executor(tokens, pipe_counter(line), line);
-	//free tokens and line here
-	//entry_check2(arr, line, i);
+	free_tokens(tokens);
+	free(line);
 }

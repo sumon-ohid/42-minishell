@@ -30,6 +30,7 @@ SRC = 	srcs/main.c \
 		srcs/ft_export.c \
 		srcs/ft_pwd.c \
 		srcs/ft_unset.c \
+		srcs/ft_free.c \
 
 OBJ = $(SRC:.c=.o)
 
