@@ -5,13 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-<<<<<<< HEAD
-/*   Created: 2024/01/17 09:25:07 by sumon             #+#    #+#             */
-/*   Updated: 2024/01/17 14:33:27 by sumon            ###   ########.fr       */
-=======
 /*   Created: 2024/01/17 09:25:07 by msumon            #+#    #+#             */
 /*   Updated: 2024/01/17 19:26:53 by msumon           ###   ########.fr       */
->>>>>>> origin
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,19 +53,9 @@ void	print_argument(char *arg)
 		free(inside_quotes);
 	}
 	else if (arg[0] == '$' && ft_strcmp(arg, "$") != 0)
-<<<<<<< HEAD
-	{
-		ft_putstr(get_env_value(arg));
-	}
-	else if (arg[0] == '$' && ft_strcmp(arg, "$") == 0)
-	{
-		ft_putchar('$');
-	}
-=======
 		ft_putstr(get_env_value(arg));
 	else if (arg[0] == '$' && ft_strcmp(arg, "$") == 0)
 		ft_putchar('$');
->>>>>>> origin
 	else if (ft_strcmp(arg, "\"\"") != 0 && ft_strcmp(arg, "''") != 0)
 		ft_putstr(arg);
 	else

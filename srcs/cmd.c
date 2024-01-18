@@ -75,53 +75,92 @@ void	entry_check2(t_token *head, char *line)
 		printf("%s : command not found.\n", line);
 }
 
-void	executor(t_token **tokens, int processes, char *line)
-{
-	// ima execute shit here but now 
-	//let's just check for builtins in a simple way
-	(void)processes;
-	// printf("entered executor\n");
-	if (*tokens)
-	{
-		if (tokens[0]->type == BUILTIN)
-			entry_check2(tokens[0], line);
-	}
-	else
-		printf("im here to inform you that tokenizer sucks\n");
-}*/
-
 void	execute_chain(t_token *chain, char *line)
 {
 	if (chain)
 	{
 		if (chain->type == BUILTIN)
+		{
 			entry_check2(chain, line);
+		}
 	}
 	else
 		printf("im here to inform you that tokenizer sucks\n");
 }
 
-void	executor(t_token **tokens, int processes, char *line)
+void close_what_this_child_doesnt_need(int ***origin, int index, int max)
+{
+	int **fd;
+	int counter;
+
+	fd = *origin;
+	counter = 0;
+	while (counter < index - 1)
+	{
+		close(fd[counter][0]);
+		close(fd[counter][1]);
+		counter++;
+	}
+	if (index != 0)
+		close(fd[counter][1]);
+	counter++;
+	if (index != max)
+		close(fd[counter][0]);
+	counter++;
+	while (counter <= max)
+	{
+		close(fd[counter][0]);
+		close(fd[counter][1]);
+		counter++;
+	}
+}
+
+void	executor_init(t_token **tokens, int processes, char *line)
 {
 	int counter;
-	int	pid;
-	int status;
+	int	pid[512];
+	int *status;
+	int **fd;
 
+	counter = 0; //will stand for current process
+	fd = malloc(sizeof(int *) * (processes - 1)); //pipes (arrays of size 4*2) for each child-child communication
+	//pid = malloc(sizeof(int) * processes); //pid tracker for each child
+	while (counter < processes - 1)
+	{
+		fd[counter] = malloc(sizeof(int) * 2);
+		if (pipe(fd[counter]) == -1)
+			return ; //error handling!
+		counter++;
+	}
 	counter = 0;
 	while (counter < processes)
 	{
-		pid = fork();
-		if (pid == 0) //i'm the child
+		pid[counter] = fork();
+		if (pid[counter] == 0) //i'm the child
 		{
+			if (counter != 0) //i'm not the first child, which reads from STDIN
+				dup2(fd[counter - 1][0], STDIN_FILENO);
+			if (counter != processes - 1) //i'm not the last child, which writes to STDOUT
+				dup2(fd[counter][1], STDOUT_FILENO);
+			close_what_this_child_doesnt_need(&fd, counter, processes - 1);
 			execute_chain(tokens[counter], line);
-			exit (0);
+			//free all the pids if malloced - rn on stack
+			exit (-1); //if executing doesnt happen
 		}
-		else
+		else if (pid[counter] == -1)
 		{
-			waitpid(pid, &status, 0);
+			//forking error happened! Idk how to handle it yet.
 		}
 		counter++;
 	}
+	counter = 0;
+	status = malloc(sizeof(int) * processes); //status tracker for each child
+	while (counter < processes)
+	{
+		waitpid(pid[counter], &status[counter], 0);
+		counter++;
+	}
+	return ;
 }
 
 void	entry_check(char *line)
@@ -134,7 +173,8 @@ void	entry_check(char *line)
 	if (!arr)
 		return ;
 	process_words(&tokens, arr, line);
-	executor(tokens, pipe_counter(line), line);
-	free_tokens(tokens);
+	//write(2, "SO far so good\n", 15);
+	executor_init(tokens, pipe_counter(line), line);
+	//free_tokens(tokens);
 	free(line);
 }

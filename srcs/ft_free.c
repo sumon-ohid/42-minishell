@@ -25,8 +25,8 @@ void	free_arr(char **arr)
 	free(arr);
 }
 
-void	free_tokens(t_token **tokens)
-{
+void	free_tokens(t_token **tokens) //TODO: This needs to be corrected. A linked list needs to be freed
+{										//in a different manner. Currently disabled this function in entry_check
 	int	i;
 
 	i = 0;
