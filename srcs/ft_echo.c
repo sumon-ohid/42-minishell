@@ -3,10 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sumon <sumon@student.42.fr>                +#+  +:+       +#+        */
+/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
+<<<<<<< HEAD
 /*   Created: 2024/01/17 09:25:07 by sumon             #+#    #+#             */
 /*   Updated: 2024/01/17 14:33:27 by sumon            ###   ########.fr       */
+=======
+/*   Created: 2024/01/17 09:25:07 by msumon            #+#    #+#             */
+/*   Updated: 2024/01/17 19:26:53 by msumon           ###   ########.fr       */
+>>>>>>> origin
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +58,7 @@ void	print_argument(char *arg)
 		free(inside_quotes);
 	}
 	else if (arg[0] == '$' && ft_strcmp(arg, "$") != 0)
+<<<<<<< HEAD
 	{
 		ft_putstr(get_env_value(arg));
 	}
@@ -60,17 +66,24 @@ void	print_argument(char *arg)
 	{
 		ft_putchar('$');
 	}
+=======
+		ft_putstr(get_env_value(arg));
+	else if (arg[0] == '$' && ft_strcmp(arg, "$") == 0)
+		ft_putchar('$');
+>>>>>>> origin
 	else if (ft_strcmp(arg, "\"\"") != 0 && ft_strcmp(arg, "''") != 0)
-	{
 		ft_putstr(arg);
-	}
+	else
+		ft_putchar(' ');
 }
 
-void	ft_echo(char **arr)
+void	ft_echo(char *line)
 {
-	int	i;
-	int	newline;
+	char	**arr;
+	int		i;
+	int		newline;
 
+	arr = parse_input(line);
 	i = 1;
 	newline = 1;
 	if (arr[i] && ft_strcmp(arr[i], "-n") == 0)
@@ -82,13 +95,9 @@ void	ft_echo(char **arr)
 	{
 		print_argument(arr[i]);
 		if (arr[i + 1])
-		{
 			ft_putchar(' ');
-		}
 		i++;
 	}
 	if (newline)
-	{
 		ft_putchar('\n');
-	}
 }

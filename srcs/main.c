@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sumon <sumon@student.42.fr>                +#+  +:+       +#+        */
+/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:17:43 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/01/17 11:18:27 by sumon            ###   ########.fr       */
+/*   Updated: 2024/01/17 18:24:40 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	ft_initialize(t_data *node, char *input, char *input2)
 		{
 			node->path = input;
 			add_history(input2);
-			entry_check(input, input2);
+			entry_check(input2);
 		}
 	}
 	free(input);
