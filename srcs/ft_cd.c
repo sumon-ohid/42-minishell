@@ -18,10 +18,8 @@ void	ft_cd(char *str)
 	{
 		if (chdir(str) == -1)
 		{
-			ft_putstr("cd: no such file or directory: ");
+			ft_putstr("cd: no such directory: ");
 			ft_putstr("\n");
 		}
 	}
-	else
-		chdir("/Users/new_dir");
 }
