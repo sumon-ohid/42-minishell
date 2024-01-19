@@ -97,5 +97,13 @@ void				process_words(t_token ***origin, char **words, char *str);
 // free memory
 void				free_tokens(t_token **token);
 void				free_arr(char **arr);
+void				error_quit(int fd, int *tomlo, char *str);
+char				**free_everything(char **arr, int m_ctr);
+
+//execution part
+char				*extract_path(char *comm2, char **poss_paths, char *og_comm);
+char				*pathfinder(char **envp, char *comm);
+void				extract_find_execute(char **envp, char *full_comm, int round);
+
 
 #endif
