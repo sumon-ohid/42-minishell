@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:24:36 by msumon            #+#    #+#             */
-/*   Updated: 2024/01/17 19:32:25 by msumon           ###   ########.fr       */
+/*   Updated: 2024/01/19 10:28:11 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+#include <unistd.h>
 
 void	ft_cd(char *str)
 {
@@ -21,5 +22,9 @@ void	ft_cd(char *str)
 			ft_putstr("cd: no such directory: ");
 			ft_putstr("\n");
 		}
+	}
+	else
+	{
+		chdir(getenv("HOME"));
 	}
 }
