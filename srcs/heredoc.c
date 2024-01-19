@@ -6,11 +6,12 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 10:40:57 by msumon            #+#    #+#             */
-/*   Updated: 2024/01/19 11:50:02 by msumon           ###   ########.fr       */
+/*   Updated: 2024/01/19 13:15:11 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -74,7 +75,9 @@ char	*ft_heredoc(char *str)
 				return (NULL);
 			}
 			heredoc = tmp;
-			ft_strjoin(heredoc, "\n", 0);
+			if (len > 0)
+				heredoc = ft_strjoin(heredoc, "\n", 0);
+			heredoc = ft_strjoin(heredoc, line, 0);
 		}
 		else
 		{
@@ -91,21 +94,3 @@ char	*ft_heredoc(char *str)
 	}
 	return (heredoc);
 }
-
-// int	main(void)
-// {
-//     int i;
-
-//     i = 0;
-// 	char *heredoc = ft_heredoc("END");
-// 	if (heredoc)
-// 	{
-// 		printf("heredoc->%s\n", heredoc);
-// 		free(heredoc);
-// 	}
-// 	else
-// 	{
-// 		printf("Failed to allocate memory for heredoc\n");
-// 	}
-// 	return (0);
-// }
