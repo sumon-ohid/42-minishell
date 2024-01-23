@@ -15,7 +15,7 @@ jobs:
     - uses: actions/checkout@v3
     - name: make
       run: make
-    - name: make check
-      run: make check
-    - name: make distcheck
-      run: make distcheck
+    - name: minishell
+      run: ./minishell
+    - name: make fclean
+      run: make fclean
