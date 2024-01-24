@@ -93,6 +93,7 @@ int ft_commander(t_token *chain)
 		chain = chain->next;
 	}
 	extract_find_execute(environ, mark->str, 1);
+	exit(-1); //if execve fails
 	return (0);
 }
 
@@ -144,6 +145,26 @@ void close_what_this_child_doesnt_need(int ***origin, int index, int max)
 	}
 }
 
+int	exception_checker(t_token **tokens, int processes)
+{
+	t_token *proxy;
+
+	if (processes != 1)
+		return (0);
+	proxy = tokens[0];
+	while (proxy)
+	{
+		if (proxy->type == BUILTIN)
+			break ;
+		while (proxy && proxy->type != BUILTIN)
+			proxy = proxy->next;
+	}
+	if (!proxy)
+		return (0);
+	else
+		return (1);
+}
+
 void	executor_init(t_token **tokens, int processes, char *line)
 {
 	int counter;
@@ -151,6 +172,11 @@ void	executor_init(t_token **tokens, int processes, char *line)
 	int *status;
 	int **fd;
 
+	if (exception_checker(tokens, processes))
+	{
+		execute_chain(tokens[0], line);
+		return ;
+	}
 	counter = 0; //will stand for current process
 	fd = malloc(sizeof(int *) * (processes - 1)); //pipes (arrays of size 4*2) for each child-child communication
 	//pid = malloc(sizeof(int) * processes); //pid tracker for each child
@@ -173,8 +199,9 @@ void	executor_init(t_token **tokens, int processes, char *line)
 				dup2(fd[counter][1], STDOUT_FILENO);
 			close_what_this_child_doesnt_need(&fd, counter, processes - 1);
 			execute_chain(tokens[counter], line);
-			//free all the pids if malloced - rn on stack
-			exit (-1); //if executing doesnt happen
+			//free all the pids if malloced - rn on stack, free token list etc ( - in chain above??)
+			exit(1); //kill the child with appropriate return value here
+			//exit (-1); //if executing doesnt happen
 		}
 		else if (pid[counter] == -1)
 		{
