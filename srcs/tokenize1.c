@@ -6,7 +6,7 @@
 /*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:57:30 by msumon            #+#    #+#             */
-/*   Updated: 2024/01/17 19:35:37 by msumon           ###   ########.fr       */
+/*   Updated: 2024/01/24 19:57:29 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ int	check_builtins(char *word)
 	else if (ft_strcmp(word, "pwd") == 0)
 		return (0);
 	else if (ft_strcmp(word, "exit") == 0)
-		return (0);
-	else if (ft_strcmp(word, "ls") == 0)
 		return (0);
 	else if (ft_strcmp(word, "whoami") == 0)
 		return (0);

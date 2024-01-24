@@ -6,7 +6,7 @@
 /*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/01/17 19:29:10 by msumon           ###   ########.fr       */
+/*   Updated: 2024/01/24 21:48:29 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,28 @@
 # define DELIM 11
 # define BUILTIN 12
 
+// signals
+# define CTRL_C 1
+# define CTRL_D 2
+
+// signal mode
+typedef enum s_mode
+{
+	INTERACTIVE,
+	NON_INTERACTIVE,
+	CHILD,
+	HEREDOCS
+}					t_mode;
+
 typedef struct s_data
 {
 	char			*string;
 	char			*path;
+	char			**envp;
+	char			*mode;
+	char			*oldpwd;
+	char			*pwd;
+	char			*home;
 	struct s_data	*next;
 }					t_data;
 
@@ -66,6 +84,7 @@ int					ft_strlen(const char *str);
 char				*ft_substr(char const *s, unsigned int start, size_t len);
 char				*ft_strdup(const char *src);
 int					ft_strcmp(char *s1, char *s2);
+int					ft_strncmp(char *s1, char *s2, size_t n);
 char				**ft_split(char const *s, char c, size_t i, size_t j);
 void				ft_putstr(char *str);
 void				ft_putchar(char c);
@@ -73,19 +92,22 @@ char				*ft_strndup(const char *s, size_t n);
 void				*ft_memcpy(void *dest, const void *src, size_t n);
 void				*ft_calloc(size_t nmemb, size_t size);
 char				**ft_malloc(int size, char **str);
+char				*ft_strcpy(char *s1, char *s2);
+char				**ft_realloc(void *ptr, size_t old_size, size_t new_size);
+void				*ft_realloc_heredoc(void *ptr, size_t old_size, size_t new_size);
 
 // builtins
-void				ft_cd(char *str);
+void				ft_cd(char *str, t_data *node);
 void				ft_echo(char *arr);
-char				**ft_env(void);
+char				**ft_env(t_data *node);
 void				ft_export(char *str);
 void				ft_pwd(void);
 void				ft_unset(char *str);
-void 				ft_whoami(void);
-
+void				ft_whoami(void);
+char				*ft_getenv(t_data *node, char *str);
 
 // take_input
-void				entry_check(char *line);
+void				entry_check(t_data *node, char *line);
 char				**parse_input(char *line);
 t_token				**tokenizer(char *str);
 int					pipe_counter(char *str);
@@ -100,10 +122,11 @@ void				free_arr(char **arr);
 void				error_quit(int fd, int *tomlo, char *str);
 char				**free_everything(char **arr, int m_ctr);
 
-//execution part
-char				*extract_path(char *comm2, char **poss_paths, char *og_comm);
+// execution part
+char				*extract_path(char *comm2, char **poss_paths,
+						char *og_comm);
 char				*pathfinder(char **envp, char *comm);
-void				extract_find_execute(char **envp, char *full_comm, int round);
-
+void				extract_find_execute(char **envp, char *full_comm,
+						int round);
 
 #endif

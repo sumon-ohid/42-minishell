@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 10:40:57 by msumon            #+#    #+#             */
-/*   Updated: 2024/01/19 13:15:11 by msumon           ###   ########.fr       */
+/*   Updated: 2024/01/24 21:50:14 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	*ft_strcpy(char *s1, char *s2)
 	return (s1);
 }
 
-void	*ft_realloc(void *ptr, size_t old_size, size_t new_size)
+void	*ft_realloc_heredoc(void *ptr, size_t old_size, size_t new_size)
 {
 	void	*new_ptr;
 
@@ -67,7 +67,7 @@ char	*ft_heredoc(char *str)
 			break ;
 		if (heredoc)
 		{
-			tmp = ft_realloc(heredoc, len, len + ft_strlen(line) + 2);
+			tmp = ft_realloc_heredoc(heredoc, len, len + ft_strlen(line) + 2);
 			if (!tmp)
 			{
 				free(heredoc);

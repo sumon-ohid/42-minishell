@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:17:43 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/01/19 13:14:08 by msumon           ###   ########.fr       */
+/*   Updated: 2024/01/24 21:50:56 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	handle_sigquit(int sig)
 	(void)sig;
 }
 
-void	ft_initialize(t_data *node, char *input, char *input2)
+void	ft_initialize(t_data *node, char *input, char *input2, char **envp)
 {
 	while (1)
 	{
@@ -42,20 +42,26 @@ void	ft_initialize(t_data *node, char *input, char *input2)
 		else if (*input2)
 		{
 			node->path = input;
+			node->envp = envp;
+			node->home = getenv("HOME");
+			node->oldpwd = getenv("OLDPWD");
+			node->pwd = getenv("PWD");
 			add_history(input2);
-			entry_check(input2);
+			entry_check(node, input2);
 		}
 	}
 	free(input);
 	free(input2);
 }
 
-int	main(void)
+int	main(int argc, char **argv, char **envp)
 {
 	t_data	*node;
 	char	*input;
 	char	*input2;
 
+	(void)argc;
+	(void)argv;
 	input2 = NULL;
 	node = (t_data *)malloc(sizeof(t_data));
 	if (node == NULL)
@@ -70,6 +76,6 @@ int	main(void)
 		free(node);
 		exit(EXIT_FAILURE);
 	}
-	ft_initialize(node, input, input2);
+	ft_initialize(node, input, input2, envp);
 	return (0);
 }

@@ -3,40 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 14:32:03 by msumon            #+#    #+#             */
-/*   Updated: 2024/01/19 10:30:40 by msumon           ###   ########.fr       */
+/*   Updated: 2024/01/24 21:32:32 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 #include <dirent.h>
-
-void	ft_ls(char *dir_name)
-{
-	DIR				*dir;
-	struct dirent	*entry;
-
-	dir = opendir(dir_name);
-	if (!dir)
-	{
-		perror("minishell");
-		return ;
-	}
-	entry = readdir(dir);
-	while (entry != NULL)
-	{
-		if (entry->d_name[0] != '.')
-		{
-			ft_putstr(entry->d_name);
-			ft_putchar(' ');
-		}
-		entry = readdir(dir);
-	}
-	ft_putchar('\n');
-	closedir(dir);
-}
 
 char	**parse_input(char *line)
 {
@@ -51,16 +26,19 @@ char	**parse_input(char *line)
 	return (tokens);
 }
 
-int	entry_check2(t_token *head, char *line)
+int	entry_check2(t_data *node, t_token *head, char *line)
 {
 	if (ft_strcmp(head->str, "whoami") == 0)
 		printf("%s\n", getenv("USER"));
 	else if (ft_strcmp(head->str, "cd") == 0)
-		ft_cd(head->next->str);
+		if (head->next)
+			ft_cd(head->next->str, node);
+		else
+			ft_cd(NULL, node);
 	else if (ft_strcmp(head->str, "echo") == 0)
 		ft_echo(line);
 	else if (ft_strcmp(head->str, "env") == 0)
-		ft_env();
+		ft_env(node);
 	else if (ft_strcmp(head->str, "clear") == 0)
 		write(1, "\033[H\033[J", 6);
 	else if (ft_strcmp(head->str, "pwd") == 0)
@@ -69,8 +47,6 @@ int	entry_check2(t_token *head, char *line)
 		exit(127);
 	else if (ft_strcmp(head->str, "exit") == 0)
 		exit(0);
-	else if (ft_strcmp(head->str, "ls") == 0)
-		ft_ls(".");
 	else
 		printf("%s : command not found.\n", line);
 	return (1);
@@ -97,7 +73,7 @@ int ft_commander(t_token *chain)
 	return (0);
 }
 
-int	execute_chain(t_token *chain, char *line)
+int	execute_chain(t_data *node, t_token *chain, char *line)
 {
 	t_token *proxy;
 
@@ -107,7 +83,7 @@ int	execute_chain(t_token *chain, char *line)
 	while (proxy)
 	{
 		if (proxy->type == BUILTIN)
-			return (entry_check2(chain, line));
+			return (entry_check2(node, chain, line));
 		else if (proxy->type == COMMAND)
 			return (ft_commander(chain));
 		else
@@ -165,7 +141,7 @@ int	exception_checker(t_token **tokens, int processes)
 		return (1);
 }
 
-void	executor_init(t_token **tokens, int processes, char *line)
+void	executor_init(t_data *node, t_token **tokens, int processes, char *line)
 {
 	int counter;
 	int	pid[512];
@@ -174,7 +150,7 @@ void	executor_init(t_token **tokens, int processes, char *line)
 
 	if (exception_checker(tokens, processes))
 	{
-		execute_chain(tokens[0], line);
+		execute_chain(node, tokens[0], line);
 		return ;
 	}
 	counter = 0; //will stand for current process
@@ -198,7 +174,7 @@ void	executor_init(t_token **tokens, int processes, char *line)
 			if (counter != processes - 1) //i'm not the last child, which writes to STDOUT
 				dup2(fd[counter][1], STDOUT_FILENO);
 			close_what_this_child_doesnt_need(&fd, counter, processes - 1);
-			execute_chain(tokens[counter], line);
+			execute_chain(node, tokens[counter], line);
 			//free all the pids if malloced - rn on stack, free token list etc ( - in chain above??)
 			exit(1); //kill the child with appropriate return value here
 			//exit (-1); //if executing doesnt happen
@@ -219,7 +195,7 @@ void	executor_init(t_token **tokens, int processes, char *line)
 	return ;
 }
 
-void	entry_check(char *line)
+void	entry_check(t_data *node, char *line)
 {
 	char	**arr;
 	t_token	**tokens;
@@ -230,7 +206,7 @@ void	entry_check(char *line)
 		return ;
 	process_words(&tokens, arr, line);
 	//write(2, "SO far so good\n", 15);
-	executor_init(tokens, pipe_counter(line), line);
+	executor_init(node, tokens, pipe_counter(line), line);
 	//free_tokens(tokens);
 	free(line);
 }
