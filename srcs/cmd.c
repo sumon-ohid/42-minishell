@@ -51,7 +51,7 @@ char	**parse_input(char *line)
 	return (tokens);
 }
 
-void	entry_check2(t_token *head, char *line)
+int	entry_check2(t_token *head, char *line)
 {
 	if (ft_strcmp(head->str, "whoami") == 0)
 		printf("%s\n", getenv("USER"));
@@ -73,19 +73,48 @@ void	entry_check2(t_token *head, char *line)
 		ft_ls(".");
 	else
 		printf("%s : command not found.\n", line);
+	return (1);
 }
 
-void	execute_chain(t_token *chain, char *line)
+int ft_commander(t_token *chain)
 {
-	if (chain)
+	extern char **environ;
+	t_token		*mark;
+
+	while (chain && chain->type != COMMAND)
+		chain = chain->next;
+	mark = chain;
+	chain = chain->next;
+	while (chain && chain->type == FLAG)
 	{
-		if (chain->type == BUILTIN)
-		{
-			entry_check2(chain, line);
-		}
+		mark->str = ft_strjoin(mark->str, " ", 1);
+		mark->str = ft_strjoin(mark->str, chain->str, 1);
+		//malloc protection?
+		chain = chain->next;
 	}
-	else
+	extract_find_execute(environ, mark->str, 1);
+	return (0);
+}
+
+int	execute_chain(t_token *chain, char *line)
+{
+	t_token *proxy;
+
+	proxy = chain;
+	if (!chain)
+		return (-1);
+	while (proxy)
+	{
+		if (proxy->type == BUILTIN)
+			return (entry_check2(chain, line));
+		else if (proxy->type == COMMAND)
+			return (ft_commander(chain));
+		else
+			proxy = proxy->next;
+	}
+	if (!proxy)
 		printf("im here to inform you that tokenizer sucks\n");
+	return (0);
 }
 
 void close_what_this_child_doesnt_need(int ***origin, int index, int max)

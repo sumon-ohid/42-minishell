@@ -32,6 +32,7 @@ SRC = 	srcs/main.c \
 		srcs/ft_unset.c \
 		srcs/ft_free.c \
 		srcs/heredoc.c \
+		srcs/pipex.c \
 
 OBJ = $(SRC:.c=.o)
 

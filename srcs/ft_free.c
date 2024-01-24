@@ -37,3 +37,32 @@ void	free_tokens(t_token **tokens) //TODO: This needs to be corrected. A linked 
 	}
 	free(tokens);
 }
+
+void	error_quit(int fd, int *tomlo, char *str)
+{
+	if (fd)
+		close(fd);
+	if (tomlo)
+	{
+		close(tomlo[0]);
+		close(tomlo[1]);
+	}
+	if (str)
+		free(str);
+	write(2, "Error\n", 6);
+	exit(errno);
+}
+
+char	**free_everything(char **arr, int m_ctr)
+{
+	int	counter;
+
+	counter = 0;
+	while (counter < m_ctr)
+	{
+		free(arr[counter]);
+		counter++;
+	}
+	free(arr);
+	return (NULL);
+}
