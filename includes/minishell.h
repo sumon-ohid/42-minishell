@@ -41,6 +41,7 @@
 # define HEREDOC 10
 # define DELIM 11
 # define BUILTIN 12
+# define SET 13
 
 // signals
 # define CTRL_C 1

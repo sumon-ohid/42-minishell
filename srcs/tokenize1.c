@@ -45,10 +45,28 @@ int	check_builtins(char *word)
 		return (-1);
 }
 
+int	check_assign(char *word)
+{
+	int counter;
+
+	counter = 0;
+	if (!word)
+		return (0);
+	while (word[counter])
+	{
+		if (word[counter] == '=')
+			return (1);
+		counter++;
+	}
+	return (0);
+}
+
 int	check_prevs(char *word, int prev_type)
 {
 	if (!word)
 		return (0);
+	else if (check_assign(word))
+		return (SET);
 	else if (prev_type == HEREDOC)
 		return (DELIM);
 	else if (prev_type == REDIR_OUT)
