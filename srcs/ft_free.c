@@ -58,7 +58,7 @@ char	**free_everything(char **arr, int m_ctr)
 	int	counter;
 
 	counter = 0;
-	while (counter < m_ctr)
+	while (counter < m_ctr && arr[counter])
 	{
 		free(arr[counter]);
 		counter++;

@@ -98,7 +98,34 @@ void	create_and_link_token(t_token ***origin, int current, char *word)
 	}
 }
 
-void	process_words(t_token ***origin, char **words, char *str)
+void	process_words(t_token ***origin, char **units, char *str)
+{
+	int		counter;
+	int		counter2;
+	char	**words;
+
+	counter = 0;
+	counter2 = 0;
+	//printf("STR is: %s\n", str);
+	//printf("0th word is: %s\n", words[counter]);
+	while (counter2 < pipe_counter(str))
+	{
+		words = ft_split(units[counter2], ' ', 0, 0);
+		while (words[counter])
+		{
+			create_and_link_token(origin, counter2, words[counter]);
+			counter++;
+			// TODO: error management
+		}
+		counter2++;
+		counter = 0;
+		free_everything(words, 10000);
+	}
+	free_everything(units, 10000);
+	//printf("first token is: %s\n", (*origin[0])->str);
+}
+/*
+void	process_words(t_token ***origin, char **units, char *str)
 {
 	int		counter;
 	int		counter2;
@@ -119,4 +146,4 @@ void	process_words(t_token ***origin, char **words, char *str)
 		counter++;
 	}
 	//printf("first token is: %s\n", (*origin[0])->str);
-}
+}*/

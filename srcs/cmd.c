@@ -17,7 +17,7 @@ char	**parse_input(char *line)
 {
 	char	**tokens;
 
-	tokens = ft_split(line, ' ', 0, 0);
+	tokens = ft_split(line, '|', 0, 0);
 	if (!tokens)
 	{
 		write(2, "Allocation error\n", 17);
