@@ -94,8 +94,8 @@ void	fork_processes(int processes, t_data *node, t_token **tokens,
 				dup2(node->fd[counter - 1][0], STDIN_FILENO);
 			if (counter != processes - 1)
 				dup2(node->fd[counter][1], STDOUT_FILENO);
-			close_what_this_child_doesnt_need(&node->fd, counter, processes
-				- 1);
+			//close_what_this_child_doesnt_need(&node->fd, counter, processes
+			//	- 1); TODO: fix fd leaks but this function sucks currently for some reason
 			execute_chain(node, tokens[counter], line);
 			exit(1);
 		}

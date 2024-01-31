@@ -54,6 +54,7 @@ void	executor_init(t_data *node, t_token **tokens, int processes, char *line)
 		return ;
 	}
 	allocate_fd(&fd, processes);
+	node->fd = fd;
 	fork_processes(processes, node, tokens, line);
 	status = malloc(sizeof(int) * processes);
 	if (!status)

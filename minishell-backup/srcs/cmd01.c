@@ -78,8 +78,8 @@ void	close_what_this_child_doesnt_need(int ***origin, int index, int max)
 	if (index != 0)
 		close(fd[counter][1]);
 	counter++;
-	if (index != max)
-		close(fd[counter][0]);
+	//if (index != max)
+		//close(fd[counter][0]);
 	counter++;
 	while (counter <= max)
 	{

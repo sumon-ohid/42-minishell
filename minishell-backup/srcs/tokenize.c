@@ -97,6 +97,22 @@ void	create_and_link_token(t_token ***origin, int current, char *word)
 	}
 }
 
+void ft_free_array(char **str)
+{
+	int	i;
+
+	i = 0;
+	if (!str)
+		return ;
+	while (str[i])
+	{
+		free(str[i]);
+		i++;
+	}
+	free(str);
+	return ;
+}
+
 void	process_words(t_token ***origin, char **units, char *str)
 {
 	int		counter;
@@ -118,8 +134,10 @@ void	process_words(t_token ***origin, char **units, char *str)
 		}
 		counter2++;
 		counter = 0;
+		ft_free_array(words);
 		//free_everything(words, 10000);
 	}
+	//ft_free_array(units);
 	//free_everything(units, 10000);
 	//printf("first token is: %s\n", (*origin[0])->str);
 }
