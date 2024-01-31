@@ -48,6 +48,7 @@ int	entry_check2(t_data *node, t_token *head, char *line)
 		ft_unset(node, head, line);
 	else
 		printf("minishell: %s: command not found\n", line);
+	ft_restore(node);
 	return (1);
 }
 

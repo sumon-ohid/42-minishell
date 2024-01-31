@@ -83,6 +83,7 @@ int	entry_check(t_data *node, char *line)
 		return (1);
 	}
 	process_words(&tokens, arr, line);
+	ft_set(node);
 	executor_init(node, tokens, pipe_counter(line), line);
 	//free_tokens(tokens);
 	free(line);

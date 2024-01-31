@@ -85,6 +85,24 @@ void	ft_redirector(t_token *chain, int file_type)
     //printf("NOTHING HAPPENED\n");
 }
 
+void	ft_set(t_data *node)
+{
+	node->std_in = dup(STDIN_FILENO);
+	if (node->std_in == -1)
+		exit(-1); //error_handling
+	node->std_out = dup(STDOUT_FILENO);
+	if (node->std_out == -1)
+		exit(-1); //error_handling
+}
+
+void	ft_restore(t_data *node)
+{
+	if (dup2(node->std_in, STDIN_FILENO) == -1)
+		exit(-1); //error_handling
+	if (dup2(node->std_out, STDOUT_FILENO) == -1)
+		exit(-1); //error_handling
+}
+
 void	ft_redirect_checker(t_token *chain)
 {
 	t_token	*proxy;

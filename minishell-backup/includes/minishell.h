@@ -75,6 +75,8 @@ typedef struct s_data
 	int				processes;
 	int				*pid;
 	int				cur_proc;
+	int				std_in;
+	int				std_out;
 	char			**envp;
 	char			*oldpwd;
 	char			*pwd;
@@ -150,6 +152,8 @@ char				**free_everything(char **arr, int m_ctr);
 //redirections
 
 void				ft_redirect_checker(t_token *chain);
+void				ft_set(t_data *node);
+void				ft_restore(t_data *node);
 
 // execution part
 char				*extract_path(char *comm2, char **poss_paths,
