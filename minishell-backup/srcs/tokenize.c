@@ -92,8 +92,8 @@ void	create_and_link_token(t_token ***origin, int current, char *word)
 		while (proxy->next)
 			proxy = proxy->next;
 		proxy->next = create_token(word);
-		proxy->next->previous = cur;
-		proxy->next->type = determine_type(word, cur->type);
+		//proxy->next->previous = cur;
+		proxy->next->type = determine_type(word, proxy->type);
 	}
 }
 

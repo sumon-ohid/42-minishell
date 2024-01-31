@@ -74,6 +74,7 @@ typedef struct s_data
 	int				**fd;
 	int				processes;
 	int				*pid;
+	int				cur_proc;
 	char			**envp;
 	char			*oldpwd;
 	char			*pwd;
@@ -118,7 +119,6 @@ int					ft_unset(t_data *node, t_token *token, char *str);
 char				*ft_getenv(t_data *node, char *str);
 
 // take_input
-
 int					entry_check(t_data *node, char *line);
 t_token				**tokenizer(char *str);
 int					pipe_counter(char *str);
@@ -146,6 +146,10 @@ void				free_tokens(t_token **token);
 void				free_arr(char **arr);
 void				error_quit(int fd, int *tomlo, char *str);
 char				**free_everything(char **arr, int m_ctr);
+
+//redirections
+
+void				ft_redirect_checker(t_token *chain);
 
 // execution part
 char				*extract_path(char *comm2, char **poss_paths,

@@ -37,6 +37,7 @@ SRC = 	srcs/main.c \
 		srcs/heredoc.c \
 		srcs/pipex.c \
 		srcs/signals.c \
+		srcs/redirects.c \
 
 OBJ = $(SRC:.c=.o)
 

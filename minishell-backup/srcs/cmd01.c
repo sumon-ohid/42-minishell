@@ -61,6 +61,7 @@ int	execute_chain(t_data *node, t_token *chain, char *line, int processes)
 	proxy = chain;
 	if (!chain)
 		return (-1);
+	ft_redirect_checker(chain);
 	while (proxy)
 	{
 		if (proxy->type == BUILTIN)
