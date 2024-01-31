@@ -2,7 +2,7 @@ NAME = minishell
 CC = cc
 CC1 = clang
 CC2 = gcc
-CFLAGS = -Wall -Werror -Wextra -fsanitize=address -g
+CFLAGS = -Wall -Werror -Wextra -g
 HEADER = minishell.h
 
 #Colors

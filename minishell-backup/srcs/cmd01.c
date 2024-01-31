@@ -39,7 +39,22 @@ int	ft_commander(t_token *chain)
 	return (0);
 }
 
-int	execute_chain(t_data *node, t_token *chain, char *line)
+void	close_all(int ***origin, int max)
+{
+	int	**fd;
+	int	counter;
+
+	fd = *origin;
+	counter = 0;
+	while (counter < max)
+	{
+		close(fd[counter][0]);
+		close(fd[counter][1]);
+		counter++;
+	}
+}
+
+int	execute_chain(t_data *node, t_token *chain, char *line, int processes)
 {
 	t_token	*proxy;
 
@@ -49,7 +64,11 @@ int	execute_chain(t_data *node, t_token *chain, char *line)
 	while (proxy)
 	{
 		if (proxy->type == BUILTIN)
+		{
+			if (processes)
+				close_all(&node->fd, processes - 1);
 			return (entry_check2(node, chain, line));
+		}
 		else if (proxy->type == COMMAND)
 			return (ft_commander(chain));
 		else if (proxy->type != COMMAND && proxy->type != BUILTIN)
@@ -78,10 +97,10 @@ void	close_what_this_child_doesnt_need(int ***origin, int index, int max)
 	if (index != 0)
 		close(fd[counter][1]);
 	counter++;
-	//if (index != max)
-		//close(fd[counter][0]);
+	if (index != max)
+		close(fd[counter][0]);
 	counter++;
-	while (counter <= max)
+	while (counter < max)
 	{
 		close(fd[counter][0]);
 		close(fd[counter][1]);

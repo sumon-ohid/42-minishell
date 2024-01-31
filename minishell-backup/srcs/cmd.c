@@ -45,12 +45,11 @@ void	executor_init(t_data *node, t_token **tokens, int processes, char *line)
 	int	**fd;
 
 	fd = NULL;
-	node->fd = fd;
 	node->pid = pid;
 	node->processes = processes;
 	if (exception_checker(tokens, processes))
 	{
-		execute_chain(node, tokens[0], line);
+		execute_chain(node, tokens[0], line, 0);
 		return ;
 	}
 	allocate_fd(&fd, processes);

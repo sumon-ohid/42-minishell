@@ -129,7 +129,7 @@ void				process_words(t_token ***origin, char **words, char *str);
 
 // cmd01
 int					ft_commander(t_token *chain);
-int					execute_chain(t_data *node, t_token *chain, char *line);
+int					execute_chain(t_data *node, t_token *chain, char *line, int processes);
 void				close_what_this_child_doesnt_need(int ***origin, int index,
 						int max);
 int					exception_checker(t_token **tokens, int processes);
