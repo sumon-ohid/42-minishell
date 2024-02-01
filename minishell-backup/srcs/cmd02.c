@@ -33,7 +33,7 @@ int	entry_check2(t_data *node, t_token *head, char *line)
 		else
 			ft_cd(NULL, node);
 	else if (ft_strcmp(head->str, "echo") == 0)
-		ft_echo(line, node);
+		ft_echo(line, node, head);
 	else if (ft_strcmp(head->str, "env") == 0)
 		ft_env(node);
 	else if (ft_strcmp(head->str, "clear") == 0)

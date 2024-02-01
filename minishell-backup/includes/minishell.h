@@ -113,7 +113,7 @@ int					ft_isalnum(int c);
 
 // builtins
 void				ft_cd(char *str, t_data *node);
-void				ft_echo(char *line, t_data *node);
+void				ft_echo(char *line, t_data *node, t_token *head);
 char				**ft_env(t_data *node);
 int					ft_export(t_data *node, t_token *token, char *str);
 void				ft_pwd(void);
