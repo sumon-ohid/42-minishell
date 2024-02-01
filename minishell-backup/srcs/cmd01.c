@@ -18,6 +18,8 @@ int	ft_commander(t_token *chain)
 	t_token		*mark;
 	char		*tmp;
 
+	//write(2, "WOOO\n", 5);
+	//ft_redirect_checker(chain);
 	while (chain && chain->type != COMMAND)
 		chain = chain->next;
 	mark = chain;
@@ -62,6 +64,12 @@ int	execute_chain(t_data *node, t_token *chain, char *line, int processes)
 	if (!chain)
 		return (-1);
 	ft_redirect_checker(chain);
+	/*while (chain)
+	{
+		printf("next token is: %s\n", chain->str);
+		printf("token type: %d\n", chain->type);
+		chain = chain->next;
+	}*/
 	while (proxy)
 	{
 		if (proxy->type == BUILTIN)
@@ -72,8 +80,8 @@ int	execute_chain(t_data *node, t_token *chain, char *line, int processes)
 		}
 		else if (proxy->type == COMMAND)
 			return (ft_commander(chain));
-		else if (proxy->type != COMMAND && proxy->type != BUILTIN)
-			break ;
+		//else if (proxy->type != COMMAND && proxy->type != BUILTIN)
+			//break ;
 		else
 			proxy = proxy->next;
 	}
