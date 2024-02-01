@@ -55,6 +55,7 @@ void	executor_init(t_data *node, t_token **tokens, int processes, char *line)
 	allocate_fd(&fd, processes);
 	node->fd = fd;
 	fork_processes(processes, node, tokens, line);
+	close_all(&fd, processes - 1);
 	status = malloc(sizeof(int) * processes);
 	if (!status)
 	{
@@ -83,7 +84,6 @@ int	entry_check(t_data *node, char *line)
 		return (1);
 	}
 	process_words(&tokens, arr, line);
-	ft_set(node);
 	executor_init(node, tokens, pipe_counter(line), line);
 	//free_tokens(tokens);
 	free(line);

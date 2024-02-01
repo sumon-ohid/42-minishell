@@ -106,6 +106,15 @@ void	fork_processes(int processes, t_data *node, t_token **tokens,
 			perror("Fork failed");
 			exit(EXIT_FAILURE);
 		}
+		else
+		{
+			if (counter != 0)
+                close(node->fd[counter - 1][0]); // Close the read end of the previous pipe
+            if (counter != processes - 1)
+                close(node->fd[counter][1]);
+		}
 		counter++;
 	}
+	if (processes > 1)
+        close(node->fd[processes - 2][0]);
 }

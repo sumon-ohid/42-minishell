@@ -84,29 +84,29 @@ int	execute_chain(t_data *node, t_token *chain, char *line, int processes)
 
 void	close_what_this_child_doesnt_need(int ***origin, int index, int max)
 {
-	int	**fd;
-	int	counter;
+    int **fd;
+    int counter;
 
-	fd = *origin;
-	counter = 0;
-	while (counter < index - 1)
-	{
-		close(fd[counter][0]);
-		close(fd[counter][1]);
-		counter++;
-	}
-	if (index != 0)
-		close(fd[counter][1]);
-	counter++;
-	if (index != max)
-		close(fd[counter][0]);
-	counter++;
-	while (counter < max)
-	{
-		close(fd[counter][0]);
-		close(fd[counter][1]);
-		counter++;
-	}
+    fd = *origin;
+    counter = 0;
+    while (counter < index)
+    {
+        if (counter != index - 1)
+        {
+            close(fd[counter][1]);
+        }
+        close(fd[counter][0]);
+        counter++;
+    }
+    while (counter < max)
+    {
+        if (counter != index)
+        {
+            close(fd[counter][0]);
+        }
+        close(fd[counter][1]);
+        counter++;
+    }
 }
 
 int	exception_checker(t_token **tokens, int processes)

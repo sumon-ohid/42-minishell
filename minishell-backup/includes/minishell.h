@@ -154,6 +154,7 @@ char				**free_everything(char **arr, int m_ctr);
 void				ft_redirect_checker(t_token *chain);
 void				ft_set(t_data *node);
 void				ft_restore(t_data *node);
+void				close_all(int ***origin, int max);
 
 // execution part
 char				*extract_path(char *comm2, char **poss_paths,
