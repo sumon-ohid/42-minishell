@@ -39,9 +39,21 @@ int	entry_check(t_data *node, char *line)
 	return (0);
 }
 
-int	ft_lexical_checker(char *line)
+char	**parse_input(char *line)
 {
-    // we have to iterate through line and implement the following here:
+	char	**tokens;
+
+	tokens = ft_split(line, '|', 0, 0);
+	if (!tokens)
+	{
+		write(2, "Allocation error\n", 17);
+		exit(EXIT_FAILURE);
+	}
+	return (tokens);
+}
+
+
+// we have to iterate through line and implement the following here:
 	// 1. check if a ' or " has started,
 	//	they also have a maching sign that closes it
 	// 2. There are no two pipes following each other, like | | or
@@ -55,6 +67,8 @@ int	ft_lexical_checker(char *line)
 	// If any error of the above happens,
 	//	display "Syntax error near unexpected token", free line, return 0
 	// Otherwise: return 1
+int	ft_lexical_checker(char *line)
+{
 	int in_single_quote = 0;
 	int in_double_quote = 0;
 	char last_char = '\0';
