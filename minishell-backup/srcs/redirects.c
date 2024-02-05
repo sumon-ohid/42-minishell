@@ -47,7 +47,7 @@ void	redirect_out_append(char *output)
 {
 	int	fd2;
 
-	fd2 = open(output, O_TRUNC | O_WRONLY | O_CREAT | O_APPEND, 0644);
+	fd2 = open(output, O_WRONLY | O_APPEND | O_CREAT , 0644);
 	if (fd2 == -1)
 	{
 		printf("minishell: %s: Permission denied\n", output);

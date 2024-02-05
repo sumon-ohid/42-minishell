@@ -70,8 +70,9 @@ char	**parse_input(char *line)
 	// Otherwise: return 1
 int ft_lexer_error(char *line)
 {
+	(void)line;
 	printf("Syntax error near unexpected token\n");
-	free(line);
+	//free(line);
 	return (0);
 }
 
