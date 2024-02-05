@@ -34,6 +34,7 @@ int	determine_type(char *word, int prev_type)
 
 // TODO: account for $?
 // malloc protection
+
 t_token	*create_token(char *word)
 {
 	t_token	*new;
@@ -121,8 +122,6 @@ void	process_words(t_token ***origin, char **units, char *str)
 
 	counter = 0;
 	counter2 = 0;
-	//printf("STR is: %s\n", str);
-	//printf("0th word is: %s\n", words[counter]);
 	while (counter2 < pipe_counter(str))
 	{
 		words = ft_split(units[counter2], ' ', 0, 0);
@@ -135,7 +134,6 @@ void	process_words(t_token ***origin, char **units, char *str)
 		counter2++;
 		counter = 0;
 		ft_free_array(words);
-		//free_everything(words, 10000);
 	}
 	//ft_free_array(units);
 	//free_everything(units, 10000);
@@ -149,8 +147,6 @@ void	process_words(t_token ***origin, char **units, char *str)
 
 	counter = 0;
 	counter2 = 0;
-	//printf("STR is: %s\n", str);
-	//printf("0th word is: %s\n", words[counter]);
 	while (counter2 < pipe_counter(str))
 	{
 		while (words[counter] && ft_strcmp(words[counter], "|") != 0)

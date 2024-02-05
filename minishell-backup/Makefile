@@ -38,6 +38,7 @@ SRC = 	srcs/main.c \
 		srcs/pipex.c \
 		srcs/signals.c \
 		srcs/redirects.c \
+		srcs/lexer.c \
 
 OBJ = $(SRC:.c=.o)
 

@@ -122,6 +122,7 @@ char				*ft_getenv(t_data *node, char *str);
 
 // take_input
 int					entry_check(t_data *node, char *line);
+int 				ft_lexical_checker(char *line);
 t_token				**tokenizer(char *str);
 int					pipe_counter(char *str);
 char				*handle_envp(char *str);
