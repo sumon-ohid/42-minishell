@@ -18,6 +18,8 @@ int	ft_commander(t_token *chain)
 	t_token		*mark;
 	char		*tmp;
 
+	//write(2, "WOOO\n", 5);
+	//ft_redirect_checker(chain);
 	while (chain && chain->type != COMMAND)
 		chain = chain->next;
 	mark = chain;
@@ -62,6 +64,12 @@ int	execute_chain(t_data *node, t_token *chain, char *line, int processes)
 	if (!chain)
 		return (-1);
 	ft_redirect_checker(chain);
+	/*while (chain)
+	{
+		printf("next token is: %s\n", chain->str);
+		printf("token type: %d\n", chain->type);
+		chain = chain->next;
+	}*/
 	while (proxy)
 	{
 		if (proxy->type == BUILTIN)
@@ -72,8 +80,8 @@ int	execute_chain(t_data *node, t_token *chain, char *line, int processes)
 		}
 		else if (proxy->type == COMMAND)
 			return (ft_commander(chain));
-		else if (proxy->type != COMMAND && proxy->type != BUILTIN)
-			break ;
+		//else if (proxy->type != COMMAND && proxy->type != BUILTIN)
+			//break ;
 		else
 			proxy = proxy->next;
 	}
@@ -84,29 +92,29 @@ int	execute_chain(t_data *node, t_token *chain, char *line, int processes)
 
 void	close_what_this_child_doesnt_need(int ***origin, int index, int max)
 {
-	int	**fd;
-	int	counter;
+    int **fd;
+    int counter;
 
-	fd = *origin;
-	counter = 0;
-	while (counter < index - 1)
-	{
-		close(fd[counter][0]);
-		close(fd[counter][1]);
-		counter++;
-	}
-	if (index != 0)
-		close(fd[counter][1]);
-	counter++;
-	if (index != max)
-		close(fd[counter][0]);
-	counter++;
-	while (counter < max)
-	{
-		close(fd[counter][0]);
-		close(fd[counter][1]);
-		counter++;
-	}
+    fd = *origin;
+    counter = 0;
+    while (counter < index)
+    {
+        if (counter != index - 1)
+        {
+            close(fd[counter][1]);
+        }
+        close(fd[counter][0]);
+        counter++;
+    }
+    while (counter < max)
+    {
+        if (counter != index)
+        {
+            close(fd[counter][0]);
+        }
+        close(fd[counter][1]);
+        counter++;
+    }
 }
 
 int	exception_checker(t_token **tokens, int processes)

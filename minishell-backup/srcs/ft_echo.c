@@ -123,7 +123,7 @@ void	print_argument(char *arg, t_data *node)
 	return ;
 }
 
-void	ft_echo(char *line, t_data *node)
+/*void	ft_echo(char *line, t_data *node)
 {
 	char	**arr;
 	int		i;
@@ -146,4 +146,24 @@ void	ft_echo(char *line, t_data *node)
 	}
 	if (newline)
 		ft_putchar('\n');
+}*/
+
+void	ft_echo(char *line, t_data *node, t_token *head)
+{
+	int fl;
+
+	fl = 0;
+	(void)line;
+	while (head)
+	{
+		if (head->type == FLAG)
+		{
+			if (fl)
+				ft_putchar(' ');
+			print_argument(head->str, node);
+			fl = 1;
+		}
+		head = head->next;
+	}
+	ft_putchar('\n');
 }

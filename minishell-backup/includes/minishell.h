@@ -6,7 +6,7 @@
 /*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/01/26 17:33:58 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/05 15:13:30 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ int					ft_isalnum(int c);
 
 // builtins
 void				ft_cd(char *str, t_data *node);
-void				ft_echo(char *line, t_data *node);
+void				ft_echo(char *line, t_data *node, t_token *head);
 char				**ft_env(t_data *node);
 int					ft_export(t_data *node, t_token *token, char *str);
 void				ft_pwd(void);
@@ -122,6 +122,7 @@ char				*ft_getenv(t_data *node, char *str);
 
 // take_input
 int					entry_check(t_data *node, char *line);
+int 				ft_lexical_checker(char *line);
 t_token				**tokenizer(char *str);
 int					pipe_counter(char *str);
 char				*handle_envp(char *str);
@@ -135,6 +136,7 @@ int					execute_chain(t_data *node, t_token *chain, char *line, int processes);
 void				close_what_this_child_doesnt_need(int ***origin, int index,
 						int max);
 int					exception_checker(t_token **tokens, int processes);
+void				executor_init(t_data *node, t_token **tokens, int processes, char *line);
 
 // cmd02
 char				**parse_input(char *line);
@@ -154,6 +156,7 @@ char				**free_everything(char **arr, int m_ctr);
 void				ft_redirect_checker(t_token *chain);
 void				ft_set(t_data *node);
 void				ft_restore(t_data *node);
+void				close_all(int ***origin, int max);
 
 // execution part
 char				*extract_path(char *comm2, char **poss_paths,

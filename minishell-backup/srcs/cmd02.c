@@ -33,7 +33,7 @@ int	entry_check2(t_data *node, t_token *head, char *line)
 		else
 			ft_cd(NULL, node);
 	else if (ft_strcmp(head->str, "echo") == 0)
-		ft_echo(line, node);
+		ft_echo(line, node, head);
 	else if (ft_strcmp(head->str, "env") == 0)
 		ft_env(node);
 	else if (ft_strcmp(head->str, "clear") == 0)
@@ -106,6 +106,15 @@ void	fork_processes(int processes, t_data *node, t_token **tokens,
 			perror("Fork failed");
 			exit(EXIT_FAILURE);
 		}
+		else
+		{
+			if (counter != 0)
+                close(node->fd[counter - 1][0]); // Close the read end of the previous pipe
+            if (counter != processes - 1)
+                close(node->fd[counter][1]);
+		}
 		counter++;
 	}
+	if (processes > 1)
+        close(node->fd[processes - 2][0]);
 }

@@ -55,6 +55,7 @@ void	executor_init(t_data *node, t_token **tokens, int processes, char *line)
 	allocate_fd(&fd, processes);
 	node->fd = fd;
 	fork_processes(processes, node, tokens, line);
+	close_all(&fd, processes - 1);
 	status = malloc(sizeof(int) * processes);
 	if (!status)
 	{
@@ -63,30 +64,4 @@ void	executor_init(t_data *node, t_token **tokens, int processes, char *line)
 	}
 	wait_for_processes(pid, status, processes);
 	free_resources(fd, status, processes);
-}
-
-int	entry_check(t_data *node, char *line)
-{
-	char	**arr;
-	t_token	**tokens;
-
-	tokens = ft_calloc(sizeof(t_token *), pipe_counter(line));
-	if (!tokens)
-	{
-		perror("Memory allocation failed");
-		return (1);
-	}
-	arr = parse_input(line);
-	if (!arr)
-	{
-		free(tokens);
-		return (1);
-	}
-	process_words(&tokens, arr, line);
-	ft_set(node);
-	executor_init(node, tokens, pipe_counter(line), line);
-	//free_tokens(tokens);
-	free(line);
-	free_arr(arr);
-	return (0);
 }

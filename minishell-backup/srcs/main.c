@@ -54,7 +54,10 @@ int	main(int argc, char **argv, char **envp)
 		perror("Failed to allocate memory for node.");
 		exit(EXIT_FAILURE);
 	}
+	ft_set(node);
 	ft_initialize(node, envp);
+	close(node->std_in);
+	close(node->std_out);
 	free(node);
 	return (0);
 }
