@@ -12,6 +12,15 @@
 
 #include "../includes/minishell.h"
 
+void	initialize_node(t_data *node, char **envp)
+{
+	node->env_len = 0;
+	node->envp = envp;
+	node->home = getenv("HOME");
+	node->oldpwd = getenv("OLDPWD");
+	node->pwd = getenv("PWD");
+}
+
 void	ft_initialize(t_data *node, char **envp)
 {
 	char	*input;
@@ -29,15 +38,13 @@ void	ft_initialize(t_data *node, char **envp)
 		}
 		else if (*input)
 		{
-			if (ft_strchr(input, '=') == 1)
+			if (ft_strchr(input, '=') == 1) //should change this cause of quotes
 				node->line_for_export = ft_strdup(input);
-			node->env_len = 0;
-			node->envp = envp;
-			node->home = getenv("HOME");
-			node->oldpwd = getenv("OLDPWD");
-			node->pwd = getenv("PWD");
+			else if (ft_strcmp(input, "\n") == 0)
+				break ;
+			initialize_node(node, envp);
 			add_history(input);
-			entry_check(node, input);
+			node->last_return = entry_check(node, input);
 		}
 	}
 }

@@ -160,7 +160,10 @@ void	ft_echo(char *line, t_data *node, t_token *head)
 		{
 			if (fl)
 				ft_putchar(' ');
-			print_argument(head->str, node);
+			if (ft_strcmp(head->str, "$?") == 0) //TODO: handle other cases with it embedded in string etc.
+				ft_lastvalue(node);
+			else
+				print_argument(head->str, node);
 			fl = 1;
 		}
 		head = head->next;

@@ -24,7 +24,7 @@ void	wait_for_processes(int *pid, int *status, int processes)
 	}
 }
 
-void	free_resources(int **fd, int *status, int processes)
+void	free_resources(int **fd, int processes)
 {
 	int	counter;
 
@@ -35,10 +35,10 @@ void	free_resources(int **fd, int *status, int processes)
 		counter++;
 	}
 	free(fd);
-	free(status);
+	//free(status);
 }
 
-void	executor_init(t_data *node, t_token **tokens, int processes, char *line)
+int	executor_init(t_data *node, t_token **tokens, int processes, char *line)
 {
 	int	pid[512];
 	int	*status;
@@ -50,7 +50,7 @@ void	executor_init(t_data *node, t_token **tokens, int processes, char *line)
 	if (exception_checker(tokens, processes))
 	{
 		execute_chain(node, tokens[0], line, 0);
-		return ;
+		return (0);
 	}
 	allocate_fd(&fd, processes);
 	node->fd = fd;
@@ -63,5 +63,6 @@ void	executor_init(t_data *node, t_token **tokens, int processes, char *line)
 		exit(EXIT_FAILURE);
 	}
 	wait_for_processes(pid, status, processes);
-	free_resources(fd, status, processes);
+	free_resources(fd, processes);
+	return (status[processes - 1]);
 }

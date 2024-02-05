@@ -37,7 +37,7 @@ int	ft_commander(t_token *chain)
 		}
 		chain = chain->next;
 	}
-	extract_find_execute(environ, mark->str, 1);
+	extract_find_execute(environ, mark->str);
 	return (0);
 }
 

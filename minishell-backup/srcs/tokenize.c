@@ -35,7 +35,7 @@ int	determine_type(char *word, int prev_type)
 // TODO: account for $?
 // malloc protection
 
-t_token	*create_token(char *word)
+t_token	*create_token(char *word, t_data *node)
 {
 	t_token	*new;
 
@@ -45,8 +45,8 @@ t_token	*create_token(char *word)
 	new->previous = NULL;
 	new->next = NULL;
 	new->arr = NULL;
-	if (word[0] == '$')
-		new->str = handle_envp(word);
+	if (ft_strstr(word, "$"))
+		new->str = handle_envp(word, node);
 	else
 		new->str = ft_strdup(word);
 	new->type = 0;
@@ -71,7 +71,7 @@ int	pipe_counter(char *str)
 	return (pipes + 1);
 }
 
-void	create_and_link_token(t_token ***origin, int current, char *word)
+void	create_and_link_token(t_token ***origin, int current, char *word, t_data *node)
 {
 	t_token	*proxy;
 	t_token *cur;
@@ -83,7 +83,7 @@ void	create_and_link_token(t_token ***origin, int current, char *word)
 	if (!cur)
 	{
 		//printf("head list was empty\n");
-		cur = create_token(word);
+		cur = create_token(word, node);
 		cur->type = determine_type(word, 0);
 		tokens[current] = cur;
 		//printf("head str is now: %s\n", cur->str);
@@ -92,7 +92,7 @@ void	create_and_link_token(t_token ***origin, int current, char *word)
 	{
 		while (proxy->next)
 			proxy = proxy->next;
-		proxy->next = create_token(word);
+		proxy->next = create_token(word, node);
 		//proxy->next->previous = cur;
 		proxy->next->type = determine_type(word, proxy->type);
 	}
@@ -114,7 +114,7 @@ void ft_free_array(char **str)
 	return ;
 }
 
-void	process_words(t_token ***origin, char **units, char *str)
+void	process_words(t_token ***origin, char **units, char *str, t_data *node)
 {
 	int		counter;
 	int		counter2;
@@ -124,10 +124,10 @@ void	process_words(t_token ***origin, char **units, char *str)
 	counter2 = 0;
 	while (counter2 < pipe_counter(str))
 	{
-		words = ft_split(units[counter2], ' ', 0, 0);
+		words = ft_split/*_special*/(units[counter2], ' ', 0, 0);
 		while (words[counter])
 		{
-			create_and_link_token(origin, counter2, words[counter]);
+			create_and_link_token(origin, counter2, words[counter], node);
 			counter++;
 			// TODO: error management
 		}

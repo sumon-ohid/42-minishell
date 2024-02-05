@@ -86,7 +86,7 @@ char	*pathfinder(char **envp, char *comm)
 	return (extract_path(comm2, poss_paths, comm));
 }
 
-void	extract_find_execute(char **envp, char *full_comm, int round)
+void	extract_find_execute(char **envp, char *full_comm)
 {
 	char	**comms;
 	char	*path;
@@ -106,9 +106,7 @@ void	extract_find_execute(char **envp, char *full_comm, int round)
 		else
 			printf("Error: malloc failure\n");
 		free_everything(comms, counter);
-		if (round == 2)
-			exit(127);
-		exit(0);
+		exit(127);
 	}
 	execve(path, comms, NULL);
 	free_everything(comms, counter);
