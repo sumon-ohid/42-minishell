@@ -6,7 +6,7 @@
 /*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/01/26 17:33:58 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/05 15:13:30 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,7 @@ int					execute_chain(t_data *node, t_token *chain, char *line, int processes);
 void				close_what_this_child_doesnt_need(int ***origin, int index,
 						int max);
 int					exception_checker(t_token **tokens, int processes);
+void				executor_init(t_data *node, t_token **tokens, int processes, char *line);
 
 // cmd02
 char				**parse_input(char *line);
