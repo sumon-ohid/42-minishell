@@ -96,6 +96,7 @@ char				*ft_strdup(const char *src);
 int					ft_strcmp(char *s1, char *s2);
 int					ft_strncmp(char *s1, char *s2, size_t n);
 char				**ft_split(char const *s, char c, size_t i, size_t j);
+int					k_count(char const *s, int i, char c);
 void				ft_putstr(char *str);
 void				ft_putchar(char c);
 char				*ft_strndup(const char *s, size_t n);

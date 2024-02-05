@@ -12,19 +12,6 @@
 
 #include "../includes/minishell.h"
 
-char	**parse_input(char *line)
-{
-	char	**tokens;
-
-    tokens = ft_split(line, '|', 0, 0);
-	if (!tokens)
-	{
-		write(2, "Allocation error\n", 17);
-		exit(EXIT_FAILURE);
-	}
-	return (tokens);
-}
-
 int	entry_check2(t_data *node, t_token *head, char *line)
 {
 	if (ft_strcmp(head->str, "cd") == 0)

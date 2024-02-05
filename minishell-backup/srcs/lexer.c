@@ -39,6 +39,19 @@ int	entry_check(t_data *node, char *line)
 	return (0);
 }
 
+char	**parse_input(char *line)
+{
+	char	**tokens;
+
+    tokens = ft_split(line, '|', 0, 0);
+	if (!tokens)
+	{
+		write(2, "Allocation error\n", 17);
+		exit(EXIT_FAILURE);
+	}
+	return (tokens);
+}
+
 int ft_lexical_checker(char *line)
 {
     //we have to iterate through line and implement the following here:

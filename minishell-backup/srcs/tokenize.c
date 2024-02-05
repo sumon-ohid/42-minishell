@@ -124,7 +124,7 @@ void	process_words(t_token ***origin, char **units, char *str)
 	counter2 = 0;
 	while (counter2 < pipe_counter(str))
 	{
-		words = ft_split(units[counter2], ' ', 0, 0);
+		words = ft_split_special(units[counter2], ' ', 0, 0);
 		while (words[counter])
 		{
 			create_and_link_token(origin, counter2, words[counter]);
