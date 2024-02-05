@@ -6,7 +6,7 @@
 /*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 13:51:32 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/05 15:35:25 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/05 19:55:25 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,42 +68,64 @@ char	**parse_input(char *line)
 	// If any error of the above happens,
 	//	display "Syntax error near unexpected token", free line, return 0
 	// Otherwise: return 1
+int ft_lexer_error(char *line)
+{
+	printf("Syntax error near unexpected token\n");
+	free(line);
+	return (0);
+}
+
 int	ft_lexical_checker(char *line)
 {
-	(void)line;
-	/*int in_single_quote = 0;
-	int in_double_quote = 0;
-	char last_char = '\0';
+	int in_single_quote;
+	int in_double_quote;
+	char prev_char;
 	char c;
-	int i = 0;
+	int i;
 
-	while ((c = line[i]) != '\0')
+	in_single_quote = 0;
+	in_double_quote = 0;
+	i = 0;
+	while ((line[i]) != '\0')
 	{
+		c = line[i];
 		if (c == '\'' && !in_double_quote)
 			in_single_quote = !in_single_quote;
 		else if (c == '\"' && !in_single_quote)
 	    	in_double_quote = !in_double_quote;
 		else if (!in_single_quote && !in_double_quote)
 		{
-			if ((c == '|' && (last_char == '|' || last_char == '\0' || line[i+1] == '\0')) ||
-                ((c == '>' || c == '<') && (last_char == ' ' || line[i+1] == ' ')) ||
-                ((c == '>' && last_char == '>') && (i > 1 && line[i-2] == ' ')) ||
-                ((c == '<' && last_char == '<') && (i > 1 && line[i-2] == ' ')) ||
-                (c == '=' && (last_char == ' ' || line[i+1] == ' ')))
-            {
-                printf("Syntax error near unexpected token\n");
-                free(line);
-                return 0;
-            }
+			if (c == '|' && prev_char == '|')
+				ft_lexer_error(line);
+			else if (c == '<' && prev_char == '>')
+				ft_lexer_error(line);
+			else if (c == '>' && prev_char == '<')
+				ft_lexer_error(line);
+			else if (c == '|' && prev_char == '>')
+				ft_lexer_error(line);
+			else if (c == '|' && prev_char == '<')
+				ft_lexer_error(line);
+			else if (c == '>' && prev_char == '|')
+				ft_lexer_error(line);
+			else if (c == '<' && prev_char == '|')
+				ft_lexer_error(line);
+			else if (c == '>' && line[i + 1] == ' ' && line[i + 2] == '>')
+				ft_lexer_error(line);
+			else if (c == '<' && line[i + 1] == ' ' && line[i + 2] == '<')
+				ft_lexer_error(line);
+			else if (c == '|' && line[i + 1] == ' ' && line[i + 2] == '|')
+				ft_lexer_error(line);
+			else if (c == '>' && line[i + 1] == '\0')
+				ft_lexer_error(line);
+			else if (c == '<' && line[i + 1] == '\0')
+				ft_lexer_error(line);
+			else if (c == '|' && line[i + 1] == '\0')
+				ft_lexer_error(line);
 		}
-		last_char = c;
+		prev_char = c;
 		i++;
 	}
 	if (in_single_quote || in_double_quote)
-	{
-		printf("Syntax error near unexpected token\n");
-		free(line);
-		return (0);
-	}*/
+		ft_lexer_error(line);
 	return (1);
 }
