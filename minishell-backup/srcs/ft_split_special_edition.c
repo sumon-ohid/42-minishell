@@ -40,7 +40,7 @@ static size_t	word_counter(char const *s, char c)
 	return (words);
 }
 
-char	**ft_split(char const *s, char c, size_t i, size_t j)
+char    **ft_split_special(char *str, char c, size_t i, size_t j)
 {
 	char	**s_split;
 	size_t	k;
@@ -69,9 +69,4 @@ char	**ft_split(char const *s, char c, size_t i, size_t j)
 	}
 	s_split[j] = NULL;
 	return (s_split);
-}
-
-char    **ft_split_special(char *str)
-{
-
 }

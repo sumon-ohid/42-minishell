@@ -33,7 +33,7 @@ int	entry_check(t_data *node, char *line)
 	}
 	process_words(&tokens, arr, line);
 	executor_init(node, tokens, pipe_counter(line), line);
-	// free_tokens(tokens);
+	free_tokens(tokens);
 	free(line);
 	free_arr(arr);
 	return (0);
@@ -69,7 +69,8 @@ char	**parse_input(char *line)
 	// Otherwise: return 1
 int	ft_lexical_checker(char *line)
 {
-	int in_single_quote = 0;
+	(void)line;
+	/*int in_single_quote = 0;
 	int in_double_quote = 0;
 	char last_char = '\0';
 	char c;
@@ -102,6 +103,6 @@ int	ft_lexical_checker(char *line)
 		printf("Syntax error near unexpected token\n");
 		free(line);
 		return (0);
-	}
+	}*/
 	return (1);
 }
