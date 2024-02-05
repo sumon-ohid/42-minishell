@@ -32,7 +32,7 @@ int	entry_check(t_data *node, char *line)
 		free(tokens);
 		return (127);
 	}
-	process_words(&tokens, arr, line);
+	process_words(&tokens, arr, line, node);
 	ret_val = executor_init(node, tokens, pipe_counter(line), line);
 	free_tokens(tokens);
 	free(line);

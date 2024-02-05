@@ -112,6 +112,7 @@ int					ft_putnbr(int n);
 int					ft_strchr(char *str, char c);
 int					ft_isspace(int c);
 int					ft_isalnum(int c);
+char				*ft_itoa(int n);
 
 // builtins
 void				ft_cd(char *str, t_data *node);
@@ -122,16 +123,17 @@ void				ft_pwd(void);
 int					ft_unset(t_data *node, t_token *token, char *str);
 char				*ft_getenv(t_data *node, char *str);
 void    			ft_lastvalue(t_data *node);
+char    			*ft_lastval_str(t_data *node);
 
 // take_input
 int					entry_check(t_data *node, char *line);
 int 				ft_lexical_checker(char *line);
 t_token				**tokenizer(char *str);
 int					pipe_counter(char *str);
-char				*handle_envp(char *str);
+char				*handle_envp(char *str, t_data *node);
 int					check_builtins(char *word);
 int					check_prevs(char *word, int prev_type);
-void				process_words(t_token ***origin, char **words, char *str);
+void				process_words(t_token ***origin, char **words, char *str, t_data *node);
 
 // cmd01
 int					ft_commander(t_token *chain);

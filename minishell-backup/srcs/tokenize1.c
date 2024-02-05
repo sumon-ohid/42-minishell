@@ -12,14 +12,24 @@
 
 #include "../includes/minishell.h"
 
-char	*handle_envp(char *str)
+char	*handle_envp(char *str, t_data *node)
 {
 	char	*output;
 
-	output = getenv(str + 1);
+	/*if (ft_strstr(str, "\""))
+		//DO SOMETHING HERE!*/
+	if (ft_strcmp(str, "$?") == 0)
+		return (ft_lastval_str(node));
+	else if (str[0] == '$')
+	{
+		if (getenv(str + 1))
+			output = ft_strdup(getenv(str + 1));
+		else
+			output = ft_strdup("");
+	}
 	if (!output)
-		output = ft_strdup("\n");
-	free(str);
+		exit(EXIT_FAILURE);
+	//free(str);
 	return (output);
 }
 
