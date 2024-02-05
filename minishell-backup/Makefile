@@ -39,6 +39,7 @@ SRC = 	srcs/main.c \
 		srcs/signals.c \
 		srcs/redirects.c \
 		srcs/lexer.c \
+		srcs/ft_lastvalue.c \
 		#srcs/ft_split_special_edition.c \
 
 OBJ = $(SRC:.c=.o)

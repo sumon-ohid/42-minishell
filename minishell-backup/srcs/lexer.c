@@ -16,27 +16,28 @@ int	entry_check(t_data *node, char *line)
 {
 	char	**arr;
 	t_token	**tokens;
+	int		ret_val;
 
 	if (!ft_lexical_checker(line))
-		return (1);
+		return (2);
 	tokens = ft_calloc(sizeof(t_token *), pipe_counter(line));
 	if (!tokens)
 	{
 		perror("Memory allocation failed");
-		return (1);
+		return (127);
 	}
 	arr = parse_input(line);
 	if (!arr)
 	{
 		free(tokens);
-		return (1);
+		return (127);
 	}
 	process_words(&tokens, arr, line);
-	executor_init(node, tokens, pipe_counter(line), line);
+	ret_val = executor_init(node, tokens, pipe_counter(line), line);
 	free_tokens(tokens);
 	free(line);
 	free_arr(arr);
-	return (0);
+	return (ret_val);
 }
 
 char	**parse_input(char *line)

@@ -45,9 +45,9 @@ t_token	*create_token(char *word)
 	new->previous = NULL;
 	new->next = NULL;
 	new->arr = NULL;
-	if (word[0] == '$')
-		new->str = handle_envp(word);
-	else
+	//if (word[0] == '$')
+		//new->str = handle_envp(word); FIX THIS!!!!!!
+	//else
 		new->str = ft_strdup(word);
 	new->type = 0;
 	return (new);

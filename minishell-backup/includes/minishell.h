@@ -77,6 +77,7 @@ typedef struct s_data
 	int				cur_proc;
 	int				std_in;
 	int				std_out;
+	int				last_return;
 	char			**envp;
 	char			*oldpwd;
 	char			*pwd;
@@ -120,6 +121,7 @@ int					ft_export(t_data *node, t_token *token, char *str);
 void				ft_pwd(void);
 int					ft_unset(t_data *node, t_token *token, char *str);
 char				*ft_getenv(t_data *node, char *str);
+void    			ft_lastvalue(t_data *node);
 
 // take_input
 int					entry_check(t_data *node, char *line);
@@ -137,7 +139,7 @@ int					execute_chain(t_data *node, t_token *chain, char *line, int processes);
 void				close_what_this_child_doesnt_need(int ***origin, int index,
 						int max);
 int					exception_checker(t_token **tokens, int processes);
-void				executor_init(t_data *node, t_token **tokens, int processes, char *line);
+int					executor_init(t_data *node, t_token **tokens, int processes, char *line);
 
 // cmd02
 char				**parse_input(char *line);
@@ -163,8 +165,7 @@ void				close_all(int ***origin, int max);
 char				*extract_path(char *comm2, char **poss_paths,
 						char *og_comm);
 char				*pathfinder(char **envp, char *comm);
-void				extract_find_execute(char **envp, char *full_comm,
-						int round);
+void				extract_find_execute(char **envp, char *full_comm);
 
 // signals
 void				mode(t_data *data, t_mode mode);

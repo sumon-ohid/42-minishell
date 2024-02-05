@@ -44,7 +44,7 @@ void	ft_initialize(t_data *node, char **envp)
 				break ;
 			initialize_node(node, envp);
 			add_history(input);
-			entry_check(node, input);
+			node->last_return = entry_check(node, input);
 		}
 	}
 }
