@@ -20,7 +20,7 @@ int	entry_check(t_data *node, char *line)
 
 	if (!ft_lexical_checker(line))
 		return (2);
-	ft_upgrade_spaces(line);
+	line = ft_upgrade_spaces(line);
 	tokens = ft_calloc(sizeof(t_token *), pipe_counter(line));
 	if (!tokens)
 	{
@@ -56,7 +56,8 @@ char	**parse_input(char *line)
 
 char *ft_upgrade_spaces(line)
 {
-
+	//do the thing (except for " and ')
+	//free the line at the end because new version will replace it
 }
 
 
