@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:25:07 by msumon            #+#    #+#             */
-/*   Updated: 2024/01/26 17:22:44 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/06 16:02:10 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,91 +69,133 @@ void	show_dir(void)
 	closedir(d);
 }
 
-void	print_argument(char *arg, t_data *node)
+void	handle_dollar(char *arg, int *i, t_data *node)
 {
-	int		i;
-	int		len;
-	char	*new_arg;
-
-	i = 0;
-	len = ft_strlen(arg);
-	if (arg[0] == '\'' && arg[1] == '\0')
-		return ;
-	else if (arg[0] == '\"' && arg[1] == '\0')
-		return ;
-	while (arg[i])
-	{
-		if (arg[i] == '$' && arg[i + 1])
-		{
-			if (arg[i + 1] == '?')
-				ft_putnbr(0);
-			else if (arg[i + 1] == '$')
-				ft_putnbr(getpid());
-			else if (arg[i + 1] == '0')
-				ft_putstr("minishell");
-			else
-			{
-				ft_putstr(get_env_value(arg + 1, node));
-				return ;
-			}
-			i++;
-		}
-		else if (arg[i] == '~')
-			ft_putstr(getenv("HOME"));
-		else if (arg[i] == '*')
-			show_dir();
-		else if ((arg[0] == '\'' && arg[len - 1] == '\'') || (arg[0] == '\"'
-				&& arg[len - 1] == '\"'))
-		{
-			new_arg = ft_substr(arg, 1, len - 2);
-			ft_putstr(new_arg);
-			free(new_arg);
-			i = len;
-		}
-		else if ((arg[0] == '\'' && arg[len - 1] != '\'') || (arg[0] == '\"'
-				&& arg[len - 1] != '\"'))
-			return ;
-		else if ((arg[0] != '\'' && arg[len - 1] == '\'') || (arg[0] != '\"'
-				&& arg[len - 1] == '\"'))
-			return ;
-		else
-			ft_putchar(arg[i]);
-		i++;
-	}
-	return ;
+    if (arg[*i + 1] == '?')
+        ft_putnbr(0);
+    else if (arg[*i + 1] == '$')
+        ft_putnbr(getpid());
+    else if (arg[*i + 1] == '0')
+        ft_putstr("minishell");
+    else
+    {
+        ft_putstr(get_env_value(arg + 1, node));
+        return ;
+    }
+    (*i)++;
 }
 
-/*void	ft_echo(char *line, t_data *node)
+void	handle_quotes(char *arg, int *i, int len)
 {
-	char	**arr;
-	int		i;
-	int		newline;
+    char *new_arg;
 
-	arr = ft_split(line, ' ', 0, 0);
-	i = 1;
-	newline = 1;
-	if (arr[i] && ft_strcmp(arr[i], "-n") == 0)
-	{
-		newline = 0;
-		i++;
-	}
-	while (arr[i])
-	{
-		print_argument(arr[i], node);
-		if (arr[i + 1])
-			ft_putchar(' ');
-		i++;
-	}
-	if (newline)
-		ft_putchar('\n');
-}*/
+    if ((arg[0] == '\'' && arg[len - 1] == '\'') || (arg[0] == '\"' && arg[len - 1] == '\"'))
+    {
+        new_arg = ft_substr(arg, 1, len - 2);
+        ft_putstr(new_arg);
+        free(new_arg);
+        *i = len;
+    }
+    else if ((arg[0] == '\'' && arg[len - 1] != '\'') || (arg[0] == '\"' && arg[len - 1] != '\"'))
+        return ;
+    else if ((arg[0] != '\'' && arg[len - 1] == '\'') || (arg[0] != '\"' && arg[len - 1] == '\"'))
+        return ;
+}
+
+void	print_argument(char *arg, t_data *node)
+{
+    int		i;
+    int		len;
+
+    i = 0;
+    len = ft_strlen(arg);
+    if (arg[0] == '\'' && arg[1] == '\0')
+        return ;
+    else if (arg[0] == '\"' && arg[1] == '\0')
+        return ;
+    while (arg[i])
+    {
+        if (arg[i] == '$' && arg[i + 1])
+            handle_dollar(arg, &i, node);
+        else if (arg[i] == '~')
+            ft_putstr(getenv("HOME"));
+        else if (arg[i] == '*')
+            show_dir();
+        else
+            handle_quotes(arg, &i, len);
+        ft_putchar(arg[i]);
+        i++;
+    }
+    return ;
+}
+
+// void	print_argument(char *arg, t_data *node)
+// {
+// 	int		i;
+// 	int		len;
+// 	char	*new_arg;
+
+// 	i = 0;
+// 	len = ft_strlen(arg);
+// 	if (arg[0] == '\'' && arg[1] == '\0')
+// 		return ;
+// 	else if (arg[0] == '\"' && arg[1] == '\0')
+// 		return ;
+// 	while (arg[i])
+// 	{
+// 		if (arg[i] == '$' && arg[i + 1])
+// 		{
+// 			if (arg[i + 1] == '?')
+// 				ft_putnbr(0);
+// 			else if (arg[i + 1] == '$')
+// 				ft_putnbr(getpid());
+// 			else if (arg[i + 1] == '0')
+// 				ft_putstr("minishell");
+// 			else
+// 			{
+// 				ft_putstr(get_env_value(arg + 1, node));
+// 				return ;
+// 			}
+// 			i++;
+// 		}
+// 		else if (arg[i] == '~')
+// 			ft_putstr(getenv("HOME"));
+// 		else if (arg[i] == '*')
+// 			show_dir();
+// 		else if ((arg[0] == '\'' && arg[len - 1] == '\'') || (arg[0] == '\"'
+// 				&& arg[len - 1] == '\"'))
+// 		{
+// 			new_arg = ft_substr(arg, 1, len - 2);
+// 			ft_putstr(new_arg);
+// 			free(new_arg);
+// 			i = len;
+// 		}
+// 		else if ((arg[0] == '\'' && arg[len - 1] != '\'') || (arg[0] == '\"'
+// 				&& arg[len - 1] != '\"'))
+// 			return ;
+// 		else if ((arg[0] != '\'' && arg[len - 1] == '\'') || (arg[0] != '\"'
+// 				&& arg[len - 1] == '\"'))
+// 			return ;
+// 		else
+// 			ft_putchar(arg[i]);
+// 		i++;
+// 	}
+// 	return ;
+// }
 
 void	ft_echo(char *line, t_data *node, t_token *head)
 {
 	int fl;
+	int newline;
 
+	newline = 1;
 	fl = 0;
 	(void)line;
+	if (head->next && ft_strcmp(head->next->str, "-n") == 0)
+	{
+		newline = 0;
+		head = head->next->next;
+	}
 	while (head)
 	{
 		if (head->type == FLAG)
@@ -168,5 +210,9 @@ void	ft_echo(char *line, t_data *node, t_token *head)
 		}
 		head = head->next;
 	}
-	ft_putchar('\n');
+	if (newline)
+		ft_putchar('\n');
 }
+
+// echo "$HOME" need to fix.
+//  echo asas =sas this does not behave like bash

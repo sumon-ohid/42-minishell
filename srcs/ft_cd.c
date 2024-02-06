@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:24:36 by msumon            #+#    #+#             */
-/*   Updated: 2024/01/25 18:18:22 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/06 15:47:46 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,9 @@ char	**ft_realloc(void *ptr, size_t old_size, size_t new_size)
 		return (NULL);
 	}
 	else if (!ptr)
-	{
 		return (malloc(new_size));
-	}
 	else if (new_size <= old_size)
-	{
 		return (ptr);
-	}
 	else
 	{
 		new_ptr = malloc(new_size);
@@ -76,18 +72,14 @@ char	*get_current_directory(void)
 
 	dir = getcwd(NULL, 0);
 	if (dir == NULL)
-	{
 		perror("getcwd");
-	}
 	return (dir);
 }
 
 void	change_directory(char *str, t_data *node)
 {
 	if (str == NULL || ft_strcmp(str, "--") == 0 || ft_strcmp(str, "~") == 0)
-	{
 		chdir(node->home);
-	}
 	else if (strcmp(str, "-") == 0)
 	{
 		chdir(node->oldpwd);

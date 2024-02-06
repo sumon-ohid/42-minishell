@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 13:51:32 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/06 14:49:43 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/06 15:59:23 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ char *ft_upgrade_spaces(char *line)
 int ft_lexer_error(char *line)
 {
 	(void)line;
-	printf("minishell: syntax error near unexpected token `newline'\n");
+	printf("minishell: syntax error near unexpected token\n");
 	return (0);
 }
 
@@ -122,6 +122,12 @@ int	ft_lexical_checker(char *line)
 			else if (c == '<' && line[i + 1] == '\0')
 				return(ft_lexer_error(line));
 			else if (c == '|' && line[i + 1] == '\0')
+				return(ft_lexer_error(line));
+			else if (c == '>' && line[i + 1] == ' ' && !(line[i + 2] >= 'A' && line[i + 2] <= 'z'))
+				return(ft_lexer_error(line));
+			else if (c == '<' && line[i + 1] == ' ' && !(line[i + 2] >= 'A' && line[i + 2] <= 'z'))
+				return(ft_lexer_error(line));
+			else if (c == '|' && line[i + 1] == ' ' && !(line[i + 2] >= 'A' && line[i + 2] <= 'z'))
 				return(ft_lexer_error(line));
 		}
 		prev_char = c;
