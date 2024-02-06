@@ -20,6 +20,7 @@ int	entry_check(t_data *node, char *line)
 
 	if (!ft_lexical_checker(line))
 		return (2);
+	ft_upgrade_spaces(line);
 	tokens = ft_calloc(sizeof(t_token *), pipe_counter(line));
 	if (!tokens)
 	{
@@ -51,6 +52,11 @@ char	**parse_input(char *line)
 		exit(EXIT_FAILURE);
 	}
 	return (tokens);
+}
+
+char *ft_upgrade_spaces(line)
+{
+
 }
 
 
