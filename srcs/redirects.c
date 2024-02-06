@@ -62,18 +62,14 @@ void	redirect_out_append(char *output)
 void	ft_redirector(t_token *chain, int file_type)
 {
     t_token	*mark1;
-    
-    //printf("ENTERED REDIRECTOR\n");
-    //printf("FILE TYPE IS: %d\n", file_type);
+
     mark1 = chain;
     while (mark1 && mark1->type != file_type)
     {
-        //printf("CURRENT FILE TYPE IS: %d\n", mark1->type);
         mark1 = mark1->next;
     }
     if (!mark1)
     {
-        //printf("WHOOPS\n");
         exit(-1); //handle error, infile or outfile was not found
     }
     if (file_type == INFILE)
@@ -82,7 +78,6 @@ void	ft_redirector(t_token *chain, int file_type)
         redirect_out(mark1->str);
     else if (file_type == OUTFILE_APPEND)
         redirect_out_append(mark1->str);
-    //printf("NOTHING HAPPENED\n");
 }
 
 void	ft_set(t_data *node)
@@ -113,8 +108,13 @@ void	ft_redirect_checker(t_token *chain)
 		if (proxy->type >= 3 && proxy->type <= 5)
         {
             ft_redirector(chain, proxy->type + 3);
-            return ;
+            //return ;
         }
+		else if (proxy->type == HEREDOC)
+		{
+			read_from_heredoc(proxy);
+			//return ;
+		}
         proxy = proxy->next;
 	}
 }

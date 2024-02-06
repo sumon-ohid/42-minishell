@@ -78,10 +78,10 @@ int	execute_chain(t_data *node, t_token *chain, char *line, int processes)
 				close_all(&node->fd, processes - 1);
 			return (entry_check2(node, chain, line));
 		}
-		else if (proxy->type == COMMAND || proxy->type == HEREDOC)
+		else if (proxy->type == COMMAND)
 		{
-			if (proxy->type == HEREDOC)
-				ft_heredoc(proxy->next->str);
+			//if (proxy->type == HEREDOC)
+				//ft_heredoc(proxy->next->str);
 			return (ft_commander(chain));
 		}
 		//else if (proxy->type != COMMAND && proxy->type != BUILTIN)

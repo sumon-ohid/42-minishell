@@ -12,38 +12,6 @@
 
 #include "../includes/minishell.h"
 
-char *ft_upgrade_spaces(char *line);
-
-int	entry_check(t_data *node, char *line)
-{
-	char	**arr;
-	t_token	**tokens;
-	int		ret_val;
-
-	if (!ft_lexical_checker(line))
-		return (2);
-	line = ft_upgrade_spaces(line);
-	//printf("line: %s\n", line);
-	tokens = ft_calloc(sizeof(t_token *), pipe_counter(line));
-	if (!tokens)
-	{
-		perror("Memory allocation failed");
-		return (127);
-	}
-	arr = parse_input(line);
-	if (!arr)
-	{
-		free(tokens);
-		return (127);
-	}
-	process_words(&tokens, arr, line, node);
-	ret_val = executor_init(node, tokens, pipe_counter(line), line);
-	free_tokens(tokens);
-	free(line);
-	free_arr(arr);
-	return (ret_val);
-}
-
 char	**parse_input(char *line)
 {
 	char	**tokens;

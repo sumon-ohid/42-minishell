@@ -54,6 +54,7 @@ typedef struct s_token
 	char			*str;
 	int				type;
 	char			**arr;
+	char			*heredoc_data;
 	struct s_token	*previous;
 	struct s_token	*next;
 }					t_token;
@@ -82,6 +83,7 @@ typedef struct s_data
 	char			*oldpwd;
 	char			*pwd;
 	char			*home;
+	//char			**heredoc_data;
 	t_mode			mode;
 	t_token			*tokens;
 	struct s_data	*next;
@@ -117,6 +119,9 @@ char				*ft_heredoc(char *str);
 void				*ft_realloc_heredoc(void *ptr, size_t old_size,
 						size_t new_size);
 int					heredocker(char *str);
+void 				check_for_heredoc(t_token **tokens, int processes);
+int					heredoc_counter(t_token *tokens);
+void				read_from_heredoc(t_token *heredoc);
 
 // builtins
 void				ft_cd(char *str, t_data *node);
@@ -132,6 +137,7 @@ char    			*ft_lastval_str(t_data *node);
 // take_input
 int					entry_check(t_data *node, char *line);
 int 				ft_lexical_checker(char *line);
+char 				*ft_upgrade_spaces(char *line);
 t_token				**tokenizer(char *str);
 int					pipe_counter(char *str);
 char				*handle_envp(char *str, t_data *node);

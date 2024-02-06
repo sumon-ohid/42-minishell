@@ -91,3 +91,58 @@ char	*ft_heredoc(char *str)
 	}
 	return (heredoc);
 }
+
+int	heredoc_counter(t_token *tokens)
+{
+	t_token *proxy;
+	int		counter;
+
+	proxy = tokens;
+	counter = 0;
+	while (proxy)
+	{
+		if (proxy->type == HEREDOC)
+			counter++;
+		proxy = proxy->next;
+	}
+	return (counter);
+}
+
+void check_for_heredoc(t_token **tokens, int processes)
+{
+	t_token *proxy;
+	//int		doc_num;
+	int		counter;
+
+	//doc_num = heredoc_counter(tokens);
+	//if (!doc_num)
+		//return ;
+	counter = 0;
+	while (counter < processes)
+	{
+		proxy = tokens[counter];
+		while (proxy)
+		{
+			if (proxy->type == HEREDOC && proxy->next)
+			{
+				proxy->heredoc_data = ft_heredoc(proxy->next->str);
+				if (!proxy->heredoc_data)
+					exit(EXIT_FAILURE);
+			}
+			proxy = proxy->next;
+		}
+		counter++;
+	}
+}
+
+void	read_from_heredoc(t_token *heredoc)
+{
+	int	tomlo[2];
+
+	pipe(tomlo); //protect this??
+	dup2(tomlo[0], STDIN_FILENO);
+	close(tomlo[0]);
+	write(tomlo[1], heredoc->heredoc_data, ft_strlen(heredoc->heredoc_data));
+	close(tomlo[1]);
+	free(heredoc->heredoc_data);
+}
