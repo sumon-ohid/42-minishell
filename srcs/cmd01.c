@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd01.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 17:28:11 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/06 12:09:12 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/06 15:46:22 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,6 @@ int	execute_chain(t_data *node, t_token *chain, char *line, int processes)
 	if (!chain)
 		return (-1);
 	ft_redirect_checker(chain);
-	/*while (chain)
-	{
-		printf("next token is: %s\n", chain->str);
-		printf("token type: %d\n", chain->type);
-		chain = chain->next;
-	}*/
 	while (proxy)
 	{
 		if (proxy->type == BUILTIN)
@@ -84,13 +78,11 @@ int	execute_chain(t_data *node, t_token *chain, char *line, int processes)
 				ft_heredoc(proxy->next->str);
 			return (ft_commander(chain));
 		}
-		//else if (proxy->type != COMMAND && proxy->type != BUILTIN)
-			//break ;
 		else
 			proxy = proxy->next;
 	}
 	if (!proxy)
-		perror("minishell: syntax error near unexpected token newline");
+		perror("minishell: syntax error near unexpected token");
 	return (0);
 }
 

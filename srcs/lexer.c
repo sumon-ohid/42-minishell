@@ -6,7 +6,7 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 13:51:32 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/06 15:41:03 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/06 15:59:23 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	entry_check(t_data *node, char *line)
 	if (!ft_lexical_checker(line))
 		return (2);
 	line = ft_upgrade_spaces(line);
+	//printf("line: %s\n", line);
 	tokens = ft_calloc(sizeof(t_token *), pipe_counter(line));
 	if (!tokens)
 	{
@@ -90,7 +91,9 @@ char *ft_upgrade_spaces(char *line)
             result[j++] = ' ';
         }
         else
+        {
             result[j++] = line[i];
+        }
         i++;
     }
     result[j] = '\0';
@@ -106,60 +109,63 @@ int ft_lexer_error(char *line)
 	return (0);
 }
 
-int	ft_check_quotes(char c, int *in_single_quote, int *in_double_quote)
-{
-    if (c == '\'' && !(*in_double_quote))
-        *in_single_quote = !(*in_single_quote);
-    else if (c == '\"' && !(*in_single_quote))
-        *in_double_quote = !(*in_double_quote);
-    return (*in_single_quote || *in_double_quote);
-}
-
-int	ft_check_char_sequence(char c, char prev_char, char *line, int i)
-{
-    if ((c == '|' && prev_char == '|') || 
-        (c == '<' && prev_char == '>') || 
-        (c == '>' && prev_char == '<') || 
-        (c == '|' && prev_char == '>') || 
-        (c == '|' && prev_char == '<') || 
-        (c == '>' && prev_char == '|') || 
-        (c == '<' && prev_char == '|') || 
-        (c == '>' && line[i + 1] == ' ' && line[i + 2] == '>') || 
-        (c == '<' && line[i + 1] == ' ' && line[i + 2] == '<') || 
-        (c == '|' && line[i + 1] == ' ' && line[i + 2] == '|') || 
-        (c == '>' && line[i + 1] == '\0') || 
-        (c == '<' && line[i + 1] == '\0') || 
-        (c == '|' && line[i + 1] == '\0') || 
-        (c == '>' && line[i + 1] == ' ' && !(line[i + 2] >= 'A' && line[i + 2] <= 'z')) || 
-        (c == '<' && line[i + 1] == ' ' && !(line[i + 2] >= 'A' && line[i + 2] <= 'z')) || 
-        (c == '|' && line[i + 1] == ' ' && !(line[i + 2] >= 'A' && line[i + 2] <= 'z')))
-    {
-        return(ft_lexer_error(line));
-    }
-    return (1);
-}
-
 int	ft_lexical_checker(char *line)
 {
-    int in_single_quote = 0;
-    int in_double_quote = 0;
-    char prev_char = '\0';
-    int i = 0;
+	int in_single_quote;
+	int in_double_quote;
+	char prev_char;
+	char c;
+	int i;
 
-    while (line[i] != '\0')
-    {
-        char c = line[i];
-
-        if (ft_check_quotes(c, &in_single_quote, &in_double_quote))
-            return(ft_lexer_error(line));
-
-        if (!in_single_quote && !in_double_quote)
-        {
-            if (!ft_check_char_sequence(c, prev_char, line, i))
-                return (0);
-        }
-        prev_char = c;
-        i++;
-    }
-    return (1);
+	in_single_quote = 0;
+	in_double_quote = 0;
+	i = 0;
+	while ((line[i]) != '\0')
+	{
+		c = line[i];
+		if (c == '\'' && !in_double_quote)
+			in_single_quote = !in_single_quote;
+		else if (c == '\"' && !in_single_quote)
+	    	in_double_quote = !in_double_quote;
+		else if (!in_single_quote && !in_double_quote)
+		{
+			if (c == '|' && prev_char == '|')
+				return(ft_lexer_error(line));
+			else if (c == '<' && prev_char == '>')
+				return(ft_lexer_error(line));
+			else if (c == '>' && prev_char == '<')
+				return(ft_lexer_error(line));
+			else if (c == '|' && prev_char == '>')
+				return(ft_lexer_error(line));
+			else if (c == '|' && prev_char == '<')
+				return(ft_lexer_error(line));
+			else if (c == '>' && prev_char == '|')
+				return(ft_lexer_error(line));
+			else if (c == '<' && prev_char == '|')
+				return(ft_lexer_error(line));
+			else if (c == '>' && line[i + 1] == ' ' && line[i + 2] == '>')
+				return(ft_lexer_error(line));
+			else if (c == '<' && line[i + 1] == ' ' && line[i + 2] == '<')
+				return(ft_lexer_error(line));
+			else if (c == '|' && line[i + 1] == ' ' && line[i + 2] == '|')
+				return(ft_lexer_error(line));
+			else if (c == '>' && line[i + 1] == '\0')
+				return(ft_lexer_error(line));
+			else if (c == '<' && line[i + 1] == '\0')
+				return(ft_lexer_error(line));
+			else if (c == '|' && line[i + 1] == '\0')
+				return(ft_lexer_error(line));
+			else if (c == '>' && line[i + 1] == ' ' && !(line[i + 2] >= 'A' && line[i + 2] <= 'z'))
+				return(ft_lexer_error(line));
+			else if (c == '<' && line[i + 1] == ' ' && !(line[i + 2] >= 'A' && line[i + 2] <= 'z'))
+				return(ft_lexer_error(line));
+			else if (c == '|' && line[i + 1] == ' ' && !(line[i + 2] >= 'A' && line[i + 2] <= 'z'))
+				return(ft_lexer_error(line));
+		}
+		prev_char = c;
+		i++;
+	}
+	if (in_single_quote || in_double_quote)
+		return(ft_lexer_error(line));
+	return (1);
 }
