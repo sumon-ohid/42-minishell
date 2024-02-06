@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft_helpers.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 21:31:07 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/01/17 16:34:36 by msumon           ###   ########.fr       */
+/*   Updated: 2024/01/26 13:29:47 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,22 +102,20 @@ int	ft_strlen(const char *str)
 
 char	*ft_strdup(const char *src)
 {
-	int		counter;
-	int		counter2;
-	char	*ptr;
+	char	*dest;
+	int		i;
 
-	counter = 0;
-	counter2 = 0;
-	while (src[counter])
-		counter++;
-	ptr = (char *)malloc(counter + 1);
-	if (!ptr)
-		return (0);
-	while (counter2 < counter)
+	i = 0;
+	if (!src)
+		return (NULL);
+	dest = malloc(sizeof(char) * ft_strlen(src) + 1);
+	if (!dest)
+		return (NULL);
+	while (src[i])
 	{
-		ptr[counter2] = src[counter2];
-		counter2++;
+		dest[i] = src[i];
+		i++;
 	}
-	ptr[counter2] = '\0';
-	return (ptr);
+	dest[i] = '\0';
+	return (dest);
 }

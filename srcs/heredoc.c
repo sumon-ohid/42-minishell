@@ -6,14 +6,11 @@
 /*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 10:40:57 by msumon            #+#    #+#             */
-/*   Updated: 2024/01/24 21:50:14 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/06 12:08:40 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 
 char	*ft_strcpy(char *s1, char *s2)
 {

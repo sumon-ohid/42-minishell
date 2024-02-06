@@ -6,7 +6,7 @@
 /*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 18:25:41 by msumon            #+#    #+#             */
-/*   Updated: 2024/01/17 19:11:59 by msumon           ###   ########.fr       */
+/*   Updated: 2024/01/26 18:16:08 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	free_arr(char **arr)
 	int	i;
 
 	i = 0;
+	if (!arr)
+		return ;
 	while (arr[i])
 	{
 		free(arr[i]);
@@ -25,15 +27,21 @@ void	free_arr(char **arr)
 	free(arr);
 }
 
-void	free_tokens(t_token **tokens) //TODO: This needs to be corrected. A linked list needs to be freed
-{										//in a different manner. Currently disabled this function in entry_check
-	int	i;
+void	free_tokens(t_token **tokens)
+{
+	t_token *proxy;
+	t_token *previous;
 
-	i = 0;
-	while (tokens[i])
+	proxy = *tokens;
+	if (!proxy)
+		return ;
+	while (proxy)
 	{
-		free(tokens[i]);
-		i++;
+		previous = proxy;
+		proxy = proxy->next;
+		free(previous->str);
+		free_arr(previous->arr);
+		free(previous);
 	}
 	free(tokens);
 }
@@ -49,8 +57,9 @@ void	error_quit(int fd, int *tomlo, char *str)
 	}
 	if (str)
 		free(str);
-	write(2, "Error\n", 6);
-	exit(errno);
+	perror("minishell: .: filename argument required");
+	perror(".: usage: . filename [arguments]");
+	exit(2);
 }
 
 char	**free_everything(char **arr, int m_ctr)
@@ -58,7 +67,7 @@ char	**free_everything(char **arr, int m_ctr)
 	int	counter;
 
 	counter = 0;
-	while (counter < m_ctr)
+	while (counter < m_ctr && arr[counter])
 	{
 		free(arr[counter]);
 		counter++;

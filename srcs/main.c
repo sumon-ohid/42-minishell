@@ -6,76 +6,65 @@
 /*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:17:43 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/01/24 21:50:56 by msumon           ###   ########.fr       */
+/*   Updated: 2024/01/26 17:56:54 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-#include <stdio.h>
 
-void	handle_sigint(int sig)
+void	initialize_node(t_data *node, char **envp)
 {
-	(void)sig;
-	exit(0);
+	node->env_len = 0;
+	node->envp = envp;
+	node->home = getenv("HOME");
+	node->oldpwd = getenv("OLDPWD");
+	node->pwd = getenv("PWD");
 }
 
-void	handle_sigquit(int sig)
+void	ft_initialize(t_data *node, char **envp)
 {
-	(void)sig;
-}
+	char	*input;
 
-void	ft_initialize(t_data *node, char *input, char *input2, char **envp)
-{
 	while (1)
 	{
-		signal(SIGINT, handle_sigint);
-		signal(SIGQUIT, handle_sigquit);
-		input2 = readline(GREEN "student@minishell$ " RESET);
-		if (!input2)
+		mode(node, INTERACTIVE);
+		input = readline(GREEN "minishell$ " RESET);
+		mode(node, NON_INTERACTIVE);
+		if (!input)
 		{
-			printf("\n");
 			printf("exit\n");
 			free(input);
-			free(input2);
-			exit(0);
+			exit(EXIT_FAILURE);
 		}
-		else if (*input2)
+		else if (*input)
 		{
-			node->path = input;
-			node->envp = envp;
-			node->home = getenv("HOME");
-			node->oldpwd = getenv("OLDPWD");
-			node->pwd = getenv("PWD");
-			add_history(input2);
-			entry_check(node, input2);
+			if (ft_strchr(input, '=') == 1) //should change this cause of quotes
+				node->line_for_export = ft_strdup(input);
+			else if (ft_strcmp(input, "\n") == 0)
+				break ;
+			initialize_node(node, envp);
+			add_history(input);
+			node->last_return = entry_check(node, input);
 		}
 	}
-	free(input);
-	free(input2);
 }
 
 int	main(int argc, char **argv, char **envp)
 {
 	t_data	*node;
-	char	*input;
-	char	*input2;
 
 	(void)argc;
 	(void)argv;
-	input2 = NULL;
 	node = (t_data *)malloc(sizeof(t_data));
 	if (node == NULL)
 	{
-		perror("Failed to allocate memory");
+		perror("Failed to allocate memory for node.");
 		exit(EXIT_FAILURE);
 	}
-	input = (char *)malloc(1024);
-	if (input == NULL)
-	{
-		perror("Failed to allocate memory");
-		free(node);
-		exit(EXIT_FAILURE);
-	}
-	ft_initialize(node, input, input2, envp);
+	ft_set(node);
+	ft_initialize(node, envp);
+	close(node->std_in);
+	close(node->std_out);
+	free(node);
 	return (0);
 }

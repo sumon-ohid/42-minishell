@@ -6,7 +6,7 @@
 /*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 17:28:11 by msumon            #+#    #+#             */
-/*   Updated: 2024/01/26 17:35:37 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/06 12:09:12 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,12 @@ int	execute_chain(t_data *node, t_token *chain, char *line, int processes)
 				close_all(&node->fd, processes - 1);
 			return (entry_check2(node, chain, line));
 		}
-		else if (proxy->type == COMMAND)
+		else if (proxy->type == COMMAND || proxy->type == HEREDOC)
+		{
+			if (proxy->type == HEREDOC)
+				ft_heredoc(proxy->next->str);
 			return (ft_commander(chain));
+		}
 		//else if (proxy->type != COMMAND && proxy->type != BUILTIN)
 			//break ;
 		else

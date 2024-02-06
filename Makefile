@@ -19,9 +19,12 @@ WHITE = \033[0;97m
 SRC = 	srcs/main.c \
 		srcs/ft_split.c \
 		srcs/cmd.c \
+		srcs/cmd01.c \
+		srcs/cmd02.c \
 		srcs/libft_helpers.c \
 		srcs/libft_helpers1.c \
 		srcs/libft_helpers2.c \
+		srcs/libft_helpers3.c \
 		srcs/tokenize.c\
 		srcs/tokenize1.c\
 		srcs/ft_cd.c \
@@ -33,6 +36,12 @@ SRC = 	srcs/main.c \
 		srcs/ft_free.c \
 		srcs/heredoc.c \
 		srcs/pipex.c \
+		srcs/signals.c \
+		srcs/redirects.c \
+		srcs/lexer.c \
+		srcs/ft_lastvalue.c \
+		srcs/ft_itoa.c \
+		#srcs/ft_split_special_edition.c \
 
 OBJ = $(SRC:.c=.o)
 
@@ -42,7 +51,7 @@ all: $(NAME)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -g -o $(NAME) -lreadline
+	$(CC) $(CFLAGS) $(OBJ) -o $(NAME) -lreadline
 	@echo "$(GREEN)Executable $(NAME) created!$(DEF_COLOR)"
 
 clean:

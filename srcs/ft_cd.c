@@ -6,46 +6,46 @@
 /*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:24:36 by msumon            #+#    #+#             */
-/*   Updated: 2024/01/24 21:49:30 by msumon           ###   ########.fr       */
+/*   Updated: 2024/01/25 18:18:22 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 #include <string.h>
 
-char **ft_realloc(void *ptr, size_t old_size, size_t new_size)
+char	**ft_realloc(void *ptr, size_t old_size, size_t new_size)
 {
-    char **new_ptr;
+	char	**new_ptr;
 
-    if (new_size == 0)
-    {
-        free(ptr);
-        return NULL;
-    }
-    else if (!ptr)
-    {
-        return malloc(new_size);
-    }
-    else if (new_size <= old_size)
-    {
-        return ptr;
-    }
-    else
-    {
-        new_ptr = malloc(new_size);
-        if (new_ptr)
-        {
-           ft_memcpy(new_ptr, ptr, old_size);
-            free(ptr);
-        }
-        return new_ptr;
-    }
+	if (new_size == 0)
+	{
+		free(ptr);
+		return (NULL);
+	}
+	else if (!ptr)
+	{
+		return (malloc(new_size));
+	}
+	else if (new_size <= old_size)
+	{
+		return (ptr);
+	}
+	else
+	{
+		new_ptr = malloc(new_size);
+		if (new_ptr)
+		{
+			ft_memcpy(new_ptr, ptr, old_size);
+			free(ptr);
+		}
+		return (new_ptr);
+	}
 }
 
 void	ft_setenv(t_data *node, char *name, char *value)
 {
 	int		i;
-	char 	*str;
+	char	*str;
 	char	**new_envp;
 	char	*new_entry;
 
@@ -64,28 +64,30 @@ void	ft_setenv(t_data *node, char *name, char *value)
 	}
 	new_envp = ft_realloc(node->envp, 1, sizeof(char *) * (i + 2));
 	if (new_envp == NULL)
-	{
-		perror("realloc");
 		exit(1);
-	}
 	new_envp[i] = new_entry;
 	new_envp[i + 1] = NULL;
 	node->envp = new_envp;
 }
 
-void	ft_cd(char *str, t_data *node)
+char	*get_current_directory(void)
 {
-	char	*oldpwd;
-	char	*pwd;
+	char	*dir;
 
-	oldpwd = getcwd(NULL, 0);
-	if (oldpwd == NULL)
+	dir = getcwd(NULL, 0);
+	if (dir == NULL)
 	{
 		perror("getcwd");
-		return ;
 	}
-	if (str == NULL)
+	return (dir);
+}
+
+void	change_directory(char *str, t_data *node)
+{
+	if (str == NULL || ft_strcmp(str, "--") == 0 || ft_strcmp(str, "~") == 0)
+	{
 		chdir(node->home);
+	}
 	else if (strcmp(str, "-") == 0)
 	{
 		chdir(node->oldpwd);
@@ -101,12 +103,20 @@ void	ft_cd(char *str, t_data *node)
 			return ;
 		}
 	}
-	pwd = getcwd(NULL, 0);
+}
+
+void	ft_cd(char *str, t_data *node)
+{
+	char	*oldpwd;
+	char	*pwd;
+
+	oldpwd = get_current_directory();
+	if (oldpwd == NULL)
+		exit(1);
+	change_directory(str, node);
+	pwd = get_current_directory();
 	if (pwd == NULL)
-	{
-		perror("getcwd");
-		return ;
-	}
+		exit(1);
 	ft_setenv(node, "OLDPWD", oldpwd);
 	ft_setenv(node, "PWD", pwd);
 }

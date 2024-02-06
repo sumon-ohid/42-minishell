@@ -6,69 +6,130 @@
 /*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:25:07 by msumon            #+#    #+#             */
-/*   Updated: 2024/01/17 19:26:53 by msumon           ###   ########.fr       */
+/*   Updated: 2024/01/26 17:22:44 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-char	*get_env_value(char *arg)
+char	*copy_after_char(char *str, char c)
 {
-	char	*env_name;
-	char	*env_value;
-	char	*env_value2;
 	int		i;
 	int		j;
+	char	*output;
 
-	i = 1;
+	i = 0;
 	j = 0;
-	while (arg[i] && arg[i] != '=')
+	while (str[i] != c)
 		i++;
-	env_name = ft_strndup(arg + 1, i - 1);
-	env_value = getenv(env_name);
-	if (env_value)
+	i++;
+	output = malloc(sizeof(char) * ft_strlen(str + i));
+	while (str[i])
 	{
-		env_value2 = malloc(sizeof(char) * (ft_strlen(env_value) + 1));
-		while (env_value[j])
-		{
-			env_value2[j] = env_value[j];
-			j++;
-		}
-		env_value2[j] = '\0';
-		free(env_name);
-		return (env_value2);
+		output[j] = str[i];
+		i++;
+		j++;
 	}
-	return (free(env_name), "");
+	output[j] = '\0';
+	return (output);
 }
 
-void	print_argument(char *arg)
+char	*get_env_value(char *arg, t_data *node)
 {
-	char	*inside_quotes;
+	char	*env_value;
+	int		i;
 
-	if ((arg[0] == '"' && arg[ft_strlen(arg) - 1] == '"') || (arg[0] == '\''
-			&& arg[ft_strlen(arg) - 1] == '\''))
+	i = 0;
+	while (node->envp[i])
 	{
-		inside_quotes = ft_strndup(arg + 1, ft_strlen(arg) - 2);
-		ft_putstr(inside_quotes);
-		free(inside_quotes);
+		if (ft_strstr(node->envp[i], arg) != 0)
+		{
+			env_value = copy_after_char(node->envp[i], '=');
+			return (env_value);
+		}
+		i++;
 	}
-	else if (arg[0] == '$' && ft_strcmp(arg, "$") != 0)
-		ft_putstr(get_env_value(arg));
-	else if (arg[0] == '$' && ft_strcmp(arg, "$") == 0)
-		ft_putchar('$');
-	else if (ft_strcmp(arg, "\"\"") != 0 && ft_strcmp(arg, "''") != 0)
-		ft_putstr(arg);
-	else
-		ft_putchar(' ');
+	return ("");
 }
 
-void	ft_echo(char *line)
+void	show_dir(void)
+{
+	DIR				*d;
+	struct dirent	*dir;
+
+	d = opendir(".");
+	while ((dir = readdir(d)) != NULL)
+	{
+		if (dir->d_name[0] != '.')
+		{
+			ft_putstr(dir->d_name);
+			ft_putchar(' ');
+		}
+	}
+	closedir(d);
+}
+
+void	print_argument(char *arg, t_data *node)
+{
+	int		i;
+	int		len;
+	char	*new_arg;
+
+	i = 0;
+	len = ft_strlen(arg);
+	if (arg[0] == '\'' && arg[1] == '\0')
+		return ;
+	else if (arg[0] == '\"' && arg[1] == '\0')
+		return ;
+	while (arg[i])
+	{
+		if (arg[i] == '$' && arg[i + 1])
+		{
+			if (arg[i + 1] == '?')
+				ft_putnbr(0);
+			else if (arg[i + 1] == '$')
+				ft_putnbr(getpid());
+			else if (arg[i + 1] == '0')
+				ft_putstr("minishell");
+			else
+			{
+				ft_putstr(get_env_value(arg + 1, node));
+				return ;
+			}
+			i++;
+		}
+		else if (arg[i] == '~')
+			ft_putstr(getenv("HOME"));
+		else if (arg[i] == '*')
+			show_dir();
+		else if ((arg[0] == '\'' && arg[len - 1] == '\'') || (arg[0] == '\"'
+				&& arg[len - 1] == '\"'))
+		{
+			new_arg = ft_substr(arg, 1, len - 2);
+			ft_putstr(new_arg);
+			free(new_arg);
+			i = len;
+		}
+		else if ((arg[0] == '\'' && arg[len - 1] != '\'') || (arg[0] == '\"'
+				&& arg[len - 1] != '\"'))
+			return ;
+		else if ((arg[0] != '\'' && arg[len - 1] == '\'') || (arg[0] != '\"'
+				&& arg[len - 1] == '\"'))
+			return ;
+		else
+			ft_putchar(arg[i]);
+		i++;
+	}
+	return ;
+}
+
+/*void	ft_echo(char *line, t_data *node)
 {
 	char	**arr;
 	int		i;
 	int		newline;
 
-	arr = parse_input(line);
+	arr = ft_split(line, ' ', 0, 0);
 	i = 1;
 	newline = 1;
 	if (arr[i] && ft_strcmp(arr[i], "-n") == 0)
@@ -78,11 +139,34 @@ void	ft_echo(char *line)
 	}
 	while (arr[i])
 	{
-		print_argument(arr[i]);
+		print_argument(arr[i], node);
 		if (arr[i + 1])
 			ft_putchar(' ');
 		i++;
 	}
 	if (newline)
 		ft_putchar('\n');
+}*/
+
+void	ft_echo(char *line, t_data *node, t_token *head)
+{
+	int fl;
+
+	fl = 0;
+	(void)line;
+	while (head)
+	{
+		if (head->type == FLAG)
+		{
+			if (fl)
+				ft_putchar(' ');
+			if (ft_strcmp(head->str, "$?") == 0) //TODO: handle other cases with it embedded in string etc.
+				ft_lastvalue(node);
+			else
+				print_argument(head->str, node);
+			fl = 1;
+		}
+		head = head->next;
+	}
+	ft_putchar('\n');
 }

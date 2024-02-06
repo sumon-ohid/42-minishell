@@ -6,7 +6,7 @@
 /*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 07:40:56 by msumon            #+#    #+#             */
-/*   Updated: 2024/01/17 19:16:28 by msumon           ###   ########.fr       */
+/*   Updated: 2024/01/25 18:55:06 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ static size_t	ft_counter(char const *s, char c)
 
 	i = 0;
 	x = 0;
+	if (!s)
+		return (0);
 	while (s[i])
 	{
 		while (s[i] == c)
@@ -63,6 +65,8 @@ char	**ft_split(char const *s, char c, size_t i, size_t j)
 	s_split = (char **)malloc(sizeof(char *) * (ft_counter(s, c) + 1));
 	if (s_split == NULL)
 		return (NULL);
+	if (!s)
+		return (s_split);
 	while (s[i])
 	{
 		if (s[i] != c)

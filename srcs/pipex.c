@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 20:21:29 by mhuszar           #+#    #+#             */
-/*   Updated: 2023/12/12 20:21:31 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/01/26 18:06:11 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,31 +20,40 @@ char	*check_og_comm(char *og_comm)
 		return (NULL);
 }
 
+void	free_poss_paths(char **poss_paths)
+{
+	int	counter;
+
+	counter = 0;
+	while (poss_paths[counter])
+	{
+		free(poss_paths[counter++]);
+	}
+	free(poss_paths);
+}
+
 char	*extract_path(char *comm2, char **poss_paths, char *og_comm)
 {
 	int		counter;
 	char	*res;
 
+	if (comm2 != NULL)
+	{
+		free(comm2);
+		comm2 = NULL;
+	}
 	counter = 0;
-	counter = 0;
-	free(comm2);
 	while (poss_paths[counter])
 	{
 		if (access(poss_paths[counter], X_OK) == 0)
 		{
 			res = ft_strdup(poss_paths[counter]);
-			counter = 0;
-			while (poss_paths[counter])
-				free(poss_paths[counter++]);
-			free(poss_paths);
+			free_poss_paths(poss_paths);
 			return (res);
 		}
 		counter++;
 	}
-	counter = 0;
-	while (poss_paths[counter])
-		free(poss_paths[counter++]);
-	free(poss_paths);
+	free_poss_paths(poss_paths);
 	return (check_og_comm(og_comm));
 }
 
@@ -60,8 +69,8 @@ char	*pathfinder(char **envp, char *comm)
 	if (!comm2)
 		return ("faill");
 	counter = 0;
-	while ((!ft_strstr(envp[counter], "PATH")
-			|| ft_strstr(envp[counter], "_PATH")) && envp[counter])
+	while ((!ft_strstr(envp[counter], "PATH") || ft_strstr(envp[counter],
+				"_PATH")) && envp[counter])
 		counter++;
 	while (envp[counter][i] && envp[counter][i] != '/')
 		i++;
@@ -77,7 +86,7 @@ char	*pathfinder(char **envp, char *comm)
 	return (extract_path(comm2, poss_paths, comm));
 }
 
-void	extract_find_execute(char **envp, char *full_comm, int round)
+void	extract_find_execute(char **envp, char *full_comm)
 {
 	char	**comms;
 	char	*path;
@@ -86,20 +95,18 @@ void	extract_find_execute(char **envp, char *full_comm, int round)
 	counter = 0;
 	comms = ft_split(full_comm, ' ', 0, 0);
 	if (!comms)
-		exit (-1);
+		exit(1);
 	while (comms[counter])
 		counter++;
 	path = pathfinder(envp, comms[0]);
 	if (ft_strcmp(path, "faill") == 0 || !path)
 	{
 		if (!path)
-			printf("%s: command not found\n", comms[0]);
+			printf("minishell: %s: command not found\n", comms[0]);
 		else
 			printf("Error: malloc failure\n");
 		free_everything(comms, counter);
-		if (round == 2)
-			exit(127);
-		exit(0);
+		exit(127);
 	}
 	execve(path, comms, NULL);
 	free_everything(comms, counter);

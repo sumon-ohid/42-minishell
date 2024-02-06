@@ -6,7 +6,7 @@
 /*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 13:51:32 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/05 19:55:25 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/06 11:07:28 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,9 @@ char	**parse_input(char *line)
 	// Otherwise: return 1
 int ft_lexer_error(char *line)
 {
-	printf("Syntax error near unexpected token\n");
-	free(line);
+	(void)line;
+	printf("minishell: syntax error near unexpected token `newline'\n");
+	//free(line);
 	return (0);
 }
 
@@ -96,36 +97,36 @@ int	ft_lexical_checker(char *line)
 		else if (!in_single_quote && !in_double_quote)
 		{
 			if (c == '|' && prev_char == '|')
-				ft_lexer_error(line);
+				return(ft_lexer_error(line));
 			else if (c == '<' && prev_char == '>')
-				ft_lexer_error(line);
+				return(ft_lexer_error(line));
 			else if (c == '>' && prev_char == '<')
-				ft_lexer_error(line);
+				return(ft_lexer_error(line));
 			else if (c == '|' && prev_char == '>')
-				ft_lexer_error(line);
+				return(ft_lexer_error(line));
 			else if (c == '|' && prev_char == '<')
-				ft_lexer_error(line);
+				return(ft_lexer_error(line));
 			else if (c == '>' && prev_char == '|')
-				ft_lexer_error(line);
+				return(ft_lexer_error(line));
 			else if (c == '<' && prev_char == '|')
-				ft_lexer_error(line);
+				return(ft_lexer_error(line));
 			else if (c == '>' && line[i + 1] == ' ' && line[i + 2] == '>')
-				ft_lexer_error(line);
+				return(ft_lexer_error(line));
 			else if (c == '<' && line[i + 1] == ' ' && line[i + 2] == '<')
-				ft_lexer_error(line);
+				return(ft_lexer_error(line));
 			else if (c == '|' && line[i + 1] == ' ' && line[i + 2] == '|')
-				ft_lexer_error(line);
+				return(ft_lexer_error(line));
 			else if (c == '>' && line[i + 1] == '\0')
-				ft_lexer_error(line);
+				return(ft_lexer_error(line));
 			else if (c == '<' && line[i + 1] == '\0')
-				ft_lexer_error(line);
+				return(ft_lexer_error(line));
 			else if (c == '|' && line[i + 1] == '\0')
-				ft_lexer_error(line);
+				return(ft_lexer_error(line));
 		}
 		prev_char = c;
 		i++;
 	}
 	if (in_single_quote || in_double_quote)
-		ft_lexer_error(line);
+		return(ft_lexer_error(line));
 	return (1);
 }
