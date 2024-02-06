@@ -24,7 +24,9 @@ char    *ft_lastval_str(t_data *node)
 {
     char *result;
 
-    if (WIFEXITED(node->last_return))
+    if (node->last_return == 2)
+        result = ft_itoa(2);
+    else if (WIFEXITED(node->last_return))
         result = ft_itoa(WEXITSTATUS(node->last_return));
     else
         result = ft_itoa(127); //for now
