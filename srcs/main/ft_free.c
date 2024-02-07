@@ -6,7 +6,7 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 18:25:41 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/07 13:38:04 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/07 14:52:53 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	free_arr(char **arr)
 
 void	free_tokens(t_token **tokens)
 {
-	t_token *proxy;
-	t_token *previous;
+	t_token	*proxy;
+	t_token	*previous;
 
 	proxy = *tokens;
 	if (!proxy)
@@ -57,8 +57,8 @@ void	error_quit(int fd, int *tomlo, char *str)
 	}
 	if (str)
 		free(str);
-	perror("minishell: .: filename argument required");
-	perror(".: usage: . filename [arguments]");
+	ft_putstr_fd("minishell: .: filename argument required", 2);
+	ft_putstr_fd(".: usage: . filename [arguments]", 2);
 	exit(2);
 }
 

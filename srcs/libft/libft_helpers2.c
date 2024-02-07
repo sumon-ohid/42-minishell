@@ -6,28 +6,29 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:02:15 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/07 13:36:52 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/07 14:49:15 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int ft_strchr(char *str, char c)
+int	ft_strchr(char *str, char c)
 {
-	int i = 0;
+	int	i;
 
+	i = 0;
 	while (str[i])
 	{
 		if (str[i] == c)
-			return 1;
+			return (1);
 		i++;
 	}
-	return 0;
+	return (0);
 }
 
 int	ft_strcmp(char *s1, char *s2)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!s1 || !s2)
@@ -43,9 +44,9 @@ int	ft_strcmp(char *s1, char *s2)
 	return (0);
 }
 
-int ft_strncmp(char *s1, char *s2, size_t n)
+int	ft_strncmp(char *s1, char *s2, size_t n)
 {
-	size_t i;
+	size_t	i;
 
 	if (n == 0)
 		return (0);
@@ -73,7 +74,7 @@ char	**ft_malloc(int size, char **str)
 	return (output);
 }
 
-int ft_putnbr(int n)
+int	ft_putnbr(int n)
 {
 	char	c;
 

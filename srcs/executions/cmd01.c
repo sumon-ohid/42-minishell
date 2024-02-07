@@ -6,7 +6,7 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 17:28:11 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/07 13:38:25 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/07 15:24:34 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ int	ft_commander(t_token *chain)
 	t_token		*mark;
 	char		*tmp;
 
-	//write(2, "WOOO\n", 5);
-	//ft_redirect_checker(chain);
 	while (chain && chain->type != COMMAND)
 		chain = chain->next;
 	mark = chain;
@@ -73,44 +71,38 @@ int	execute_chain(t_data *node, t_token *chain, char *line, int processes)
 			return (entry_check2(node, chain, line));
 		}
 		else if (proxy->type == COMMAND)
-		{
-			//if (proxy->type == HEREDOC)
-				//ft_heredoc(proxy->next->str);
 			return (ft_commander(chain));
-		}
 		else
 			proxy = proxy->next;
 	}
-	if (!proxy)
-		perror("minishell: syntax error near unexpected token");
 	return (0);
 }
 
 void	close_what_this_child_doesnt_need(int ***origin, int index, int max)
 {
-    int **fd;
-    int counter;
+	int	**fd;
+	int	counter;
 
-    fd = *origin;
-    counter = 0;
-    while (counter < index)
-    {
-        if (counter != index - 1)
-        {
-            close(fd[counter][1]);
-        }
-        close(fd[counter][0]);
-        counter++;
-    }
-    while (counter < max)
-    {
-        if (counter != index)
-        {
-            close(fd[counter][0]);
-        }
-        close(fd[counter][1]);
-        counter++;
-    }
+	fd = *origin;
+	counter = 0;
+	while (counter < index)
+	{
+		if (counter != index - 1)
+		{
+			close(fd[counter][1]);
+		}
+		close(fd[counter][0]);
+		counter++;
+	}
+	while (counter < max)
+	{
+		if (counter != index)
+		{
+			close(fd[counter][0]);
+		}
+		close(fd[counter][1]);
+		counter++;
+	}
 }
 
 int	exception_checker(t_token **tokens, int processes)

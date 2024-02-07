@@ -6,7 +6,7 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:25:07 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/07 13:35:57 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/07 15:44:05 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ void	show_dir(void)
 	struct dirent	*dir;
 
 	d = opendir(".");
-	while ((dir = readdir(d)) != NULL)
+	dir = readdir(d);
+	while (dir != NULL)
 	{
 		if (dir->d_name[0] != '.')
 		{
@@ -67,66 +68,6 @@ void	show_dir(void)
 		}
 	}
 	closedir(d);
-}
-
-void	handle_dollar(char *arg, int *i, t_data *node)
-{
-    if (arg[*i + 1] == '?')
-        ft_putnbr(0);
-    else if (arg[*i + 1] == '$')
-        ft_putnbr(getpid());
-    else if (arg[*i + 1] == '0')
-        ft_putstr("minishell");
-    else
-    {
-        ft_putstr(get_env_value(arg + 1, node));
-        return ;
-    }
-    (*i)++;
-}
-
-void	handle_quotes(char *arg, int *i, int len)
-{
-    char *new_arg;
-
-    if ((arg[0] == '\'' && arg[len - 1] == '\'') || (arg[0] == '\"' && arg[len - 1] == '\"'))
-    {
-        new_arg = ft_substr(arg, 1, len - 2);
-        ft_putstr(new_arg);
-        free(new_arg);
-        *i = len;
-    }
-    else if ((arg[0] == '\'' && arg[len - 1] != '\'') || (arg[0] == '\"' && arg[len - 1] != '\"'))
-        return ;
-    else if ((arg[0] != '\'' && arg[len - 1] == '\'') || (arg[0] != '\"' && arg[len - 1] == '\"'))
-        return ;
-}
-
-void	print_argument(char *arg, t_data *node)
-{
-    int		i;
-    int		len;
-
-    i = 0;
-    len = ft_strlen(arg);
-    if (arg[0] == '\'' && arg[1] == '\0')
-        return ;
-    else if (arg[0] == '\"' && arg[1] == '\0')
-        return ;
-    while (arg[i])
-    {
-        if (arg[i] == '$' && arg[i + 1])
-            handle_dollar(arg, &i, node);
-        else if (arg[i] == '~')
-            ft_putstr(getenv("HOME"));
-        else if (arg[i] == '*')
-            show_dir();
-        else
-            handle_quotes(arg, &i, len);
-        ft_putchar(arg[i]);
-        i++;
-    }
-    return ;
 }
 
 // void	print_argument(char *arg, t_data *node)
@@ -183,10 +124,15 @@ void	print_argument(char *arg, t_data *node)
 // 	return ;
 // }
 
+// TODO: handle other cases with it embedded in string etc.
+// echo "$HOME" need to fix.
+//  echo asas =sas this does not behave like bash
+// need to handle cd ll exit code.
+
 void	ft_echo(char *line, t_data *node, t_token *head)
 {
-	int fl;
-	int newline;
+	int	fl;
+	int	newline;
 
 	newline = 1;
 	fl = 0;
@@ -202,8 +148,6 @@ void	ft_echo(char *line, t_data *node, t_token *head)
 		{
 			if (fl)
 				ft_putchar(' ');
-			if (ft_strcmp(head->str, "$?") == 0) //TODO: handle other cases with it embedded in string etc.
-				ft_lastvalue(node);
 			else
 				print_argument(head->str, node);
 			fl = 1;
@@ -213,6 +157,3 @@ void	ft_echo(char *line, t_data *node, t_token *head)
 	if (newline)
 		ft_putchar('\n');
 }
-
-// echo "$HOME" need to fix.
-//  echo asas =sas this does not behave like bash

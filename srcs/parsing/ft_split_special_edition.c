@@ -6,7 +6,7 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 14:27:31 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/07 13:39:07 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/07 13:48:30 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,32 +16,32 @@ static size_t	word_counter(char const *s, char c)
 {
 	size_t	i;
 	size_t	words;
-    int     inside_quote;
+	int		inside_quote;
 
 	i = 0;
 	words = 0;
-    inside_quote = 0;
+	inside_quote = 0;
 	if (!s)
 		return (0);
 	while (s[i])
 	{
-        while (s[i] == c)
+		while (s[i] == c)
 			i++;
 		if (s[i] != '\0')
 			words++;
-        if (s[i] == '\'' || s[i] == '\"')
-        {
-            i++;
-            while (s[i] && !(s[i] == '\'' || s[i] == '\"'))
-                i++;
-        }
+		if (s[i] == '\'' || s[i] == '\"')
+		{
+			i++;
+			while (s[i] && !(s[i] == '\'' || s[i] == '\"'))
+				i++;
+		}
 		while (s[i] != c && s[i] != '\0')
 			i++;
 	}
 	return (words);
 }
 
-char    **ft_split_special(char *s, char c, size_t i, size_t j)
+char	**ft_split_special(char *s, char c, size_t i, size_t j)
 {
 	char	**s_split;
 	size_t	k;

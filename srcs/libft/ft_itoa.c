@@ -6,7 +6,7 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 16:16:13 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/07 13:36:38 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/07 14:50:37 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ char	*ft_itoa(int n)
 
 	counter = 0;
 	negative = 0;
-	proxy = (long int )n;
+	proxy = (long int)n;
 	if (n < 0)
 	{
 		negative = 1;
@@ -88,10 +88,3 @@ char	*ft_itoa(int n)
 	rev_str_tab(result, digits, negative);
 	return (result);
 }
-/*
-int	main(void)
-{
-	printf("%d\n", digit_counter(2147483648));
-	printf("%s", ft_itoa(-2123456));
-	return (0);
-}*/

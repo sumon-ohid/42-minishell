@@ -6,23 +6,24 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 13:00:50 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/07 13:37:48 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/07 15:52:20 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+#include <readline/readline.h>
 
 int		g_signal = 0;
 
 void	handler(int status)
 {
-    if (status == SIGINT)
-    {
-        g_signal = CTRL_C;
-        ioctl(STDIN_FILENO, TIOCSTI, "\n");
+	if (status == SIGINT)
+	{
+		g_signal = CTRL_C;
+		ioctl(STDIN_FILENO, TIOCSTI, "\n");
 		rl_replace_line("", 0);
-        rl_on_new_line();
-    }
+		rl_on_new_line();
+	}
 }
 
 void	handle_heredoc(int status)
@@ -31,7 +32,7 @@ void	handle_heredoc(int status)
 	{
 		g_signal = CTRL_C;
 		ioctl(STDIN_FILENO, TIOCSTI, "\n");
-		rl_replace_line("", 0); 
+		rl_replace_line("", 0);
 		rl_on_new_line();
 	}
 }

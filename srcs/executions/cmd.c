@@ -6,7 +6,7 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 14:32:03 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/07 13:38:22 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/07 15:24:47 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	free_resources(int **fd, int processes)
 		counter++;
 	}
 	free(fd);
-	//free(status);
 }
 
 int	executor_init(t_data *node, t_token **tokens, int processes, char *line)

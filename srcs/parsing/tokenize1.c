@@ -6,19 +6,36 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:57:30 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/07 13:38:51 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/07 15:37:19 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+/*if (ft_strstr(str, "\""))
+ DO SOMETHING HERE!*/
+
+void	ft_free_array(char **str)
+{
+	int	i;
+
+	i = 0;
+	if (!str)
+		return ;
+	while (str[i])
+	{
+		free(str[i]);
+		i++;
+	}
+	free(str);
+	return ;
+}
 
 char	*handle_envp(char *str, t_data *node)
 {
 	char	*output;
 
 	output = NULL;
-	/*if (ft_strstr(str, "\""))
-		//DO SOMETHING HERE!*/
 	if (ft_strcmp(str, "$?") == 0)
 		return (ft_lastval_str(node));
 	else if (str[0] == '$')
@@ -30,7 +47,6 @@ char	*handle_envp(char *str, t_data *node)
 	}
 	if (!output)
 		exit(EXIT_FAILURE);
-	//free(str);
 	return (output);
 }
 
@@ -52,7 +68,7 @@ int	check_builtins(char *word)
 		return (0);
 	else if (ft_strcmp(word, "export") == 0)
 		return (0);
-	else if  (ft_strcmp(word, "unset") == 0)
+	else if (ft_strcmp(word, "unset") == 0)
 		return (0);
 	else
 		return (-1);
@@ -60,7 +76,7 @@ int	check_builtins(char *word)
 
 int	check_assign(char *word)
 {
-	int counter;
+	int	counter;
 
 	counter = 0;
 	if (!word)

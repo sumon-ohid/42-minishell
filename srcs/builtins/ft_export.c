@@ -6,7 +6,7 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:27:41 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/07 13:36:02 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/07 15:29:02 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,51 +35,39 @@ int	handle_export_with_equals(t_data *node, char **var)
 		i++;
 	dup = ft_strdup(var[1]);
 	if (dup == NULL)
-	{
-		ft_putstr("ft_strdup failed at ft_export function\n");
-		return (1);
-	}
+		handle_error("ft_strdup failed at handle_export= function", 1);
 	node->envp[i] = ft_realloc_heredoc(node->envp[i], i, i + 1);
-    if(!node->envp)
-    {
-        ft_putstr("ft_realloc_envp failed at ft_export function\n");
-        return (1);
-    }
+	if (!node->envp)
+		handle_error("ft_realloc_envp failed at ft_export function", 1);
 	node->envp[i] = dup;
-    node->envp[i + 1] = NULL;
+	node->envp[i + 1] = NULL;
 	return (0);
 }
 
 // need to fix this function
 int	handle_export_without_equals(t_data *node, char **var)
 {
-    int		i;
-    int     j;
-    char	*dup;
+	int		i;
+	int		j;
+	char	*dup;
 
-    i = 0;
-    j = 0;
-    while (node->envp[i])
-        i++;
-    while (var[j])
-    {
-        dup = ft_strdup(var[j]);
-        if (dup == NULL)
-        {
-            ft_putstr("ft_strdup failed at ft_export function\n");
-            return (1);
-        }   
-        node->envp[i] = ft_realloc_heredoc(node->envp[i], i, i + 1);
-        if(!node->envp)
-        {
-            ft_putstr("ft_realloc_envp failed at ft_export function\n");
-            return (1);
-        }
-        node->envp[i] = dup;
-        node->envp[i + 1] = NULL;
-        j++;
-    }
-    return (0);
+	i = 0;
+	j = 0;
+	while (node->envp[i])
+		i++;
+	while (var[j])
+	{
+		dup = ft_strdup(var[j]);
+		if (dup == NULL)
+			handle_error("ft_strdup failed at ft_export function", 1);
+		node->envp[i] = ft_realloc_heredoc(node->envp[i], i, i + 1);
+		if (!node->envp)
+			handle_error("Envp failed at ft_export function", 1);
+		node->envp[i] = dup;
+		node->envp[i + 1] = NULL;
+		j++;
+	}
+	return (0);
 }
 
 // need to implement if var exists do not add

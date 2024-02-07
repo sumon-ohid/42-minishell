@@ -6,7 +6,7 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:17:43 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/07 13:37:08 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/07 14:42:15 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ int	entry_check(t_data *node, char *line)
 	t_token	**tokens;
 	int		ret_val;
 
-	if (!ft_lexical_checker(line))
+	if (!ft_lexical_checker(line, 0, 0, '\0'))
 		return (2);
-	line = ft_upgrade_spaces(line);
+	line = ft_upgrade_spaces(line, 0, 0, 0);
 	tokens = ft_calloc(sizeof(t_token *), pipe_counter(line));
 	if (!tokens)
 	{
@@ -74,7 +74,7 @@ void	ft_initialize(t_data *node, char **envp)
 		}
 		else if (*input)
 		{
-			if (ft_strchr(input, '=') == 1) //should change this cause of quotes
+			if (ft_strchr(input, '=') == 1)
 				node->line_for_export = ft_strdup(input);
 			else if (ft_strcmp(input, "\n") == 0)
 				break ;

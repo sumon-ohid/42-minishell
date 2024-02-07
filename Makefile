@@ -29,16 +29,21 @@ SRC = 	srcs/main/main.c \
 		srcs/parsing/tokenize1.c\
 		srcs/builtins/ft_cd.c \
 		srcs/builtins/ft_echo.c \
+		srcs/builtins/ft_echo_extra.c \
 		srcs/builtins/ft_env.c \
 		srcs/builtins/ft_export.c \
 		srcs/builtins/ft_pwd.c \
 		srcs/builtins/ft_unset.c \
 		srcs/main/ft_free.c \
+		srcs/main/handle_error.c \
 		srcs/heredoc/heredoc.c \
+		srcs/heredoc/heredoc_extra.c \
 		srcs/executions/pipex.c \
 		srcs/signals/signals.c \
 		srcs/executions/redirects.c \
+		srcs/executions/redirects_extra.c \
 		srcs/parsing/lexer.c \
+		srcs/parsing/lexer_extra.c \
 		srcs/signals/ft_lastvalue.c \
 		srcs/libft/ft_itoa.c \
 		#srcs/parsing/ft_split_special_edition.c \

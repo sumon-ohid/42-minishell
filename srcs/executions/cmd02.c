@@ -6,7 +6,7 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 17:31:58 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/07 13:38:30 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/07 15:42:13 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,12 @@
 int	entry_check2(t_data *node, t_token *head, char *line)
 {
 	if (ft_strcmp(head->str, "cd") == 0)
+	{
 		if (head->next)
 			ft_cd(head->next->str, node);
 		else
 			ft_cd(NULL, node);
+	}
 	else if (ft_strcmp(head->str, "echo") == 0)
 		ft_echo(line, node, head);
 	else if (ft_strcmp(head->str, "env") == 0)
@@ -67,41 +69,40 @@ void	allocate_fd(int ***fd, int processes)
 	}
 }
 
+void	parent_close(t_data *node, int i, int processes)
+{
+	if (i != 0)
+		close(node->fd[i - 1][0]);
+	if (i != processes - 1)
+		close(node->fd[i][1]);
+}
+
 void	fork_processes(int processes, t_data *node, t_token **tokens,
 		char *line)
 {
-	int	counter;
+	int	i;
 
-	counter = 0;
-	while (counter < processes)
+	i = 0;
+	while (i < processes)
 	{
-		node->pid[counter] = fork();
-		if (node->pid[counter] == 0)
+		node->pid[i] = fork();
+		if (node->pid[i] == 0)
 		{
-			if (counter != 0)
-				dup2(node->fd[counter - 1][0], STDIN_FILENO);
-			if (counter != processes - 1)
-				dup2(node->fd[counter][1], STDOUT_FILENO);
-			close_what_this_child_doesnt_need(&node->fd, counter, processes
-				- 1);
-			node->cur_proc = counter;
-			execute_chain(node, tokens[counter], line, processes);
+			if (i != 0)
+				dup2(node->fd[i - 1][0], STDIN_FILENO);
+			if (i != processes - 1)
+				dup2(node->fd[i][1], STDOUT_FILENO);
+			close_what_this_child_doesnt_need(&node->fd, i, processes - 1);
+			node->cur_proc = i;
+			execute_chain(node, tokens[i], line, processes);
 			exit(1);
 		}
-		else if (node->pid[counter] == -1)
-		{
-			perror("Fork failed");
-			exit(EXIT_FAILURE);
-		}
+		else if (node->pid[i] == -1)
+			handle_error("Fork failed", 1);
 		else
-		{
-			if (counter != 0)
-                close(node->fd[counter - 1][0]); // Close the read end of the previous pipe
-            if (counter != processes - 1)
-                close(node->fd[counter][1]);
-		}
-		counter++;
+			parent_close(node, i, processes);
+		i++;
 	}
 	if (processes > 1)
-        close(node->fd[processes - 2][0]);
+		close(node->fd[processes - 2][0]);
 }
