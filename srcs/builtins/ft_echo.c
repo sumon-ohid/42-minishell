@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:25:07 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/07 15:44:05 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/07 17:54:12 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,8 +148,7 @@ void	ft_echo(char *line, t_data *node, t_token *head)
 		{
 			if (fl)
 				ft_putchar(' ');
-			else
-				print_argument(head->str, node);
+			print_argument(head->str, node);
 			fl = 1;
 		}
 		head = head->next;

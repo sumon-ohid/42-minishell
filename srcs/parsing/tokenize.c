@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:50:09 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/07 16:35:00 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/07 20:38:49 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,20 @@ int	pipe_counter(char *str)
 {
 	int	counter;
 	int	pipes;
+	int	in_quotes;
 
 	if (!str)
 		return (0);
 	counter = 0;
 	pipes = 0;
+	in_quotes = 0;
 	while (str[counter])
 	{
-		if (str[counter] == '|')
+		if ((str[counter] == '\'' || str[counter] == '\"') && !in_quotes)
+			in_quotes = 1;
+		else if ((str[counter] == '\'' || str[counter] == '\"') && in_quotes)
+			in_quotes = 0;
+		else if (str[counter] == '|' && !in_quotes)
 			pipes++;
 		counter++;
 	}
@@ -108,7 +114,7 @@ void	process_words(t_token ***origin, char **units, char *str, t_data *node)
 	node->line_temp = str;
 	while (counter2 < pipe_counter(str))
 	{
-		words = ft_split_special(units[counter2], ' ', 0, 0);
+		words = ft_split_special(units[counter2], ' ', 'X', 0);
 		while (words[counter])
 		{
 			create_and_link_token(origin, counter2, words[counter], node);

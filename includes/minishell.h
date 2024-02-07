@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/07 16:39:52 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/07 18:14:10 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ char				*ft_strdup(const char *src);
 int					ft_strcmp(char *s1, char *s2);
 int					ft_strncmp(char *s1, char *s2, size_t n);
 char				**ft_split(char const *s, char c, size_t i, size_t j);
-char				**ft_split_special(char *s, char c, size_t i, size_t j);
+char				**ft_split_special(char *s, char c, char mode, size_t j);
 int					k_count(char const *s, int i, char c);
 void				ft_putstr(char *str);
 void				ft_putchar(char c);

@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 14:35:54 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/07 16:37:42 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/07 20:21:58 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ char	**parse_input(char *line)
 {
 	char	**tokens;
 
-	tokens = ft_split(line, '|', 0, 0);
+	tokens = ft_split_special(line, '|', 'P', 0);
 	if (!tokens)
 	{
 		write(2, "Allocation error\n", 17);
@@ -55,12 +55,14 @@ char	*ft_upgrade_spaces(char *line, int i, int j, int in_quotes)
 
 int	quote_assigner(char *big, char *little)
 {
-	char res;
+	char *res;
 
-	res = *ft_quote_detector(big, little);
-	if (res == '\'')
+	res = ft_quote_detector(big, little);
+	if (res == NULL)
+		return (NO_QUOTE);
+	else if (*res == '\'')
 		return (SINGLE_QUOTE);
-	else if (res == '\"')
+	else if (*res == '\"')
 		return (DOUBLE_QUOTE);
 	else
 		return (NO_QUOTE);

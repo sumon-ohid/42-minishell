@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 07:40:56 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/07 15:52:08 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/07 18:00:50 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ char	**ft_split(char const *s, char c, size_t i, size_t j)
 
 	s_split = (char **)malloc(sizeof(char *) * (ft_counter(s, c) + 1));
 	if (s_split == NULL)
-		return (NULL);
+		handle_error("malloc in split failed", -1);
 	while (s[i])
 	{
 		if (s[i] != c)
@@ -72,7 +72,7 @@ char	**ft_split(char const *s, char c, size_t i, size_t j)
 			k = k_count(s, i, c);
 			s_split[j] = (char *)malloc(sizeof(char) * (k - i + 1));
 			if (!s_split[j])
-				return (ft_free_str(s_split, j));
+				handle_error("malloc in split failed", -1);//return (ft_free_str(s_split, j));
 			k = 0;
 			while (s[i] && s[i] != c)
 				s_split[j][k++] = s[i++];
