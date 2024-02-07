@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 13:00:50 by msumon            #+#    #+#             */
-/*   Updated: 2024/01/26 18:02:28 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/07 13:37:48 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 int		g_signal = 0;
 
@@ -19,8 +19,8 @@ void	handler(int status)
     if (status == SIGINT)
     {
         g_signal = CTRL_C;
-        ioctl(0, TIOCSTI, "\n");
-		//rl_replace_line("", 0);
+        ioctl(STDIN_FILENO, TIOCSTI, "\n");
+		rl_replace_line("", 0);
         rl_on_new_line();
     }
 }
@@ -30,8 +30,8 @@ void	handle_heredoc(int status)
 	if (status == SIGINT)
 	{
 		g_signal = CTRL_C;
-		ioctl(0, TIOCSTI, "\n");
-		//rl_replace_line("", 0); 
+		ioctl(STDIN_FILENO, TIOCSTI, "\n");
+		rl_replace_line("", 0); 
 		rl_on_new_line();
 	}
 }
@@ -48,15 +48,15 @@ void	signal_init(t_data *data)
 		signal(SIGINT, SIG_IGN);
 		signal(SIGQUIT, SIG_IGN);
 	}
-	else if (data->mode == CHILD)
-	{
-		signal(SIGINT, SIG_IGN);
-		signal(SIGQUIT, SIG_DFL);
-	}
 	else if (data->mode == HEREDOCS)
 	{
 		signal(SIGINT, &handle_heredoc);
 		signal(SIGQUIT, SIG_IGN);
+	}
+	else
+	{
+		signal(SIGINT, SIG_IGN);
+		signal(SIGQUIT, SIG_DFL);
 	}
 }
 

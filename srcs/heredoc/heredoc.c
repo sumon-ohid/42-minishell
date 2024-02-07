@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 10:40:57 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/06 12:08:40 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/07 13:37:22 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 char	*ft_strcpy(char *s1, char *s2)
 {
@@ -48,8 +48,9 @@ void	*ft_realloc_heredoc(void *ptr, size_t old_size, size_t new_size)
 	return (new_ptr);
 }
 
-char	*ft_heredoc(char *str)
+char	*ft_heredoc(t_data *node, char *str)
 {
+	(void)node;
 	char	*line;
 	size_t	len;
 	char	*tmp;
@@ -57,10 +58,17 @@ char	*ft_heredoc(char *str)
 	char *heredoc; // this will hold the final string
 	heredoc = NULL;
 	len = 0;
+	mode(node, HEREDOCS);
 	while (1)
 	{
 		line = readline("> ");
-		if (!line || ft_strcmp(line, str) == 0)
+		if (g_signal == CTRL_C)
+		{
+			free(line);
+			g_signal = 0;
+			return (NULL);
+		}
+		if (g_signal == SIGQUIT || !line || ft_strcmp(line, str) == 0)
 			break ;
 		if (heredoc)
 		{
@@ -69,7 +77,7 @@ char	*ft_heredoc(char *str)
 			{
 				free(heredoc);
 				free(line);
-				return (NULL);
+				exit (1);
 			}
 			heredoc = tmp;
 			if (len > 0)
@@ -82,13 +90,17 @@ char	*ft_heredoc(char *str)
 			if (!heredoc)
 			{
 				free(line);
-				return (NULL);
+				exit(1);
 			}
 			ft_strcpy(heredoc, line);
 		}
 		len += ft_strlen(line) + 1;
 		free(line);
 	}
+	mode(node, NON_INTERACTIVE);
+	if(line != NULL)
+		free(line);
+	heredoc = ft_strjoin(heredoc, "\n", 0);
 	return (heredoc);
 }
 
@@ -108,15 +120,15 @@ int	heredoc_counter(t_token *tokens)
 	return (counter);
 }
 
-void check_for_heredoc(t_token **tokens, int processes)
+int check_for_heredoc(t_data *node, t_token **tokens, int processes)
 {
 	t_token *proxy;
 	//int		doc_num;
 	int		counter;
 
-	//doc_num = heredoc_counter(tokens);
-	//if (!doc_num)
-		//return ;
+	// doc_num = heredoc_counter(*tokens);
+	// if (!doc_num)
+	// 	return ;
 	counter = 0;
 	while (counter < processes)
 	{
@@ -125,15 +137,18 @@ void check_for_heredoc(t_token **tokens, int processes)
 		{
 			if (proxy->type == HEREDOC && proxy->next)
 			{
-				proxy->heredoc_data = ft_heredoc(proxy->next->str);
+				proxy->heredoc_data = ft_heredoc(node, proxy->next->str);
 				if (!proxy->heredoc_data)
-					exit(EXIT_FAILURE);
+					return 0;
 			}
 			proxy = proxy->next;
 		}
 		counter++;
 	}
+	return (1);
 }
+
+// cat << eof > out | << rr give syntax error but in bash its valid
 
 void	read_from_heredoc(t_token *heredoc)
 {

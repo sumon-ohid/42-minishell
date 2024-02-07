@@ -6,12 +6,11 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:24:36 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/06 15:47:46 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/07 13:35:47 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
-#include <string.h>
+#include "../../includes/minishell.h"
 
 char	**ft_realloc(void *ptr, size_t old_size, size_t new_size)
 {

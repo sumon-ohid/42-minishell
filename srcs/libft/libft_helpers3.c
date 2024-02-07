@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   libft_helpers3.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 10:43:23 by msumon            #+#    #+#             */
-/*   Updated: 2024/01/26 17:33:09 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/07 13:36:55 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 int	ft_isalnum(int c)
 {

@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_special_edition.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 14:27:31 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/05 14:27:34 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/07 13:39:07 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "../includes/minishell.h"
+
+#include "../../includes/minishell.h"
 
 static size_t	word_counter(char const *s, char c)
 {
@@ -40,7 +41,7 @@ static size_t	word_counter(char const *s, char c)
 	return (words);
 }
 
-char    **ft_split_special(char *str, char c, size_t i, size_t j)
+char    **ft_split_special(char *s, char c, size_t i, size_t j)
 {
 	char	**s_split;
 	size_t	k;

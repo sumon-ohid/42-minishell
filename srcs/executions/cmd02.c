@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cmd02.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 17:31:58 by msumon            #+#    #+#             */
-/*   Updated: 2024/01/26 17:57:37 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/07 13:38:30 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 int	entry_check2(t_data *node, t_token *head, char *line)
 {

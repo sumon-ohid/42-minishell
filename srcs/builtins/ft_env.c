@@ -1,22 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pwd.c                                           :+:      :+:    :+:   */
+/*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/17 09:25:54 by msumon            #+#    #+#             */
-/*   Updated: 2024/01/17 19:17:23 by msumon           ###   ########.fr       */
+/*   Created: 2024/01/17 09:25:24 by msumon            #+#    #+#             */
+/*   Updated: 2024/02/07 13:36:00 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
-void	ft_pwd(void)
+char	**ft_env(t_data *node)
 {
-	char	*pwd;
+	int		i;
+	char	**envp;
 
-	pwd = getcwd(NULL, 0);
-	ft_putstr(pwd);
-	ft_putchar('\n');
+	i = 0;
+	envp = node->envp;
+	while (envp[i])
+	{
+		ft_putstr(envp[i]);
+		ft_putchar('\n');
+		i++;
+	}
+	return (envp);
 }

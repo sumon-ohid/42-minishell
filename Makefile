@@ -16,32 +16,32 @@ MAGENTA = \033[0;95m
 CYAN = \033[0;96m
 WHITE = \033[0;97m
 
-SRC = 	srcs/main.c \
-		srcs/ft_split.c \
-		srcs/cmd.c \
-		srcs/cmd01.c \
-		srcs/cmd02.c \
-		srcs/libft_helpers.c \
-		srcs/libft_helpers1.c \
-		srcs/libft_helpers2.c \
-		srcs/libft_helpers3.c \
-		srcs/tokenize.c\
-		srcs/tokenize1.c\
-		srcs/ft_cd.c \
-		srcs/ft_echo.c \
-		srcs/ft_env.c \
-		srcs/ft_export.c \
-		srcs/ft_pwd.c \
-		srcs/ft_unset.c \
-		srcs/ft_free.c \
-		srcs/heredoc.c \
-		srcs/pipex.c \
-		srcs/signals.c \
-		srcs/redirects.c \
-		srcs/lexer.c \
-		srcs/ft_lastvalue.c \
-		srcs/ft_itoa.c \
-		#srcs/ft_split_special_edition.c \
+SRC = 	srcs/main/main.c \
+		srcs/libft/ft_split.c \
+		srcs/executions/cmd.c \
+		srcs/executions/cmd01.c \
+		srcs/executions/cmd02.c \
+		srcs/libft/libft_helpers.c \
+		srcs/libft/libft_helpers1.c \
+		srcs/libft/libft_helpers2.c \
+		srcs/libft/libft_helpers3.c \
+		srcs/parsing/tokenize.c\
+		srcs/parsing/tokenize1.c\
+		srcs/builtins/ft_cd.c \
+		srcs/builtins/ft_echo.c \
+		srcs/builtins/ft_env.c \
+		srcs/builtins/ft_export.c \
+		srcs/builtins/ft_pwd.c \
+		srcs/builtins/ft_unset.c \
+		srcs/main/ft_free.c \
+		srcs/heredoc/heredoc.c \
+		srcs/executions/pipex.c \
+		srcs/signals/signals.c \
+		srcs/executions/redirects.c \
+		srcs/parsing/lexer.c \
+		srcs/signals/ft_lastvalue.c \
+		srcs/libft/ft_itoa.c \
+		#srcs/parsing/ft_split_special_edition.c \
 
 OBJ = $(SRC:.c=.o)
 

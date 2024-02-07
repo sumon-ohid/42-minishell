@@ -6,11 +6,11 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 21:31:07 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/01/26 13:29:47 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/07 13:36:47 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 int	ft_strstr(const char *big, const char *little)
 {
@@ -46,7 +46,7 @@ char	*ft_strjoin(char *s1, char *s2, int save_flag)
 		return (0);
 	new_str = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
 	if (!new_str)
-		return (0);
+		exit(1);
 	ctr1 = 0;
 	ctr2 = 0;
 	while (s1[ctr1])

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   libft_helpers1.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 11:33:12 by msumon            #+#    #+#             */
-/*   Updated: 2024/01/17 19:15:20 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/07 13:36:50 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 void	*ft_memcpy(void *dest, const void *src, size_t n)
 {

@@ -6,11 +6,11 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 19:16:45 by msumon            #+#    #+#             */
-/*   Updated: 2024/01/26 14:42:41 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/07 13:36:10 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 char **ft_realloc_envp(char **envp, int old_size, int new_size)
 {

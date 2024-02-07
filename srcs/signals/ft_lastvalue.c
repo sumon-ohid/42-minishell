@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lastvalue.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:55:33 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/06 12:08:07 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/07 13:36:05 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 void    ft_lastvalue(t_data *node)
 {

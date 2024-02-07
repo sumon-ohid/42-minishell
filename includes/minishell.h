@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/06 11:50:24 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/07 12:47:04 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@
 // signals
 # define CTRL_C 1
 # define CTRL_D 2
+
+extern int g_signal;
 
 typedef struct s_token
 {
@@ -115,11 +117,11 @@ int					ft_isalnum(int c);
 char				*ft_itoa(int n);
 
 //heredoc
-char				*ft_heredoc(char *str);
+char				*ft_heredoc(t_data *node, char *str);
 void				*ft_realloc_heredoc(void *ptr, size_t old_size,
 						size_t new_size);
 int					heredocker(char *str);
-void 				check_for_heredoc(t_token **tokens, int processes);
+int 				check_for_heredoc(t_data *node, t_token **tokens, int processes);
 int					heredoc_counter(t_token *tokens);
 void				read_from_heredoc(t_token *heredoc);
 

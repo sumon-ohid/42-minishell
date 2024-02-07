@@ -6,11 +6,11 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:02:15 by msumon            #+#    #+#             */
-/*   Updated: 2024/01/26 12:15:04 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/07 13:36:52 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 int ft_strchr(char *str, char c)
 {
