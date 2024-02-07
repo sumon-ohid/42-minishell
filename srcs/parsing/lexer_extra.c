@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer01.c                                          :+:      :+:    :+:   */
+/*   lexer_extra.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 14:35:54 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/07 14:45:25 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/07 16:37:42 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,17 @@ char	*ft_upgrade_spaces(char *line, int i, int j, int in_quotes)
 	result[j] = '\0';
 	free(line);
 	return (result);
+}
+
+int	quote_assigner(char *big, char *little)
+{
+	char res;
+
+	res = *ft_quote_detector(big, little);
+	if (res == '\'')
+		return (SINGLE_QUOTE);
+	else if (res == '\"')
+		return (DOUBLE_QUOTE);
+	else
+		return (NO_QUOTE);
 }

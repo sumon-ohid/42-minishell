@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft_helpers3.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 10:43:23 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/07 15:42:54 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/07 16:39:40 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,28 @@ char	*ft_strcpy(char *s1, char *s2)
 void	ft_putstr_fd(char *s, int fd)
 {
 	write(fd, s, ft_strlen(s));
+}
+
+char	*ft_quote_detector(char *big, char *little)
+{
+	size_t	counter_a;
+	size_t	counter_b;
+
+	counter_a = 0;
+	counter_b = 0;
+	if (!little || !big)
+		return (NULL);
+	while (big[counter_a] != 0 && little[counter_b] != 0)
+	{
+		while (big[counter_a] == little[counter_b])
+		{
+			counter_a++;
+			counter_b++;
+			if (little[counter_b] == '\0')
+				return (&big[counter_a]);
+		}
+		counter_a = (counter_a - counter_b) + 1;
+		counter_b = 0;
+	}
+	return (NULL);
 }

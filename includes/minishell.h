@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/07 15:53:58 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/07 16:39:52 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,11 @@
 # define CTRL_C 1
 # define CTRL_D 2
 
+//quotes
+# define NO_QUOTE 0
+# define DOUBLE_QUOTE 1
+# define SINGLE_QUOTE 2
+
 extern int			g_signal;
 
 typedef struct s_token
@@ -57,6 +62,7 @@ typedef struct s_token
 	int				type;
 	char			**arr;
 	char			*heredoc_data;
+	int				quote;
 	struct s_token	*previous;
 	struct s_token	*next;
 }					t_token;
@@ -85,6 +91,7 @@ typedef struct s_data
 	char				*oldpwd;
 	char				*pwd;
 	char				*home;
+	char				*line_temp;
 	t_mode				mode;
 	t_token				*tokens;
 	struct s_data		*next;
@@ -93,6 +100,7 @@ typedef struct s_data
 // libft_helpers
 char				*ft_itoa(int n);
 int					ft_strstr(const char *big, const char *little);
+char				*ft_quote_detector(char *big, char *little);
 char				*ft_strjoin(char *s1, char *s2, int save_flag);
 int					ft_strlen(const char *str);
 char				*ft_substr(char const *s, unsigned int start, size_t len);
@@ -100,6 +108,7 @@ char				*ft_strdup(const char *src);
 int					ft_strcmp(char *s1, char *s2);
 int					ft_strncmp(char *s1, char *s2, size_t n);
 char				**ft_split(char const *s, char c, size_t i, size_t j);
+char				**ft_split_special(char *s, char c, size_t i, size_t j);
 int					k_count(char const *s, int i, char c);
 void				ft_putstr(char *str);
 void				ft_putchar(char c);
@@ -151,6 +160,7 @@ int					check_builtins(char *word);
 int					check_prevs(char *word, int prev_type);
 void				process_words(t_token ***origin, char **words, char *str,
 						t_data *node);
+int					quote_assigner(char *big, char *little);
 
 // cmd01
 int					ft_commander(t_token *chain);

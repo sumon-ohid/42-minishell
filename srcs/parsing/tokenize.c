@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:50:09 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/07 15:37:04 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/07 16:35:00 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,9 @@ t_token	*create_token(char *word, t_data *node)
 	new->previous = NULL;
 	new->next = NULL;
 	new->arr = NULL;
-	if (ft_strstr(word, "$"))
-		new->str = handle_envp(word, node);
+	new->quote = quote_assigner(node->line_temp, word); //we somehow need to pass line here!
+	if (ft_strstr(word, "$") && new->quote != SINGLE_QUOTE)
+		new->str = handle_envp(word, node); //check this func!!
 	else
 		new->str = ft_strdup(word);
 	new->type = 0;
@@ -104,9 +105,10 @@ void	process_words(t_token ***origin, char **units, char *str, t_data *node)
 
 	counter = 0;
 	counter2 = 0;
+	node->line_temp = str;
 	while (counter2 < pipe_counter(str))
 	{
-		words = ft_split(units[counter2], ' ', 0, 0);
+		words = ft_split_special(units[counter2], ' ', 0, 0);
 		while (words[counter])
 		{
 			create_and_link_token(origin, counter2, words[counter], node);

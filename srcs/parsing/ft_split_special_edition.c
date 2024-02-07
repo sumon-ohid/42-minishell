@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_special_edition.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 14:27:31 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/07 13:48:30 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/07 16:08:47 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,12 @@ static size_t	word_counter(char const *s, char c)
 {
 	size_t	i;
 	size_t	words;
-	int		inside_quote;
+	char	quote;
 
 	i = 0;
 	words = 0;
-	inside_quote = 0;
 	if (!s)
-		return (0);
+		exit (1);
 	while (s[i])
 	{
 		while (s[i] == c)
@@ -31,8 +30,8 @@ static size_t	word_counter(char const *s, char c)
 			words++;
 		if (s[i] == '\'' || s[i] == '\"')
 		{
-			i++;
-			while (s[i] && !(s[i] == '\'' || s[i] == '\"'))
+			quote = s[i++];
+			while (s[i] && s[i] != quote)
 				i++;
 		}
 		while (s[i] != c && s[i] != '\0')
@@ -45,12 +44,14 @@ char	**ft_split_special(char *s, char c, size_t i, size_t j)
 {
 	char	**s_split;
 	size_t	k;
+	char	quote;
+	int		flag;
 
+	quote = 0;
+	flag = 0;
 	s_split = (char **)malloc(sizeof(char *) * (word_counter(s, c) + 1));
 	if (s_split == NULL)
-		return (NULL);
-	if (!s)
-		return (s_split);
+		handle_error("malloc in split failed", -1);
 	while (s[i])
 	{
 		if (s[i] != c)
@@ -58,10 +59,25 @@ char	**ft_split_special(char *s, char c, size_t i, size_t j)
 			k = k_count(s, i, c);
 			s_split[j] = (char *)malloc(sizeof(char) * (k - i + 1));
 			if (!s_split[j])
-				return (ft_free_str(s_split, j));
+				handle_error("malloc in split failed", -1);//return (ft_free_str(s_split, j));
 			k = 0;
-			while (s[i] && s[i] != c)
-				s_split[j][k++] = s[i++];
+			while (s[i] && (s[i] != c || quote))
+			{
+				if (!flag && (s[i] == '\'' || s[i] == '\"'))
+				{
+					quote = s[i];
+					flag = 1;
+					i++;
+				}
+				else if (flag && (s[i] == quote))
+				{
+					flag = 0;
+					quote = 0;
+					i++;
+				}
+				else
+					s_split[j][k++] = s[i++];
+			}
 			s_split[j][k] = '\0';
 			j++;
 		}
