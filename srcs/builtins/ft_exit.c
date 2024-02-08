@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 14:41:52 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/08 13:53:19 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/08 18:48:01 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,16 @@ typedef struct s_data
 
 void free_node(t_data *node)
 {
-    close(node->std_in);
+    free_tokens(node->tokens, node->processes);
+	close(node->std_in);
     close(node->std_out);
+	free(node->input_line);
+	ft_free_array(node->arr);
+	free(node);
 }
 
-void    ft_exit(t_data *node, t_token *head, char *line)
+void    ft_exit(t_data *node, int exit_val)
 {
-    free_tokens(&head);
-    free_node(node);
-    free(line);
-    exit(0);
+	free_node(node);
+    exit(exit_val);
 }

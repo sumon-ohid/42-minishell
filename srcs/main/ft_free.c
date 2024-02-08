@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 18:25:41 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/08 16:26:46 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/08 17:43:40 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,21 +28,27 @@ void	free_arr(char **arr)
 }
 
 //dokens is really double array, freeing needs to be changed somehow!!!!
-void	free_tokens(t_token **tokens)
+void	free_tokens(t_token **tokens, int processes)
 {
 	t_token	*proxy;
 	t_token	*previous;
+	int		counter;
 
-	proxy = *tokens;
-	if (!proxy)
-		return ;
-	while (proxy)
+	counter = 0;
+	while (counter < processes)
 	{
-		previous = proxy;
-		proxy = proxy->next;
-		free(previous->str);
-		free_arr(previous->arr);
-		free(previous);
+		proxy = tokens[counter];
+		if (!proxy)
+			return ;
+		while (proxy)
+		{
+			previous = proxy;
+			proxy = proxy->next;
+			free(previous->str);
+			//free_arr(previous->arr);
+			free(previous);
+		}
+		counter++;
 	}
 	free(tokens);
 }

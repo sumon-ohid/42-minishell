@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:17:43 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/08 12:15:08 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/08 18:34:48 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	ft_cleanup(t_token **tokens, char *line, char **arr)
+void	ft_cleanup(t_data *node, t_token **tokens, char *line, char **arr)
 {
-	free_tokens(tokens);
+	free_tokens(tokens, node->processes);
 	free(line);
 	free_arr(arr);
 }
@@ -35,10 +35,13 @@ int	entry_check(t_data *node, char *line)
 	if (!arr)
 		handle_error("Memory allocation failed at entry check", 1);
 	process_words(&tokens, arr, line, node);
+	node->tokens = tokens;
+	node->input_line = line;
+	node->arr = arr;
 	if (!check_for_heredoc(node, tokens, pipe_counter(line)))
 		return (130);
 	ret_val = executor_init(node, tokens, pipe_counter(line), line);
-	ft_cleanup(tokens, line, arr);
+	ft_cleanup(node, tokens, line, arr);
 	return (ret_val);
 }
 

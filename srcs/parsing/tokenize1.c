@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize1.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:57:30 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/08 16:30:27 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/08 17:03:43 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,61 @@ char	*handle_envp(char *str, t_data *node)
 	output = ft_strjoin(output, str + i, 0);
 	return (output);
 }
+
+int	ft_strcat(char *dst, char *src)
+{
+	int	counter1;
+	int	counter2;
+
+	counter1 = 0;
+	counter2 = 0;
+	printf("dst is: %s, src is: %s\n", dst, src);
+	while (dst[counter1])
+		counter1++;
+	while (src[counter2])
+	{
+		dst[counter1] = src[counter2];
+		counter1++;
+		counter2++;
+	}
+	dst[counter1] = '\0';
+	return (counter1);
+}
+/*
+char	*handle_envp(char *str, t_data *node)
+{
+	char	*output;
+	char	tmp[10000];
+	char	en_v[1000];
+	int		i;
+	int 	j;
+
+	j = 0;
+	i = 0;
+	output = NULL;
+	//if (ft_strcmp(str, "$?") == 0)
+		//return (ft_lastval_str(node)); MOVE TO GETENV VALUE - it will leak tho
+	while (str[i])
+	{
+		while(str[i] != '$' && str[i])
+			tmp[j++] = str[i++];
+		tmp[j] = '\0';
+		j = 0;
+		while(str[i] && str[i] != ' ')
+			en_v[j++] = str[i++];
+		en_v[j] = '\0';
+		printf("tmp is: %s, en_v is: %s\n", tmp, get_env_value(en_v, node));
+		j = ft_strcat(tmp, get_env_value(en_v, node));
+		while (tmp[j])
+			j++;
+		printf("after strcat, tmp is: %s\n", tmp);
+	}
+	tmp[j] = '\0';
+	output = ft_strdup(tmp);
+	if (!output)
+		handle_error("malloc in handle_envp failed", -1);
+	return (output);
+}*/
 
 int	check_builtins(char *word)
 {

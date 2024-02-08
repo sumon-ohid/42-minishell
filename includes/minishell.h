@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/08 13:52:50 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/08 18:50:33 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ typedef enum s_mode
 typedef struct s_data
 {
 	char				*line_for_export;
-	int					last_return ;
+	int					last_return;
 	int					env_len;
 	int					**fd;
 	int					processes;
@@ -91,9 +91,12 @@ typedef struct s_data
 	char				*oldpwd;
 	char				*pwd;
 	char				*home;
+	char				*input_line;
 	char				*line_temp;
+	char				**arr;
+	char				**local_vars;
 	t_mode				mode;
-	t_token				*tokens;
+	t_token				**tokens;
 	struct s_data		*next;
 }						t_data;
 
@@ -147,7 +150,7 @@ int					ft_unset(t_data *node, t_token *token, char *str);
 char				*ft_getenv(t_data *node, char *str);
 void				ft_lastvalue(t_data *node);
 char				*ft_lastval_str(t_data *node);
-void				ft_exit(t_data *node, t_token *head, char *line);
+void				ft_exit(t_data *node,/* t_token *head, char *line*/ int exit_val);
 
 // take_input
 int					entry_check(t_data *node, char *line);
@@ -164,7 +167,7 @@ void				process_words(t_token ***origin, char **words, char *str,
 int					quote_assigner(char *big, char *little);
 
 // cmd01
-int					ft_commander(t_token *chain);
+int					ft_commander(t_token *chain, t_data *node);
 int					execute_chain(t_data *node, t_token *chain, char *line,
 						int processes);
 void				close_what_this_child_doesnt_need(int ***origin, int index,
@@ -182,7 +185,7 @@ void				fork_processes(int processes, t_data *node,
 
 // free memory
 void				ft_free_array(char **str);
-void				free_tokens(t_token **token);
+void				free_tokens(t_token **token, int processes);
 void				free_arr(char **arr);
 void				error_quit(int fd, int *tomlo, char *str);
 char				**free_everything(char **arr, int m_ctr);
@@ -199,7 +202,7 @@ void				close_all(int ***origin, int max);
 char				*extract_path(char *comm2, char **poss_paths,
 						char *og_comm);
 char				*pathfinder(char **envp, char *comm);
-void				extract_find_execute(char **envp, char *full_comm);
+void				extract_find_execute(char **envp, char *full_comm, t_data *node);
 
 // signals
 void				mode(t_data *data, t_mode mode);

@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 14:32:03 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/08 14:01:13 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/08 18:42:36 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,6 @@ int	executor_init(t_data *node, t_token **tokens, int processes, char *line)
 	node->fd = fd;
 	fork_processes(processes, node, tokens, line);
 	close_all(&fd, processes - 1);
-	/*status = malloc(sizeof(int) * processes);
-	if (!status)
-	{
-		perror("Memory allocation failed");
-		exit(EXIT_FAILURE);
-	}*/
 	wait_for_processes(pid, status, processes);
 	free_resources(fd, processes);
 	return (status[processes - 1]);

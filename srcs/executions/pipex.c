@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 20:21:29 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/07 13:38:33 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/08 18:59:37 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ char	*extract_path(char *comm2, char **poss_paths, char *og_comm)
 		{
 			res = ft_strdup(poss_paths[counter]);
 			free_poss_paths(poss_paths);
+			if (!res)
+				return ("faill");
 			return (res);
 		}
 		counter++;
@@ -86,7 +88,7 @@ char	*pathfinder(char **envp, char *comm)
 	return (extract_path(comm2, poss_paths, comm));
 }
 
-void	extract_find_execute(char **envp, char *full_comm)
+void	extract_find_execute(char **envp, char *full_comm, t_data *node)
 {
 	char	**comms;
 	char	*path;
@@ -106,9 +108,10 @@ void	extract_find_execute(char **envp, char *full_comm)
 		else
 			printf("Error: malloc failure\n");
 		free_everything(comms, counter);
-		exit(127);
+		ft_exit(node, 127);
 	}
 	execve(path, comms, NULL);
 	free_everything(comms, counter);
-	error_quit(0, 0, path);
+	ft_exit(node, 127);
+	//error_quit(0, 0, path);
 }
