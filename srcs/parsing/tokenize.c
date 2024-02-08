@@ -3,28 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:50:09 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/08 12:10:58 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/08 12:59:43 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	determine_type(char *word, int prev_type)
+int	determine_type(char *word, int prev_type, int quote)
 {
 	if (!word)
 		return (0);
-	else if (ft_strcmp("<", word) == 0)
+	else if (ft_strcmp("<", word) == 0 && quote == NO_QUOTE)
 		return (REDIR_IN);
-	else if (ft_strcmp(">", word) == 0)
+	else if (ft_strcmp(">", word) == 0 && quote == NO_QUOTE)
 		return (REDIR_OUT);
-	else if (ft_strcmp("<<", word) == 0)
+	else if (ft_strcmp("<<", word) == 0 && quote == NO_QUOTE)
 		return (HEREDOC);
-	else if (ft_strcmp(">>", word) == 0)
+	else if (ft_strcmp(">>", word) == 0 && quote == NO_QUOTE)
 		return (REDIR_OUT_APPEND);
-	else if (ft_strcmp("|", word) == 0)
+	else if (ft_strcmp("|", word) == 0 && quote == NO_QUOTE)
 		return (PIPE);
 	else if (check_builtins(word) == 0)
 		return (BUILTIN);
@@ -93,7 +93,7 @@ void	create_and_link_token(t_token ***origin, int current, char *word,
 	if (!cur)
 	{
 		cur = create_token(word, node);
-		cur->type = determine_type(word, 0);
+		cur->type = determine_type(word, 0, cur->quote);
 		tokens[current] = cur;
 	}
 	else
@@ -101,7 +101,8 @@ void	create_and_link_token(t_token ***origin, int current, char *word,
 		while (proxy->next)
 			proxy = proxy->next;
 		proxy->next = create_token(word, node);
-		proxy->next->type = determine_type(word, proxy->type);
+		proxy->next->type = determine_type(word, proxy->type,
+			proxy->next->quote);
 	}
 }
 

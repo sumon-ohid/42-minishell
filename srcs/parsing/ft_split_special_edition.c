@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 14:27:31 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/08 12:45:38 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/08 12:48:28 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,8 @@ static int	l_count(char const *s, int i, char c)
 			in_quotes = 1;
 		else if ((s[l] == '\'' || s[l] == '\"') && in_quotes)
 			in_quotes = 0;
-		l++;
+		if (!(s[l] == '\'' || s[l] == '\"'))
+			l++;
 	}
 	return (l);
 }
