@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:50:09 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/07 20:38:49 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/08 12:10:58 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ t_token	*create_token(char *word, t_data *node)
 	if (!word)
 		return (0);
 	new = malloc(sizeof(t_token));
+	if (!new)
+		handle_error("Memory allocation failed at create token", 1);
 	new->previous = NULL;
 	new->next = NULL;
 	new->arr = NULL;

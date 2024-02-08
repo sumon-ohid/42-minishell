@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_extra.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 14:35:54 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/07 20:21:58 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/08 12:13:41 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,7 @@ char	**parse_input(char *line)
 
 	tokens = ft_split_special(line, '|', 'P', 0);
 	if (!tokens)
-	{
-		write(2, "Allocation error\n", 17);
-		exit(EXIT_FAILURE);
-	}
+		handle_error("Memory allocation failed at parse input", 1);
 	return (tokens);
 }
 
@@ -31,7 +28,7 @@ char	*ft_upgrade_spaces(char *line, int i, int j, int in_quotes)
 
 	result = malloc(strlen(line) * 3 + 1);
 	if (!result)
-		ft_putstr_fd("Memory allocation failed", EXIT_FAILURE);
+		handle_error("Memory allocation failed at upgrade_spaces", 1);
 	while (line[i])
 	{
 		if (line[i] == '"' || line[i] == '\'')

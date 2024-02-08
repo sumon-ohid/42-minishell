@@ -1,0 +1,7 @@
+{
+   <surpass_readline_library>
+   Memcheck:Leak
+   ...
+   obj:*/libreadline.so.*
+   ...
+}

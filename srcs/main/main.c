@@ -6,7 +6,7 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:17:43 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/07 14:42:15 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/08 12:15:08 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,10 @@ int	entry_check(t_data *node, char *line)
 	line = ft_upgrade_spaces(line, 0, 0, 0);
 	tokens = ft_calloc(sizeof(t_token *), pipe_counter(line));
 	if (!tokens)
-	{
-		perror("Memory allocation failed");
-		return (127);
-	}
+		handle_error("Memory allocation failed at entry check", 1);
 	arr = parse_input(line);
 	if (!arr)
-	{
-		free(tokens);
-		return (127);
-	}
+		handle_error("Memory allocation failed at entry check", 1);
 	process_words(&tokens, arr, line, node);
 	if (!check_for_heredoc(node, tokens, pipe_counter(line)))
 		return (130);
@@ -94,10 +88,7 @@ int	main(int argc, char **argv, char **envp)
 		return (write(2, "Error: too many arguments\n", 26));
 	node = (t_data *)malloc(sizeof(t_data));
 	if (node == NULL)
-	{
-		perror("Failed to allocate memory for node.");
-		exit(EXIT_FAILURE);
-	}
+		handle_error("Memory allocation failed for node.", 1);
 	ft_set(node);
 	ft_initialize(node, envp);
 	close(node->std_in);
