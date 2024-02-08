@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 14:27:31 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/08 12:48:28 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/08 13:14:42 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,7 @@ static int	l_count(char const *s, int i, char c)
 {
 	int	l;
 	int	in_quotes;
+	int	quote_num;
 
 	l = i;
 	in_quotes = 0;
@@ -138,10 +139,11 @@ static int	l_count(char const *s, int i, char c)
 			in_quotes = 1;
 		else if ((s[l] == '\'' || s[l] == '\"') && in_quotes)
 			in_quotes = 0;
-		if (!(s[l] == '\'' || s[l] == '\"'))
-			l++;
+		if (s[l] == '\'' || s[l] == '\"')
+			quote_num++;
+		l++;
 	}
-	return (l);
+	return (l - quote_num);
 }
 
 char	**ft_split_special(char *s, char c, char mode, size_t j)
@@ -158,7 +160,7 @@ char	**ft_split_special(char *s, char c, char mode, size_t j)
 	{
 		while (s[i] == c)
 			i++;
-		k = l_count(s, i, c); //should not count " and ' chars!!
+		k = l_count(s, i, c);
 		s_split[j] = (char *)malloc(sizeof(char) * (k - i + 1));
 		if (!s_split[j])
 			handle_error("malloc in split failed", -1); //return (ft_free_str(s_split, j));
