@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 14:27:31 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/07 20:40:22 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/08 12:45:38 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,7 +153,7 @@ char	**ft_split_special(char *s, char c, char mode, size_t j)
 	s_split = (char **)malloc(sizeof(char *) * (word_counter(s, c) + 1));
 	if (s_split == NULL)
 		handle_error("malloc in split failed", -1);
-	while (s[i])
+	while (s[i] && j < (word_counter(s, c)))
 	{
 		while (s[i] == c)
 			i++;
