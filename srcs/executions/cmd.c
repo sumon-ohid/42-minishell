@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 14:32:03 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/07 15:24:47 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/08 14:01:13 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	free_resources(int **fd, int processes)
 int	executor_init(t_data *node, t_token **tokens, int processes, char *line)
 {
 	int	pid[512];
-	int	*status;
+	int	status[512];
 	int	**fd;
 
 	fd = NULL;
@@ -55,12 +55,12 @@ int	executor_init(t_data *node, t_token **tokens, int processes, char *line)
 	node->fd = fd;
 	fork_processes(processes, node, tokens, line);
 	close_all(&fd, processes - 1);
-	status = malloc(sizeof(int) * processes);
+	/*status = malloc(sizeof(int) * processes);
 	if (!status)
 	{
 		perror("Memory allocation failed");
 		exit(EXIT_FAILURE);
-	}
+	}*/
 	wait_for_processes(pid, status, processes);
 	free_resources(fd, processes);
 	return (status[processes - 1]);

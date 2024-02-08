@@ -34,6 +34,7 @@ SRC = 	srcs/main/main.c \
 		srcs/builtins/ft_export.c \
 		srcs/builtins/ft_pwd.c \
 		srcs/builtins/ft_unset.c \
+		srcs/builtins/ft_exit.c \
 		srcs/main/ft_free.c \
 		srcs/main/handle_error.c \
 		srcs/heredoc/heredoc.c \
