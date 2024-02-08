@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize1.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:57:30 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/08 12:59:23 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/08 16:30:27 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,19 +34,25 @@ void	ft_free_array(char **str)
 char	*handle_envp(char *str, t_data *node)
 {
 	char	*output;
-
-	output = NULL;
+	char	*tmp;
+	int	i;
+	int j;
+	
+	j = 0;
+	i = 0;
+	output = "NULL";
+	tmp = malloc(sizeof(char) * ft_strlen(str) + 1);
 	if (ft_strcmp(str, "$?") == 0)
 		return (ft_lastval_str(node));
-	else if (str[0] == '$')
-	{
-		if (getenv(str + 1))
-			output = ft_strdup(getenv(str + 1));
-		else
-			output = ft_strdup("");
-	}
-	if (!output)
-		exit(EXIT_FAILURE);
+	while(str[i] != '$')
+		i++;
+	i++;
+	while(str[i] && str[i] != ' ')
+		tmp[j++] = str[i++];
+	tmp[j] = '\0';
+	output = ft_strdup(get_env_value(tmp, node));
+	free(tmp);
+	output = ft_strjoin(output, str + i, 0);
 	return (output);
 }
 

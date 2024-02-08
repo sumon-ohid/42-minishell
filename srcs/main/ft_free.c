@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 18:25:41 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/08 13:55:15 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/08 16:26:46 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	error_quit(int fd, int *tomlo, char *str)
 	if (str)
 		free(str);
 	ft_putstr_fd("minishell: .: filename argument required", 2);
-	ft_putstr_fd(".: usage: . filename [arguments]", 2);
+	ft_putstr_fd(".: usage: . filename [arguments].\n", 2);
 	exit(2);
 }
 
