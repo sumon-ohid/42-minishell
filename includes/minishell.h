@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/08 18:50:33 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/09 13:42:32 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,8 @@ char				*ft_getenv(t_data *node, char *str);
 void				ft_lastvalue(t_data *node);
 char				*ft_lastval_str(t_data *node);
 void				ft_exit(t_data *node,/* t_token *head, char *line*/ int exit_val);
-
+char 				*copy_until_char(char *str, char c);
+char				*copy_after_char(char *str, char c);
 // take_input
 int					entry_check(t_data *node, char *line);
 int					ft_lexical_checker(char *line, int in_single_quote,
