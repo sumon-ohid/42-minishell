@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/08 18:50:33 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/09 15:13:35 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,16 @@ typedef struct s_token
 	struct s_token	*next;
 }					t_token;
 
+//internal vars list
+typedef struct s_vars
+{
+	char			*str;
+	char			*first_half;
+	char			*second_half;
+	int				deprecated;
+	struct s_vars	*next;
+}					t_vars;
+
 // signal mode
 typedef enum s_mode
 {
@@ -78,7 +88,7 @@ typedef enum s_mode
 
 typedef struct s_data
 {
-	char				*line_for_export;
+	//char				*line_for_export;
 	int					last_return;
 	int					env_len;
 	int					**fd;
@@ -94,7 +104,7 @@ typedef struct s_data
 	char				*input_line;
 	char				*line_temp;
 	char				**arr;
-	char				**local_vars;
+	t_vars				*local_vars;
 	t_mode				mode;
 	t_token				**tokens;
 	struct s_data		*next;
@@ -151,6 +161,7 @@ char				*ft_getenv(t_data *node, char *str);
 void				ft_lastvalue(t_data *node);
 char				*ft_lastval_str(t_data *node);
 void				ft_exit(t_data *node,/* t_token *head, char *line*/ int exit_val);
+void    			ft_localvars(t_token **tokens, t_data *node, int processes);
 
 // take_input
 int					entry_check(t_data *node, char *line);

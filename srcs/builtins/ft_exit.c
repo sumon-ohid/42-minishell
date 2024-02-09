@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 14:41:52 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/08 18:48:01 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/09 15:18:06 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,27 @@ typedef struct s_data
 	struct s_data		*next;
 }						t_data;*/
 
+void	free_vars(t_vars *local_vars)
+{
+	t_vars *cur;
+	t_vars *prev;
+
+	cur = local_vars;
+	while (cur)
+	{
+		prev = cur;
+		cur = cur->next;
+		free(prev->str);
+		free(prev->first_half);
+		free(prev->second_half);
+		free(prev);
+	}
+}
+
 void free_node(t_data *node)
 {
     free_tokens(node->tokens, node->processes);
+	free_vars(node->local_vars);
 	close(node->std_in);
     close(node->std_out);
 	free(node->input_line);

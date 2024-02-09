@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirects.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 18:46:23 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/07 15:40:03 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/09 15:06:55 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	ft_set(t_data *node)
 {
+	node->local_vars = NULL;
 	node->std_in = dup(STDIN_FILENO);
 	if (node->std_in == -1)
 		exit(-1);
