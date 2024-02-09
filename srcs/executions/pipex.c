@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 20:21:29 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/09 16:40:13 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/09 19:58:43 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,17 +71,16 @@ char	*pathfinder(char **envp, char *comm)
 	if (!comm2)
 		return ("faill");
 	counter = 0;
-	while ((!ft_strstr(envp[counter], "PATH") || ft_strstr(envp[counter],
-				"_PATH")) && envp[counter])
+	while (envp[counter] && (!ft_strstr(envp[counter], "PATH")
+		|| ft_strstr(envp[counter], "_PATH")))
 		counter++;
+	if (!envp[counter])
+		return (free(comm2), "faill");
 	while (envp[counter][i] && envp[counter][i] != '/')
 		i++;
 	poss_paths = ft_split(&envp[counter][i], ':', 0, 0);
 	if (!poss_paths)
-	{
-		free(comm2);
-		return ("faill");
-	}
+		return (free(comm2), "faill");
 	counter = -1;
 	while (poss_paths[++counter])
 		poss_paths[counter] = ft_strjoin(poss_paths[counter], comm2, 1);
