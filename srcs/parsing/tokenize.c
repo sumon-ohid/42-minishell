@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:50:09 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/08 12:59:43 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/09 20:06:04 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ t_token	*create_token(char *word, t_data *node)
 	new->arr = NULL;
 	new->quote = quote_assigner(node->line_temp, word); //we somehow need to pass line here!
 	if (ft_strstr(word, "$") && new->quote != SINGLE_QUOTE)
-		new->str = handle_envp(word, node); //check this func!!
+		new->str = handle_envp(word, node);
 	else
 		new->str = ft_strdup(word);
 	new->type = 0;

@@ -6,7 +6,7 @@
 /*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:57:30 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/09 19:51:32 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/09 20:08:30 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,27 @@ void	ft_free_array(char **str)
 	}
 	free(str);
 	return ;
+}
+
+char	*copy_until_char(char *str, char c)
+{
+	int		i;
+	char	*output;
+
+	i = 0;
+	while (str[i] && str[i] != c)
+		i++;
+	output = malloc(sizeof(char) * (i + 1));
+	if (!output)
+		handle_error("malloc in copy_until_char failed", 1);
+	i = 0;
+	while (str[i] && str[i] != c)
+	{
+		output[i] = str[i];
+		i++;
+	}
+	output[i] = '\0';
+	return (output);
 }
 
 int	ft_strlen_till_char(char *str, char c)
