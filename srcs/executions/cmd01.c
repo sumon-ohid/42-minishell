@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 17:28:11 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/09 16:59:02 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/09 21:33:36 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	ft_commander(t_token *chain, t_data *node)
 		}
 		chain = chain->next;
 	}
+	mode(node, INTERACTIVE);
 	extract_find_execute(environ, mark->str, node);
 	return (0);
 }

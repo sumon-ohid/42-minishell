@@ -6,21 +6,49 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 14:32:03 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/08 18:42:36 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/09 21:32:48 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	wait_for_processes(int *pid, int *status, int processes)
+/*void	wait_for_processes(int *pid, int *status, int processes, t_data *node)
 {
 	int	counter;
 
+	(void)node;
 	counter = 0;
 	while (counter < processes)
 	{
 		waitpid(pid[counter], &status[counter], 0);
 		counter++;
+	}
+}*/
+
+void	wait_for_processes(int *pid, int *status, int processes, t_data *node)
+{
+	int	counter;
+	int	return_val;
+
+	counter = 0;
+	while (counter < processes)
+	{
+		return_val = waitpid(pid[counter], &status[counter], WNOHANG);
+		if (return_val == -1)
+			ft_exit(node, 127, "error in execution part");
+		else if (return_val == 0)
+		{
+			if (g_signal == CTRL_C)
+			{
+				kill(pid[counter], SIGABRT);
+					g_signal = 0;
+			}
+		}
+		else
+		{
+			if (WIFEXITED(status[counter]) || WIFSIGNALED(status[counter]))
+				counter++;
+		}
 	}
 }
 
@@ -55,7 +83,7 @@ int	executor_init(t_data *node, t_token **tokens, int processes, char *line)
 	node->fd = fd;
 	fork_processes(processes, node, tokens, line);
 	close_all(&fd, processes - 1);
-	wait_for_processes(pid, status, processes);
+	wait_for_processes(pid, status, processes, node);
 	free_resources(fd, processes);
 	return (status[processes - 1]);
 }

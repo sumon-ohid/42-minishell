@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/09 20:17:40 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/09 21:20:03 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@
 # define DOUBLE_QUOTE 1
 # define SINGLE_QUOTE 2
 
-extern int			g_signal;
+extern volatile sig_atomic_t	g_signal;
 
 typedef struct s_token
 {

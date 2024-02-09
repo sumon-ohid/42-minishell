@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 13:00:50 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/09 19:05:10 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/09 21:28:57 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 #include <readline/readline.h>
 
-int		g_signal = 0;
+volatile sig_atomic_t	g_signal = 0;
 
 void	handler(int status)
 {
