@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/09 17:01:19 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/09 20:17:40 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,5 +224,6 @@ void				mode(t_data *data, t_mode mode);
 // handle errors
 int					handle_error(char *error, int status);
 void				ft_putstr_fd(char *s, int fd);
+void				nocomm_error(char *name);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 20:21:29 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/09 19:58:43 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/09 20:17:11 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void	extract_find_execute(char **envp, char *full_comm, t_data *node)
 	if (ft_strcmp(path, "faill") == 0 || !path)
 	{
 		if (!path)
-			printf("minishell: %s: command not found\n", comms[0]);
+			nocomm_error(comms[0]);
 		else
 			printf("Error: malloc failure\n");
 		free_everything(comms, counter);
