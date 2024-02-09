@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/09 15:13:35 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/09 15:22:02 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,7 +162,8 @@ void				ft_lastvalue(t_data *node);
 char				*ft_lastval_str(t_data *node);
 void				ft_exit(t_data *node,/* t_token *head, char *line*/ int exit_val);
 void    			ft_localvars(t_token **tokens, t_data *node, int processes);
-
+char 				*copy_until_char(char *str, char c);
+char				*copy_after_char(char *str, char c);
 // take_input
 int					entry_check(t_data *node, char *line);
 int					ft_lexical_checker(char *line, int in_single_quote,
