@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   redirects_extra.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 15:02:36 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/07 15:41:35 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/09 17:01:44 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	redirect_in(char *input)
+int	redirect_in(char *input, int mode)
 {
 	int	fd1;
 
@@ -20,14 +20,18 @@ void	redirect_in(char *input)
 	if (fd1 == -1)
 	{
 		printf("minishell: %s: No such file or directory\n", input);
-		exit(errno);
+		if (mode == 1)
+			exit(errno);
+		else
+			return (0);
 	}
 	if (dup2(fd1, STDIN_FILENO) == -1)
 		exit(-1);
 	close(fd1);
+	return (1);
 }
 
-void	redirect_out(char *output)
+int	redirect_out(char *output, int mode)
 {
 	int	fd2;
 
@@ -35,14 +39,18 @@ void	redirect_out(char *output)
 	if (fd2 == -1)
 	{
 		printf("minishell: %s: Permission denied\n", output);
-		exit(1);
+		if (mode == 1)
+			exit(errno);
+		else
+			return (0);
 	}
 	if (dup2(fd2, STDOUT_FILENO) == -1)
 		exit(-1);
 	close(fd2);
+	return (1);
 }
 
-void	redirect_out_append(char *output)
+int	redirect_out_append(char *output, int mode)
 {
 	int	fd2;
 
@@ -50,14 +58,18 @@ void	redirect_out_append(char *output)
 	if (fd2 == -1)
 	{
 		printf("minishell: %s: Permission denied\n", output);
-		exit(1);
+		if (mode == 1)
+			exit(errno);
+		else
+			return (0);
 	}
 	if (dup2(fd2, STDOUT_FILENO) == -1)
 		exit(-1);
 	close(fd2);
+	return (1);
 }
 
-void	ft_redirector(t_token *chain, int file_type)
+int	ft_redirector(t_token *chain, int file_type, int mode)
 {
 	t_token	*mark1;
 
@@ -71,9 +83,10 @@ void	ft_redirector(t_token *chain, int file_type)
 		exit(-1);
 	}
 	if (file_type == INFILE)
-		redirect_in(mark1->str);
+		return (redirect_in(mark1->str, mode));
 	else if (file_type == OUTFILE)
-		redirect_out(mark1->str);
+		return (redirect_out(mark1->str, mode));
 	else if (file_type == OUTFILE_APPEND)
-		redirect_out_append(mark1->str);
+		return (redirect_out_append(mark1->str, mode));
+	return (1);
 }

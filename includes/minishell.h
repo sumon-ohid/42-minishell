@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/09 16:40:47 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/09 17:01:19 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,8 +206,8 @@ char				**free_everything(char **arr, int m_ctr);
 
 // redirections
 
-void				ft_redirector(t_token *chain, int file_type);
-void				ft_redirect_checker(t_token *chain);
+int					ft_redirector(t_token *chain, int file_type, int mode);
+int					ft_redirect_checker(t_token *chain, int mode);
 void				ft_set(t_data *node);
 void				ft_restore(t_data *node);
 void				close_all(int ***origin, int max);

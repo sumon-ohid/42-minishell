@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 18:46:23 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/09 15:06:55 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/09 16:59:34 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ft_restore(t_data *node)
 		exit(-1);
 }
 
-void	ft_redirect_checker(t_token *chain)
+int	ft_redirect_checker(t_token *chain, int mode)
 {
 	t_token	*proxy;
 
@@ -40,7 +40,8 @@ void	ft_redirect_checker(t_token *chain)
 	{
 		if (proxy->type >= 3 && proxy->type <= 5)
 		{
-			ft_redirector(chain, proxy->type + 3);
+			if (!ft_redirector(chain, proxy->type + 3, mode))
+				return (0);
 		}
 		else if (proxy->type == HEREDOC)
 		{
@@ -48,4 +49,5 @@ void	ft_redirect_checker(t_token *chain)
 		}
 		proxy = proxy->next;
 	}
+	return (1);
 }
