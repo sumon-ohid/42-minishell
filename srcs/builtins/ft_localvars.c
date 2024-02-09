@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 13:17:31 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/09 15:18:59 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/09 16:39:02 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ t_vars  *create_vars_node(char *str, t_data *node)
     counter = 0;
     new = malloc(sizeof(t_vars));
     if (!new)
-        ft_exit(node, 127);
+        ft_exit(node, 127, "malloc error in create_vars");
     while (str[counter] && str[counter] != '=')
         counter++;
     new->first_half = ft_substr(str, 0, counter);
     new->second_half = ft_substr(str, counter + 1, ft_strlen(str) - counter);
     new->str = ft_strdup(str);
     if (!new->str || !new->first_half || !new->second_half)
-        ft_exit(node, 127);
+        ft_exit(node, 127, "malloc error in create_vars");
     new->next = NULL;
     new->deprecated = 0;
     //printf("we created some strings: %s, %s and %s\n", new->str, new->first_half, new->second_half);

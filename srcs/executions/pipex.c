@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 20:21:29 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/08 18:59:37 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/09 16:40:13 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,10 +108,10 @@ void	extract_find_execute(char **envp, char *full_comm, t_data *node)
 		else
 			printf("Error: malloc failure\n");
 		free_everything(comms, counter);
-		ft_exit(node, 127);
+		ft_exit(node, 127, NULL);
 	}
 	execve(path, comms, NULL);
 	free_everything(comms, counter);
-	ft_exit(node, 127);
+	ft_exit(node, 127, "execve failed");
 	//error_quit(0, 0, path);
 }

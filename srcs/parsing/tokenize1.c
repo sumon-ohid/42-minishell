@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize1.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:57:30 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/09 14:53:06 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/09 16:33:26 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ char	*handle_envp(char *str, t_data *node)
     split_str = ft_split(str, ' ', 0, 0);
     if (!split_str)
         handle_error("malloc in handle_envp failed", 1);
-    if (ft_strcmp(str, "$?") == 0)
+    if (ft_strcmp(str, "$?") == 0) //they could be part of a bigger string, should be considered, maybe this should be moved to get_env_value
         return (ft_lastval_str(node));
     if (ft_strcmp(str, "$") == 0)
         return (ft_strdup("$"));
@@ -85,7 +85,7 @@ char	*handle_envp(char *str, t_data *node)
         if (ft_strstr(split_str[i], "$"))
         {
 			tmp = copy_until_char(split_str[i], '$');
-			if (tmp)
+			if (tmp) //this part leads to leaks cause of overwriting, check save flags you pass
 			{
 				new_result = ft_strjoin(result, tmp, 0);
             	result = new_result;

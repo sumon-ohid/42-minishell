@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:25:07 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/09 14:23:01 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/09 16:38:20 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ char	*copy_after_char(char *str, char c)
 		i++;
 	i++;
 	output = malloc(sizeof(char) * ft_strlen(str + i));
+	if (!output)
+		return (NULL);
 	while (str[i])
 	{
 		output[j] = str[i];
@@ -44,9 +46,13 @@ char	*get_env_value(char *arg, t_data *node)
 	while (node->envp[i])
 	{	
 		tmp = copy_until_char(node->envp[i], '=');
+		if (!tmp)
+			ft_exit(node, 127, "malloc error in get_env");
 		if (ft_strcmp(tmp, arg) == 0)
 		{
 			env_value = copy_after_char(node->envp[i], '=');
+			if (!env_value)
+				ft_exit(node, 127, "malloc error in get_env");
 			return (env_value);
 		}
 		free(tmp);

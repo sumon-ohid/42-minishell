@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 14:41:52 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/09 15:18:06 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/09 16:37:42 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,11 @@ void free_node(t_data *node)
 	free(node);
 }
 
-void    ft_exit(t_data *node, int exit_val)
+void    ft_exit(t_data *node, int exit_val, char *msg)
 {
 	free_node(node);
-    exit(exit_val);
+	if (msg)
+		handle_error(msg, exit_val);
+	else
+		exit(exit_val);
 }
