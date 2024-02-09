@@ -6,7 +6,7 @@
 /*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:57:30 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/09 20:08:30 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/09 20:44:45 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,10 @@ char	*handle_envp(char *str, t_data *node)
     if (!result)
         handle_error("malloc in handle_envp failed", 1);
     result[0] = '\0';
+	if (ft_strcmp(str, "$?") == 0) //they could be part of a bigger string, should be considered, maybe this should be moved to get_env_value
+         return (ft_lastval_str(node));
+    if (ft_strcmp(str, "$") == 0)
+         return (ft_strdup("$"));
     while (str[i])
     {
         if (str[i] != '$')
