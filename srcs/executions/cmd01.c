@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 17:28:11 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/09 21:33:36 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/10 19:45:47 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,19 +93,19 @@ void	close_what_this_child_doesnt_need(int ***origin, int index, int max)
 	counter = 0;
 	while (counter < index)
 	{
-		if (counter != index - 1)
-		{
+		//if (counter != index - 1)
+		//{
 			close(fd[counter][1]);
-		}
+		//}
 		close(fd[counter][0]);
 		counter++;
 	}
 	while (counter < max)
 	{
-		if (counter != index)
-		{
+		//if (counter != index)
+		//{
 			close(fd[counter][0]);
-		}
+		//}
 		close(fd[counter][1]);
 		counter++;
 	}

@@ -1,7 +1,1 @@
-Makefile
-includes
-infile
-minishell
-outfile
-srcs
-valgrind.supp
+aaa
