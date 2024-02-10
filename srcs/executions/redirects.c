@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 18:46:23 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/09 16:59:34 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/10 12:56:29 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,9 @@ void	ft_restore(t_data *node)
 {
 	if (dup2(node->std_in, STDIN_FILENO) == -1)
 		exit(-1);
+	close(node->std_in);
 	if (dup2(node->std_out, STDOUT_FILENO) == -1)
+	close(node->std_in);
 		exit(-1);
 }
 

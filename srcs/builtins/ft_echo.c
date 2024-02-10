@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:25:07 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/09 20:42:24 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/10 12:40:39 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*copy_after_char(char *str, char c)
 	while (str[i] != c)
 		i++;
 	i++;
-	output = malloc(sizeof(char) * ft_strlen(str + i));
+	output = malloc(sizeof(char) * ft_strlen(str + i) + 1);
 	if (!output)
 		return (NULL);
 	while (str[i])
