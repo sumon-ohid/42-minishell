@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize1.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:57:30 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/10 12:54:33 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/09 20:44:45 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void char_append(char **str, char c)
 	*str = new_str;
 }
 
-char *extract_var_name(char *str, t_data *node)
+char *extract_var_name(char *str)
 {
 	int i;
 	char *output;
@@ -91,7 +91,7 @@ char *extract_var_name(char *str, t_data *node)
 	i = 0;
 	output = malloc(sizeof(char) * (ft_strlen_till_char(str, ' ') + 1));
 	if (!output)
-		ft_exit(node, 1, "malloc in extract_var_name failed");
+		handle_error("malloc in extract_var_name failed", 1);
 	while (str[i] && str[i] != ' ')
 	{
 		output[i] = str[i];
@@ -111,7 +111,7 @@ char	*handle_envp(char *str, t_data *node)
     i = 0;
     result = malloc(sizeof(char) * (ft_strlen(str) + 1));
     if (!result)
-        ft_exit(node, 1, "malloc in handle_envp failed");
+        handle_error("malloc in handle_envp failed", 1);
     result[0] = '\0';
 	if (ft_strcmp(str, "$?") == 0) //they could be part of a bigger string, should be considered, maybe this should be moved to get_env_value
          return (ft_lastval_str(node));
@@ -125,15 +125,14 @@ char	*handle_envp(char *str, t_data *node)
         }
         else
         {
-            var_name = extract_var_name(str + i + 1, node);
+            var_name = extract_var_name(str + i + 1);
             var_value = get_env_value(var_name, node);
             result = ft_strjoin(result, var_value, 1);
             i += ft_strlen(var_name);
-			free(var_name);
         }
         i++;
     }
-	return (result);
+    return (result);
 }
 
 
