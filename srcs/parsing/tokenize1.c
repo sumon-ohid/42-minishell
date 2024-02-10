@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:57:30 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/10 13:34:48 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/10 13:36:53 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ char	*handle_envp(char *str, t_data *node)
     int i;
 
     i = 0;
-    result = malloc(sizeof(char) * (ft_strlen(str) + 1) + 1);
+    result = malloc(sizeof(char) * (ft_strlen(str) + 1));
     if (!result)
         handle_error("malloc in handle_envp failed", 1);
     result[0] = '\0';
@@ -128,7 +128,6 @@ char	*handle_envp(char *str, t_data *node)
             var_name = extract_var_name(str + i + 1);
             var_value = get_env_value(var_name, node);
             result = ft_strjoin(result, var_value, 1);
-			free(var_value);
             i += ft_strlen(var_name);
         }
         i++;
