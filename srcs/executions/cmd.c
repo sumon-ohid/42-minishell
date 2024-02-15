@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 14:32:03 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/09 21:32:48 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/11 15:38:25 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,36 @@ void	free_resources(int **fd, int processes)
 		counter++;
 	}
 	free(fd);
+}
+
+void	fork_processes(int processes, t_data *node, t_token **tokens,
+		char *line)
+{
+	int	i;
+
+	i = 0;
+	while (i < processes)
+	{
+		node->pid[i] = fork();
+		if (node->pid[i] == 0)
+		{
+			if (i != 0)
+				dup2(node->fd[i - 1][0], STDIN_FILENO);
+			if (i != processes - 1)
+				dup2(node->fd[i][1], STDOUT_FILENO);
+			close_what_this_child_doesnt_need(&node->fd, i, processes - 1);
+			node->cur_proc = i;
+			execute_chain(node, tokens[i], line, processes);
+			exit(1);
+		}
+		else if (node->pid[i] == -1)
+			handle_error("Fork failed", 1);
+		else
+			parent_close(node, i, processes);
+		i++;
+	}
+	if (processes > 1)
+		close(node->fd[processes - 2][0]);
 }
 
 int	executor_init(t_data *node, t_token **tokens, int processes, char *line)

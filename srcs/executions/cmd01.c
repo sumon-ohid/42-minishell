@@ -6,11 +6,26 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 17:28:11 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/10 19:51:16 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/11 15:38:50 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+void	close_all(int ***origin, int max)
+{
+	int	**fd;
+	int	counter;
+
+	fd = *origin;
+	counter = 0;
+	while (counter < max)
+	{
+		close(fd[counter][0]);
+		close(fd[counter][1]);
+		counter++;
+	}
+}
 
 int	ft_commander(t_token *chain, t_data *node)
 {
@@ -38,21 +53,6 @@ int	ft_commander(t_token *chain, t_data *node)
 	mode(node, INTERACTIVE);
 	extract_find_execute(environ, mark->str, node);
 	return (0);
-}
-
-void	close_all(int ***origin, int max)
-{
-	int	**fd;
-	int	counter;
-
-	fd = *origin;
-	counter = 0;
-	while (counter < max)
-	{
-		close(fd[counter][0]);
-		close(fd[counter][1]);
-		counter++;
-	}
 }
 
 int	execute_chain(t_data *node, t_token *chain, char *line, int processes)
