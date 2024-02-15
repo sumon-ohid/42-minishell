@@ -6,7 +6,7 @@
 /*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:27:41 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/15 16:30:28 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/15 18:56:03 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,6 @@ int handle_var_exist_in_envp(t_data *node, char *var)
 			break ;
 		i++;
 	}
-	if (node->envp[i])
-		free(node->envp[i]);
 	node->envp[i] = ft_realloc_heredoc(node->envp[i], i, i + 1);
 	if (!node->envp)
 		handle_error("Envp failed at ft_export function", 1);
@@ -117,8 +115,6 @@ int handle_var_exist_in_local_vars(t_data *node, char *var, t_vars *local_vars)
 	}
 	while (local_vars)
 	{
-		if (node->envp[i])
-			free(node->envp[i]);
 		if (ft_strcmp(local_vars->first_half, var_name) == 0)
 		{
 			new_value = ft_strjoin(local_vars->first_half, "=", 0);
@@ -171,6 +167,6 @@ int	ft_export(t_data *node, t_token *token, char *str)
 		return (handle_export_no_args(node));
 	else
 		return (handle_export(node, var, local_vars));
-	//free(var);
+	free_arr(var);
 	return (0);
 }

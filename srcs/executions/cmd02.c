@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd02.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 17:31:58 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/09 16:39:15 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/15 18:37:23 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	entry_check2(t_data *node, t_token *head, char *line)
 		ft_exit(node, 0, NULL);
 	else if (ft_strstr(head->str, "export") != 0)
 		ft_export(node, head, line);
-	else if (ft_strcmp(head->str, "unset") == 0)
+	else if (ft_strstr(head->str, "unset") != 0)
 		ft_unset(node, head, line);
 	else
 		printf("minishell: %s: command not found\n", line);
