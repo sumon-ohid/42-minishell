@@ -6,7 +6,7 @@
 /*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/15 16:42:16 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/16 08:56:47 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,7 @@ void				print_argument(char *arg, t_data *node);
 char				*get_env_value(char *arg, t_data *node);
 char				**ft_env(t_data *node);
 int					ft_export(t_data *node, t_token *token, char *str);
-void				ft_pwd(void);
+int					ft_pwd(void);
 int					ft_unset(t_data *node, t_token *token, char *str);
 char				*ft_getenv(t_data *node, char *str);
 void				ft_lastvalue(t_data *node);

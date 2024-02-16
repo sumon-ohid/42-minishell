@@ -6,12 +6,11 @@
 /*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 13:17:31 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/09 20:06:11 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/16 08:14:23 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
 
 t_vars  *create_vars_node(char *str, t_data *node)
 {
