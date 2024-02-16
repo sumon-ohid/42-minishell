@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd01.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 17:28:11 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/10 19:51:16 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/16 08:01:41 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 
 int	ft_commander(t_token *chain, t_data *node)
 {
-	extern char	**environ;
+	char	**environ;
 	t_token		*mark;
 	char		*tmp;
 
+	environ = node->envp;
 	while (chain && chain->type != COMMAND)
 		chain = chain->next;
 	mark = chain;
