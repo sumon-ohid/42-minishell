@@ -32,6 +32,7 @@ SRC = 	srcs/main/main.c \
 		srcs/builtins/ft_echo_extra.c \
 		srcs/builtins/ft_env.c \
 		srcs/builtins/ft_export.c \
+		srcs/builtins/ft_export_extra.c \
 		srcs/builtins/ft_pwd.c \
 		srcs/builtins/ft_unset.c \
 		srcs/builtins/ft_exit.c \

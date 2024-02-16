@@ -6,7 +6,7 @@
 /*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/16 08:56:47 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/16 09:05:13 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,11 @@
 # define NO_QUOTE 0
 # define DOUBLE_QUOTE 1
 # define SINGLE_QUOTE 2
+
+//export flags
+#define NOT_EXIST 0
+#define EXIST_ENVP 1
+#define EXIST_LOCAL_VARS 2
 
 extern volatile sig_atomic_t	g_signal;
 
@@ -156,6 +161,8 @@ void				print_argument(char *arg, t_data *node);
 char				*get_env_value(char *arg, t_data *node);
 char				**ft_env(t_data *node);
 int					ft_export(t_data *node, t_token *token, char *str);
+int 				handle_var_exist_in_envp(t_data *node, char *var);
+int 				handle_var_exist_in_local_vars(t_data *node, char *var, t_vars *local_vars);
 int					ft_pwd(void);
 int					ft_unset(t_data *node, t_token *token, char *str);
 char				*ft_getenv(t_data *node, char *str);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:25:07 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/10 13:37:41 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/16 09:00:58 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,41 +76,6 @@ char	*get_env_value(char *arg, t_data *node)
     }
     return ("");
 }
-
-// char	*get_env_value(char *arg, t_data *node)
-// {
-// 	char	*env_value;
-// 	char	*tmp;
-// 	int		i;
-
-// 	i = 0;
-// 	while (node->envp[i])
-// 	{	
-// 		tmp = copy_until_char(node->envp[i], '=');
-// 		if (!tmp)
-// 			ft_exit(node, 127, "malloc error in get_env");
-// 		if (ft_strcmp(tmp, arg) == 0)
-// 		{
-// 			env_value = copy_after_char(node->envp[i], '=');
-// 			if (!env_value)
-// 				ft_exit(node, 127, "malloc error in get_env");
-// 			return (env_value);
-// 		}
-// 		else if (ft_strcmp(node->local_vars->first_half, arg) == 0)
-// 		{
-// 			if (node->local_vars->deprecated == 0)
-// 			{
-// 				env_value = ft_strdup(node->local_vars->second_half);
-// 				if (!env_value)
-// 					ft_exit(node, 127, "malloc error in get_env");
-// 				return (env_value);
-// 			}
-// 		}
-// 		free(tmp);
-// 		i++;
-// 	}
-// 	return ("");
-// }
 
 void	show_dir(void)
 {
