@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 14:41:52 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/19 16:17:11 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/19 16:44:49 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	free_node(t_data *node)
 	close(node->std_out);
 	free(node->input_line);
 	ft_free_array(node->arr);
-	//free(node);
+	free(node);
 }
 
 void	ft_exit(t_data *node, int exit_val, char *msg)
