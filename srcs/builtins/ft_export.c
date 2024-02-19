@@ -6,11 +6,12 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:27:41 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/19 11:14:39 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/19 16:24:08 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+#include <stdlib.h>
 
 int	handle_export_no_args(t_data *node)
 {
@@ -82,6 +83,7 @@ int	handle_export(t_data *node, char **var, t_vars *local_vars)
 			handle_var_exist_in_local_vars(node, var[i], local_vars);
 		i++;
 	}
+	free_arr(var);
 	return (0);
 }
 
@@ -102,6 +104,5 @@ int	ft_export(t_data *node, t_token *token, char *str)
 		return (handle_export_no_args(node));
 	else
 		return (handle_export(node, var, local_vars));
-	free_arr(var);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:25:07 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/19 11:13:14 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/19 17:30:07 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ char	*get_env_value(char *arg, t_data *node)
 			env_value = copy_after_char(node->envp[i], '=');
 			if (!env_value)
 				ft_exit(node, 127, "malloc error in get_env");
+			free(tmp);
 			return (env_value);
 		}
 		free(tmp);

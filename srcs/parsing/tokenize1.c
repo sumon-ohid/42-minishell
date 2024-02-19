@@ -6,7 +6,7 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:57:30 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/19 11:30:11 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/19 17:29:13 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ char	*handle_envp(char *str, t_data *node)
 			var_value = get_env_value(var_name, node);
 			result = ft_strjoin(result, var_value, 1);
 			i += ft_strlen(var_name);
+			free(var_name);
+			free(var_value);
 		}
 		i++;
 	}
