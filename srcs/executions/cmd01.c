@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd01.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 17:28:11 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/16 08:01:41 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/19 11:24:19 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 int	ft_commander(t_token *chain, t_data *node)
 {
 	char	**environ;
-	t_token		*mark;
-	char		*tmp;
+	t_token	*mark;
+	char	*tmp;
 
 	environ = node->envp;
 	while (chain && chain->type != COMMAND)
@@ -63,7 +63,6 @@ int	execute_chain(t_data *node, t_token *chain, char *line, int processes)
 	proxy = chain;
 	if (!chain)
 		return (-1);
-	//ft_redirect_checker(chain);
 	while (proxy)
 	{
 		if (proxy->type == BUILTIN)
@@ -71,7 +70,7 @@ int	execute_chain(t_data *node, t_token *chain, char *line, int processes)
 			if (processes)
 				close_all(&node->fd, processes - 1);
 			if (!ft_redirect_checker(chain, 0))
-				return (-1); //hope its the right val
+				return (-1);
 			return (entry_check2(node, chain, line));
 		}
 		else if (proxy->type == COMMAND)

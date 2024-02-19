@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export_extra.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 09:03:06 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/16 09:03:39 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/19 11:21:56 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int handle_var_exist_in_envp(t_data *node, char *var)
+int	handle_var_exist_in_envp(t_data *node, char *var)
 {
-	int i;
-	char *name_before_equal;
-	char *var_name;
-	char *new_value;
+	int		i;
+	char	*name_before_equal;
+	char	*var_name;
+	char	*new_value;
 
 	i = 0;
 	while (node->envp[i])
@@ -40,12 +40,12 @@ int handle_var_exist_in_envp(t_data *node, char *var)
 	return (0);
 }
 
-int handle_var_exist_in_local_vars(t_data *node, char *var, t_vars *local_vars)
+int	handle_var_exist_in_local_vars(t_data *node, char *var, t_vars *local_vars)
 {
-	int i;
-	char *name_before_equal;
-	char *var_name;
-	char *new_value;
+	int		i;
+	char	*name_before_equal;
+	char	*var_name;
+	char	*new_value;
 
 	i = 0;
 	while (node->envp[i])
@@ -67,7 +67,7 @@ int handle_var_exist_in_local_vars(t_data *node, char *var, t_vars *local_vars)
 			node->envp[i + 1] = NULL;
 			free(name_before_equal);
 			free(var_name);
-			break;
+			break ;
 		}
 		else
 			local_vars = local_vars->next;

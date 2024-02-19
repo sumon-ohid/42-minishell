@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo_extra.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 15:32:22 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/16 09:00:37 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/19 11:13:56 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ void	handle_quotes(char *arg, int *i, int len)
 {
 	char	*new_arg;
 
-	if ((arg[0] == '\'' && arg[len - 1] == '\'')
-		|| (arg[0] == '\"' && arg[len - 1] == '\"'))
+	if ((arg[0] == '\'' && arg[len - 1] == '\'') || (arg[0] == '\"' && arg[len
+				- 1] == '\"'))
 	{
 		new_arg = ft_substr(arg, 1, len - 2);
 		ft_putstr(new_arg);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:27:41 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/16 09:04:01 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/19 11:14:39 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ int	handle_export_no_args(t_data *node)
 	return (0);
 }
 
-int check_if_var_exists(t_data *node, char *var, t_vars *local_vars)
+int	check_if_var_exists(t_data *node, char *var, t_vars *local_vars)
 {
-	int i;
-	char *name_before_equal;
-	char *var_name;
+	int		i;
+	char	*name_before_equal;
+	char	*var_name;
 
 	i = 0;
 	while (node->envp[i])
@@ -50,25 +50,25 @@ int check_if_var_exists(t_data *node, char *var, t_vars *local_vars)
 	return (0);
 }
 
-int handle_var_not_exists(t_data *node, char *var)
+int	handle_var_not_exists(t_data *node, char *var)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (node->envp[i])
 		i++;
-    node->envp[i] = ft_realloc_heredoc(node->envp[i], i, i + 1);
-    if (!node->envp)
-        handle_error("Envp failed at ft_export function", 1);
-    node->envp[i] = ft_strdup(var);
-    node->envp[i + 1] = NULL;
+	node->envp[i] = ft_realloc_heredoc(node->envp[i], i, i + 1);
+	if (!node->envp)
+		handle_error("Envp failed at ft_export function", 1);
+	node->envp[i] = ft_strdup(var);
+	node->envp[i + 1] = NULL;
 	return (0);
 }
 
-int handle_export(t_data *node, char **var, t_vars *local_vars)
+int	handle_export(t_data *node, char **var, t_vars *local_vars)
 {
-	int var_exists;
-	int i;
+	int	var_exists;
+	int	i;
 
 	i = 1;
 	while (var[i])
@@ -88,7 +88,7 @@ int handle_export(t_data *node, char **var, t_vars *local_vars)
 int	ft_export(t_data *node, t_token *token, char *str)
 {
 	char	**var;
-	t_vars *local_vars;
+	t_vars	*local_vars;
 
 	local_vars = node->local_vars;
 	(void)token;
@@ -98,7 +98,7 @@ int	ft_export(t_data *node, t_token *token, char *str)
 		ft_putstr("ft_split failed at ft_export function\n");
 		return (1);
 	}
-	if (ft_strcmp(var[0], "export") == 0 && var[1] == NULL) 
+	if (ft_strcmp(var[0], "export") == 0 && var[1] == NULL)
 		return (handle_export_no_args(node));
 	else
 		return (handle_export(node, var, local_vars));

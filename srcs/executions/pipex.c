@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 20:21:29 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/09 20:17:11 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/19 11:24:38 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ char	*pathfinder(char **envp, char *comm)
 		return ("faill");
 	counter = 0;
 	while (envp[counter] && (!ft_strstr(envp[counter], "PATH")
-		|| ft_strstr(envp[counter], "_PATH")))
+			|| ft_strstr(envp[counter], "_PATH")))
 		counter++;
 	if (!envp[counter])
 		return (free(comm2), "faill");
@@ -112,5 +112,4 @@ void	extract_find_execute(char **envp, char *full_comm, t_data *node)
 	execve(path, comms, NULL);
 	free_everything(comms, counter);
 	ft_exit(node, 127, "execve failed");
-	//error_quit(0, 0, path);
 }

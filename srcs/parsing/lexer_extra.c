@@ -6,7 +6,7 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 14:35:54 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/08 12:13:41 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/19 11:27:25 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ char	*ft_upgrade_spaces(char *line, int i, int j, int in_quotes)
 
 int	quote_assigner(char *big, char *little)
 {
-	char *res;
+	char	*res;
 
 	res = ft_quote_detector(big, little);
 	if (res == NULL)
