@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 17:31:58 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/19 16:53:12 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/19 17:03:23 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,9 @@ void	allocate_fd(int ***fd, int processes)
 	int	counter;
 
 	counter = 0;
-	*fd = malloc(sizeof(int *) * (processes - 1));
-	if (!*fd)
+	if (processes - 1)
+		*fd = malloc(sizeof(int *) * (processes - 1));
+	if (!*fd && processes - 1)
 	{
 		perror("Memory allocation failed");
 		exit(EXIT_FAILURE);
