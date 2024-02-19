@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 17:31:58 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/19 17:03:23 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/19 19:34:14 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,14 @@ void	allocate_fd(int ***fd, int processes)
 		}
 		counter++;
 	}
+}
+
+void	exit_builtin(t_data *node)
+{
+	char *argv[] = {"/bin/true", NULL};
+
+	execve("/bin/true", argv, NULL);
+	ft_exit(node, -1, "execve failed");
 }
 
 void	parent_close(t_data *node, int i, int processes)
