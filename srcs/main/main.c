@@ -6,7 +6,7 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:17:43 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/19 17:37:26 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/19 19:15:42 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	initialize_node(t_data *node, char **envp)
 	node->home = getenv("HOME");
 	node->oldpwd = getenv("OLDPWD");
 	node->pwd = getenv("PWD");
+	node->env_allocated = 0;
 }
 
 void	ft_initialize(t_data *node, char **envp)
