@@ -2,7 +2,7 @@ NAME = minishell
 CC = cc
 CC1 = clang
 CC2 = gcc
-CFLAGS = -Wall -Werror -Wextra -g -fsanitize=address
+CFLAGS = -Wall -Werror -Wextra -g #-fsanitize=address
 HEADER = minishell.h
 
 #Colors
@@ -66,11 +66,11 @@ $(NAME): $(OBJ)
 
 clean:
 	@rm -f $(OBJ) $(BN_OBJ)
-	@echo "$(RED) Object files removed. $(RESET)"
+	@echo "$(YELLOW) Object files removed. $(RESET)"
 
 fclean: clean
 	@rm -f $(NAME)
-	@echo "$(RED) minishell file removed. $(RESET)"
+	@echo "$(YELLOW) $(NAME) file removed. $(RESET)"
 
 smooth: all clean
 

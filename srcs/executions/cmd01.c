@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 17:28:11 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/19 10:57:41 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/19 14:40:00 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ int	execute_chain(t_data *node, t_token *chain, char *line, int processes)
 		else
 			proxy = proxy->next;
 	}
+	printf("we have not found a command\n");
 	return (0);
 }
 

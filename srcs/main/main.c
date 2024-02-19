@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:17:43 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/19 11:25:54 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/19 13:39:42 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ int	entry_check(t_data *node, char *line)
 	line = ft_upgrade_spaces(line, 0, 0, 0);
 	tokens = ft_calloc(sizeof(t_token *), pipe_counter(line));
 	if (!tokens)
-		handle_error("Memory allocation failed at entry check", 1);
+		ft_exit(node, 1, "Memory allocation failed at entry check");
 	arr = parse_input(line);
 	if (!arr)
-		handle_error("Memory allocation failed at entry check", 1);
+		ft_exit(node, 1, "Memory allocation failed at entry check");
 	process_words(&tokens, arr, line, node);
 	node->tokens = tokens;
 	node->input_line = line;
