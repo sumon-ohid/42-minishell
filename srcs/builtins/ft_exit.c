@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 14:41:52 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/19 19:04:23 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/19 19:05:03 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	free_node(t_data *node)
 	close(node->std_out);
 	free(node->input_line);
 	ft_free_array(node->arr);
+	ft_free_array(node->envp);
 	free(node);
 }
 

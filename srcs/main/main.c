@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:17:43 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/19 19:15:42 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/19 18:59:16 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,33 @@ int	entry_check(t_data *node, char *line)
 	return (ret_val);
 }
 
+char **dup_envp(char **envp)
+{
+	int counter;
+	char **result;
+	int counter2;
+
+	counter = 0;
+	while (envp[counter])
+		counter++;
+	result = malloc(sizeof(char *) * counter);
+	counter2 = 0;
+	while (counter2 < counter - 1) //or minus 1
+	{
+		result[counter2] = ft_strdup(envp[counter2]); //protect malloc!!
+		counter2++;
+	}
+	result[counter2] = NULL;
+	return (result);
+}
+
 void	initialize_node(t_data *node, char **envp)
 {
+	(void)envp;
 	node->env_len = 0;
-	node->envp = envp;
 	node->home = getenv("HOME");
 	node->oldpwd = getenv("OLDPWD");
 	node->pwd = getenv("PWD");
-	node->env_allocated = 0;
 }
 
 void	ft_initialize(t_data *node, char **envp)
@@ -94,6 +113,7 @@ int	main(int argc, char **argv, char **envp)
 	if (node == NULL)
 		handle_error("Memory allocation failed for node.", 1);
 	ft_set(node);
+	node->envp = dup_envp(envp);
 	ft_initialize(node, envp);
 	close(node->std_in);
 	close(node->std_out);

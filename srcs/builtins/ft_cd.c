@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:24:36 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/19 19:25:03 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/19 19:00:03 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,12 @@ void	ft_setenv(t_data *node, char *name, char *value)
 		if (ft_strncmp(node->envp[i], name, ft_strlen(name)) == 0
 			&& node->envp[i][ft_strlen(name)] == '=')
 		{	
-			if (node->env_allocated == 1)
-				free(node->envp[i]);
+			//printf("env_all value is: %d\n", node->env_allocated);
+			//if (node->env_allocated >= 2)
+			free(node->envp[i]);
 			node->envp[i] = new_entry;
-			node->env_allocated = 1;
+			//node->env_allocated++;
+			//node->to_free_old = i;
 			return ;
 		}
 		i++;
