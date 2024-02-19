@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/19 19:34:31 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/19 20:06:19 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,7 +203,7 @@ int					executor_init(t_data *node, t_token **tokens, int processes,
 // cmd02
 char				**parse_input(char *line);
 int					entry_check2(t_data *node, t_token *head, char *line);
-void				allocate_fd(int ***fd, int processes);
+void				allocate_fd(int ***fd, int processes, t_data *node);
 void				fork_processes(int processes, t_data *node,
 						t_token **tokens, char *line);
 

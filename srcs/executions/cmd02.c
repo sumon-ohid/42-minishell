@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 17:31:58 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/19 19:34:14 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/19 20:09:28 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	entry_check2(t_data *node, t_token *head, char *line)
 	return (1);
 }
 
-void	allocate_fd(int ***fd, int processes)
+void	allocate_fd(int ***fd, int processes, t_data *node)
 {
 	int	counter;
 
@@ -49,22 +49,19 @@ void	allocate_fd(int ***fd, int processes)
 	if (processes - 1)
 		*fd = malloc(sizeof(int *) * (processes - 1));
 	if (!*fd && processes - 1)
-	{
-		perror("Memory allocation failed");
-		exit(EXIT_FAILURE);
-	}
+		ft_exit(node, -1, "memory allocation failed");
 	while (counter < processes - 1)
 	{
 		(*fd)[counter] = malloc(sizeof(int) * 2);
 		if (!(*fd)[counter])
 		{
-			perror("Memory allocation failed");
-			exit(EXIT_FAILURE);
+			free(*fd);
+			ft_exit(node, -1, "memory allocation failed");
 		}
 		if (pipe((*fd)[counter]) == -1)
 		{
-			perror("Pipe creation failed");
-			exit(EXIT_FAILURE);
+			ft_free_array(fd);
+			ft_exit(node, -1, "pipe creation failed");
 		}
 		counter++;
 	}

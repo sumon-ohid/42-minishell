@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 14:32:03 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/19 19:34:01 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/19 20:06:42 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ void	fork_processes(int processes, t_data *node, t_token **tokens,
 			node->cur_proc = i;
 			execute_chain(node, tokens[i], line, processes);
 			exit_builtin(node);
-			//ft_exit(node, 0, NULL);
 		}
 		else if (node->pid[i] == -1)
 			handle_error("Fork failed", 1);
@@ -110,7 +109,7 @@ int	executor_init(t_data *node, t_token **tokens, int processes, char *line)
 		execute_chain(node, tokens[0], line, 0);
 		return (0);
 	}
-	allocate_fd(&fd, processes);
+	allocate_fd(&fd, processes, node);
 	node->fd = fd;
 	fork_processes(processes, node, tokens, line);
 	close_all(&fd, processes - 1);
