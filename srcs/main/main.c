@@ -6,7 +6,7 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:17:43 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/19 17:33:02 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/19 17:37:26 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,5 @@ int	main(int argc, char **argv, char **envp)
 	ft_initialize(node, envp);
 	close(node->std_in);
 	close(node->std_out);
-	free(node);
 	return (0);
 }
