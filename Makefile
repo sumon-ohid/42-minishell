@@ -2,7 +2,7 @@ NAME = minishell
 CC = cc
 CC1 = clang
 CC2 = gcc
-CFLAGS = -Wall -Werror -Wextra -g #-fsanitize=address
+CFLAGS = -Wall -Werror -Wextra -g -fsanitize=address
 HEADER = minishell.h
 
 #Colors
@@ -15,6 +15,7 @@ BLUE = \033[0;94m
 MAGENTA = \033[0;95m
 CYAN = \033[0;96m
 WHITE = \033[0;97m
+RESET = \033[0m
 
 SRC = 	srcs/main/main.c \
 		srcs/libft/ft_split.c \
@@ -27,11 +28,13 @@ SRC = 	srcs/main/main.c \
 		srcs/libft/libft_helpers3.c \
 		srcs/parsing/tokenize.c\
 		srcs/parsing/tokenize1.c\
+		srcs/parsing/tokenize2.c\
 		srcs/builtins/ft_cd.c \
 		srcs/builtins/ft_echo.c \
 		srcs/builtins/ft_echo_extra.c \
 		srcs/builtins/ft_env.c \
 		srcs/builtins/ft_export.c \
+		srcs/builtins/ft_export_extra.c \
 		srcs/builtins/ft_pwd.c \
 		srcs/builtins/ft_unset.c \
 		srcs/builtins/ft_exit.c \
@@ -55,17 +58,19 @@ OBJ = $(SRC:.c=.o)
 all: $(NAME)
 
 %.o : %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o $(NAME) -lreadline
+	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME) -lreadline
 	@echo "$(GREEN)Executable $(NAME) created!$(DEF_COLOR)"
 
 clean:
-	rm -f $(OBJ) $(BN_OBJ)
+	@rm -f $(OBJ) $(BN_OBJ)
+	@echo "$(RED) Object files removed. $(RESET)"
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
+	@echo "$(RED) minishell file removed. $(RESET)"
 
 smooth: all clean
 

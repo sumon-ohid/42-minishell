@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:50:09 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/09 20:06:04 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/19 11:40:20 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int	determine_type(char *word, int prev_type, int quote)
 
 // TODO: account for $?
 // malloc protection
-
 t_token	*create_token(char *word, t_data *node)
 {
 	t_token	*new;
@@ -47,7 +46,7 @@ t_token	*create_token(char *word, t_data *node)
 	new->previous = NULL;
 	new->next = NULL;
 	new->arr = NULL;
-	new->quote = quote_assigner(node->line_temp, word); //we somehow need to pass line here!
+	new->quote = quote_assigner(node->line_temp, word);
 	if (ft_strstr(word, "$") && new->quote != SINGLE_QUOTE)
 		new->str = handle_envp(word, node);
 	else
@@ -102,7 +101,7 @@ void	create_and_link_token(t_token ***origin, int current, char *word,
 			proxy = proxy->next;
 		proxy->next = create_token(word, node);
 		proxy->next->type = determine_type(word, proxy->type,
-			proxy->next->quote);
+				proxy->next->quote);
 	}
 }
 

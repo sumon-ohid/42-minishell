@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 17:28:11 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/11 15:38:50 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/19 10:57:41 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,11 @@ void	close_all(int ***origin, int max)
 
 int	ft_commander(t_token *chain, t_data *node)
 {
-	extern char	**environ;
-	t_token		*mark;
-	char		*tmp;
+	char	**environ;
+	t_token	*mark;
+	char	*tmp;
 
+	environ = node->envp;
 	while (chain && chain->type != COMMAND)
 		chain = chain->next;
 	mark = chain;
@@ -62,7 +63,6 @@ int	execute_chain(t_data *node, t_token *chain, char *line, int processes)
 	proxy = chain;
 	if (!chain)
 		return (-1);
-	//ft_redirect_checker(chain);
 	while (proxy)
 	{
 		if (proxy->type == BUILTIN)
@@ -70,7 +70,7 @@ int	execute_chain(t_data *node, t_token *chain, char *line, int processes)
 			if (processes)
 				close_all(&node->fd, processes - 1);
 			if (!ft_redirect_checker(chain, 0))
-				return (-1); //hope its the right val
+				return (-1);
 			return (entry_check2(node, chain, line));
 		}
 		else if (proxy->type == COMMAND)

@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_special_edition.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 14:27:31 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/08 15:25:46 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/19 11:32:35 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
 /*
 static size_t	word_counter(char const *s, char c)
 {
@@ -40,16 +41,18 @@ static size_t	word_counter(char const *s, char c)
 	printf("WORD NUMBER IS: %ld\n", words);
 	return (words);
 }*/
-
-static size_t word_counter(char const *s, char c)
+static size_t	word_counter(char const *s, char c)
 {
-    size_t i = 0;
-    size_t words = 0;
-    char quote_char = 0;
+	size_t	i;
+	size_t	words;
+	char	quote_char;
 
+	i = 0;
+	words = 0;
+	quote_char = 0;
 	while (s[i])
 	{
-        while (s[i] == c && s[i])
+		while (s[i] == c && s[i])
 			i++;
 		if (s[i] != c && s[i])
 			words++;
@@ -57,17 +60,17 @@ static size_t word_counter(char const *s, char c)
 		{
 			if ((s[i] == '\'' || s[i] == '\"') && !quote_char)
 			{
-            	quote_char = s[i++];
+				quote_char = s[i++];
 				while (s[i] != quote_char && s[i] != '\0')
-             	   i++;
+					i++;
 				quote_char = 0;
-            	i++;
-        	}
+				i++;
+			}
 			else
 				i++;
 		}
-    }
-    return (words);
+	}
+	return (words);
 }
 
 static void	split_helper_pipes(char *s, char c, size_t *i, char *output)
@@ -167,7 +170,7 @@ char	**ft_split_special(char *s, char c, char mode, size_t j)
 		k = l_count(s, i, c);
 		s_split[j] = (char *)malloc(sizeof(char) * (k - i + 1));
 		if (!s_split[j])
-			handle_error("malloc in split failed", -1); //return (ft_free_str(s_split, j));
+			handle_error("malloc in split failed", -1);
 		if (mode == 'P')
 			split_helper_pipes(s, c, &i, s_split[j]);
 		else
@@ -197,7 +200,8 @@ char	**ft_split_special(char *s, char c, size_t i, size_t j)
 			k = k_count(s, i, c);
 			s_split[j] = (char *)malloc(sizeof(char) * (k - i + 1));
 			if (!s_split[j])
-				handle_error("malloc in split failed", -1);//return (ft_free_str(s_split, j));
+				handle_error("malloc in split failed",
+					-1);//return (ft_free_str(s_split, j));
 			k = 0;
 			while (s[i] && (s[i] != c || quote))
 			{

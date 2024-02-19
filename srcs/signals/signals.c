@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 13:00:50 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/09 21:28:57 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/19 11:33:12 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	handler(int status)
 	{
 		g_signal = CTRL_C;
 		ioctl(STDIN_FILENO, TIOCSTI, "\n");
-		//rl_replace_line("", 0);
+		rl_replace_line("", 0);
 		rl_on_new_line();
 	}
 }
@@ -32,7 +32,7 @@ void	handle_heredoc(int status)
 	{
 		g_signal = CTRL_C;
 		ioctl(STDIN_FILENO, TIOCSTI, "\n");
-		//rl_replace_line("", 0);
+		rl_replace_line("", 0);
 		rl_on_new_line();
 	}
 }

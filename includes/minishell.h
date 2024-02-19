@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/15 17:49:41 by codespace        ###   ########.fr       */
+/*   Updated: 2024/02/19 10:59:06 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # define GREEN "\033[32m"
 # define RESET "\033[0m"
 
+// headers
 # include <dirent.h>
 # include <errno.h>
 # include <fcntl.h>
@@ -55,6 +56,11 @@
 # define DOUBLE_QUOTE 1
 # define SINGLE_QUOTE 2
 
+//export flags
+# define NOT_EXIST 0
+# define EXIST_ENVP 1
+# define EXIST_LOCAL_VARS 2
+
 extern volatile sig_atomic_t	g_signal;
 
 typedef struct s_token
@@ -85,11 +91,11 @@ typedef enum s_mode
 	NON_INTERACTIVE,
 	CHILD,
 	HEREDOCS
-}					t_mode;
+}			t_mode;
 
+// main node
 typedef struct s_data
 {
-	//char				*line_for_export;
 	int					last_return;
 	int					env_len;
 	int					**fd;
@@ -156,16 +162,19 @@ void				print_argument(char *arg, t_data *node);
 char				*get_env_value(char *arg, t_data *node);
 char				**ft_env(t_data *node);
 int					ft_export(t_data *node, t_token *token, char *str);
-void				ft_pwd(void);
+int					handle_var_exist_in_envp(t_data *node, char *var);
+int					handle_var_exist_in_local_vars(t_data *node, char *var,
+						t_vars *local_vars);
+int					ft_pwd(void);
 int					ft_unset(t_data *node, t_token *token, char *str);
 char				*ft_getenv(t_data *node, char *str);
 void				ft_lastvalue(t_data *node);
 char				*ft_lastval_str(t_data *node);
 void				ft_exit(t_data *node, int exit_val, char *msg);
-void    			ft_localvars(t_token **tokens, t_data *node, int processes);
-char 				*copy_until_char(char *str, char c);
+void				ft_localvars(t_token **tokens, t_data *node, int processes);
+char				*copy_until_char(char *str, char c);
 char				*copy_after_char(char *str, char c);
-void    			ft_localvars(t_token **tokens, t_data *node, int processes);
+void				ft_localvars(t_token **tokens, t_data *node, int processes);
 
 // take_input
 int					entry_check(t_data *node, char *line);
@@ -217,8 +226,13 @@ void				close_all(int ***origin, int max);
 char				*extract_path(char *comm2, char **poss_paths,
 						char *og_comm);
 char				*pathfinder(char **envp, char *comm);
+<<<<<<< HEAD
 void				extract_find_execute(char **envp, char *full_comm, t_data *node);
 void				parent_close(t_data *node, int i, int processes);
+=======
+void				extract_find_execute(char **envp,
+						char *full_comm, t_data *node);
+>>>>>>> refs/remotes/origin/main
 
 // signals
 void				mode(t_data *data, t_mode mode);
@@ -227,5 +241,9 @@ void				mode(t_data *data, t_mode mode);
 int					handle_error(char *error, int status);
 void				ft_putstr_fd(char *s, int fd);
 void				nocomm_error(char *name);
+
+// tokenizer
+int					ft_strlen_till_char(char *str, char c);
+void				char_append(char **str, char c);
 
 #endif

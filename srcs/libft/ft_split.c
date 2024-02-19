@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 07:40:56 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/07 18:00:50 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/19 11:25:08 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ char	**ft_split(char const *s, char c, size_t i, size_t j)
 			k = k_count(s, i, c);
 			s_split[j] = (char *)malloc(sizeof(char) * (k - i + 1));
 			if (!s_split[j])
-				handle_error("malloc in split failed", -1);//return (ft_free_str(s_split, j));
+				handle_error("malloc in split failed", -1);
 			k = 0;
 			while (s[i] && s[i] != c)
 				s_split[j][k++] = s[i++];

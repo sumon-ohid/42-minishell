@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:17:43 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/09 19:39:37 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/19 11:25:54 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	entry_check(t_data *node, char *line)
 	node->tokens = tokens;
 	node->input_line = line;
 	node->arr = arr;
-	ft_localvars(tokens, node, pipe_counter(line)); //upgrade pipe counter to take different quotes into account
+	ft_localvars(tokens, node, pipe_counter(line));
 	if (!check_for_heredoc(node, tokens, pipe_counter(line)))
 		return (130);
 	ret_val = executor_init(node, tokens, pipe_counter(line), line);
@@ -72,8 +72,6 @@ void	ft_initialize(t_data *node, char **envp)
 		}
 		else if (*input)
 		{
-			//if (ft_strchr(input, '=') == 1)
-				//node->line_for_export = ft_strdup(input);
 			if (ft_strcmp(input, "\n") == 0)
 				break ;
 			initialize_node(node, envp);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 13:51:32 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/07 15:48:46 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/16 08:48:38 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ int	check_invalid_next_chars(char c, char *line, int i)
 		return (ft_lexer_error(line));
 	else if (c == '|' && line[i + 1] == ' ' && !(line[i + 2] >= 'A' && line[i
 				+ 2] <= 'z'))
+		return (ft_lexer_error(line));
+	else if (c == '=' && line[i + 1] == ' ')
 		return (ft_lexer_error(line));
 	return (1);
 }

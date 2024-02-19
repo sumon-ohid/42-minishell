@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 18:25:41 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/08 17:43:40 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/19 11:25:37 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ void	free_tokens(t_token **tokens, int processes)
 			previous = proxy;
 			proxy = proxy->next;
 			free(previous->str);
-			//free_arr(previous->arr);
 			free(previous);
 		}
 		counter++;
