@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/19 10:59:06 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/19 11:01:36 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -226,13 +226,10 @@ void				close_all(int ***origin, int max);
 char				*extract_path(char *comm2, char **poss_paths,
 						char *og_comm);
 char				*pathfinder(char **envp, char *comm);
-<<<<<<< HEAD
 void				extract_find_execute(char **envp, char *full_comm, t_data *node);
 void				parent_close(t_data *node, int i, int processes);
-=======
 void				extract_find_execute(char **envp,
 						char *full_comm, t_data *node);
->>>>>>> refs/remotes/origin/main
 
 // signals
 void				mode(t_data *data, t_mode mode);
