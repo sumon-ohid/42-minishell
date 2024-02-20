@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:24:36 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/20 12:45:36 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/20 13:01:53 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,14 +71,16 @@ char	*get_current_directory(void)
 	return (dir);
 }
 
-void	change_directory(char *str, t_data *node)
+void	change_directory(char *str, t_data *node, char *pwd)
 {
 	if (str == NULL || ft_strcmp(str, "--") == 0 || ft_strcmp(str, "~") == 0)
 		chdir(node->home);
 	else if (ft_strcmp(str, "-") == 0)
 	{
-		chdir(node->oldpwd);
-		printf("%s\n", node->oldpwd);
+		printf("cur-dir %s\n", node->pwd);
+		printf("old-dir %s\n", node->oldpwd);
+		chdir(pwd);
+		printf("%s\n", pwd);
 	}
 	else
 	{
@@ -104,9 +106,7 @@ void	ft_cd(char *str, t_data *node)
 	pwd = get_current_directory();
 	if (pwd == NULL)
 		exit(1);
-	node->oldpwd = oldpwd;
-	node->pwd = pwd;
-	change_directory(str, node);
+	change_directory(str, node, pwd);
 	ft_setenv(node, "OLDPWD", oldpwd);
 	ft_setenv(node, "PWD", pwd);
 }
