@@ -6,7 +6,7 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:25:07 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/20 16:04:49 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/20 16:40:46 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,23 +78,23 @@ char	*get_env_value(char *arg, t_data *node)
 	return ("");
 }
 
-void	show_dir(void)
-{
-	DIR				*d;
-	struct dirent	*dir;
+// void	show_dir(void)
+// {
+// 	DIR				*d;
+// 	struct dirent	*dir;
 
-	d = opendir(".");
-	dir = readdir(d);
-	while (dir != NULL)
-	{
-		if (dir->d_name[0] != '.')
-		{
-			ft_putstr(dir->d_name);
-			ft_putchar(' ');
-		}
-	}
-	closedir(d);
-}
+// 	d = opendir(".");
+// 	dir = readdir(d);
+// 	while (dir != NULL)
+// 	{
+// 		if (dir->d_name[0] != '.')
+// 		{
+// 			ft_putstr(dir->d_name);
+// 			ft_putchar(' ');
+// 		}
+// 	}
+// 	closedir(d);
+// }
 
 void	ft_echo(char *line, t_data *node, t_token *head)
 {
@@ -111,6 +111,8 @@ void	ft_echo(char *line, t_data *node, t_token *head)
 	}
 	while (head)
 	{
+		// if the command is echo then any built-in command is not
+		// going into condition
 		if (head->type == FLAG)
 		{
 			if (fl)

@@ -6,11 +6,12 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 15:32:22 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/20 15:57:26 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/20 16:38:03 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+#include <stdio.h>
 
 void	handle_dollar(char *arg, int *i, t_data *node)
 {
@@ -53,6 +54,7 @@ void	print_argument(char *arg, t_data *node)
 
 	i = 0;
 	(void)node;
+	printf("---> %s\n", arg);
 	if (arg[0] == '\'' && arg[1] == '\0')
 		return ;
 	else if (arg[0] == '\"' && arg[1] == '\0')
@@ -61,9 +63,10 @@ void	print_argument(char *arg, t_data *node)
 	{
 		if (arg[i] == '~')
 			ft_putstr(getenv("HOME"));
-		else if (arg[i] == '*')
-			show_dir();
-		ft_putchar(arg[i]);
+		// else if (arg[i] == '*')
+		// 	show_dir();
+		else
+			ft_putchar(arg[i]);
 		i++;
 	}
 	return ;

@@ -6,7 +6,7 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 14:59:41 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/07 15:00:17 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/20 16:29:03 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ char	*ft_heredoc(t_data *node, char *str)
 			break ;
 		if (ft_strcmp(line, str) == 0)
 			break ;
+		add_history(line);
 		heredoc = append_line_to_heredoc(heredoc, line, &len);
 		free(line);
 	}
