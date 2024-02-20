@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:17:43 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/20 12:42:36 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/20 14:56:10 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,14 @@ char **dup_envp(char **envp)
 	while (envp[counter])
 		counter++;
 	result = malloc(sizeof(char *) * counter);
+	if (!result)
+		return (NULL);
 	counter2 = 0;
 	while (counter2 < counter - 1) //or minus 1
 	{
-		result[counter2] = ft_strdup(envp[counter2]); //protect malloc!!
+		result[counter2] = ft_strdup(envp[counter2]);
+		if (!result[counter2])
+			return (NULL);
 		counter2++;
 	}
 	result[counter2] = NULL;

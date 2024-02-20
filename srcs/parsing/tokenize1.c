@@ -6,7 +6,7 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:57:30 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/19 17:29:13 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/20 15:54:13 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,10 @@ char	*handle_envp(char *str, t_data *node)
 	result[0] = '\0';
 	if (ft_strcmp(str, "$?") == 0)
 		return (ft_lastval_str(node));
-	if (ft_strcmp(str, "$") == 0)
+	if (ft_strcmp(str, "$") == 0 && ft_strlen(str) == 1)
 		return (ft_strdup("$"));
+	if (ft_strcmp(str, "$$") == 0)
+		return (ft_itoa(getpid()));
 	while (str[i])
 	{
 		if (str[i] != '$')
@@ -62,7 +64,7 @@ char	*handle_envp(char *str, t_data *node)
 			result = ft_strjoin(result, var_value, 1);
 			i += ft_strlen(var_name);
 			free(var_name);
-			free(var_value);
+			//free(var_value);
 		}
 		i++;
 	}

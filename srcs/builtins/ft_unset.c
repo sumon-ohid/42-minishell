@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 19:16:45 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/15 19:39:28 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/20 14:59:43 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	ft_unsetenv(t_data *node, char *str)
 		if (ft_strncmp(node->envp[i], str, ft_strlen(str)) == 0)
 		{
 			j = i;
+			free(node->envp[i]);
 			while (node->envp[j])
 			{
 				node->envp[j] = node->envp[j + 1];

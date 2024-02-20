@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 20:21:29 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/19 14:39:11 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/20 15:42:30 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void	extract_find_execute(char **envp, char *full_comm, t_data *node)
 		if (!path)
 			nocomm_error(comms[0]);
 		else
-			printf("Error: malloc failure\n");
+			printf("minishell: %s: command not found\n", comms[0]);
 		free_everything(comms, counter);
 		ft_exit(node, 127, NULL);
 	}
