@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:17:43 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/19 18:59:16 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/20 12:42:36 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ void	ft_initialize(t_data *node, char **envp)
 		{
 			printf("exit\n");
 			free(input);
+			ft_free_array(node->envp);
 			free(node);
 			exit(EXIT_FAILURE);
 		}

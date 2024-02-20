@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:24:36 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/19 19:00:03 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/20 12:45:36 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	change_directory(char *str, t_data *node)
 			ft_putstr("cd: no such directory: ");
 			ft_putstr(str);
 			ft_putstr("\n");
-			free(node->oldpwd);
+			//free(node->oldpwd);
 			return ;
 		}
 	}
@@ -101,10 +101,12 @@ void	ft_cd(char *str, t_data *node)
 	oldpwd = get_current_directory();
 	if (oldpwd == NULL)
 		exit(1);
-	change_directory(str, node);
 	pwd = get_current_directory();
 	if (pwd == NULL)
 		exit(1);
+	node->oldpwd = oldpwd;
+	node->pwd = pwd;
+	change_directory(str, node);
 	ft_setenv(node, "OLDPWD", oldpwd);
 	ft_setenv(node, "PWD", pwd);
 }
