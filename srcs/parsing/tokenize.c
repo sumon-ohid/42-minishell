@@ -6,7 +6,7 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:50:09 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/19 11:40:20 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/21 11:26:58 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ t_token	*create_token(char *word, t_data *node)
 	new->previous = NULL;
 	new->next = NULL;
 	new->arr = NULL;
+	new->heredoc_data = NULL;
 	new->quote = quote_assigner(node->line_temp, word);
 	if (ft_strstr(word, "$") && new->quote != SINGLE_QUOTE)
 		new->str = handle_envp(word, node);

@@ -18,14 +18,14 @@ WHITE = \033[0;97m
 RESET = \033[0m
 
 SRC = 	srcs/main/main.c \
-		srcs/libft/ft_split.c \
+		srcs/utils/ft_split.c \
 		srcs/executions/cmd.c \
 		srcs/executions/cmd01.c \
 		srcs/executions/cmd02.c \
-		srcs/libft/libft_helpers.c \
-		srcs/libft/libft_helpers1.c \
-		srcs/libft/libft_helpers2.c \
-		srcs/libft/libft_helpers3.c \
+		srcs/utils/libft_helpers.c \
+		srcs/utils/libft_helpers1.c \
+		srcs/utils/libft_helpers2.c \
+		srcs/utils/libft_helpers3.c \
 		srcs/parsing/tokenize.c\
 		srcs/parsing/tokenize1.c\
 		srcs/parsing/tokenize2.c\
@@ -50,7 +50,7 @@ SRC = 	srcs/main/main.c \
 		srcs/parsing/lexer.c \
 		srcs/parsing/lexer_extra.c \
 		srcs/signals/ft_lastvalue.c \
-		srcs/libft/ft_itoa.c \
+		srcs/utils/ft_itoa.c \
 		srcs/parsing/ft_split_special_edition.c \
 
 OBJ = $(SRC:.c=.o)

@@ -6,7 +6,7 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 18:25:41 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/19 11:25:37 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/21 11:28:03 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	free_tokens(t_token **tokens, int processes)
 		{
 			previous = proxy;
 			proxy = proxy->next;
+			free(previous->heredoc_data);
 			free(previous->str);
 			free(previous);
 		}

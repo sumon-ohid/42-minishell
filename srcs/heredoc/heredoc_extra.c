@@ -6,7 +6,7 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 14:59:41 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/20 16:29:03 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/21 11:33:31 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ char	*append_line_to_heredoc(char *heredoc, char *line, size_t *len)
 			handle_error("Realloc failed at Heredoc", 1);
 		heredoc = tmp;
 		if (*len > 0)
-			heredoc = ft_strjoin(heredoc, "\n", 0);
-		heredoc = ft_strjoin(heredoc, line, 0);
+			heredoc = ft_strjoin(heredoc, "\n", 1);
+		heredoc = ft_strjoin(heredoc, line, 1);
 	}
 	else
 	{
@@ -101,6 +101,6 @@ char	*ft_heredoc(t_data *node, char *str)
 	mode(node, NON_INTERACTIVE);
 	if (line != NULL)
 		free(line);
-	heredoc = ft_strjoin(heredoc, "\n", 0);
+	heredoc = ft_strjoin(heredoc, "\n", 1);
 	return (heredoc);
 }
