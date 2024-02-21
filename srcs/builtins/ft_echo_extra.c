@@ -13,22 +13,7 @@
 #include "../../includes/minishell.h"
 #include <stdio.h>
 
-void	handle_dollar(char *arg, int *i, t_data *node)
-{
-	if (arg[*i + 1] == '?')
-		ft_putnbr(0);
-	else if (arg[*i + 1] == '$')
-		ft_putnbr(getpid());
-	else if (arg[*i + 1] == '0')
-		ft_putstr("minishell");
-	else
-	{
-		ft_putstr(get_env_value(arg + 1, node));
-		return ;
-	}
-	(*i)++;
-}
-
+// I think this function is not used anywhere in the project
 void	handle_quotes(char *arg, int *i, int len)
 {
 	char	*new_arg;
@@ -54,7 +39,6 @@ void	print_argument(char *arg, t_data *node)
 
 	i = 0;
 	(void)node;
-	printf("---> %s\n", arg);
 	if (arg[0] == '\'' && arg[1] == '\0')
 		return ;
 	else if (arg[0] == '\"' && arg[1] == '\0')
@@ -63,8 +47,6 @@ void	print_argument(char *arg, t_data *node)
 	{
 		if (arg[i] == '~')
 			ft_putstr(getenv("HOME"));
-		// else if (arg[i] == '*')
-		// 	show_dir();
 		else
 			ft_putchar(arg[i]);
 		i++;

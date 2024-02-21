@@ -119,6 +119,7 @@ int	main(int argc, char **argv, char **envp)
 		handle_error("Memory allocation failed for node.", 1);
 	ft_set(node);
 	node->envp = dup_envp(envp);
+	node->last_return = 0;
 	ft_initialize(node, envp);
 	close(node->std_in);
 	close(node->std_out);

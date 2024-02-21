@@ -52,7 +52,7 @@ char	*get_env_value(char *arg, t_data *node)
 			ft_exit(node, 127, "malloc error in get_env");
 		if (ft_strcmp(tmp, arg) == 0)
 		{
-			env_value = copy_after_char(node->envp[i], '=');
+			env_value = node->envp[i] + ft_strlen(tmp) + 1;
 			if (!env_value)
 				ft_exit(node, 127, "malloc error in get_env");
 			free(tmp);

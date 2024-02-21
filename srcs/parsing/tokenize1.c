@@ -46,11 +46,20 @@ char	*handle_envp(char *str, t_data *node)
 		handle_error("malloc in handle_envp failed", 1);
 	result[0] = '\0';
 	if (ft_strcmp(str, "$?") == 0)
+	{
+		free(result);
 		return (ft_lastval_str(node));
+	}
 	if (ft_strcmp(str, "$") == 0 && ft_strlen(str) == 1)
+	{
+		free(result);
 		return (ft_strdup("$"));
+	}
 	if (ft_strcmp(str, "$$") == 0)
+	{
+		free(result);
 		return (ft_itoa(getpid()));
+	}
 	while (str[i])
 	{
 		if (str[i] != '$')
@@ -64,7 +73,6 @@ char	*handle_envp(char *str, t_data *node)
 			result = ft_strjoin(result, var_value, 1);
 			i += ft_strlen(var_name);
 			free(var_name);
-			//free(var_value);
 		}
 		i++;
 	}
