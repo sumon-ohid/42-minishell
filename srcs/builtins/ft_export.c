@@ -6,12 +6,14 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:27:41 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/22 12:00:43 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/22 16:21:20 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 #include <stdlib.h>
+
+
 
 int	handle_export_no_args(t_data *node)
 {
@@ -26,57 +28,31 @@ int	handle_export_no_args(t_data *node)
 	return (0);
 }
 
-int	check_if_var_exists(t_data *node, char *var, t_vars *local_vars)
+int	check_if_var_exists(t_data *node, char *var)
 {
     int		i;
     char	*name_before_equal;
     char	*var_name;
 
     i = 0;
+	var_name = copy_until_char(var, '=');
     while (node->envp[i])
     {
         name_before_equal = copy_until_char(node->envp[i], '=');
-        var_name = copy_until_char(var, '=');
         if (ft_strcmp(name_before_equal, var_name) == 0)
         {
-            //free(name_before_equal);
-            //free(var_name);
+            free(name_before_equal);
+            free(var_name);
             return (1);
         }
-        //free(name_before_equal);
-        //free(var_name);
+        free(name_before_equal);
         i++;
     }
-    while (local_vars)
-    {
-        var_name = copy_until_char(var, '=');
-        if (ft_strcmp(local_vars->first_half, var_name) == 0)
-        {
-            //free(var_name);
-            return (2);
-        }
-        //free(var_name);
-        local_vars = local_vars->next;
-    }
+    free(var_name);
     return (0);
 }
 
-int	handle_var_not_exists(t_data *node, char *var)
-{
-	int	i;
-
-	i = 0;
-	while (node->envp[i])
-		i++;
-	node->envp[i] = ft_realloc_heredoc(node->envp[i], i, i + 1);
-	if (!node->envp)
-		handle_error("Envp failed at ft_export function", 1);
-	node->envp[i] = ft_strdup(var);
-	node->envp[i + 1] = NULL;
-	return (0);
-}
-
-int	handle_export(t_data *node, char **var, t_vars *local_vars)
+int	handle_export(t_data *node, char **var)
 {
 	int	var_exists;
 	int	i;
@@ -84,15 +60,14 @@ int	handle_export(t_data *node, char **var, t_vars *local_vars)
 	i = 1;
 	while (var[i])
 	{
-		var_exists = check_if_var_exists(node, var[i], local_vars);
+		var_exists = check_if_var_exists(node, var[i]);
 		if (var_exists == NOT_EXIST)
 			handle_var_not_exists(node, var[i]);
 		else if (var_exists == EXIST_ENVP)
 			handle_var_exist_in_envp(node, var[i]);
-		else if (var_exists == EXIST_LOCAL_VARS)
-			handle_var_exist_in_local_vars(node, var[i], local_vars);
 		i++;
 	}
+	free_arr(var);
 	return (0);
 }
 
@@ -114,8 +89,7 @@ int	ft_export(t_data *node, t_token *token, char *str)
 	}
 	else
 	{
-		handle_export(node, var, local_vars);
-		free_arr(var);
+		handle_export(node, var);
 		return (0);
 	}
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:17:43 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/21 11:32:12 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/22 15:54:53 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ void	ft_initialize(t_data *node, char **envp)
 		{
 			printf("exit\n");
 			free(input);
+			free_vars(node->local_vars);
 			ft_free_array(node->envp);
 			free(node);
 			exit(EXIT_FAILURE);

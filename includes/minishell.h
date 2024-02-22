@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/22 12:28:16 by codespace        ###   ########.fr       */
+/*   Updated: 2024/02/22 16:21:47 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,6 +175,9 @@ void				ft_localvars(t_token **tokens, t_data *node, int processes);
 char				*copy_until_char(char *str, char c);
 char				*copy_after_char(char *str, char c);
 void				ft_localvars(t_token **tokens, t_data *node, int processes);
+char				*malloc_heredoc(char *ptr, size_t old_size, size_t new_size);
+void				ft_setenv(t_data *node, char *name, char *value);
+int					handle_var_not_exists(t_data *node, char *var);
 
 // take_input
 int					entry_check(t_data *node, char *line);
@@ -216,6 +219,8 @@ char				**free_everything(char **arr, int m_ctr);
 void				free_node(t_data *node);
 void				exit_builtin(t_data *node);
 void				ft_free_fds(t_data *node);
+void				free_vars(t_vars *local_vars);
+
 
 // redirections
 
