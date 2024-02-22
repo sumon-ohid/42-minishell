@@ -100,11 +100,9 @@ int	handle_export(t_data *node, char **var)
 int	ft_export(t_data *node, t_token *token, char *str)
 {
 	char	**var;
-	t_vars	*local_vars;
 
-	local_vars = node->local_vars;
 	(void)token;
-	var = ft_split(str, ' ', 0, 0);
+	var = ft_split_special(str, ' ', 'E', 0);
 	if (var == NULL)
 		ft_exit(node, 1, "Malloc failed at ft_export function");
 	if (ft_strcmp(var[0], "export") == 0 && var[1] == NULL)
