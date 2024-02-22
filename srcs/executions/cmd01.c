@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd01.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 17:28:11 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/19 19:30:59 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/22 10:16:54 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,13 @@ int	execute_chain(t_data *node, t_token *chain, char *line, int processes)
 		{
 			if (processes)
 				close_all(&node->fd, processes - 1);
-			if (!ft_redirect_checker(chain, 0))
+			if (!ft_redirect_checker(chain, 0, node))
 				return (-1);
 			return (entry_check2(node, chain, line));
 		}
 		else if (proxy->type == COMMAND)
 		{
-			ft_redirect_checker(chain, 1);
+			ft_redirect_checker(chain, 1, node);
 			return (ft_commander(chain, node));
 		}
 		else

@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 17:31:58 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/22 10:04:55 by codespace        ###   ########.fr       */
+/*   Updated: 2024/02/22 10:08:07 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	exit_builtin(t_data *node)
 	char *argv[] = {"/bin/true", NULL};
 
 	execve("/bin/true", argv, NULL);
-	ft_exit(node, -1, "execve failed");
+	ft_exit(node, 0, NULL);
 }
 
 void	parent_close(t_data *node, int i, int processes)

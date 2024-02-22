@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirects.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 18:46:23 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/09 16:59:34 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/22 10:12:32 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ft_restore(t_data *node)
 		exit(-1);
 }
 
-int	ft_redirect_checker(t_token *chain, int mode)
+int	ft_redirect_checker(t_token *chain, int mode, t_data *node)
 {
 	t_token	*proxy;
 
@@ -40,7 +40,7 @@ int	ft_redirect_checker(t_token *chain, int mode)
 	{
 		if (proxy->type >= 3 && proxy->type <= 5)
 		{
-			if (!ft_redirector(chain, proxy->type + 3, mode))
+			if (!ft_redirector(chain, proxy->type + 3, mode, node))
 				return (0);
 		}
 		else if (proxy->type == HEREDOC)
