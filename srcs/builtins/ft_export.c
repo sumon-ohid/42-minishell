@@ -6,23 +6,49 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:27:41 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/22 16:21:20 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/22 17:20:09 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 #include <stdlib.h>
 
+void	insertion_sort(char **arr, int n)
+{
+	int		i;
+	int		j;
+	char	*key;
 
+	i = 1;
+	while (i < n)
+	{
+		key = arr[i];
+		j = i - 1;
+		while (j >= 0 && ft_strncmp(arr[j], key, 1) > 0)
+		{
+			arr[j + 1] = arr[j];
+			j = j - 1;
+		}
+		arr[j + 1] = key;
+		i++;
+	}
+}
 
 int	handle_export_no_args(t_data *node)
 {
-	int	i;
+	int		i;
+	char	*var_value;
+	char	*var_name;
 
+	insertion_sort(node->envp, ft_strlen_arr(node->envp));
 	i = 0;
 	while (node->envp[i])
 	{
-		printf("declare -x %s\n", node->envp[i]);
+		var_name = copy_until_char(node->envp[i], '=');
+		var_value = copy_after_char(node->envp[i], '=');
+		printf("declare -x %s=\"%s\"\n", var_name, var_value);
+		free(var_name);
+		free(var_value);
 		i++;
 	}
 	return (0);
@@ -30,26 +56,26 @@ int	handle_export_no_args(t_data *node)
 
 int	check_if_var_exists(t_data *node, char *var)
 {
-    int		i;
-    char	*name_before_equal;
-    char	*var_name;
+	int		i;
+	char	*name_before_equal;
+	char	*var_name;
 
-    i = 0;
+	i = 0;
 	var_name = copy_until_char(var, '=');
-    while (node->envp[i])
-    {
-        name_before_equal = copy_until_char(node->envp[i], '=');
-        if (ft_strcmp(name_before_equal, var_name) == 0)
-        {
-            free(name_before_equal);
-            free(var_name);
-            return (1);
-        }
-        free(name_before_equal);
-        i++;
-    }
-    free(var_name);
-    return (0);
+	while (node->envp[i])
+	{
+		name_before_equal = copy_until_char(node->envp[i], '=');
+		if (ft_strcmp(name_before_equal, var_name) == 0)
+		{
+			free(name_before_equal);
+			free(var_name);
+			return (1);
+		}
+		free(name_before_equal);
+		i++;
+	}
+	free(var_name);
+	return (0);
 }
 
 int	handle_export(t_data *node, char **var)

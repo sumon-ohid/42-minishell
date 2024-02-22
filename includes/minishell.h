@@ -6,7 +6,7 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/22 16:21:47 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/22 16:55:25 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,6 +178,7 @@ void				ft_localvars(t_token **tokens, t_data *node, int processes);
 char				*malloc_heredoc(char *ptr, size_t old_size, size_t new_size);
 void				ft_setenv(t_data *node, char *name, char *value);
 int					handle_var_not_exists(t_data *node, char *var);
+int 				ft_strlen_arr(char **arr);
 
 // take_input
 int					entry_check(t_data *node, char *line);
