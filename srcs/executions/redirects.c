@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 18:46:23 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/22 11:52:48 by codespace        ###   ########.fr       */
+/*   Updated: 2024/02/22 12:02:43 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,18 @@ void	ft_set(t_data *node)
 	node->local_vars = NULL;
 	node->std_in = dup(STDIN_FILENO);
 	if (node->std_in == -1)
-		exit(-1);
+		ft_exit(node, -1, "dup failed");
 	node->std_out = dup(STDOUT_FILENO);
 	if (node->std_out == -1)
-		exit(-1);
+		ft_exit(node, -1, "dup failed");
 }
 
 void	ft_restore(t_data *node)
 {
 	if (dup2(node->std_in, STDIN_FILENO) == -1)
-		exit(-1);
+		ft_exit(node, -1, "dup2 failed");
 	if (dup2(node->std_out, STDOUT_FILENO) == -1)
-		exit(-1);
+		ft_exit(node, -1, "dup2 failed");
 }
 
 int	ft_redirect_checker(t_token *chain, int mode, t_data *node, int killmode)

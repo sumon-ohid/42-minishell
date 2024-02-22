@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 14:41:52 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/19 19:05:03 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/22 12:30:41 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,41 @@ typedef struct s_data
 	char			*line_temp;
 	struct s_data	*next;
 }						t_data;*/
+
+void	ft_free_array(char **str)
+{
+	int	i;
+
+	i = 0;
+	if (!str)
+		return ;
+	while (str[i])
+	{
+		free(str[i]);
+		i++;
+	}
+	free(str);
+	return ;
+}
+
+void	ft_free_fds(t_data *node)
+{
+	int	i;
+	int **arr;
+
+	i = 0;
+	close_all(&node->fd, node->processes - 1);
+	arr = node->fd;
+	if (!arr)
+		return ;
+	while (i < node->processes - 1)
+	{
+		free(arr[i]);
+		i++;
+	}
+	free(arr);
+	return ;
+}
 
 void	free_vars(t_vars *local_vars)
 {
@@ -49,8 +84,10 @@ void	free_node(t_data *node)
 {
 	free_tokens(node->tokens, node->processes);
 	free_vars(node->local_vars);
-	close(node->std_in);
-	close(node->std_out);
+	if (node->std_in != -1)
+		close(node->std_in);
+	if (node->std_out != -1)
+		close(node->std_out);
 	free(node->input_line);
 	ft_free_array(node->arr);
 	ft_free_array(node->envp);

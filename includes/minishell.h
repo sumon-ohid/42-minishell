@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/22 11:52:15 by codespace        ###   ########.fr       */
+/*   Updated: 2024/02/22 12:28:16 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,6 +215,7 @@ void				error_quit(int fd, int *tomlo, char *str);
 char				**free_everything(char **arr, int m_ctr);
 void				free_node(t_data *node);
 void				exit_builtin(t_data *node);
+void				ft_free_fds(t_data *node);
 
 // redirections
 
@@ -226,8 +227,8 @@ void				close_all(int ***origin, int max);
 
 // execution part
 char				*extract_path(char *comm2, char **poss_paths,
-						char *og_comm);
-char				*pathfinder(char **envp, char *comm);
+						char *og_comm, t_data *node);
+char				*pathfinder(char **envp, char *comm, t_data *node);
 void				extract_find_execute(char **envp, t_token *mark, t_data *node);
 void				parent_close(t_data *node, int i, int processes);
 

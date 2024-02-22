@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 17:31:58 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/22 10:37:40 by codespace        ###   ########.fr       */
+/*   Updated: 2024/02/22 12:31:44 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	entry_check2(t_data *node, t_token *head, char *line)
 	else if (ft_strstr(head->str, "unset") != 0)
 		ft_unset(node, head, line);
 	else
-		printf("minishell: %s: command not found\n", head->str);
+		nocomm_error(head->str);
 	ft_restore(node);
 	return (1);
 }
@@ -69,9 +69,10 @@ void	allocate_fd(int ***fd, int processes, t_data *node)
 
 void	exit_builtin(t_data *node)
 {
-	char *argv[] = {"/bin/true", NULL};
+	//char *argv[] = {"/bin/true", NULL};
 
-	execve("/bin/true", argv, NULL);
+	//execve("/bin/true", argv, NULL);
+	ft_free_fds(node);
 	ft_exit(node, 0, NULL);
 }
 

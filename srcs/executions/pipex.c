@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 20:21:29 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/22 10:37:45 by codespace        ###   ########.fr       */
+/*   Updated: 2024/02/22 12:31:26 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ void	free_poss_paths(char **poss_paths)
 	free(poss_paths);
 }
 
-char	*extract_path(char *comm2, char **poss_paths, char *og_comm)
+char	*extract_path(char *comm2, char **poss_paths, char *og_comm,
+	t_data *node)
 {
 	int		counter;
 	char	*res;
@@ -50,7 +51,7 @@ char	*extract_path(char *comm2, char **poss_paths, char *og_comm)
 			res = ft_strdup(poss_paths[counter]);
 			free_poss_paths(poss_paths);
 			if (!res)
-				return ("faill");
+				ft_exit(node, -1, "malloc failure at pathfinder");
 			return (res);
 		}
 		counter++;
@@ -59,7 +60,7 @@ char	*extract_path(char *comm2, char **poss_paths, char *og_comm)
 	return (check_og_comm(og_comm));
 }
 
-char	*pathfinder(char **envp, char *comm)
+char	*pathfinder(char **envp, char *comm, t_data *node)
 {
 	char	**poss_paths;
 	int		counter;
@@ -69,7 +70,7 @@ char	*pathfinder(char **envp, char *comm)
 	i = 0;
 	comm2 = ft_strjoin("/", comm, 0);
 	if (!comm2)
-		return ("faill");
+		ft_exit(node, -1, "malloc failure at pathfinder");
 	counter = 0;
 	while (envp[counter] && (!ft_strstr(envp[counter], "PATH")
 			|| ft_strstr(envp[counter], "_PATH")))
@@ -80,11 +81,11 @@ char	*pathfinder(char **envp, char *comm)
 		i++;
 	poss_paths = ft_split(&envp[counter][i], ':', 0, 0);
 	if (!poss_paths)
-		return (free(comm2), "faill");
+		ft_exit(node, -1, "malloc failure at pathfinder");
 	counter = -1;
 	while (poss_paths[++counter])
 		poss_paths[counter] = ft_strjoin(poss_paths[counter], comm2, 1);
-	return (extract_path(comm2, poss_paths, comm));
+	return (extract_path(comm2, poss_paths, comm, node));
 }
 
 char	**comm_array(t_token *mark, t_data *node)
@@ -120,13 +121,11 @@ void	extract_find_execute(char **envp, t_token *mark, t_data *node)
 		ft_exit(node, -1, "malloc failure");
 	while (comms[counter])
 		counter++;
-	path = pathfinder(envp, comms[0]);
+	path = pathfinder(envp, comms[0], node);
 	if (ft_strcmp(path, "faill") == 0 || !path)
 	{
-		if (!path)
-			nocomm_error(comms[0]);
-		else
-			printf("minishell: %s: command not found\n", comms[0]);
+		ft_free_fds(node);
+		nocomm_error(comms[0]);
 		free_everything(comms, counter);
 		ft_exit(node, 127, NULL);
 	}

@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 15:02:36 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/22 10:15:44 by codespace        ###   ########.fr       */
+/*   Updated: 2024/02/22 12:04:56 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,7 @@ int	ft_redirector(t_token *chain, int file_type, int mode, t_data *node)
 		mark1 = mark1->next;
 	}
 	if (!mark1)
-	{
-		exit(-1);
-	}
+		ft_exit(node, -1, NULL);
 	if (file_type == INFILE)
 		return (redirect_in(mark1->str, mode, node));
 	else if (file_type == OUTFILE)
