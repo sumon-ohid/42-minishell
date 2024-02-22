@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 17:28:11 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/22 10:16:54 by codespace        ###   ########.fr       */
+/*   Updated: 2024/02/22 10:28:39 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	ft_commander(t_token *chain, t_data *node)
 		chain = chain->next;
 	}
 	mode(node, INTERACTIVE);
-	extract_find_execute(environ, mark->str, node);
+	extract_find_execute(environ, mark, node);
 	return (0);
 }
 

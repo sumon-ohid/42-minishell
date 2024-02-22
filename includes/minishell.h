@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/22 10:16:23 by codespace        ###   ########.fr       */
+/*   Updated: 2024/02/22 10:36:32 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,10 +228,8 @@ void				close_all(int ***origin, int max);
 char				*extract_path(char *comm2, char **poss_paths,
 						char *og_comm);
 char				*pathfinder(char **envp, char *comm);
-void				extract_find_execute(char **envp, char *full_comm, t_data *node);
+void				extract_find_execute(char **envp, t_token *mark, t_data *node);
 void				parent_close(t_data *node, int i, int processes);
-void				extract_find_execute(char **envp,
-						char *full_comm, t_data *node);
 
 // signals
 void				mode(t_data *data, t_mode mode);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 20:21:29 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/20 15:42:30 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/22 10:37:45 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,16 +87,37 @@ char	*pathfinder(char **envp, char *comm)
 	return (extract_path(comm2, poss_paths, comm));
 }
 
-void	extract_find_execute(char **envp, char *full_comm, t_data *node)
+char	**comm_array(t_token *mark, t_data *node)
+{
+	char *full_comm;
+	char **result;
+	
+	full_comm = mark->str;
+	if (mark->quote == NO_QUOTE)
+		return (ft_split(full_comm, ' ', 0, 0));
+	else
+	{
+		result = malloc(sizeof(char *) * 2);
+		if (!result)
+			ft_exit(node, -1, "malloc failure during execution");
+		result[0] = ft_strdup(full_comm);
+		if (!result[0])
+			ft_exit(node, -1, "malloc failure during execution");
+		result[1] = NULL;
+	}
+	return (result);
+}
+
+void	extract_find_execute(char **envp, t_token *mark, t_data *node)
 {
 	char	**comms;
 	char	*path;
 	int		counter;
 
 	counter = 0;
-	comms = ft_split(full_comm, ' ', 0, 0);
+	comms = comm_array(mark, node);
 	if (!comms)
-		exit(1);
+		ft_exit(node, -1, "malloc failure");
 	while (comms[counter])
 		counter++;
 	path = pathfinder(envp, comms[0]);
