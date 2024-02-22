@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_special_edition.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 14:27:31 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/19 11:32:35 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/22 10:06:24 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,11 @@ static size_t	word_counter(char const *s, char c)
 	printf("WORD NUMBER IS: %ld\n", words);
 	return (words);
 }*/
-static size_t	word_counter(char const *s, char c)
+static size_t	word_counter(char const *s, char c, int i, char quote_char)
 {
-	size_t	i;
 	size_t	words;
-	char	quote_char;
 
-	i = 0;
 	words = 0;
-	quote_char = 0;
 	while (s[i])
 	{
 		while (s[i] == c && s[i])
@@ -160,10 +156,10 @@ char	**ft_split_special(char *s, char c, char mode, size_t j)
 	size_t	i;
 
 	i = 0;
-	s_split = (char **)malloc(sizeof(char *) * (word_counter(s, c) + 1));
+	s_split = malloc(sizeof(char *) * (word_counter(s, c, 0, 0) + 1));
 	if (s_split == NULL)
 		handle_error("malloc in split failed", -1);
-	while (s[i] && j < (word_counter(s, c)))
+	while (s[i] && j < (word_counter(s, c, 0, 0)))
 	{
 		while (s[i] == c)
 			i++;
