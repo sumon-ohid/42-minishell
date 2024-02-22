@@ -6,11 +6,36 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 14:59:41 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/21 11:33:31 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/22 11:47:21 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+void ft_memset(void *b, int c, size_t len)
+{
+	unsigned char	*ptr;
+
+	ptr = (unsigned char *)b;
+	while (len--)
+		*ptr++ = (unsigned char)c;
+}
+
+char	*malloc_heredoc(char *ptr, size_t old_size, size_t new_size)
+{
+    char	*new_ptr;
+
+    new_ptr = malloc(new_size);
+    if (!new_ptr)
+        return (NULL);
+    ft_memset(new_ptr, 0, new_size);
+    if (ptr)
+    {
+        ft_memcpy(new_ptr, ptr, old_size);
+        free(ptr);
+    }
+    return (new_ptr);
+}
 
 void	*ft_realloc_heredoc(void *ptr, size_t old_size, size_t new_size)
 {
@@ -58,7 +83,7 @@ char	*append_line_to_heredoc(char *heredoc, char *line, size_t *len)
 
 	if (heredoc)
 	{
-		tmp = ft_realloc_heredoc(heredoc, *len, *len + ft_strlen(line) + 2);
+		tmp = malloc_heredoc(heredoc, *len, *len + ft_strlen(line) + 2);
 		if (!tmp)
 			handle_error("Realloc failed at Heredoc", 1);
 		heredoc = tmp;
@@ -83,7 +108,7 @@ char	*ft_heredoc(t_data *node, char *str)
 	size_t	len;
 	char	*heredoc;
 
-	heredoc = NULL;
+	heredoc = ft_strdup("");
 	len = 0;
 	mode(node, HEREDOCS);
 	while (1)
