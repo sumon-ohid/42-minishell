@@ -6,7 +6,7 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:27:41 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/19 17:49:16 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/22 12:00:43 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,12 @@ int	check_if_var_exists(t_data *node, char *var, t_vars *local_vars)
         var_name = copy_until_char(var, '=');
         if (ft_strcmp(name_before_equal, var_name) == 0)
         {
-            free(name_before_equal);
-            free(var_name);
+            //free(name_before_equal);
+            //free(var_name);
             return (1);
         }
-        free(name_before_equal);
-        free(var_name);
+        //free(name_before_equal);
+        //free(var_name);
         i++;
     }
     while (local_vars)
@@ -52,39 +52,14 @@ int	check_if_var_exists(t_data *node, char *var, t_vars *local_vars)
         var_name = copy_until_char(var, '=');
         if (ft_strcmp(local_vars->first_half, var_name) == 0)
         {
-            free(var_name);
+            //free(var_name);
             return (2);
         }
-        free(var_name);
+        //free(var_name);
         local_vars = local_vars->next;
     }
     return (0);
 }
-
-// int	check_if_var_exists(t_data *node, char *var, t_vars *local_vars)
-// {
-// 	int		i;
-// 	char	*name_before_equal;
-// 	char	*var_name;
-
-// 	i = 0;
-// 	while (node->envp[i])
-// 	{
-// 		name_before_equal = copy_until_char(node->envp[i], '=');
-// 		var_name = copy_until_char(var, '=');
-// 		if (ft_strcmp(name_before_equal, var_name) == 0)
-// 			return (1);
-// 		i++;
-// 	}
-// 	while (local_vars)
-// 	{
-// 		var_name = copy_until_char(var, '=');
-// 		if (ft_strcmp(local_vars->first_half, var_name) == 0)
-// 			return (2);
-// 		local_vars = local_vars->next;
-// 	}
-// 	return (0);
-// }
 
 int	handle_var_not_exists(t_data *node, char *var)
 {
@@ -118,7 +93,6 @@ int	handle_export(t_data *node, char **var, t_vars *local_vars)
 			handle_var_exist_in_local_vars(node, var[i], local_vars);
 		i++;
 	}
-	free_arr(var);
 	return (0);
 }
 
@@ -131,10 +105,7 @@ int	ft_export(t_data *node, t_token *token, char *str)
 	(void)token;
 	var = ft_split(str, ' ', 0, 0);
 	if (var == NULL)
-	{
-		ft_putstr("ft_split failed at ft_export function\n");
-		return (1);
-	}
+		ft_exit(node, 1, "Malloc failed at ft_export function");
 	if (ft_strcmp(var[0], "export") == 0 && var[1] == NULL)
 	{
 		handle_export_no_args(node);
