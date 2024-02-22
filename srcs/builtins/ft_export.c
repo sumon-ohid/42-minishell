@@ -6,14 +6,14 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:27:41 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/22 17:20:09 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/22 17:22:01 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 #include <stdlib.h>
 
-void	insertion_sort(char **arr, int n)
+void	sort_env(char **arr, int n)
 {
 	int		i;
 	int		j;
@@ -40,7 +40,7 @@ int	handle_export_no_args(t_data *node)
 	char	*var_value;
 	char	*var_name;
 
-	insertion_sort(node->envp, ft_strlen_arr(node->envp));
+	sort_env(node->envp, ft_strlen_arr(node->envp));
 	i = 0;
 	while (node->envp[i])
 	{
