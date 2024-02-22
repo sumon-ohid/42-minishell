@@ -20,6 +20,8 @@ char	*copy_after_char(char *str, char c)
 
 	i = 0;
 	j = 0;
+	if (ft_strchr(str, c) == 0)
+		return (ft_strdup(""));
 	while (str[i] != c)
 		i++;
 	i++;

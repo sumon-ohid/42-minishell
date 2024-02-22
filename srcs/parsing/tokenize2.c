@@ -18,6 +18,8 @@ char	*copy_until_char(char *str, char c)
 	char	*output;
 
 	i = 0;
+	if (ft_strchr(str, c) == 0)
+		return (ft_strdup(str));
 	while (str[i] && str[i] != c)
 		i++;
 	output = malloc(sizeof(char) * (i + 1));
