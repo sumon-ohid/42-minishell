@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/22 10:36:32 by codespace        ###   ########.fr       */
+/*   Updated: 2024/02/22 11:52:15 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -219,7 +219,7 @@ void				exit_builtin(t_data *node);
 // redirections
 
 int					ft_redirector(t_token *chain, int file_type, int mode, t_data *node);
-int					ft_redirect_checker(t_token *chain, int mode, t_data *node);
+int					ft_redirect_checker(t_token *chain, int mode, t_data *node, int killmode);
 void				ft_set(t_data *node);
 void				ft_restore(t_data *node);
 void				close_all(int ***origin, int max);
