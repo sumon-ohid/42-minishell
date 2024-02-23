@@ -167,7 +167,7 @@ int					handle_var_exist_in_local_vars(t_data *node, char *var,
 						t_vars *local_vars);
 int					ft_pwd(void);
 int					ft_unset(t_data *node, t_token *token, char *str);
-char				*ft_getenv(t_data *node, char *str);
+char				*ft_getenv(char *name, t_data *node);
 void				ft_lastvalue(t_data *node);
 char				*ft_lastval_str(t_data *node);
 void				ft_exit(t_data *node, int exit_val, char *msg);

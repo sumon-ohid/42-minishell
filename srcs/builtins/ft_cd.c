@@ -35,6 +35,23 @@ void	ft_setenv(t_data *node, char *name, char *value)
 	}
 }
 
+char	*ft_getenv(char *name, t_data *node)
+{
+	int	i;
+	int	len;
+
+	i = 0;
+	len = ft_strlen(name);
+	while (node->envp[i])
+	{
+		if (ft_strncmp(node->envp[i], name, len) == 0
+			&& node->envp[i][len] == '=')
+			return (node->envp[i] + len + 1);
+		i++;
+	}
+	return (NULL);
+}
+
 char	*get_current_directory(void)
 {
 	char	*dir;
@@ -47,6 +64,12 @@ char	*get_current_directory(void)
 
 void	change_directory(char *str, t_data *node)
 {
+	node->home = ft_getenv("HOME", node);
+	if (node->home == NULL)
+	{
+		ft_putstr("minishell: cd: HOME not set\n");
+		return ;
+	}
 	if (str == NULL || ft_strcmp(str, "--") == 0 || ft_strcmp(str, "~") == 0)
 		chdir(node->home);
 	else if (ft_strcmp(str, "-") == 0)
