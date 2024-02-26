@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_localvars.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 13:17:31 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/19 11:15:22 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/26 15:04:19 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ t_vars	*create_vars_node(char *str, t_data *node)
 		counter++;
 	new->first_half = ft_substr(str, 0, counter);
 	new->second_half = ft_substr(str, counter + 1, ft_strlen(str) - counter);
+	if (!new->second_half)
+		new->second_half = ft_strdup("");
 	new->str = ft_strdup(str);
 	if (!new->str || !new->first_half || !new->second_half)
 		ft_exit(node, 127, "malloc error in create_vars");

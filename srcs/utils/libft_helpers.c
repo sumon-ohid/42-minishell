@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 21:31:07 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/26 13:19:09 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/26 15:03:41 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	else
 		sub_str = (char *)malloc(sizeof(char) * (len + 1));
 	if (!sub_str)
-		return (0);
+		return (NULL);
 	counter = 0;
 	while (len && s[start])
 	{
