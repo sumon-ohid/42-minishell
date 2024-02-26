@@ -56,8 +56,10 @@ char	*get_env_value(char *arg, t_data *node)
 		{
 			if (node->envp[i][ft_strlen(tmp)] == '=')
 				env_value = node->envp[i] + ft_strlen(tmp) + 1;
-			else
+			else if (node->envp[i][ft_strlen(tmp)] == '\0')
 				env_value = "";
+			else
+				env_value = arg;
 			free(tmp);
 			return (env_value);
 		}
