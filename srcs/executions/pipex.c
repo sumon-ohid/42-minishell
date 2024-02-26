@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 20:21:29 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/22 12:31:26 by codespace        ###   ########.fr       */
+/*   Updated: 2024/02/26 12:16:40 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,10 @@ char	**comm_array(t_token *mark, t_data *node)
 {
 	char *full_comm;
 	char **result;
-	
+
 	full_comm = mark->str;
+	if (!full_comm || ft_strcmp("", full_comm) == 0)
+		ft_exit(node, 127, NULL);
 	if (mark->quote == NO_QUOTE)
 		return (ft_split(full_comm, ' ', 0, 0));
 	else
