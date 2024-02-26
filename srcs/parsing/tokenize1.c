@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize1.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:57:30 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/26 13:41:44 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/26 15:52:13 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,7 @@ char	*handle_envp(char *str, t_data *node)
 	while (str[i])
 	{
 		if (str[i] != '$')
-		{
 			char_append(&result, str[i]);
-		}
 		else
 		{
 			var_name = extract_var_name(str + i + 1);
