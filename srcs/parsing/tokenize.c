@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:50:09 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/22 09:54:53 by codespace        ###   ########.fr       */
+/*   Updated: 2024/02/26 14:02:44 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,11 @@ t_token	*create_token(char *word, t_data *node)
 	if (ft_strstr(word, "$") && new->quote != SINGLE_QUOTE)
 		new->str = handle_envp(word, node);
 	else
+	{
 		new->str = ft_strdup(word);
+		if (!new->str)
+			handle_error("Memory allocation failed at create token", 1);
+	}
 	new->type = 0;
 	return (new);
 }

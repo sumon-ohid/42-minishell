@@ -6,7 +6,7 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:27:41 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/22 17:22:01 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/26 13:50:55 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,9 @@ int	handle_export(t_data *node, char **var)
 int	ft_export(t_data *node, t_token *token, char *str)
 {
 	char	**var;
-
+	int		i;
+	
+	i = 0;
 	(void)token;
 	var = ft_split_special(str, ' ', 'E', 0);
 	if (var == NULL)

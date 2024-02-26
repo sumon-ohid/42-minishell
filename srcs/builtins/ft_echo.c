@@ -6,7 +6,7 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:25:07 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/20 16:40:46 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/26 13:55:30 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,20 +63,20 @@ char	*get_env_value(char *arg, t_data *node)
 		free(tmp);
 		i++;
 	}
-	while (local_vars)
-	{
-		if (ft_strcmp(local_vars->first_half, arg) == 0)
-		{
-			if (local_vars->deprecated == 0)
-			{
-				env_value = ft_strdup(local_vars->second_half);
-				if (!env_value)
-					ft_exit(node, 127, "malloc error in get_env");
-				return (env_value);
-			}
-		}
-		local_vars = local_vars->next;
-	}
+	// while (local_vars)
+	// {
+	// 	if (ft_strcmp(local_vars->first_half, arg) == 0)
+	// 	{
+	// 		if (local_vars->deprecated == 0)
+	// 		{
+	// 			env_value = ft_strdup(local_vars->second_half);
+	// 			if (!env_value)
+	// 				ft_exit(node, 127, "malloc error in get_env");
+	// 			return (env_value);
+	// 		}
+	// 	}
+	// 	local_vars = local_vars->next;
+	// }
 	return ("");
 }
 
