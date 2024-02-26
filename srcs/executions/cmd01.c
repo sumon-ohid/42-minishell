@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd01.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 17:28:11 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/22 12:16:01 by codespace        ###   ########.fr       */
+/*   Updated: 2024/02/26 13:21:25 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,12 @@ int	ft_commander(t_token *chain, t_data *node)
 	{
 		tmp = ft_strjoin(mark->str, " ", 1);
 		mark->str = tmp;
+		if (!mark->str)
+			ft_exit(node, -1, "memory allocation in commander failed");
 		tmp = ft_strjoin(mark->str, chain->str, 1);
 		mark->str = tmp;
 		if (!mark->str)
-		{
-			perror("Memory allocation failed");
-			exit(-1);
-		}
+			ft_exit(node, -1, "memory allocation in commander failed");
 		chain = chain->next;
 	}
 	mode(node, INTERACTIVE);

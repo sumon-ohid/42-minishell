@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:24:36 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/20 14:20:49 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/26 13:20:20 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,11 @@ void	ft_setenv(t_data *node, char *name, char *value)
 
 	i = 0;
 	str = ft_strjoin(name, "=", 0);
+	if (!str)
+		ft_exit(node, -1, "malloc fail in setenv");
 	new_entry = ft_strjoin(str, value, 1);
+	if (!new_entry)
+		ft_exit(node, -1, "malloc fail in setenv");
 	free(value);
 	while (node->envp[i])
 	{
@@ -96,11 +100,11 @@ void	ft_cd(char *str, t_data *node)
 
 	oldpwd = get_current_directory();
 	if (oldpwd == NULL)
-		exit(1);
+		ft_exit(node, -1, NULL);
 	change_directory(str, node);
 	pwd = get_current_directory();
 	if (pwd == NULL)
-		exit(1);
+		ft_exit(node, -1, NULL);
 	ft_setenv(node, "OLDPWD", oldpwd);
 	ft_setenv(node, "PWD", pwd);
 }

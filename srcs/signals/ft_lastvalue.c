@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lastvalue.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:55:33 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/07 14:18:16 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/26 13:17:57 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,6 @@ char	*ft_lastval_str(t_data *node)
 	else
 		result = ft_itoa(127);
 	if (!result)
-		exit(EXIT_FAILURE);
+		ft_exit(node, -1, "malloc in itoa failed");
 	return (result);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:25:07 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/26 13:55:30 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/26 13:26:23 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ char	*get_env_value(char *arg, t_data *node)
 	char	*env_value;
 	char	*tmp;
 	int		i;
-	t_vars	*local_vars;
+	//t_vars	*local_vars;
 
 	i = 0;
-	local_vars = node->local_vars;
+	//local_vars = node->local_vars;
 	while (node->envp[i])
 	{
 		tmp = copy_until_char(node->envp[i], '=');

@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 20:21:29 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/26 12:16:40 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/26 13:21:55 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ char	*pathfinder(char **envp, char *comm, t_data *node)
 		ft_exit(node, -1, "malloc failure at pathfinder");
 	counter = -1;
 	while (poss_paths[++counter])
-		poss_paths[counter] = ft_strjoin(poss_paths[counter], comm2, 1);
+		poss_paths[counter] = ft_strjoin(poss_paths[counter], comm2, 1); //TODO: needs to be protected
 	return (extract_path(comm2, poss_paths, comm, node));
 }
 

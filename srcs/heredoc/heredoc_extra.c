@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_extra.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 14:59:41 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/22 11:47:21 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/26 13:25:07 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,8 @@ char	*handle_signals(char *line)
 	return (line);
 }
 
-char	*append_line_to_heredoc(char *heredoc, char *line, size_t *len)
+char	*append_line_to_heredoc(char *heredoc, char *line,
+	size_t *len, t_data *node)
 {
 	char	*tmp;
 
@@ -85,17 +86,19 @@ char	*append_line_to_heredoc(char *heredoc, char *line, size_t *len)
 	{
 		tmp = malloc_heredoc(heredoc, *len, *len + ft_strlen(line) + 2);
 		if (!tmp)
-			handle_error("Realloc failed at Heredoc", 1);
+			ft_exit(node, -1, "realloc failed at heredoc");
 		heredoc = tmp;
 		if (*len > 0)
-			heredoc = ft_strjoin(heredoc, "\n", 1);
+			heredoc = ft_strjoin(heredoc, "\n", 1); //this is also not protected
 		heredoc = ft_strjoin(heredoc, line, 1);
+		if (!heredoc)
+			ft_exit(node, -1, "malloc failed at heredoc");
 	}
 	else
 	{
 		heredoc = malloc(ft_strlen(line) + 1);
 		if (!heredoc)
-			handle_error("Malloc failed at Heredoc", 1);
+			ft_exit(node, -1, "malloc failed at heredoc");
 		ft_strcpy(heredoc, line);
 	}
 	*len += ft_strlen(line) + 1;
@@ -119,12 +122,14 @@ char	*ft_heredoc(t_data *node, char *str)
 			break ;
 		if (ft_strcmp(line, str) == 0)
 			break ;
-		heredoc = append_line_to_heredoc(heredoc, line, &len);
+		heredoc = append_line_to_heredoc(heredoc, line, &len, node);
 		free(line);
 	}
 	mode(node, NON_INTERACTIVE);
 	if (line != NULL)
 		free(line);
 	heredoc = ft_strjoin(heredoc, "\n", 1);
+	if (!heredoc)
+			ft_exit(node, -1, "malloc failed at heredoc");
 	return (heredoc);
 }

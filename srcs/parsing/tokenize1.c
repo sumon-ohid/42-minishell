@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize1.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:57:30 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/26 13:56:15 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/26 13:25:31 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ char	*handle_envp(char *str, t_data *node)
 			var_name = extract_var_name(str + i + 1);
 			var_value = get_env_value(var_name, node);
 			result = ft_strjoin(result, var_value, 1);
+			if (!result)
+				ft_exit(node, -1, "malloc failed at handle envp");
 			i += ft_strlen(var_name);
 			free(var_name);
 		}

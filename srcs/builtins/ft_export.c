@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:27:41 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/26 13:50:55 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/26 13:26:46 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,9 +100,9 @@ int	handle_export(t_data *node, char **var)
 int	ft_export(t_data *node, t_token *token, char *str)
 {
 	char	**var;
-	int		i;
+	//int		i;
 	
-	i = 0;
+	//i = 0;
 	(void)token;
 	var = ft_split_special(str, ' ', 'E', 0);
 	if (var == NULL)
