@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:50:09 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/26 14:02:44 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/26 13:40:38 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int	determine_type(char *word, int prev_type, int quote)
 }
 
 // TODO: account for $?
-// malloc protection
 t_token	*create_token(char *word, t_data *node)
 {
 	t_token	*new;
@@ -43,7 +42,7 @@ t_token	*create_token(char *word, t_data *node)
 		return (0);
 	new = malloc(sizeof(t_token));
 	if (!new)
-		handle_error("Memory allocation failed at create token", 1);
+		ft_exit(node, -1, "memory allocation failed at create token");
 	new->previous = NULL;
 	new->next = NULL;
 	new->arr = NULL;
@@ -55,7 +54,7 @@ t_token	*create_token(char *word, t_data *node)
 	{
 		new->str = ft_strdup(word);
 		if (!new->str)
-			handle_error("Memory allocation failed at create token", 1);
+			ft_exit(node, -1, "memory allocation failed at create token");
 	}
 	new->type = 0;
 	return (new);
@@ -123,6 +122,8 @@ void	process_words(t_token ***origin, char **units, char *str, t_data *node)
 	while (counter2 < pipe_counter(str))
 	{
 		words = ft_split_special(units[counter2], ' ', 'X', 0);
+		if (!words)
+			ft_exit(node, -1, "malloc failed at process_words function");
 		while (words[counter])
 		{
 			create_and_link_token(origin, counter2, words[counter], node);

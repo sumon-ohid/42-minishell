@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 14:32:03 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/19 20:06:42 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/26 13:36:32 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	fork_processes(int processes, t_data *node, t_token **tokens,
 			exit_builtin(node);
 		}
 		else if (node->pid[i] == -1)
-			handle_error("Fork failed", 1);
+			ft_exit(node, -1, "forking failed");
 		else
 			parent_close(node, i, processes);
 		i++;

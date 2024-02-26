@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_special_edition.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 14:27:31 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/22 10:38:41 by codespace        ###   ########.fr       */
+/*   Updated: 2024/02/26 13:39:20 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,7 @@ char	**ft_split_special(char *s, char c, char mode, size_t j)
 	i = 0;
 	s_split = malloc(sizeof(char *) * (word_counter(s, c, 0, 0) + 1));
 	if (s_split == NULL)
-		handle_error("malloc in split failed", -1);
+		return (NULL);
 	while (s[i] && j < (word_counter(s, c, 0, 0)))
 	{
 		while (s[i] == c)
@@ -166,7 +166,7 @@ char	**ft_split_special(char *s, char c, char mode, size_t j)
 		k = l_count(s, i, c);
 		s_split[j] = (char *)malloc(sizeof(char) * (k - i + 1));
 		if (!s_split[j])
-			handle_error("malloc in split failed", -1);
+			return(NULL);
 		if (mode == 'P')
 			split_helper_pipes(s, c, &i, s_split[j]);
 		else

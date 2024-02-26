@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:57:30 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/26 13:25:31 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/26 13:41:44 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ char	*extract_var_name(char *str)
 	return (output);
 }
 
+//TODO: you cannot return itoa and dup directly because if malloc fail considerations, or you have to handle it outside of function
 char	*handle_envp(char *str, t_data *node)
 {
 	char	*result;
@@ -43,7 +44,7 @@ char	*handle_envp(char *str, t_data *node)
 	i = 0;
 	result = malloc(sizeof(char) * (ft_strlen(str) + 1));
 	if (!result)
-		handle_error("malloc in handle_envp failed", 1);
+		ft_exit(node, -1, "malloc in handle_envp failed");
 	result[0] = '\0';
 	if (ft_strcmp(str, "$?") == 0)
 	{

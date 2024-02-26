@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export_extra.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 09:03:06 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/22 17:17:13 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/26 13:36:11 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,17 +52,17 @@ int	handle_var_not_exists(t_data *node, char *var)
 	i = 0;
 	new_envp = malloc(sizeof(char *) * (ft_strlen_arr(node->envp) + 2));
 	if (!new_envp)
-		handle_error("Malloc failed at ft_export function", 1);
+		ft_exit(node, -1, "malloc failed at ft_export function");
 	while (node->envp[i])
 	{
 		new_envp[i] = ft_strdup(node->envp[i]);
 		if (!new_envp[i])
-			handle_error("Malloc failed at ft_export function", 1);
+			ft_exit(node, -1, "malloc failed at ft_export function");
 		i++;
 	}
 	new_envp[i] = ft_strdup(var);
 	if (!new_envp[i])
-		handle_error("Malloc failed at ft_export function", 1);
+		ft_exit(node, -1, "malloc failed at ft_export function");
 	new_envp[i + 1] = NULL;
 	free_arr(node->envp);
 	node->envp = new_envp;
