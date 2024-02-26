@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 10:40:57 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/21 11:27:14 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/26 12:27:50 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,5 @@ void	read_from_heredoc(t_token *heredoc)
 	close(tomlo[0]);
 	write(tomlo[1], heredoc->heredoc_data, ft_strlen(heredoc->heredoc_data));
 	close(tomlo[1]);
-	free(heredoc->heredoc_data);
+	//free(heredoc->heredoc_data);
 }
