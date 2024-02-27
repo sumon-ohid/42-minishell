@@ -6,7 +6,7 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:27:41 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/27 09:52:23 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/27 11:46:55 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,10 +87,15 @@ int	handle_export(t_data *node, char **var)
 	while (var[i])
 	{
 		var_exists = check_if_var_exists(node, var[i]);
-		if (var_exists == NOT_EXIST)
-			handle_var_not_exists(node, var[i]);
-		else if (var_exists == EXIST_ENVP)
-			handle_var_exist_in_envp(node, var[i]);
+		if (var_name_check(var[i]) == 1)
+			printf("minishell: export: `%s': not a valid identifier\n", var[i]);
+		else
+		{
+			if (var_exists == NOT_EXIST)
+				handle_var_not_exists(node, var[i]);
+			else if (var_exists == EXIST_ENVP)
+				handle_var_exist_in_envp(node, var[i]);
+		}
 		i++;
 	}
 	free_arr(var);

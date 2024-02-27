@@ -6,11 +6,36 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 09:03:06 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/27 09:51:47 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/27 11:46:44 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+int	var_name_check(char *var)
+{
+	int		i;
+	char	*var_name;
+
+	i = 0;
+	var_name = copy_until_char(var, '=');
+	while (var_name[i] && var_name[i] != '=')
+	{
+		if (!ft_isalpha(var_name[i]) && var_name[i] != '_')
+		{
+			free(var_name);
+			return (1);
+		}
+		i++;
+	}
+	if (var_name[i] == '=' && !isalpha(var_name[i - 1]))
+	{
+		free(var_name);
+		return (1);
+	}
+	free(var_name);
+	return (0);
+}
 
 int	ft_strlen_arr(char **arr)
 {

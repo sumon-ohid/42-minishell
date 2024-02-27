@@ -6,7 +6,7 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/27 10:04:32 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/27 11:44:32 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,7 @@ int					ft_strchr(char *str, char c);
 int					ft_isspace(int c);
 int					ft_isalnum(int c);
 char				*ft_itoa(int n);
+int					ft_isalpha(char c);
 
 // heredoc
 char				*ft_heredoc(t_data *node, char *str);
@@ -165,6 +166,7 @@ void				print_argument(char *arg, t_data *node);
 char				*get_env_value(char *arg, t_data *node);
 char				**ft_env(t_data *node);
 int					ft_export(t_data *node, t_token *token, char *str);
+int					var_name_check(char *var);
 int					handle_var_exist_in_envp(t_data *node, char *var);
 int					handle_var_exist_in_local_vars(t_data *node, char *var,
 						t_vars *local_vars);

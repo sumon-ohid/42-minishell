@@ -26,6 +26,7 @@ SRC = 	srcs/main/main.c \
 		srcs/utils/libft_helpers1.c \
 		srcs/utils/libft_helpers2.c \
 		srcs/utils/libft_helpers3.c \
+		srcs/utils/libft_helpers4.c \
 		srcs/parsing/tokenize.c\
 		srcs/parsing/tokenize1.c\
 		srcs/parsing/tokenize2.c\
