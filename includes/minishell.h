@@ -155,7 +155,7 @@ int					heredoc_counter(t_token *tokens);
 void				read_from_heredoc(t_token *heredoc);
 
 // builtins
-void				ft_cd(char *str, t_data *node);
+int					ft_cd(char *str, t_data *node);
 void				ft_echo(char *line, t_data *node, t_token *head);
 void				show_dir(void);
 void				print_argument(char *arg, t_data *node);

@@ -17,9 +17,9 @@ int	entry_check2(t_data *node, t_token *head, char *line)
 	if (ft_strcmp(head->str, "cd") == 0)
 	{
 		if (head->next)
-			ft_cd(head->next->str, node);
+			return(ft_cd(head->next->str, node));
 		else
-			ft_cd(NULL, node);
+			return(ft_cd(NULL, node));
 	}
 	else if (ft_strcmp(head->str, "echo") == 0)
 		ft_echo(line, node, head);

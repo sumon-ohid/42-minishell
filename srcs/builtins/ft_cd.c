@@ -66,45 +66,48 @@ char	*get_current_directory(void)
 	return (dir);
 }
 
-void	change_directory(char *str, t_data *node)
+int	change_directory(char *str, t_data *node)
 {
 	node->home = ft_getenv("HOME", node);
 	if (node->home == NULL)
 	{
 		ft_putstr("minishell: cd: HOME not set\n");
-		return ;
+		return (1);
 	}
 	if (str == NULL || ft_strcmp(str, "--") == 0 || ft_strcmp(str, "~") == 0)
+	{
 		chdir(node->home);
+		return (0);
+	}
 	else if (ft_strcmp(str, "-") == 0)
 	{
 		chdir(node->oldpwd);
 		printf("%s\n", node->oldpwd);
+		return (0);
 	}
-	else
+	else if (chdir(str) == -1)
 	{
-		if (chdir(str) == -1)
-		{
-			ft_putstr("cd: no such directory: ");
-			ft_putstr(str);
-			ft_putstr("\n");
-			return ;
-		}
+		printf("minishell: cd: %s: no such directory\n", str);
+		return (1);
 	}
+	return (0);
 }
 
-void	ft_cd(char *str, t_data *node)
+int	ft_cd(char *str, t_data *node)
 {
 	char	*oldpwd;
 	char	*pwd;
+	int 	ret;
 
+	ret = 0;
 	oldpwd = get_current_directory();
 	if (oldpwd == NULL)
 		ft_exit(node, -1, NULL);
-	change_directory(str, node);
+	ret = change_directory(str, node);
 	pwd = get_current_directory();
 	if (pwd == NULL)
 		ft_exit(node, -1, NULL);
 	ft_setenv(node, "OLDPWD", oldpwd);
 	ft_setenv(node, "PWD", pwd);
+	return (ret);
 }

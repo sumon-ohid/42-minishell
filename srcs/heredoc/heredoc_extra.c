@@ -37,28 +37,6 @@ char	*malloc_heredoc(char *ptr, size_t old_size, size_t new_size)
     return (new_ptr);
 }
 
-void	*ft_realloc_heredoc(void *ptr, size_t old_size, size_t new_size)
-{
-	void	*new_ptr;
-
-	if (new_size == 0)
-	{
-		free(ptr);
-		return (malloc(1));
-	}
-	if (ptr == NULL)
-		return (malloc(new_size));
-	if (new_size <= old_size)
-		return (ptr);
-	new_ptr = malloc(new_size);
-	if (new_ptr)
-	{
-		ft_memcpy(new_ptr, ptr, old_size);
-		free(ptr);
-	}
-	return (new_ptr);
-}
-
 char	*handle_signals(char *line)
 {
 	if (g_signal == CTRL_C)
