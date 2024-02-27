@@ -6,7 +6,7 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 13:51:32 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/26 14:54:04 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/27 09:45:23 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ int	check_invalid_sequences(char c, char prev_char, char *line)
 		return (ft_lexer_error(line));
 	else if (c == '|' && prev_char == '<')
 		return (ft_lexer_error(line));
-	// else if (c == '>' && prev_char == '|')
-	// 	return (ft_lexer_error(line));
-	// else if (c == '<' && prev_char == '|')
-	// 	return (ft_lexer_error(line));
+	else if (c == '>' && prev_char == '|')
+		return (ft_lexer_error(line));
+	else if (c == '<' && prev_char == '|')
+		return (ft_lexer_error(line));
 	else if (c == '<' && prev_char == '<' && line[2] == '<')
 		return (ft_lexer_error(line));
 	else if (c == '>' && prev_char == '>' && line[2] == '>')
@@ -61,9 +61,6 @@ int	check_invalid_next_chars(char c, char *line, int i)
 	else if (c == '<' && line[i + 1] == ' ' && !(line[i + 2] >= 'A' && line[i
 				+ 2] <= 'z'))
 		return (ft_lexer_error(line));
-	// else if (c == '|' && line[i + 1] == ' ' && !(line[i + 2] >= 'A' && line[i
-	// 			+ 2] <= 'z'))
-	//	return (ft_lexer_error(line));
 	else if (c == '=' && line[i + 1] == ' ')
 		return (ft_lexer_error(line));
 	return (1);

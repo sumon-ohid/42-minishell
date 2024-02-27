@@ -1,27 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft_helpers4.c                                   :+:      :+:    :+:   */
+/*   ft_free2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/22 12:48:37 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/27 09:48:28 by msumon           ###   ########.fr       */
+/*   Created: 2024/02/27 10:03:57 by msumon            #+#    #+#             */
+/*   Updated: 2024/02/27 10:04:15 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-char	*ft_strncpy(char *dest, char *src, size_t n)
+void	ft_cleanup(t_data *node, t_token **tokens, char *line, char **arr)
 {
-	size_t	i;
-
-	i = 0;
-	while (src[i] && i < n)
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	dest[i] = '\0';
-	return (dest);
+	free_tokens(tokens, node->processes);
+	free(line);
+	free_arr(arr);
 }

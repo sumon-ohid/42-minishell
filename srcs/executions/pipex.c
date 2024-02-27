@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 20:21:29 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/26 13:21:55 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/27 10:02:32 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,8 @@ char	*check_og_comm(char *og_comm)
 		return (NULL);
 }
 
-void	free_poss_paths(char **poss_paths)
-{
-	int	counter;
-
-	counter = 0;
-	while (poss_paths[counter])
-	{
-		free(poss_paths[counter++]);
-	}
-	free(poss_paths);
-}
-
 char	*extract_path(char *comm2, char **poss_paths, char *og_comm,
-	t_data *node)
+		t_data *node)
 {
 	int		counter;
 	char	*res;
@@ -60,6 +48,7 @@ char	*extract_path(char *comm2, char **poss_paths, char *og_comm,
 	return (check_og_comm(og_comm));
 }
 
+// TODO: needs to be protected
 char	*pathfinder(char **envp, char *comm, t_data *node)
 {
 	char	**poss_paths;
@@ -84,14 +73,14 @@ char	*pathfinder(char **envp, char *comm, t_data *node)
 		ft_exit(node, -1, "malloc failure at pathfinder");
 	counter = -1;
 	while (poss_paths[++counter])
-		poss_paths[counter] = ft_strjoin(poss_paths[counter], comm2, 1); //TODO: needs to be protected
+		poss_paths[counter] = ft_strjoin(poss_paths[counter], comm2, 1);
 	return (extract_path(comm2, poss_paths, comm, node));
 }
 
 char	**comm_array(t_token *mark, t_data *node)
 {
-	char *full_comm;
-	char **result;
+	char	*full_comm;
+	char	**result;
 
 	full_comm = mark->str;
 	if (!full_comm || ft_strcmp("", full_comm) == 0)

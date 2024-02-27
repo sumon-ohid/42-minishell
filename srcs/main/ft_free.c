@@ -6,11 +6,23 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 18:25:41 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/21 11:28:03 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/27 10:01:58 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+void	free_poss_paths(char **poss_paths)
+{
+	int	counter;
+
+	counter = 0;
+	while (poss_paths[counter])
+	{
+		free(poss_paths[counter++]);
+	}
+	free(poss_paths);
+}
 
 void	free_arr(char **arr)
 {

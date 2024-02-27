@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_extra.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 14:35:54 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/26 13:42:38 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/27 09:45:49 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ char	**parse_input(char *line)
 	return (tokens);
 }
 
-//TODO: somehow we have to replace handle error with ft_exit, but for that we have to move node here
+// TODO: somehow we have to replace handle error with ft_exit,
+//	but for that we have to move node here
 char	*ft_upgrade_spaces(char *line, int i, int j, int in_quotes)
 {
 	char	*result;

@@ -6,7 +6,7 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:25:07 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/26 15:48:18 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/27 10:00:50 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,8 @@ char	*get_env_value(char *arg, t_data *node)
 	char	*env_value;
 	char	*tmp;
 	int		i;
-	//t_vars	*local_vars;
 
 	i = 0;
-	//local_vars = node->local_vars;
 	while (node->envp[i])
 	{
 		tmp = copy_until_char(node->envp[i], '=');
@@ -66,40 +64,8 @@ char	*get_env_value(char *arg, t_data *node)
 		free(tmp);
 		i++;
 	}
-	// while (local_vars)
-	// {
-	// 	if (ft_strcmp(local_vars->first_half, arg) == 0)
-	// 	{
-	// 		if (local_vars->deprecated == 0)
-	// 		{
-	// 			env_value = ft_strdup(local_vars->second_half);
-	// 			if (!env_value)
-	// 				ft_exit(node, 127, "malloc error in get_env");
-	// 			return (env_value);
-	// 		}
-	// 	}
-	// 	local_vars = local_vars->next;
-	// }
 	return ("");
 }
-
-// void	show_dir(void)
-// {
-// 	DIR				*d;
-// 	struct dirent	*dir;
-
-// 	d = opendir(".");
-// 	dir = readdir(d);
-// 	while (dir != NULL)
-// 	{
-// 		if (dir->d_name[0] != '.')
-// 		{
-// 			ft_putstr(dir->d_name);
-// 			ft_putchar(' ');
-// 		}
-// 	}
-// 	closedir(d);
-// }
 
 void	ft_echo(char *line, t_data *node, t_token *head)
 {
@@ -116,8 +82,6 @@ void	ft_echo(char *line, t_data *node, t_token *head)
 	}
 	while (head)
 	{
-		// if the command is echo then any built-in command is not
-		// going into condition
 		if (head->type == FLAG)
 		{
 			if (fl)

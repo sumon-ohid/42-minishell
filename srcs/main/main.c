@@ -6,18 +6,11 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:17:43 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/26 13:17:13 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/27 10:04:11 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-void	ft_cleanup(t_data *node, t_token **tokens, char *line, char **arr)
-{
-	free_tokens(tokens, node->processes);
-	free(line);
-	free_arr(arr);
-}
 
 int	entry_check(t_data *node, char *line)
 {
@@ -46,11 +39,11 @@ int	entry_check(t_data *node, char *line)
 	return (ret_val);
 }
 
-char **dup_envp(char **envp)
+char	**dup_envp(char **envp)
 {
-	int counter;
-	char **result;
-	int counter2;
+	int		counter;
+	char	**result;
+	int		counter2;
 
 	counter = 0;
 	while (envp[counter])
@@ -59,7 +52,7 @@ char **dup_envp(char **envp)
 	if (!result)
 		return (NULL);
 	counter2 = 0;
-	while (counter2 < counter - 1) //or minus 1
+	while (counter2 < counter - 1)
 	{
 		result[counter2] = ft_strdup(envp[counter2]);
 		if (!result[counter2])

@@ -6,13 +6,14 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/22 16:55:25 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/27 10:04:32 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+//  colors
 # define GREEN "\033[32m"
 # define RESET "\033[0m"
 
@@ -61,8 +62,10 @@
 # define EXIST_ENVP 1
 # define EXIST_LOCAL_VARS 2
 
+// for signals
 extern volatile sig_atomic_t	g_signal;
 
+// token mode
 typedef struct s_token
 {
 	char			*str;
@@ -175,10 +178,11 @@ void				ft_localvars(t_token **tokens, t_data *node, int processes);
 char				*copy_until_char(char *str, char c);
 char				*copy_after_char(char *str, char c);
 void				ft_localvars(t_token **tokens, t_data *node, int processes);
-char				*malloc_heredoc(char *ptr, size_t old_size, size_t new_size);
+char				*malloc_heredoc(char *ptr, size_t old_size,
+						size_t new_size);
 void				ft_setenv(t_data *node, char *name, char *value);
 int					handle_var_not_exists(t_data *node, char *var);
-int 				ft_strlen_arr(char **arr);
+int					ft_strlen_arr(char **arr);
 
 // take_input
 int					entry_check(t_data *node, char *line);
@@ -221,12 +225,16 @@ void				free_node(t_data *node);
 void				exit_builtin(t_data *node);
 void				ft_free_fds(t_data *node);
 void				free_vars(t_vars *local_vars);
-
+void				free_poss_paths(char **poss_paths);
+void				ft_cleanup(t_data *node, t_token **tokens,
+						char *line, char **arr);
 
 // redirections
 
-int					ft_redirector(t_token *chain, int file_type, int mode, t_data *node);
-int					ft_redirect_checker(t_token *chain, int mode, t_data *node, int killmode);
+int					ft_redirector(t_token *chain, int file_type,
+						int mode, t_data *node);
+int					ft_redirect_checker(t_token *chain, int mode,
+						t_data *node, int killmode);
 void				ft_set(t_data *node);
 void				ft_restore(t_data *node);
 void				close_all(int ***origin, int max);
@@ -235,7 +243,8 @@ void				close_all(int ***origin, int max);
 char				*extract_path(char *comm2, char **poss_paths,
 						char *og_comm, t_data *node);
 char				*pathfinder(char **envp, char *comm, t_data *node);
-void				extract_find_execute(char **envp, t_token *mark, t_data *node);
+void				extract_find_execute(char **envp, t_token *mark,
+						t_data *node);
 void				parent_close(t_data *node, int i, int processes);
 
 // signals

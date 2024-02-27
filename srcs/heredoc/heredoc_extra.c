@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_extra.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 14:59:41 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/26 13:25:07 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/27 10:46:15 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void ft_memset(void *b, int c, size_t len)
+void	ft_memset(void *b, int c, size_t len)
 {
 	unsigned char	*ptr;
 
@@ -23,18 +23,18 @@ void ft_memset(void *b, int c, size_t len)
 
 char	*malloc_heredoc(char *ptr, size_t old_size, size_t new_size)
 {
-    char	*new_ptr;
+	char	*new_ptr;
 
-    new_ptr = malloc(new_size);
-    if (!new_ptr)
-        return (NULL);
-    ft_memset(new_ptr, 0, new_size);
-    if (ptr)
-    {
-        ft_memcpy(new_ptr, ptr, old_size);
-        free(ptr);
-    }
-    return (new_ptr);
+	new_ptr = malloc(new_size);
+	if (!new_ptr)
+		return (NULL);
+	ft_memset(new_ptr, 0, new_size);
+	if (ptr)
+	{
+		ft_memcpy(new_ptr, ptr, old_size);
+		free(ptr);
+	}
+	return (new_ptr);
 }
 
 char	*handle_signals(char *line)
@@ -55,8 +55,8 @@ char	*handle_signals(char *line)
 	return (line);
 }
 
-char	*append_line_to_heredoc(char *heredoc, char *line,
-	size_t *len, t_data *node)
+char	*append_line_to_heredoc(char *heredoc, char *line, size_t *len,
+		t_data *node)
 {
 	char	*tmp;
 
@@ -67,7 +67,11 @@ char	*append_line_to_heredoc(char *heredoc, char *line,
 			ft_exit(node, -1, "realloc failed at heredoc");
 		heredoc = tmp;
 		if (*len > 0)
-			heredoc = ft_strjoin(heredoc, "\n", 1); //this is also not protected
+		{
+			heredoc = ft_strjoin(heredoc, "\n", 1);
+			if (!heredoc)
+				ft_exit(node, -1, "malloc failed at heredoc");
+		}
 		heredoc = ft_strjoin(heredoc, line, 1);
 		if (!heredoc)
 			ft_exit(node, -1, "malloc failed at heredoc");
@@ -108,6 +112,6 @@ char	*ft_heredoc(t_data *node, char *str)
 		free(line);
 	heredoc = ft_strjoin(heredoc, "\n", 1);
 	if (!heredoc)
-			ft_exit(node, -1, "malloc failed at heredoc");
+		ft_exit(node, -1, "malloc failed at heredoc");
 	return (heredoc);
 }

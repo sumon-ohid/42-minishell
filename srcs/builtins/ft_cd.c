@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:24:36 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/26 13:20:20 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/27 09:52:16 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int	ft_cd(char *str, t_data *node)
 {
 	char	*oldpwd;
 	char	*pwd;
-	int 	ret;
+	int		ret;
 
 	ret = 0;
 	oldpwd = get_current_directory();

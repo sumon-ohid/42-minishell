@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:50:09 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/26 13:40:38 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/27 09:47:19 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ int	determine_type(char *word, int prev_type, int quote)
 		return (REDIR_OUT_APPEND);
 	else if (ft_strcmp("|", word) == 0 && quote == NO_QUOTE)
 		return (PIPE);
-	else if (check_builtins(word) == 0 && (!prev_type
-		|| prev_type == INFILE || prev_type == DELIM))
+	else if (check_builtins(word) == 0 && (!prev_type || prev_type == INFILE
+			|| prev_type == DELIM))
 		return (BUILTIN);
 	else
 		return (check_prevs(word, prev_type));

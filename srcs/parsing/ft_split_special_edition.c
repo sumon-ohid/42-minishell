@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_special_edition.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 14:27:31 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/26 13:39:20 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/27 09:46:21 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,7 +166,7 @@ char	**ft_split_special(char *s, char c, char mode, size_t j)
 		k = l_count(s, i, c);
 		s_split[j] = (char *)malloc(sizeof(char) * (k - i + 1));
 		if (!s_split[j])
-			return(NULL);
+			return (NULL);
 		if (mode == 'P')
 			split_helper_pipes(s, c, &i, s_split[j]);
 		else

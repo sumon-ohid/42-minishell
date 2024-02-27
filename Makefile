@@ -29,6 +29,7 @@ SRC = 	srcs/main/main.c \
 		srcs/parsing/tokenize.c\
 		srcs/parsing/tokenize1.c\
 		srcs/parsing/tokenize2.c\
+		srcs/parsing/tokenize3.c\
 		srcs/builtins/ft_cd.c \
 		srcs/builtins/ft_echo.c \
 		srcs/builtins/ft_echo_extra.c \
@@ -40,6 +41,7 @@ SRC = 	srcs/main/main.c \
 		srcs/builtins/ft_exit.c \
 		srcs/builtins/ft_localvars.c \
 		srcs/main/ft_free.c \
+		srcs/main/ft_free2.c \
 		srcs/main/handle_error.c \
 		srcs/heredoc/heredoc.c \
 		srcs/heredoc/heredoc_extra.c \
