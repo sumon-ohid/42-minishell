@@ -6,7 +6,7 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:24:36 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/27 09:52:16 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/27 12:06:12 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	change_directory(char *str, t_data *node)
 	node->home = ft_getenv("HOME", node);
 	if (node->home == NULL)
 	{
-		ft_putstr("minishell: cd: HOME not set\n");
+		ft_putstr_fd("minishell: cd: HOME not set\n", 2);
 		return (1);
 	}
 	if (str == NULL || ft_strcmp(str, "--") == 0 || ft_strcmp(str, "~") == 0)
@@ -87,7 +87,7 @@ int	change_directory(char *str, t_data *node)
 	}
 	else if (chdir(str) == -1)
 	{
-		printf("minishell: cd: %s: no such directory\n", str);
+		ft_putstr_fd("minishell: cd: no such directory\n", 2);
 		return (1);
 	}
 	return (0);
