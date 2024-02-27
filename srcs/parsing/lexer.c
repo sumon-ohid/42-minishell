@@ -80,11 +80,11 @@ int	ft_lexical_checker(char *line, int in_single_quote, int in_double_quote,
 			in_single_quote = !in_single_quote;
 		else if (c == '\"' && !in_single_quote)
 			in_double_quote = !in_double_quote;
-		else if (!in_single_quote && !in_double_quote)
+		if (!in_single_quote && !in_double_quote)
 		{
 			if (!check_invalid_sequences(c, prev_char, line)
-				|| !check_invalid_endings(c, line, i)
-				|| !check_invalid_next_chars(c, line, i))
+				|| !check_invalid_endings(c, line, i))
+				//|| !check_invalid_next_chars(c, line, i))
 				return (0);
 		}
 		prev_char = c;
