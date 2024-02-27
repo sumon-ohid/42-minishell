@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 17:28:11 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/26 13:21:25 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/27 18:08:07 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,6 @@ int	execute_chain(t_data *node, t_token *chain, char *line, int processes)
 	t_token	*proxy;
 
 	proxy = chain;
-	if (!chain)
-		return (-1);
 	while (proxy)
 	{
 		if (proxy->type == BUILTIN)

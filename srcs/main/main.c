@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:17:43 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/27 10:04:11 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/27 18:06:06 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void	initialize_node(t_data *node, char **envp)
 	node->home = getenv("HOME");
 	node->oldpwd = getenv("OLDPWD");
 	node->pwd = getenv("PWD");
+	node->in_child = 0;
 }
 
 void	ft_initialize(t_data *node, char **envp)

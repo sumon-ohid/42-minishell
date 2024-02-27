@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/27 11:44:32 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/27 18:01:36 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ typedef struct s_data
 	int					cur_proc;
 	int					std_in;
 	int					std_out;
+	int					in_child;
 	char				**envp;
 	char				*oldpwd;
 	char				*pwd;

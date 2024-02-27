@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd02.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 17:31:58 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/27 09:51:28 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/27 18:05:38 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ int	entry_check2(t_data *node, t_token *head, char *line)
 		write(1, "\033[H\033[J", 6);
 	else if (ft_strcmp(head->str, "pwd") == 0)
 		ft_pwd();
-	else if (ft_strcmp(head->str, "exit") == 0)
+	else if (ft_strcmp(head->str, "exit") == 0 && node->in_child == 0)
 		ft_exit(node, 0, NULL);
 	else if (ft_strstr(head->str, "export") != 0)
 		ft_export(node, head, line);
 	else if (ft_strstr(head->str, "unset") != 0)
 		ft_unset(node, head, line);
-	else
+	else if (ft_strcmp(head->str, "exit") != 0)
 		nocomm_error(head->str);
 	ft_restore(node);
 	return (1);
