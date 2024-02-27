@@ -6,7 +6,7 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 14:59:41 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/27 10:46:15 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/27 10:55:12 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,11 @@ char	*handle_signals(char *line)
 char	*append_line_to_heredoc(char *heredoc, char *line, size_t *len,
 		t_data *node)
 {
-	char	*tmp;
-
 	if (heredoc)
 	{
-		tmp = malloc_heredoc(heredoc, *len, *len + ft_strlen(line) + 2);
-		if (!tmp)
-			ft_exit(node, -1, "realloc failed at heredoc");
-		heredoc = tmp;
+		heredoc = malloc_heredoc(heredoc, *len, *len + ft_strlen(line) + 2);
+		if (!heredoc)
+			ft_exit(node, -1, "malloc failed at heredoc");
 		if (*len > 0)
 		{
 			heredoc = ft_strjoin(heredoc, "\n", 1);
