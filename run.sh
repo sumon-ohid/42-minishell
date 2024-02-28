@@ -2,8 +2,8 @@
 
 norminette -RCheckForbiddenHeader
 
-make re
+make smooth
 
-valgrind --suppressions=valgrind.supp --leak-check=full --show-leak-kinds=all --track-origins=yes ./minishell
+valgrind --suppressions=valgrind.supp --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes ./minishell
 
 make fclean

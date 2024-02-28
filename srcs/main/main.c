@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:17:43 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/28 10:46:01 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/28 21:45:37 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,19 @@ void	initialize_node(t_data *node, char **envp)
 	node->pwd = getenv("PWD");
 	node->in_child = 0;
 }
+void	eof_free(t_data *node)
+{
+	printf("exit\n");
+	//free(input);
+	free_vars(node->local_vars);
+	ft_free_array(node->envp);
+	if (node->std_in != -1)
+		close(node->std_in);
+	if (node->std_out != -1)
+		close(node->std_out);
+	free(node);
+	exit(EXIT_FAILURE);
+}
 
 void	ft_initialize(t_data *node, char **envp)
 {
@@ -107,12 +120,7 @@ void	ft_initialize(t_data *node, char **envp)
 		mode(node, NON_INTERACTIVE);
 		if (!input)
 		{
-			printf("exit\n");
-			free(input);
-			free_vars(node->local_vars);
-			ft_free_array(node->envp);
-			free(node);
-			exit(EXIT_FAILURE);
+			eof_free(node);
 		}
 		else if (*input)
 		{
