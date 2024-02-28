@@ -97,6 +97,11 @@ char	*handle_envp(char *str, t_data *node)
 				result = handle_dollar_question(result, node, &i);
 			else if (str[i + 1] == '$')
 				result = handle_dollar_dollar(result, node, &i);
+			else if (str[i + 1] == '-')
+			{
+				printf(RED"I knew it, Don't go this much crazy!\n"RESET);
+				i++;
+			}
 			else
 				result = handle_env_values(str, result, node, &i);
 		}
