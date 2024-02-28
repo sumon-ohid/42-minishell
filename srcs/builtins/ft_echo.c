@@ -67,6 +67,25 @@ char	*get_env_value(char *arg, t_data *node)
 	return ("");
 }
 
+int flag_check(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (str[i] == '-')
+	{
+		i++;
+		while (str[i])
+		{
+			if (str[i] != 'n')
+				return (0);
+			i++;
+		}
+		return (1);
+	}
+	return (0);
+}
+
 void	ft_echo(char *line, t_data *node, t_token *head)
 {
 	int	fl;
@@ -75,7 +94,7 @@ void	ft_echo(char *line, t_data *node, t_token *head)
 	newline = 1;
 	fl = 0;
 	(void)line;
-	if (head->next && ft_strcmp(head->next->str, "-n") == 0)
+	if (head->next && flag_check(head->next->str))
 	{
 		newline = 0;
 		head = head->next->next;
