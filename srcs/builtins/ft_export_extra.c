@@ -28,7 +28,7 @@ int	var_name_check(char *var)
 		}
 		i++;
 	}
-	if (var_name[i] == '=' && !isalpha(var_name[i - 1]))
+	if (var_name[i] == '=' && !ft_isalpha(var_name[i - 1]))
 	{
 		free(var_name);
 		return (1);
