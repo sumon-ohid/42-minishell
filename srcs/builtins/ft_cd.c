@@ -68,15 +68,16 @@ char	*get_current_directory(void)
 
 int	change_directory(char *str, t_data *node)
 {
-	node->home = ft_getenv("HOME", node);
-	if (node->home == NULL)
-	{
-		ft_putstr_fd("minishell: cd: HOME not set\n", 2);
-		return (1);
-	}
 	if (str == NULL || ft_strcmp(str, "--") == 0 || ft_strcmp(str, "~") == 0)
 	{
-		chdir(node->home);
+		node->home = ft_getenv("HOME", node);
+		if (node->home == NULL)
+		{
+			ft_putstr_fd("minishell: cd: HOME not set\n", 2);
+			return (1);
+		}
+		else
+			chdir(node->home);
 		return (0);
 	}
 	else if (ft_strcmp(str, "-") == 0)
