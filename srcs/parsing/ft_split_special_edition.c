@@ -126,28 +126,57 @@ static void	split_helper(char *s, char c, size_t *i, char *output)
 
 static int	l_count(char const *s, int i, char c)
 {
-	int	l;
-	int	in_quotes;
-	int	quote_num;
+	int		k;
+	char	quote;
+	int		flag;
 
-	l = i;
-	in_quotes = 0;
-	quote_num = 0;
-	while (s[l] && (s[l] != c || in_quotes))
+	quote = 0;
+	flag = 0;
+	k = i;
+	while (s[k] && (s[k] != c || quote))
 	{
-		if ((s[l] == '\'' || s[l] == '\"') && !in_quotes)
-			in_quotes = 1;
-		else if ((s[l] == '\'' || s[l] == '\"') && in_quotes)
-			in_quotes = 0;
-		if (s[l] == '\'' || s[l] == '\"')
-			quote_num++;
-		l++;
+		if (!flag && (s[k] == '\'' || s[k] == '\"'))
+		{
+			quote = s[k];
+			flag = 1;
+			k++;
+		}
+		else if (flag && (s[k] == quote))
+		{
+			flag = 0;
+			quote = 0;
+			k++;
+		}
+		else
+			k++;
 	}
-	if (c == '|')
-		return (l);
-	else
-		return (l - quote_num);
+	return (k);
 }
+
+// static int	l_count(char const *s, int i, char c)
+// {
+// 	int	l;
+// 	int	in_quotes;
+// 	int	quote_num;
+
+// 	l = i;
+// 	in_quotes = 0;
+// 	quote_num = 0;
+// 	while (s[l] && (s[l] != c || in_quotes))
+// 	{
+// 		if ((s[l] == '\'' || s[l] == '\"') && !in_quotes)
+// 			in_quotes = 1;
+// 		else if ((s[l] == '\'' || s[l] == '\"') && in_quotes)
+// 			in_quotes = 0;
+// 		if (s[l] == '\'' || s[l] == '\"')
+// 			quote_num++;
+// 		l++;
+// 	}
+// 	if (c == '|')
+// 		return (l);
+// 	else
+// 		return (l - quote_num);
+// }
 
 char	**ft_split_special(char *s, char c, char mode, size_t j)
 {
