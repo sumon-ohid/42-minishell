@@ -122,5 +122,6 @@ void	extract_find_execute(char **envp, t_token *mark, t_data *node)
 	}
 	execve(path, comms, NULL);
 	free_everything(comms, counter);
-	ft_exit(node, 127, "execve failed");
+	free(path);
+	ft_exit(node, 127, ".: filename argument required\n.: usage: . filename [arguments]");
 }
