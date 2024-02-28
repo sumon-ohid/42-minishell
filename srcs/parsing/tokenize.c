@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:50:09 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/27 09:47:19 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/28 10:46:37 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ t_token	*create_token(char *word, t_data *node)
 	{
 		new->str = ft_strdup(word);
 		if (!new->str)
-			ft_exit(node, -1, "memory allocation failed at create token");
+			ft_early_exit(node, -1, "memory allocation failed at create token");
 	}
 	new->type = 0;
 	return (new);
@@ -123,7 +123,7 @@ void	process_words(t_token ***origin, char **units, char *str, t_data *node)
 	{
 		words = ft_split_special(units[counter2], ' ', 'X', 0);
 		if (!words)
-			ft_exit(node, -1, "malloc failed at process_words function");
+			ft_early_exit(node, -1, "malloc failed at process_words function");
 		while (words[counter])
 		{
 			create_and_link_token(origin, counter2, words[counter], node);
@@ -134,3 +134,31 @@ void	process_words(t_token ***origin, char **units, char *str, t_data *node)
 		ft_free_array(words);
 	}
 }
+
+/*void	process_words(t_token **tokens, char **units, char *str, t_data *node)
+{
+	int		counter;
+	int		counter2;
+	char	**words;
+
+	tokens = ft_calloc(sizeof(t_token *), pipe_counter(node->input_line));
+	if (!tokens)
+		ft_exit(node, 1, "Memory allocation failed at entry check");
+	counter = 0;
+	counter2 = 0;
+	node->line_temp = str;
+	while (counter2 < pipe_counter(str))
+	{
+		words = ft_split_special(units[counter2], ' ', 'X', 0);
+		if (!words)
+			ft_early_exit(node, -1, "malloc failed at process_words function");
+		while (words[counter])
+		{
+			create_and_link_token(&tokens, counter2, words[counter], node);
+			counter++;
+		}
+		counter2++;
+		counter = 0;
+		ft_free_array(words);
+	}
+}*/

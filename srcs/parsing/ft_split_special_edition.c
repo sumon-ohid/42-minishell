@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_special_edition.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 14:27:31 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/27 09:46:21 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/28 10:16:31 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,10 +152,11 @@ static int	l_count(char const *s, int i, char c)
 char	**ft_split_special(char *s, char c, char mode, size_t j)
 {
 	char	**s_split;
-	size_t	k;
 	size_t	i;
 
 	i = 0;
+	if (!s)
+		return (NULL);
 	s_split = malloc(sizeof(char *) * (word_counter(s, c, 0, 0) + 1));
 	if (s_split == NULL)
 		return (NULL);
@@ -163,8 +164,7 @@ char	**ft_split_special(char *s, char c, char mode, size_t j)
 	{
 		while (s[i] == c)
 			i++;
-		k = l_count(s, i, c);
-		s_split[j] = (char *)malloc(sizeof(char) * (k - i + 1));
+		s_split[j] = malloc(l_count(s, i, c) - i + 1);
 		if (!s_split[j])
 			return (NULL);
 		if (mode == 'P')
