@@ -62,7 +62,7 @@ char	*append_line_to_heredoc(char *heredoc, char *line, size_t *len,
 
 	if (heredoc)
 	{
-		heredoc = malloc_heredoc(heredoc, *len, *len + ft_strlen(line) + 1);
+		heredoc = malloc_heredoc(heredoc, *len, *len + ft_strlen(line) + 2);
 		if (!heredoc)
 			ft_exit(node, -1, "malloc failed at heredoc");
 		if (*len > 0)
@@ -82,13 +82,13 @@ char	*append_line_to_heredoc(char *heredoc, char *line, size_t *len,
 			ft_exit(node, -1, "malloc failed at heredoc");
 		ft_strcpy(heredoc, line);
 	}
-	*len += ft_strlen(line) + 1;
 	if (ft_strstr(heredoc, "$") && !ft_strstr(node->input_line, "\""))
 	{
 		temp = heredoc;
 		heredoc = handle_envp(temp, node);
 		free(temp);
 	}
+	*len = ft_strlen(heredoc);
 	return (heredoc);
 }
 
