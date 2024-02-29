@@ -6,7 +6,7 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:24:36 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/27 12:06:12 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/29 12:28:36 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ void	ft_setenv(t_data *node, char *name, char *value)
 		}
 		i++;
 	}
+	handle_var_not_exists(node, new_entry);
+	free(new_entry);
 }
 
 char	*ft_getenv(char *name, t_data *node)

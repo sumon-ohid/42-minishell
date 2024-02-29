@@ -18,3 +18,9 @@ cat << "EOF"
 "'"
 
 ls | exit
+
+// new errors
+
+"." has problems
+
+$HOME has problems

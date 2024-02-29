@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/28 10:46:45 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/29 12:16:59 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,6 +168,7 @@ void				print_argument(char *arg, t_data *node);
 char				*get_env_value(char *arg, t_data *node);
 char				**ft_env(t_data *node);
 int					ft_export(t_data *node, t_token *token, char *str);
+int					handle_export(t_data *node, char **var);
 int					var_name_check(char *var);
 int					handle_var_exist_in_envp(t_data *node, char *var);
 int					handle_var_exist_in_local_vars(t_data *node, char *var,
