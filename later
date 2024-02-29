@@ -2,7 +2,7 @@ echo $-msumon$"$"$"USER"$1-
 
 export q='"'
 
-minishell$ cat later | tail < doesnt_exist
+minishell$cat  later | tail < doesnt_exist
 
 cat test | xargs echo | << popa | touch done
 
