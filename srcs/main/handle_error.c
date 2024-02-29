@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 14:37:29 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/29 14:13:37 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/29 14:24:33 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,11 @@ void	nocomm_error(char *name)
 	ft_putstr_fd("minishell: ", 2);
 	ft_putstr_fd(name, 2);
 	ft_putstr_fd(": command not found\n", 2);
+}
+
+void	directory_error(char *name)
+{
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd(name, 2);
+	ft_putstr_fd(": Is a directory\n", 2);
 }

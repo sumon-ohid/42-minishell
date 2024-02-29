@@ -3,19 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 20:21:29 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/29 11:45:30 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/29 14:24:04 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-char	*check_og_comm(char *og_comm)
+char	*check_og_comm(char *og_comm, t_data *node)
 {
+	char *result;
+
 	if (access(og_comm, X_OK) == 0)
-		return (og_comm);
+	{
+		result = ft_strdup(og_comm);
+		if (!result)
+		{
+			ft_free_fds(node);
+			ft_exit(node, -1, "malloc failure in pathfinder");
+		}
+		return (result);
+	}
 	else
 		return (NULL);
 }
@@ -45,7 +55,7 @@ char	*extract_path(char *comm2, char **poss_paths, char *og_comm,
 		counter++;
 	}
 	free_poss_paths(poss_paths);
-	return (check_og_comm(og_comm));
+	return (check_og_comm(og_comm, node));
 }
 
 // TODO: needs to be protected
@@ -121,7 +131,8 @@ void	extract_find_execute(char **envp, t_token *mark, t_data *node)
 		ft_exit(node, 127, NULL);
 	}
 	execve(path, comms, NULL);
+	directory_error(comms[0]);
 	free_everything(comms, counter);
-	//free(path);
-	ft_exit(node, 127, "execve failed");
+	free(path);
+	ft_exit(node, 127, NULL);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/29 12:16:59 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/29 14:24:48 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -260,6 +260,7 @@ void				mode(t_data *data, t_mode mode);
 int					handle_error(char *error, int status);
 void				ft_putstr_fd(char *s, int fd);
 void				nocomm_error(char *name);
+void				directory_error(char *name);
 
 // tokenizer
 int					ft_strlen_till_char(char *str, char c);
