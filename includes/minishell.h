@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/29 14:24:48 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/29 18:36:53 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,7 +173,7 @@ int					var_name_check(char *var);
 int					handle_var_exist_in_envp(t_data *node, char *var);
 int					handle_var_exist_in_local_vars(t_data *node, char *var,
 						t_vars *local_vars);
-int					ft_pwd(void);
+int					ft_pwd(t_data *node);
 int					ft_unset(t_data *node, t_token *token, char *str);
 char				*ft_getenv(char *name, t_data *node);
 void				ft_lastvalue(t_data *node);

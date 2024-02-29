@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:17:43 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/29 09:44:50 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/29 18:31:33 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	entry_check(t_data *node, char *line)
 	int		ret_val;
 
 	if (!ft_lexical_checker(line, 0, 0, '\0'))
-		return (2);
+		return (-2);
 	line = ft_upgrade_spaces(line, 0, 0, 0);
 	tokens = ft_calloc(sizeof(t_token *), pipe_counter(line));
 	if (!tokens)
@@ -36,7 +36,10 @@ int	entry_check(t_data *node, char *line)
 		return (130);
 	ret_val = executor_init(node, tokens, pipe_counter(line), line);
 	ft_cleanup(node, tokens, line, arr);
-	return (ret_val);
+	if (node->last_return == -99)
+		return (-1);
+	else
+		return (ret_val);
 }
 
 /*int	entry_check(t_data *node, char *line)

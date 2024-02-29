@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:27:41 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/29 12:27:26 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/29 18:35:39 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,10 @@ int	handle_export(t_data *node, char **var)
 	{
 		var_exists = check_if_var_exists(node, var[i]);
 		if (var_name_check(var[i]) == 1)
+		{
 			printf("minishell: export: `%s': not a valid identifier\n", var[i]);
+			node->last_return = -99;
+		}
 		else
 		{
 			if (var_exists == NOT_EXIST)

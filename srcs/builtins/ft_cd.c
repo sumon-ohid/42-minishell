@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:24:36 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/29 12:28:36 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/29 18:34:53 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ int	change_directory(char *str, t_data *node)
 		if (node->home == NULL)
 		{
 			ft_putstr_fd("minishell: cd: HOME not set\n", 2);
+			node->last_return = -99;
 			return (1);
 		}
 		else
@@ -90,8 +91,8 @@ int	change_directory(char *str, t_data *node)
 	}
 	else if (chdir(str) == -1)
 	{
-		ft_putstr_fd("minishell: cd: no such directory\n", 2);
-		return (1);
+		ft_putstr_fd("minishell: cd: no such file or directory\n", 2);
+		return (node->last_return = -99, 1);
 	}
 	return (0);
 }
