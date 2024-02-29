@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 15:02:36 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/29 14:13:07 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/29 19:05:31 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ int	redirect_in(char *input, int mode, t_data *node)
 		if (mode == 1)
 		{
 			ft_free_fds(node);
-			ft_exit(node, errno, NULL);
+			ft_exit(node, 1, NULL);
 		}
 		else
-			return (0);
+			return (node->last_return = -99, 0);
 	}
 	if (dup2(fd1, STDIN_FILENO) == -1)
 	{
@@ -48,10 +48,10 @@ int	redirect_out(char *output, int mode, t_data *node)
 		if (mode == 1)
 		{
 			ft_free_fds(node);
-			ft_exit(node, errno, NULL);
+			ft_exit(node, 1, NULL);
 		}
 		else
-			return (0);
+			return (node->last_return = -99, 0);
 	}
 	if (dup2(fd2, STDOUT_FILENO) == -1)
 	{
@@ -73,10 +73,10 @@ int	redirect_out_append(char *output, int mode, t_data *node)
 		if (mode == 1)
 		{
 			ft_free_fds(node);
-			ft_exit(node, errno, NULL);
+			ft_exit(node, 1, NULL);
 		}
 		else
-			return (0);
+			return (node->last_return = -99, 0);
 	}
 	if (dup2(fd2, STDOUT_FILENO) == -1)
 	{

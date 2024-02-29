@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 17:31:58 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/29 18:37:12 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/29 19:05:58 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,10 @@ void	allocate_fd(int ***fd, int processes, t_data *node)
 void	exit_builtin(t_data *node)
 {
 	ft_free_fds(node);
-	ft_exit(node, 0, NULL);
+	if (node->last_return == -99)
+		ft_exit(node, 1, NULL);
+	else
+		ft_exit(node, 0, NULL);
 }
 
 void	parent_close(t_data *node, int i, int processes)

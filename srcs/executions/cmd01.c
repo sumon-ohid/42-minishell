@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 17:28:11 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/27 18:08:07 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/02/29 19:04:07 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	execute_chain(t_data *node, t_token *chain, char *line, int processes)
 			if (processes)
 				close_all(&node->fd, processes - 1);
 			if (!ft_redirect_checker(chain, 0, node, 0))
-				return (-1);
+				return (node->last_return = -99, -1);
 			return (entry_check2(node, chain, line));
 		}
 		else if (proxy->type == COMMAND)
