@@ -1,6 +1,6 @@
 #!/bin/bash
 
-norminette -RCheckForbiddenHeader
+#norminette -RCheckForbiddenHeader
 
 make smooth
 

@@ -1,0 +1,20 @@
+echo $-msumon$"$"$"USER"$1-
+
+export q='"'
+
+minishell$ cat later | tail < doesnt_exist
+
+cat test | xargs echo | << popa | touch done
+
+cat < cat cat > cat | cat
+
+cat << EOF""
+> $USER
+> lol
+> EOF
+
+cat << "EOF"
+
+"'"
+
+ls | exit

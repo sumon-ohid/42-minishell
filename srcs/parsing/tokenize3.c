@@ -6,7 +6,7 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 10:06:20 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/27 10:51:19 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/29 09:48:59 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ char	*handle_envp(char *str, t_data *node)
 				result = handle_dollar_dollar(result, node, &i);
 			else if (str[i + 1] == '-')
 			{
-				printf(RED"I knew it, Don't go this much crazy!\n"RESET);
+				printf("I knew it, Don't go this much crazy!\n");
 				i++;
 			}
 			else

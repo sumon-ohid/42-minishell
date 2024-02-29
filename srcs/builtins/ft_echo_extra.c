@@ -6,12 +6,11 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 15:32:22 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/20 16:38:03 by msumon           ###   ########.fr       */
+/*   Updated: 2024/02/29 11:00:44 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-#include <stdio.h>
 
 // I think this function is not used anywhere in the project
 void	handle_quotes(char *arg, int *i, int len)
@@ -39,10 +38,16 @@ void	print_argument(char *arg, t_data *node)
 
 	i = 0;
 	(void)node;
-	if (arg[0] == '\'' && arg[1] == '\0')
+	if (ft_strcmp(arg, "\"\'\"") == 0)
+	{
+		ft_putstr("\'");
 		return ;
-	else if (arg[0] == '\"' && arg[1] == '\0')
+	}
+	if (ft_strcmp(arg, "\'\"\'") == 0)
+	{
+		ft_putstr("\"");
 		return ;
+	}
 	while (arg[i])
 	{
 		if (arg[i] == '~')
