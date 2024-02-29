@@ -21,7 +21,10 @@ int	redirect_in(char *input, int mode, t_data *node)
 	{
 		printf("minishell: %s: No such file or directory\n", input);
 		if (mode == 1)
+		{
+			ft_free_fds(node);
 			ft_exit(node, errno, NULL);
+		}
 		else
 			return (0);
 	}
@@ -40,7 +43,10 @@ int	redirect_out(char *output, int mode, t_data *node)
 	{
 		printf("minishell: %s: Permission denied\n", output);
 		if (mode == 1)
+		{
+			ft_free_fds(node);
 			ft_exit(node, errno, NULL);
+		}
 		else
 			return (0);
 	}
@@ -59,7 +65,10 @@ int	redirect_out_append(char *output, int mode, t_data *node)
 	{
 		printf("minishell: %s: Permission denied\n", output);
 		if (mode == 1)
+		{
+			ft_free_fds(node);
 			ft_exit(node, errno, NULL);
+		}
 		else
 			return (0);
 	}
