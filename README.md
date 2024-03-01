@@ -1,4 +1,5 @@
 # MiniShell
+## As beautiful as a shell
 
 MiniShell is a minimalistic shell program designed to replicate the basic functionalities of the Bash shell. It provides a command-line interface for users to interact with the operating system by executing commands and managing processes.
 
@@ -72,4 +73,4 @@ MiniShell was created by [Sumon](https://github.com/sumon-ohid) and [Leske](http
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE). Feel free to modify and distribute it according to your needs. Please don't use it directly for 42 Network.
+This project is licensed under the [MIT License](LICENSE). Feel free to modify and distribute it according to your needs. !!!! Please don't use it directly for 42 School projects !!!!
