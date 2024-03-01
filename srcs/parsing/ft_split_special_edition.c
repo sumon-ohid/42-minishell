@@ -202,6 +202,7 @@ char	**ft_split_special(char *s, char c, char mode, size_t j)
 			split_helper(s, c, &i, s_split[j]);
 		j++;
 	}
+
 	s_split[j] = NULL;
 	return (s_split);
 }

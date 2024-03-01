@@ -134,8 +134,8 @@ void	process_words(t_token ***origin, char **units, char *str, t_data *node)
 	node->line_temp = str;
 	while (counter2 < pipe_counter(str))
 	{
-		replace_quotes_with_spaces(units[counter2]);
-		words = ft_split(units[counter2], ' ', 0, 0);
+		//replace_quotes_with_spaces(units[counter2]);
+		words = ft_split_special(units[counter2], ' ', 'X', 0);
 		if (!words)
 			ft_early_exit(node, -1, "malloc failed at process_words function");
 		while (words[counter])
