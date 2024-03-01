@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 20:21:29 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/29 14:24:04 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/01 22:24:15 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,8 @@ void	extract_find_execute(char **envp, t_token *mark, t_data *node)
 	}
 	execve(path, comms, NULL);
 	directory_error(comms[0]);
+	if (node->processes > 1)
+		ft_free_fds(node);
 	free_everything(comms, counter);
 	free(path);
 	ft_exit(node, 127, NULL);

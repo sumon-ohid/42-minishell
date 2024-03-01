@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 14:32:03 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/01 21:54:53 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/01 22:13:08 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,8 @@ void	fork_processes(int processes, t_data *node, t_token **tokens,
 	while (i < processes)
 	{
 		if (i < processes - 1)
-			pipe(node->fd[i]);
+			if (pipe(node->fd[i]) == -1)
+				ft_exit(node, -1, "pipe creation failed");
 		//close(node->fd[i][0]);
 		node->pid[i] = fork();
 		if (node->pid[i] == 0)
