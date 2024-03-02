@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/02 14:37:05 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/02 15:44:05 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,7 +208,7 @@ int					quote_assigner(char *big, char *little);
 int					ft_commander(t_token *chain, t_data *node);
 int					execute_chain(t_data *node, t_token *chain, char *line,
 						int processes);
-void				close_what_this_child_doesnt_need(int ***origin, int index,
+void				set_what_this_child_doesnt_need(int ***origin, int index,
 						int max);
 int					exception_checker(t_token **tokens, int processes);
 int					executor_init(t_data *node, t_token **tokens, int processes,

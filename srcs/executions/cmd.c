@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 14:32:03 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/01 22:13:08 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/02 15:47:02 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	do_child_stuff(char *line, t_data *node, int i, t_token **tokens)
 			exit_builtin(node);
 		close(node->fd[i][1]);
 	}
-	//close_what_this_child_doesnt_need(&node->fd, i, node->processes - 1);
+	//set_what_this_child_doesnt_need(&node->fd, i, node->processes - 1);
 	node->cur_proc = i;
 	node->in_child = 1;
 	execute_chain(node, tokens[i], line, node->processes);

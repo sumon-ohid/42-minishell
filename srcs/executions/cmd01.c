@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 17:28:11 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/02 15:23:30 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/02 15:49:33 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	execute_chain(t_data *node, t_token *chain, char *line, int processes)
 		if (proxy->type == BUILTIN)
 		{
 			if (processes)
-				//close_all(&node->fd, processes - 1);
+				close_all(&node->fd, processes - 1);
 			if (!ft_redirect_checker(chain, 0, node, 0))
 				return (node->last_return = -99, -1);
 			return (entry_check2(node, chain, line));
@@ -90,7 +90,7 @@ int	execute_chain(t_data *node, t_token *chain, char *line, int processes)
 	return (ft_redirect_checker(chain, 0, node, 1));
 }
 
-void	close_what_this_child_doesnt_need(int ***origin, int index, int max)
+void	set_what_this_child_doesnt_need(int ***origin, int index, int max)
 {
 	int	**fd;
 	int	counter;
@@ -101,18 +101,18 @@ void	close_what_this_child_doesnt_need(int ***origin, int index, int max)
 	{
 		if (counter != index - 1)
 		{
-			close(fd[counter][1]);
+			fd[counter][1] = -1;
 		}
-		close(fd[counter][0]);
+		fd[counter][0] = -1;
 		counter++;
 	}
 	while (counter < max)
 	{
 		if (counter != index)
 		{
-			close(fd[counter][0]);
+			fd[counter][0] = -1;
 		}
-		close(fd[counter][1]);
+		fd[counter][1] = -1;
 		counter++;
 	}
 }

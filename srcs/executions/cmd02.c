@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 17:31:58 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/01 21:46:57 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/02 15:51:37 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ void	allocate_fd(int ***fd, int processes, t_data *node)
 			free(*fd);
 			ft_exit(node, -1, "memory allocation failed");
 		}
+		(*fd)[counter][0] = -1;
+		(*fd)[counter][1] = -1;
 		/*if (pipe((*fd)[counter]) == -1)
 		{
 			//free fds here
