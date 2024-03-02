@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/02 15:44:05 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/02 19:59:19 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,7 +176,6 @@ int					handle_var_exist_in_local_vars(t_data *node, char *var,
 int					ft_pwd(t_data *node);
 int					ft_unset(t_data *node, t_token *token, char *str);
 char				*ft_getenv(char *name, t_data *node);
-void				ft_lastvalue(t_data *node);
 char				*ft_lastval_str(t_data *node);
 void				ft_exit(t_data *node, int exit_val, char *msg);
 void				ft_early_exit(t_data *node, int exit_val, char *msg);
@@ -255,6 +254,7 @@ void				parent_close(t_data *node, int i, int processes);
 
 // signals
 void				mode(t_data *data, t_mode mode);
+int					ft_lastvalue(t_data *node);
 
 // handle errors
 int					handle_error(char *error, int status);

@@ -6,22 +6,26 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:55:33 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/29 18:31:57 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/02 19:58:59 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	ft_lastvalue(t_data *node)
+int	ft_lastvalue(t_data *node)
 {
 	if (node->last_return == -2)
-		ft_putnbr(2);
+		return(2);
+	else if (node->last_return == -1)
+		return (1);
+	else if (node->last_return == -88)
+		return (130);
 	if (WIFEXITED(node->last_return))
-		ft_putnbr(WEXITSTATUS(node->last_return));
+		return(WEXITSTATUS(node->last_return));
 	else if (WIFSIGNALED(node->last_return))
-		ft_putnbr(WTERMSIG(node->last_return) + 128);
+		return(WTERMSIG(node->last_return) + 128);
 	else
-		ft_putnbr(127);
+		return(127);
 }
 
 char	*ft_lastval_str(t_data *node)

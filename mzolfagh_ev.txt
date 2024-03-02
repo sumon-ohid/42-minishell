@@ -4,7 +4,7 @@ DONE -cntrl-c in << prints extra line
 
 DONE -signal exit code is 130 (for newline too & for heredoc)
 
-- $? should be 130 when we quit from heredoc (this is tricky as heredoc can be in a child)
+DONE - $? should be 130 when we quit from heredoc (this is tricky as heredoc can be in a child)
 
 -"_=" doesnt work (it about =)\
 
