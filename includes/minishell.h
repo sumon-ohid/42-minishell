@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/02 19:59:19 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/02 20:38:35 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@
 # define DELIM 11
 # define BUILTIN 12
 # define SET 13
+# define EXPORT 14
 
 // signals
 # define CTRL_C 1

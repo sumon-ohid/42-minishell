@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize1.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:57:30 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/27 10:07:12 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/02 20:41:52 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	check_builtins(char *word)
 	else if (ft_strcmp(word, "exit") == 0)
 		return (0);
 	else if (ft_strcmp(word, "export") == 0)
-		return (0);
+		return (2);
 	else if (ft_strcmp(word, "unset") == 0)
 		return (0);
 	else
@@ -56,7 +56,7 @@ int	check_prevs(char *word, int prev_type)
 {
 	if (!word)
 		return (0);
-	else if (check_assign(word))
+	else if (check_assign(word) && (prev_type == EXPORT || prev_type == SET))
 		return (SET);
 	else if (prev_type == HEREDOC)
 		return (DELIM);
@@ -66,7 +66,8 @@ int	check_prevs(char *word, int prev_type)
 		return (OUTFILE_APPEND);
 	else if (prev_type == REDIR_IN)
 		return (INFILE);
-	else if (prev_type == BUILTIN || prev_type == COMMAND || prev_type == FLAG)
+	else if (prev_type == BUILTIN || prev_type == COMMAND || prev_type == FLAG
+		|| prev_type == EXPORT)
 		return (FLAG);
 	else
 		return (COMMAND);

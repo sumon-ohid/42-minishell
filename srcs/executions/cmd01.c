@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 17:28:11 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/02 16:03:50 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/02 20:43:02 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,8 @@ int	exception_checker(t_token **tokens, int processes)
 	proxy = tokens[0];
 	while (proxy)
 	{
+		if (proxy->type == EXPORT)
+			proxy->type = BUILTIN;
 		if (proxy->type == BUILTIN)
 			break ;
 		while (proxy && proxy->type != BUILTIN)

@@ -25,7 +25,7 @@ DONE - $? should be 130 when we quit from heredoc (this is tricky as heredoc can
 -export A="hello       world" seperates hello and world as differet tokens (check it with echo $A)(also be carefull to not mess the case below by fixing this:
 export A="123 | cat"; echo $A;)
 
--exit minishell with the same exit code as $? (test echo "something" | ./minishell and the echo $?)
+DONE -exit minishell with the same exit code as $? (test echo "something" | ./minishell and the echo $?)
 
 -inside here_doc expansion doesnt work if you have quotation.
 
