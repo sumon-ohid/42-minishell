@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:17:43 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/29 18:31:33 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/02 18:08:35 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,11 @@ void	ft_initialize(t_data *node, char **envp)
 		}
 		else if (*input)
 		{
+			if (g_signal == CTRL_C)
+			{
+				node->last_return = 2;
+				g_signal = 0;
+			}
 			if (ft_strcmp(input, "\n") == 0)
 				break ;
 			initialize_node(node, envp);

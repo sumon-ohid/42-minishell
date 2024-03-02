@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 14:32:03 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/02 16:00:16 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/02 18:02:25 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ void	wait_for_processes(int *pid, int *status, int processes, t_data *node)
 		}
 		else
 		{
-			if (WIFSIGNALED(status[counter]) && counter == processes - 1)
+			if (WIFSIGNALED(status[counter]) && counter == processes - 1
+				&& node->mode != HEREDOC)
 				write(STDOUT_FILENO, "\n", 1);
 			if (WIFEXITED(status[counter]) || WIFSIGNALED(status[counter]))
 				counter++;

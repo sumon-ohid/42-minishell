@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_extra.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 14:59:41 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/27 10:55:12 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/02 18:14:31 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,13 @@ char	*malloc_heredoc(char *ptr, size_t old_size, size_t new_size)
 	return (new_ptr);
 }
 
-char	*handle_signals(char *line)
+char	*handle_signals(char *line, t_data *node)
 {
 	if (g_signal == CTRL_C)
 	{
 		free(line);
 		g_signal = 0;
+		//node->last_return = -88;
 		return (NULL);
 	}
 	else if (!line || g_signal == SIGQUIT)
@@ -104,7 +105,7 @@ char	*ft_heredoc(t_data *node, char *str)
 	while (1)
 	{
 		line = readline("> ");
-		line = handle_signals(line);
+		line = handle_signals(line, node);
 		if (!line)
 			break ;
 		if (ft_strcmp(line, str) == 0)
