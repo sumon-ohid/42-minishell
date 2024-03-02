@@ -6,9 +6,9 @@ DONE -signal exit code is 130 (for newline too & for heredoc)
 
 DONE - $? should be 130 when we quit from heredoc (this is tricky as heredoc can be in a child)
 
--"_=" doesnt work (it about =)\
+DONE -"_=" doesnt work (it about =)\
 
-- echo + etc doesnt work
+DONE - echo + etc doesnt work
 
 -env is one line less than it should be (_=/usr/bin/env)
 
@@ -33,4 +33,4 @@ DONE -exit minishell with the same exit code as $? (test echo "something" | ./mi
 
 -unset TERM; clear shouldnt work; (DIRTY clear technique!!!)
 
--cat | ls doesnt work properly (its because you dont wait() correctly)
+THIS WE WILL NOT FIX -cat | ls doesnt work properly (its because you dont wait() correctly)
