@@ -1,0 +1,34 @@
+-signals should be handeled in un-interactive mode.(cat; SIGNAL)
+
+-cntrl-c in << prints extra line
+
+-signal exit code is 130 (for newline too & for heredoc)
+
+-"_=" doesnt work (it about =)\
+
+- echo + etc doesnt work
+
+-env is one line less than it should be (_=/usr/bin/env)
+
+-SHLVL doesnt increase
+
+-exit receives argument (also pay attention to more than 1 argument- when both are int or non-numeric, bigger tahn long int and smaller than min int)
+
+-echo "'$USER'" and echo "$USER'" has expansion problem
+
+-ambiguous redirection is not implemented (when you redirect to an expansion which expand to 0 or more than 1 thing)
+
+-empty promt ("") sould return command not found
+
+-export A="hello       world" seperates hello and world as differet tokens (check it with echo $A)(also be carefull to not mess the case below by fixing this:
+export A="123 | cat"; echo $A;)
+
+-exit minishell with the same exit code as $? (test echo "something" | ./minishell and the echo $?)
+
+-inside here_doc expansion doesnt work if you have quotation.
+
+-mkdir a; cd a; mkdir b; cd b; rm -rf ../../a; cd .. exit your minishell (it should say no such file or dir)
+
+-unset TERM; clear shouldnt work; (DIRTY clear technique!!!)
+
+-cat | ls doesnt work properly (its because you dont wait() correctly)
