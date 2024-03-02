@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:17:43 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/02 18:08:35 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/02 19:11:00 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	entry_check(t_data *node, char *line)
 	node->tokens = tokens;
 	ft_localvars(tokens, node, pipe_counter(line));
 	if (!check_for_heredoc(node, tokens, pipe_counter(line)))
-		return (130);
+		return (2);
 	ret_val = executor_init(node, tokens, pipe_counter(line), line);
 	ft_cleanup(node, tokens, line, arr);
 	if (node->last_return == -99)

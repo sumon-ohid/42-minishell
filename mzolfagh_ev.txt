@@ -1,8 +1,10 @@
 -signals should be handeled in un-interactive mode.(cat; SIGNAL)
 
--cntrl-c in << prints extra line
+DONE -cntrl-c in << prints extra line
 
--signal exit code is 130 (for newline too & for heredoc)
+DONE -signal exit code is 130 (for newline too & for heredoc)
+
+- $? should be 130 when we quit from heredoc (this is tricky as heredoc can be in a child)
 
 -"_=" doesnt work (it about =)\
 

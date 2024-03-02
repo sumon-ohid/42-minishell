@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 14:59:41 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/02 18:14:31 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/02 19:17:22 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char	*handle_signals(char *line, t_data *node)
 	{
 		free(line);
 		g_signal = 0;
-		//node->last_return = -88;
+		node->last_return = -88; //not used yet
 		return (NULL);
 	}
 	else if (!line || g_signal == SIGQUIT)
@@ -119,5 +119,7 @@ char	*ft_heredoc(t_data *node, char *str)
 	heredoc = ft_strjoin(heredoc, "\n", 1);
 	if (!heredoc)
 		ft_exit(node, -1, "malloc failed at heredoc");
+	if (node->last_return == -88)
+		return (free(heredoc), NULL);
 	return (heredoc);
 }
