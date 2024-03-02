@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/29 18:36:53 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/02 14:37:05 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,7 @@ int					heredocker(char *str);
 int					check_for_heredoc(t_data *node, t_token **tokens,
 						int processes);
 int					heredoc_counter(t_token *tokens);
-void				read_from_heredoc(t_token *heredoc);
+void				read_from_heredoc(t_token *heredoc, t_data *node);
 
 // builtins
 int					ft_cd(char *str, t_data *node);
