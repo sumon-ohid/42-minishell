@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 14:32:03 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/03 18:17:36 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/03 19:11:41 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	wait_for_processes(int *pid, int *status, int processes, t_data *node)
 		{
 			if (g_signal == CTRL_C)
 			{
-				kill(pid[counter], SIGABRT);
+				kill(pid[counter], SIGINT);
 				g_signal = 0;
 			}
 		}
@@ -48,14 +48,15 @@ void	wait_for_processes(int *pid, int *status, int processes, t_data *node)
 		{
 			if (WIFSIGNALED(status[counter]) && WTERMSIG(status[counter]) == 3)
 				printf("Quit (core dumped)\n");
+			else if (WIFSIGNALED(status[counter]) && counter == processes - 1
+				&& node->mode != HEREDOC)
+				write(STDOUT_FILENO, "\n", 1);
 			if (WIFEXITED(status[counter]) || WIFSIGNALED(status[counter]))
 				counter++;
 		}
 	}
 }
-/*if (WIFSIGNALED(status[counter]) && counter == processes - 1
-				&& node->mode != HEREDOC)
-				write(STDOUT_FILENO, "\n", 1);*/
+
 
 void	free_resources(int **fd, int processes, t_data *node)
 {
@@ -76,7 +77,7 @@ void	free_resources(int **fd, int processes, t_data *node)
 
 void	do_child_stuff(char *line, t_data *node, int i, t_token **tokens)
 {
-	mode(node, NON_INTERACTIVE);
+	mode(node, CHILD);
 	if (i != 0)
 	{
 		if (dup2(node->fd[i - 1][0], STDIN_FILENO) == -1)

@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:17:43 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/03 18:14:26 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/03 19:07:03 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ void	ft_initialize(t_data *node, char **envp)
 	{
 		mode(node, INTERACTIVE);
 		input = readline(GREEN "minishell$ " RESET);
-		//mode(node, NON_INTERACTIVE);
+		mode(node, NON_INTERACTIVE);
 		if (!input)
 		{
 			eof_free(node);
