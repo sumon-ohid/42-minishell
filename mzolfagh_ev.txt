@@ -1,5 +1,7 @@
 -signals should be handeled in un-interactive mode.(cat; SIGNAL)
 
+- CTRL + C from heredoc LEAKS
+
 DONE -cntrl-c in << prints extra line
 
 DONE -signal exit code is 130 (for newline too & for heredoc)
@@ -18,7 +20,7 @@ DONE - echo + etc doesnt work
 
 -echo "'$USER'" and echo "$USER'" has expansion problem
 
--ambiguous redirection is not implemented (when you redirect to an expansion which expand to 0 or more than 1 thing)
+DONE (for nothing only) -ambiguous redirection is not implemented (when you redirect to an expansion which expand to 0 or more than 1 thing)
 
 -empty promt ("") sould return command not found
 

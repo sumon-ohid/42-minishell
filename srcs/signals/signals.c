@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 13:00:50 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/02 18:06:18 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/03 13:52:28 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ void	signal_init(t_data *data)
 	}
 	else if (data->mode == NON_INTERACTIVE)
 	{
-		signal(SIGINT, SIG_IGN);
-		signal(SIGQUIT, SIG_IGN);
+		signal(SIGINT, &handler);
+		signal(SIGQUIT, SIG_DFL);
 	}
 	else if (data->mode == HEREDOCS)
 	{

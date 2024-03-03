@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 17:28:11 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/02 20:43:02 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/03 13:52:54 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ int	ft_commander(t_token *chain, t_data *node)
 			ft_exit(node, -1, "memory allocation in commander failed");
 		chain = chain->next;
 	}
-	mode(node, INTERACTIVE);
 	extract_find_execute(environ, mark, node);
 	return (0);
 }

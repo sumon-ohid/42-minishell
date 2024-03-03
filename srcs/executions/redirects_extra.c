@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 15:02:36 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/03 13:31:38 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/03 13:35:39 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	redirect_out(char *output, int mode, t_data *node)
 	int	fd2;
 
 	if (str_is_nothing(output))
-		return (printf("minishell: ambigous redirect\n"),
+		return (printf("minishell: ambiguous redirect\n"),
 			node->last_return = -99, 0);
 	fd2 = open(output, O_TRUNC | O_WRONLY | O_CREAT, 0644);
 	if (fd2 == -1)
@@ -85,7 +85,7 @@ int	redirect_out_append(char *output, int mode, t_data *node)
 	int	fd2;
 
 	if (str_is_nothing(output))
-		return (printf("minishell: ambigous redirect\n"),
+		return (printf("minishell: ambiguous redirect\n"),
 			node->last_return = -99, 0);
 	fd2 = open(output, O_TRUNC | O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (fd2 == -1)
