@@ -16,7 +16,7 @@ DONE - echo + etc doesnt work
 
 -SHLVL doesnt increase
 
--exit receives argument (also pay attention to more than 1 argument- when both are int or non-numeric, bigger tahn long int and smaller than min int)
+DONE -exit receives argument (also pay attention to more than 1 argument- when both are int or non-numeric, bigger tahn long int and smaller than min int)
 
 -echo "'$USER'" and echo "$USER'" has expansion problem
 

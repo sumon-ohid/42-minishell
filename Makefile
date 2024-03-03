@@ -19,6 +19,7 @@ RESET = \033[0m
 
 SRC = 	srcs/main/main.c \
 		srcs/utils/ft_split.c \
+		srcs/utils/ft_atoi.c \
 		srcs/executions/cmd.c \
 		srcs/executions/cmd01.c \
 		srcs/executions/cmd02.c \

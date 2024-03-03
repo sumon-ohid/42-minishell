@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/03 18:04:58 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/03 22:41:00 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,7 @@ int					ft_putnbr(int n);
 int					ft_strchr(char *str, char c);
 int					ft_isspace(int c);
 int					ft_isalnum(int c);
-char				*ft_itoa(int n);
+int					ft_atoi(const char *str);
 int					ft_isalpha(char c);
 
 // heredoc
@@ -181,6 +181,7 @@ int					ft_unset(t_data *node, t_token *token, char *str);
 char				*ft_getenv(char *name, t_data *node);
 char				*ft_lastval_str(t_data *node);
 void				ft_exit(t_data *node, int exit_val, char *msg);
+int					exit_with_args(t_data *node, int exit_val, t_token *head);
 void				ft_early_exit(t_data *node, int exit_val, char *msg);
 void				ft_localvars(t_token **tokens, t_data *node, int processes);
 char				*copy_until_char(char *str, char c);

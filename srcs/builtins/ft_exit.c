@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 14:41:52 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/03 18:16:24 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/03 22:58:47 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,52 @@ void	free_node(t_data *node)
 	ft_free_array(node->arr);
 	ft_free_array(node->envp);
 	free(node);
+}
+
+int	digit_checker(char *str)
+{
+	int	counter;
+
+	counter = 0;
+	if (!str)
+		return (0);
+	if (str[counter] == '+' || str[counter] == '-')
+		counter++;
+	while (str[counter] >= '0' && str[counter] <= '9')
+		counter++;
+	if (!str[counter] && counter < 20)
+		return (1);
+	else
+		return (0);
+}
+
+int	exit_with_args(t_data *node, int exit_val, t_token *head)
+{
+	t_token *proxy;
+	int		counter;
+	int		val;
+	
+	proxy = head;
+	counter = 0;
+	while (proxy)
+	{
+		if (proxy->type == FLAG)
+		{
+			if (!digit_checker(proxy->str))
+			{
+				printf("exit\nminishell: exit: %s: numeric argument required\n", proxy->str);
+				ft_exit(node, 2, NULL);
+			}
+			val = ft_atoi(proxy->str);
+			counter++;
+		}
+		proxy = proxy->next;
+	}
+	if (counter > 1)
+		return (printf("exit\nminishell: exit: too many arguments\n"));
+	else if (counter == 0)
+		ft_exit(node, exit_val, NULL);
+	return (ft_exit(node, (unsigned char)val, NULL), 0);
 }
 
 void	ft_early_exit(t_data *node, int exit_val, char *msg)
