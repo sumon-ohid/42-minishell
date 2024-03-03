@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 14:32:03 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/03 17:08:08 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/03 18:17:36 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,15 @@ void	wait_for_processes(int *pid, int *status, int processes, t_data *node)
 				&& node->mode != HEREDOC)
 				write(STDOUT_FILENO, "\n", 1);*/
 
-void	free_resources(int **fd, int processes)
+void	free_resources(int **fd, int processes, t_data *node)
 {
 	int	counter;
 
 	counter = 0;
+	free(node->pid);
+	node->pid = NULL;
+	free(node->status);
+	node->status = NULL;
 	while (counter < processes - 1)
 	{
 		free(fd[counter]);
@@ -130,12 +134,12 @@ exit_builtin(node);*/
 
 int	executor_init(t_data *node, t_token **tokens, int processes, char *line)
 {
-	int	pid[512];
-	int	status[512];
+	//int	pid[512];
+	//int	status[512];
 	int	**fd;
+	int	lastval;
 
 	fd = NULL;
-	node->pid = pid;
 	node->processes = processes;
 	allocate_fd(&fd, processes, node);
 	node->fd = fd;
@@ -144,9 +148,12 @@ int	executor_init(t_data *node, t_token **tokens, int processes, char *line)
 		execute_chain(node, tokens[0], line, 0);
 		return (0);
 	}
+	node->pid = malloc(sizeof(int) * processes);
+	node->status = malloc(sizeof(int) * processes);
 	fork_processes(processes, node, tokens, line);
 	close_all(&fd, processes - 1);
-	wait_for_processes(pid, status, processes, node);
-	free_resources(fd, processes);
-	return (status[processes - 1]);
+	wait_for_processes(node->pid, node->status, processes, node);
+	lastval = node->status[processes - 1];
+	free_resources(fd, processes, node);
+	return (lastval);
 }

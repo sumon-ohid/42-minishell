@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 14:41:52 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/02 15:57:15 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/03 18:16:24 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,12 @@ void	free_node(t_data *node)
 	if (node->std_out != -1)
 		close(node->std_out);
 	free(node->input_line);
+	if (node->status)
+		free(node->status);
+	node->status = NULL;
+	if (node->pid)
+		free(node->pid);
+	node->pid = NULL;
 	ft_free_array(node->arr);
 	ft_free_array(node->envp);
 	free(node);

@@ -1,4 +1,4 @@
-!!!! -signals should be handeled in un-interactive mode.(cat; SIGNAL)
+DONE -signals should be handeled in un-interactive mode.(cat; SIGNAL)
 
 DONE - CTRL + C from heredoc LEAKS
 

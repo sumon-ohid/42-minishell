@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:17:43 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/03 16:17:23 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/03 18:14:26 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,8 @@ void	initialize_node(t_data *node, char **envp)
 	node->oldpwd = getenv("OLDPWD");
 	node->pwd = getenv("PWD");
 	node->in_child = 0;
+	node->status = NULL;
+	node->pid = NULL;
 }
 void	eof_free(t_data *node)
 {

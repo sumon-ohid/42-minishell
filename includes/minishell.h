@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/03 16:10:28 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/03 18:04:58 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ typedef struct s_data
 	int					**fd;
 	int					processes;
 	int					*pid;
+	int					*status;
 	int					cur_proc;
 	int					std_in;
 	int					std_out;
