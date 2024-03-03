@@ -1,6 +1,6 @@
--signals should be handeled in un-interactive mode.(cat; SIGNAL)
+!!!! -signals should be handeled in un-interactive mode.(cat; SIGNAL)
 
-- CTRL + C from heredoc LEAKS
+DONE - CTRL + C from heredoc LEAKS
 
 DONE -cntrl-c in << prints extra line
 
