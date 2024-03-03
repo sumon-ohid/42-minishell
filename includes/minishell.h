@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/02 20:38:35 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/03 16:10:28 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@
 // signals
 # define CTRL_C 1
 # define CTRL_D 2
+# define CTRL_BACK 3
 
 //quotes
 # define NO_QUOTE 0

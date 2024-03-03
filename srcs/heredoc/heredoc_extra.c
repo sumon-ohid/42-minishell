@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 14:59:41 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/03 15:28:08 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/03 16:12:06 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	*handle_signals(char *line, t_data *node)
 		node->last_return = -88; //not used yet
 		return (NULL);
 	}
-	else if (!line || g_signal == SIGQUIT)
+	else if (!line)
 	{
 		write(2, "minishell: warning: here-document delimited by end-of-file\n",
 			59);
