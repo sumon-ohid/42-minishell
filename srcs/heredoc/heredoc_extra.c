@@ -6,7 +6,7 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 14:59:41 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/04 12:51:39 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/04 13:26:40 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,44 +54,6 @@ char	*handle_signals(char *line, t_data *node)
 		return (NULL);
 	}
 	return (line);
-}
-
-void	remove_quotes(char *temp)
-{
-	int	i;
-	int	j;
-	int len;
-
-	i = 0;
-	j = 0;
-	len = ft_strlen(temp);
-	while (i < len)
-	{
-		if (temp[i] == '\"' || temp[i] == '\'')
-			i++;
-		temp[j] = temp[i];
-		i++;
-		j++;
-	}
-	temp[j] = '\0';
-}
-
-char	*put_quotes_back(char *heredoc, char *line)
-{
-	char *new_heredoc;
-
-	(void)line;
-	new_heredoc = malloc(ft_strlen(heredoc) + 3);
-	if (!new_heredoc)
-		return (NULL);
-	new_heredoc = ft_strjoin("\"", heredoc, 0);
-	if (!new_heredoc)
-		return (NULL);
-	new_heredoc = ft_strjoin(new_heredoc, "\"", 1);
-	if (!new_heredoc)
-		return (NULL);
-	free(heredoc);
-	return (new_heredoc);
 }
 
 char	*append_line_to_heredoc(char *heredoc, char *line, size_t *len,
