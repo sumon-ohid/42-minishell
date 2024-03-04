@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 18:46:23 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/02 14:37:14 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/04 16:48:32 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	ft_redirect_checker(t_token *chain, int mode, t_data *node, int killmode)
 	{
 		if (proxy->type >= 3 && proxy->type <= 5)
 		{
-			if (!ft_redirector(chain, proxy->type + 3, mode, node))
+			if (!ft_redirector(proxy->next, proxy->type + 3, mode, node))
 			{
 				if (killmode)
 					ft_exit(node, 1, NULL);

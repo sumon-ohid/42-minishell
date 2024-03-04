@@ -29,7 +29,7 @@ export A="123 | cat"; echo $A;)
 
 DONE -exit minishell with the same exit code as $? (test echo "something" | ./minishell and the echo $?)
 
--inside here_doc expansion doesnt work if you have quotation.
+DONE -inside here_doc expansion doesnt work if you have quotation.
 
 -mkdir a; cd a; mkdir b; cd b; rm -rf ../../a; cd .. exit your minishell (it should say no such file or dir)
 
