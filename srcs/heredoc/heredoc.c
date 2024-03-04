@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 10:40:57 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/04 20:01:24 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/04 21:44:43 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,7 @@ int		room_in_pipe(int *tomlo, t_data *node)
 		free(tomlo);
 		ft_exit(node, -1, "pipe checking failed");
 	}
-	//printf("taken_space is %d\n", taken_space);
-	if (taken_space > 63000)
+	if (taken_space > 500)
 		return (0);
 	else
 		return (1);
@@ -81,10 +80,10 @@ void	write_in_chunks(char *text, size_t len, int *tomlo, t_data *node)
 {
 	while (len)
 	{
-		if (ft_strlen(text) > 1024)
+		if (ft_strlen(text) > 5)
 		{
-			write(tomlo[1], text, 1024);
-			text = text + 1024;
+			write(tomlo[1], text, 5);
+			text = text + 5;
 		}
 		else
 		{
@@ -102,22 +101,37 @@ void	read_from_heredoc(t_token *heredoc, t_data *node)
 	int		*tomlo;
 	char 	*text;
 	size_t	len;
+	int		pid;
 
 	tomlo = malloc(sizeof(int) * 2);
 	if (!tomlo)
 		ft_exit(node, -1, "malloc at heredoc failed");
-	text = heredoc->heredoc_data;
 	if (pipe(tomlo) == -1)
 	{
 		free(tomlo);
 		ft_exit(node, -1, "pipe creation for heredoc failed");
 	}
-	dup2(tomlo[0], STDIN_FILENO);
-	len = ft_strlen(text);
-	write_in_chunks(text, len, tomlo, node);
-	close(tomlo[0]);
-	close(tomlo[1]);
-	free(tomlo);
+	pid = fork();
+	if (pid == -1)
+		ft_exit(node, -1, "forking failed at heredoc");
+	else if (pid != 0)
+	{
+		dup2(tomlo[0], STDIN_FILENO);
+		close(tomlo[0]);
+		close(tomlo[1]);
+		free(tomlo); //why does not freeeing tomlo not leak here?????
+		return ;
+	}
+	else if (pid == 0)
+	{
+		text = heredoc->heredoc_data;
+		len = ft_strlen(text);
+		write_in_chunks(text, len, tomlo, node);
+		close(tomlo[0]);
+		close(tomlo[1]);
+		free(tomlo);
+		ft_exit(node, 0, NULL);
+	}
 }
 //write(tomlo[1], heredoc->heredoc_data, ft_strlen(heredoc->heredoc_data));
 /*
