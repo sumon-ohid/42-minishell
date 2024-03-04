@@ -16,9 +16,11 @@ DONE - echo + etc doesnt work
 
 -SHLVL doesnt increase
 
+- env -i : we should still have PWD, SHLVL & _=/usr/bin/env
+
 DONE -exit receives argument (also pay attention to more than 1 argument- when both are int or non-numeric, bigger tahn long int and smaller than min int)
 
--echo "'$USER'" and echo "$USER'" has expansion problem
+DONE -echo "'$USER'" and echo "$USER'" has expansion problem
 
 DONE (for nothing only) -ambiguous redirection is not implemented (when you redirect to an expansion which expand to 0 or more than 1 thing)
 
@@ -31,8 +33,8 @@ DONE -exit minishell with the same exit code as $? (test echo "something" | ./mi
 
 DONE -inside here_doc expansion doesnt work if you have quotation.
 
--mkdir a; cd a; mkdir b; cd b; rm -rf ../../a; cd .. exit your minishell (it should say no such file or dir)
+NO -mkdir a; cd a; mkdir b; cd b; rm -rf ../../a; cd .. exit your minishell (it should say no such file or dir)
 
 -unset TERM; clear shouldnt work; (DIRTY clear technique!!!)
 
-THIS WE WILL NOT FIX -cat | ls doesnt work properly (its because you dont wait() correctly)
+-cat | ls doesnt work properly (its because you dont wait() correctly)

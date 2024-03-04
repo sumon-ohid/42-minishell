@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 10:40:57 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/03 15:32:12 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/04 20:01:24 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,12 +93,10 @@ void	write_in_chunks(char *text, size_t len, int *tomlo, t_data *node)
 		}
 		if (!room_in_pipe(tomlo, node))
 			break ;
+		len = ft_strlen(text);
 	}
-	len = ft_strlen(text);
 }
 
-// cat << eof > out | << rr give syntax error but in bash its valid
-// protect pipe??
 void	read_from_heredoc(t_token *heredoc, t_data *node)
 {
 	int		*tomlo;
@@ -106,6 +104,8 @@ void	read_from_heredoc(t_token *heredoc, t_data *node)
 	size_t	len;
 
 	tomlo = malloc(sizeof(int) * 2);
+	if (!tomlo)
+		ft_exit(node, -1, "malloc at heredoc failed");
 	text = heredoc->heredoc_data;
 	if (pipe(tomlo) == -1)
 	{
@@ -120,3 +120,44 @@ void	read_from_heredoc(t_token *heredoc, t_data *node)
 	free(tomlo);
 }
 //write(tomlo[1], heredoc->heredoc_data, ft_strlen(heredoc->heredoc_data));
+/*
+int	write_in_chunks(char **text, int *tomlo)
+{
+	if (ft_strlen(*text) > 500)
+	{
+		write(tomlo[1], *text, 500);
+		*text = *text + 500;
+		return (0);
+	}
+	else
+	{
+		write(tomlo[1], *text, ft_strlen(*text));
+		return (1);
+	}
+}
+
+void	read_from_heredoc(t_token *heredoc, t_data *node)
+{
+	int		done;
+	int		*tomlo;
+	char 	*text;
+
+	done = 0;
+	text = heredoc->heredoc_data;
+	while (!done)
+	{
+		tomlo = malloc(sizeof(int) * 2);
+		if (!tomlo)
+			ft_exit(node, -1, "malloc at heredoc failed");
+		if (pipe(tomlo) == -1)
+		{
+			free(tomlo);
+			ft_exit(node, -1, "pipe creation for heredoc failed");
+		}
+		dup2(tomlo[0], STDIN_FILENO);
+		done = write_in_chunks(&text, tomlo);
+		close(tomlo[0]);
+		close(tomlo[1]);
+		free(tomlo);
+	}
+}*/

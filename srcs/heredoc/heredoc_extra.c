@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_extra.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 14:59:41 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/04 13:26:40 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/04 16:57:49 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,9 +106,7 @@ char	*ft_heredoc(t_data *node, char *str)
 	{
 		line = readline("> ");
 		line = handle_signals(line, node);
-		if (!line)
-			break ;
-		if (ft_strcmp(line, str) == 0)
+		if (!line || ft_strcmp(line, str) == 0)
 			break ;
 		heredoc = append_line_to_heredoc(heredoc, line, &len, node);
 		free(line);

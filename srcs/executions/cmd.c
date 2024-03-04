@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 14:32:03 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/03 19:11:41 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/04 20:21:49 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ void	free_resources(int **fd, int processes, t_data *node)
 void	do_child_stuff(char *line, t_data *node, int i, t_token **tokens)
 {
 	mode(node, CHILD);
+	//if (pipe_counter(line) - 1 != i)
+		//close(node->fd[i][0]);
 	if (i != 0)
 	{
 		if (dup2(node->fd[i - 1][0], STDIN_FILENO) == -1)
@@ -89,6 +91,7 @@ void	do_child_stuff(char *line, t_data *node, int i, t_token **tokens)
 		if (dup2(node->fd[i][1], STDOUT_FILENO) == -1)
 			exit_builtin(node);
 		close(node->fd[i][1]);
+		close(node->fd[i][0]); //THE SIGPIPE CLOSE
 	}
 	//set_what_this_child_doesnt_need(&node->fd, i, node->processes - 1);
 	node->cur_proc = i;
@@ -108,7 +111,6 @@ void	fork_processes(int processes, t_data *node, t_token **tokens,
 		if (i < processes - 1)
 			if (pipe(node->fd[i]) == -1)
 				ft_exit(node, -1, "pipe creation failed");
-		//close(node->fd[i][0]);
 		node->pid[i] = fork();
 		if (node->pid[i] == 0)
 			do_child_stuff(line, node, i, tokens);
