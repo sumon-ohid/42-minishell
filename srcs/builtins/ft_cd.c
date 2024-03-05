@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:24:36 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/29 18:34:53 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/05 11:27:07 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	ft_setenv(t_data *node, char *name, char *value)
 		}
 		i++;
 	}
-	handle_var_not_exists(node, new_entry);
+	//handle_var_not_exists(node, new_entry);
 	free(new_entry);
 }
 
@@ -106,11 +106,11 @@ int	ft_cd(char *str, t_data *node)
 	ret = 0;
 	oldpwd = get_current_directory();
 	if (oldpwd == NULL)
-		ft_exit(node, -1, NULL);
+		ft_exit(node, -1, "getcwd failed");
 	ret = change_directory(str, node);
 	pwd = get_current_directory();
 	if (pwd == NULL)
-		ft_exit(node, -1, NULL);
+		ft_exit(node, -1, "getcwd failed");
 	ft_setenv(node, "OLDPWD", oldpwd);
 	ft_setenv(node, "PWD", pwd);
 	return (ret);
