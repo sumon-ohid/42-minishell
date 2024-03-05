@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:50:09 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/02 20:38:00 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/05 17:19:48 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,11 +138,13 @@ void	process_words(t_token ***origin, char **units, char *str, t_data *node)
 	while (counter2 < pipe_counter(str))
 	{
 		//replace_quotes_with_spaces(units[counter2]);
+		printf("UNIT: %s\n", units[counter2]);
 		words = ft_split_special(units[counter2], ' ', 'X', 0);
 		if (!words)
 			ft_early_exit(node, -1, "malloc failed at process_words function");
 		while (words[counter])
 		{
+			printf("WORD: %s\n", words[counter]);
 			create_and_link_token(origin, counter2, words[counter], node);
 			counter++;
 		}
