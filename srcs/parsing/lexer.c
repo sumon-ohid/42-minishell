@@ -6,7 +6,7 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 13:51:32 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/29 14:14:13 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/05 13:11:56 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,10 @@ int	check_invalid_endings(char c, char *line, int i)
 	else if (c == '<' && line[i + 1] == '\0')
 		return (ft_lexer_error(line));
 	else if (c == '|' && line[i + 1] == '\0')
+		return (ft_lexer_error(line));
+	else if (c == '(' && line[i + 1] == '\0')
+		return (ft_lexer_error(line));
+	else if (c == ')' && line[i + 1] == '\0')
 		return (ft_lexer_error(line));
 	return (1);
 }
