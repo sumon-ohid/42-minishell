@@ -113,19 +113,6 @@ void	create_and_link_token(t_token ***origin, int current, char *word,
 	}
 }
 
-void	replace_quotes_with_spaces(char *str)
-{
-	int	counter;
-
-	counter = 0;
-	while (str[counter])
-	{
-		if (str[counter] == '\"' || str[counter] == '\'')
-			str[counter] = ' ';
-		counter++;
-	}
-}
-
 void	process_words(t_token ***origin, char **units, char *str, t_data *node)
 {
 	int		counter;
@@ -137,7 +124,6 @@ void	process_words(t_token ***origin, char **units, char *str, t_data *node)
 	node->line_temp = str;
 	while (counter2 < pipe_counter(str))
 	{
-		//replace_quotes_with_spaces(units[counter2]);
 		words = ft_split_special(units[counter2], ' ', 'X', 0);
 		if (!words)
 			ft_early_exit(node, -1, "malloc failed at process_words function");

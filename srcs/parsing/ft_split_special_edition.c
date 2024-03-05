@@ -95,40 +95,59 @@ static void	split_helper_pipes(char *s, char c, size_t *i, char *output)
 	output[k] = '\0';
 }
 
-static void	split_helper(char *s, char c, size_t *i, char *output)
+static void split_helper(char *s, char c, size_t *i, char *output)
 {
-	char	quote;
-	int		flag;
-	int		k;
+    char quote;
+    int flag;
+	int j;
+    int k;
+	int only_spaces;
 
-	quote = 0;
-	flag = 0;
-	k = 0;
-	while (s[*i] && (s[*i] != c || quote))
-	{
-		if (!flag && (s[*i] == '\'' || s[*i] == '\"'))
-		{
-			quote = s[*i];
-			flag = 1;
-			*i = *i + 1;
-			if (s[*i] == quote)
+	only_spaces = 0;
+    quote = 0;
+    flag = 0;
+	j = 0;
+    k = 0;
+    while (s[*i] && (s[*i] != c || quote))
+    {
+        if (!flag && (s[*i] == '\'' || s[*i] == '\"'))
+        {
+            quote = s[*i];
+            flag = 1;
+            (*i)++;
+            only_spaces = 1;
+            j = *i;
+            while (s[j] && s[j] != quote)
             {
-				output[k++] = quote;
-                output[k++] = quote;
-                *i = *i + 1;
+                if (s[j] != ' ')
+                {
+                    only_spaces = 0;
+                    break;
+                }
+                j++;
             }
-		}
-		else if (flag && (s[*i] == quote))
-		{
-			flag = 0;
-			quote = 0;
-			*i = *i + 1;
-		}
-		else
-			output[k++] = s[(*i)++];
-	}
-	output[k] = '\0';
+            if (only_spaces && s[j] == quote && (s[j + 1] == ' ' || s[j + 1] == '\0' || s[j + 1] == c))
+            {
+                output[k++] = quote;
+                output[k++] = quote;
+                (*i) = j + 1;
+            }
+        }
+        else if (flag && (s[*i] == quote))
+        {
+            flag = 0;
+            quote = 0;
+            (*i)++;
+        }
+        else
+        {
+            output[k++] = s[(*i)++];
+        }
+    }
+    output[k] = '\0';
 }
+
+
 
 static int	l_count(char const *s, int i, char c)
 {
