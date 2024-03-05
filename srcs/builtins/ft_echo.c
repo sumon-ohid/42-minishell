@@ -6,7 +6,7 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:25:07 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/29 10:52:45 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/05 11:32:36 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,34 @@ char	*copy_after_char(char *str, char c)
 	return (output);
 }
 
+void	remove_many_spaces(char *envp)
+{
+	int		i;
+	int		j;
+	char	*tmp;
+
+	i = 0;
+	j = 0;
+	tmp = malloc(sizeof(char) * ft_strlen(envp) + 1);
+	if (!tmp)
+		return ;
+	while (envp[i])
+	{
+		if (envp[i] == ' ' && envp[i + 1] == ' ')
+			i++;
+		else
+		{
+			tmp[j] = envp[i];
+			i++;
+			j++;
+		}
+	}
+	tmp[j] = '\0';
+	ft_strcpy(envp, tmp);
+	free(tmp);
+
+}
+
 char	*get_env_value(char *arg, t_data *node)
 {
 	char	*env_value;
@@ -47,6 +75,7 @@ char	*get_env_value(char *arg, t_data *node)
 	i = 0;
 	while (node->envp[i])
 	{
+		remove_many_spaces(node->envp[i]);
 		tmp = copy_until_char(node->envp[i], '=');
 		if (!tmp)
 			ft_exit(node, 127, "malloc error in get_env");
