@@ -75,39 +75,73 @@ char	*handle_env_values(char *str, char *result, t_data *node, int *i)
 		free(var_name);
 	}
 	else
-		char_append(&result, str[(*i)]);
+		char_append(&result, str[(*i + 1)]);
 	return (result);
+}
+
+char	*replace_quotes_with_spaces(char *str)
+{
+	int		i;
+	char	*temp;
+
+	i = 0;
+	temp = ft_strdup(str);
+	if (!temp)
+		return (NULL);
+	while (temp[i])
+	{
+		if (temp[i] == '\"' || temp[i] == '\'')
+			temp[i] = ' ';
+		i++;
+	}
+	return (temp);
 }
 
 char	*handle_envp(char *str, t_data *node)
 {
 	char	*result;
+	char	**vars;
+	char	*temp;
 	int		i;
+	int		j;
 
 	i = 0;
+	temp = replace_quotes_with_spaces(node->input_line);
+	vars = ft_split(temp, ' ', 0, 0);
+	if (!vars)
+		ft_exit(node, -1, "malloc in handle_envp failed");
 	result = malloc(sizeof(char) * (ft_strlen(str) + 1));
 	if (!result)
 		ft_exit(node, -1, "malloc in handle_envp failed");
 	result[0] = '\0';
-	while (str[i])
+	if (ft_strcmp(vars[0], "echo") == 0)
+		i = 1;
+	while(vars[i])
 	{
-		if (str[i] == '$')
+		j = 0;
+		while (vars[i][j])
 		{
-			if (str[i + 1] == '?')
-				result = handle_dollar_question(result, node, &i);
-			else if (str[i + 1] == '$')
-				result = handle_dollar_dollar(result, node, &i);
-			else if (str[i + 1] == '-')
+			if (vars[i][j] == '$')
 			{
-				printf("I knew it, Don't go this much crazy!\n");
-				i++;
+				if (vars[i][j + 1] == '?')
+					result = handle_dollar_question(result, node, &j);
+				else if (vars[i][j + 1] == '$')
+					result = handle_dollar_dollar(result, node, &j);
+				else if (vars[i][j + 1] == '-')
+				{
+					printf("I knew it, Don't go this much crazy!\n");
+					j++;
+				}
+				else
+					result = handle_env_values(vars[i], result, node, &j);
 			}
 			else
-				result = handle_env_values(str, result, node, &i);
+				char_append(&result, vars[i][j]);
+			j++;
 		}
-		else
-			char_append(&result, str[i]);
 		i++;
 	}
+	free(temp);
+	ft_free_array(vars);
 	return (result);
 }
