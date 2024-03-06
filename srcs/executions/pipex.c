@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 20:21:29 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/06 16:21:07 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/06 20:42:46 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,8 @@ void	extract_find_execute(char **envp, t_token *mark, t_data *node)
 		free_everything(comms, counter);
 		ft_exit(node, 127, NULL);
 	}
+	close(node->std_in);
+	close(node->std_out);
 	execve(path, comms, node->envp);
 	directory_error(comms[0]);
 	if (node->processes > 1)

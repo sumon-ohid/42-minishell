@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirects_extra.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 15:02:36 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/06 16:18:40 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/06 22:40:42 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	str_is_nothing(char *str)
 
 	c = 0;
 	if (!str)
+		return (1);
+	if (ft_strcmp(str, "\"\"") == 0)
 		return (1);
 	while (str[c] && (str[c] == ' ' || (str[c] >= 9 && str[c] <= 11)))
 		c++;
@@ -87,7 +89,7 @@ int	redirect_out_append(char *output, int mode, t_data *node)
 	if (str_is_nothing(output))
 		return (printf("minishell: ambiguous redirect\n"),
 			node->last_return = -99, 0);
-	fd2 = open(output, O_TRUNC | O_WRONLY | O_CREAT | O_APPEND, 0644);
+	fd2 = open(output, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (fd2 == -1)
 	{
 		printf("minishell: %s: Permission denied\n", output);
