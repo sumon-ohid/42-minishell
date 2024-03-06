@@ -6,7 +6,7 @@
 /*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/06 16:40:05 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/06 16:45:02 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -238,6 +238,10 @@ int					entry_check2(t_data *node, t_token *head, char *line);
 void				allocate_fd(int ***fd, int processes, t_data *node);
 void				fork_processes(int processes, t_data *node,
 						t_token **tokens, char *line);
+
+// cmd03
+void				wait_for_processes(int *pid, int *status,
+						int processes, t_data *node);
 
 // free memory
 void				ft_free_array(char **str);

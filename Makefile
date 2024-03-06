@@ -23,6 +23,7 @@ SRC = 	srcs/main/main.c \
 		srcs/executions/cmd.c \
 		srcs/executions/cmd01.c \
 		srcs/executions/cmd02.c \
+		srcs/executions/cmd03.c \
 		srcs/utils/libft_helpers.c \
 		srcs/utils/libft_helpers1.c \
 		srcs/utils/libft_helpers2.c \
