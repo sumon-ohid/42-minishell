@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/06 14:59:40 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/06 15:19:15 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,6 +207,7 @@ int					check_prevs(char *word, int prev_type);
 void				process_words(t_token ***origin, char **words, char *str,
 						t_data *node);
 int					quote_assigner(char *big, char *little);
+void				eof_free(t_data *node);
 
 // cmd01
 int					ft_commander(t_token *chain, t_data *node);

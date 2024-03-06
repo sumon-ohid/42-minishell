@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:17:43 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/03 19:07:03 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/06 15:18:42 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int	entry_check(t_data *node, char *line)
 	node->arr = arr;
 	process_words(&tokens, arr, line, node);
 	node->tokens = tokens;
-	ft_localvars(tokens, node, pipe_counter(line));
 	if (!check_for_heredoc(node, tokens, pipe_counter(line)))
 		return (2);
 	ret_val = executor_init(node, tokens, pipe_counter(line), line);
@@ -41,29 +40,6 @@ int	entry_check(t_data *node, char *line)
 	else
 		return (ret_val);
 }
-
-/*int	entry_check(t_data *node, char *line)
-{
-	char	**arr;
-	int		ret_val;
-
-	if (!ft_lexical_checker(line, 0, 0, '\0'))
-		return (2);
-	line = ft_upgrade_spaces(line, 0, 0, 0);
-	arr = parse_input(line);
-	if (!arr)
-		ft_exit(node, 1, "Memory allocation failed at entry check"); //these are causing leaks
-	node->input_line = line;
-	node->arr = arr;
-	node->processes = pipe_counter(line);
-	process_words(node->tokens, arr, line, node);
-	ft_localvars(node->tokens, node, pipe_counter(line));
-	if (!check_for_heredoc(node, node->tokens, pipe_counter(line)))
-		return (130);
-	ret_val = executor_init(node, node->tokens, pipe_counter(line), line);
-	ft_cleanup(node, node->tokens, line, arr);
-	return (ret_val);
-}*/
 
 char	**dup_envp(char **envp)
 {
@@ -99,19 +75,6 @@ void	initialize_node(t_data *node, char **envp)
 	node->in_child = 0;
 	node->status = NULL;
 	node->pid = NULL;
-}
-void	eof_free(t_data *node)
-{
-	printf("exit\n");
-	//free(input);
-	free_vars(node->local_vars);
-	ft_free_array(node->envp);
-	if (node->std_in != -1)
-		close(node->std_in);
-	if (node->std_out != -1)
-		close(node->std_out);
-	free(node);
-	exit(EXIT_FAILURE);
 }
 
 void	ft_initialize(t_data *node, char **envp)
@@ -161,3 +124,26 @@ int	main(int argc, char **argv, char **envp)
 	close(node->std_out);
 	return (0);
 }
+
+/*int	entry_check(t_data *node, char *line)
+{
+	char	**arr;
+	int		ret_val;
+
+	if (!ft_lexical_checker(line, 0, 0, '\0'))
+		return (2);
+	line = ft_upgrade_spaces(line, 0, 0, 0);
+	arr = parse_input(line);
+	if (!arr)
+		ft_exit(node, 1, "Memory allocation failed at entry check"); //these are causing leaks
+	node->input_line = line;
+	node->arr = arr;
+	node->processes = pipe_counter(line);
+	process_words(node->tokens, arr, line, node);
+	ft_localvars(node->tokens, node, pipe_counter(line));
+	if (!check_for_heredoc(node, node->tokens, pipe_counter(line)))
+		return (130);
+	ret_val = executor_init(node, node->tokens, pipe_counter(line), line);
+	ft_cleanup(node, node->tokens, line, arr);
+	return (ret_val);
+}*/

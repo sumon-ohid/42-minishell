@@ -6,27 +6,11 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 10:40:57 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/06 15:02:02 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/06 15:14:51 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-int	heredoc_counter(t_token *tokens)
-{
-	t_token	*proxy;
-	int		counter;
-
-	proxy = tokens;
-	counter = 0;
-	while (proxy)
-	{
-		if (proxy->type == HEREDOC)
-			counter++;
-		proxy = proxy->next;
-	}
-	return (counter);
-}
 
 int	check_for_heredoc(t_data *node, t_token **tokens, int processes)
 {
@@ -96,11 +80,23 @@ void	write_in_chunks(char *text, size_t len, int *tomlo, t_data *node)
 	}
 }
 
+void	heredoc_child(t_token *heredoc, t_data *node, int *tomlo)
+{
+	char 	*text;
+	size_t	len;
+
+	text = heredoc->heredoc_data;
+	len = ft_strlen(text);
+	write_in_chunks(text, len, tomlo, node);
+	close(tomlo[0]);
+	close(tomlo[1]);
+	free(tomlo);
+	ft_exit(node, 0, NULL);
+}
+
 void	read_from_heredoc(t_token *heredoc, t_data *node)
 {
 	int		*tomlo;
-	char 	*text;
-	size_t	len;
 	int		pid;
 
 	tomlo = malloc(sizeof(int) * 2);
@@ -123,15 +119,7 @@ void	read_from_heredoc(t_token *heredoc, t_data *node)
 		return ;
 	}
 	else if (pid == 0)
-	{
-		text = heredoc->heredoc_data;
-		len = ft_strlen(text);
-		write_in_chunks(text, len, tomlo, node);
-		close(tomlo[0]);
-		close(tomlo[1]);
-		free(tomlo);
-		ft_exit(node, 0, NULL);
-	}
+		heredoc_child(heredoc, node, tomlo);
 }
 //write(tomlo[1], heredoc->heredoc_data, ft_strlen(heredoc->heredoc_data));
 /*
@@ -174,4 +162,20 @@ void	read_from_heredoc(t_token *heredoc, t_data *node)
 		close(tomlo[1]);
 		free(tomlo);
 	}
+}
+
+int	heredoc_counter(t_token *tokens)
+{
+	t_token	*proxy;
+	int		counter;
+
+	proxy = tokens;
+	counter = 0;
+	while (proxy)
+	{
+		if (proxy->type == HEREDOC)
+			counter++;
+		proxy = proxy->next;
+	}
+	return (counter);
 }*/
