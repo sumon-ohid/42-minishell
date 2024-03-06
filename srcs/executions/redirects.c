@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 18:46:23 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/04 21:42:29 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/06 14:19:47 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int	ft_redirect_checker(t_token *chain, int mode, t_data *node, int killmode)
 				else
 					return (0);
 			}
+			mark = NULL;
 		}
 		else if (proxy->type == HEREDOC)
 			mark = proxy;

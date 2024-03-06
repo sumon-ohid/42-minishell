@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 10:40:57 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/04 21:44:43 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/06 14:22:38 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	write_in_chunks(char *text, size_t len, int *tomlo, t_data *node)
 		else
 		{
 			write(tomlo[1], text, ft_strlen(text));
-			break ;
+			return ;
 		}
 		if (!room_in_pipe(tomlo, node))
 			break ;
