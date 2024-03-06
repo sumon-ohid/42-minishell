@@ -20,10 +20,10 @@ RESET = \033[0m
 SRC = 	srcs/main/main.c \
 		srcs/utils/ft_split.c \
 		srcs/utils/ft_atoi.c \
-		srcs/executions/cmd.c \
-		srcs/executions/cmd01.c \
-		srcs/executions/cmd02.c \
-		srcs/executions/cmd03.c \
+		srcs/executions/cmd1_init_and_fork.c \
+		srcs/executions/cmd2_execute_chain.c \
+		srcs/executions/cmd3_builtins.c \
+		srcs/executions/waiting.c \
 		srcs/utils/libft_helpers.c \
 		srcs/utils/libft_helpers1.c \
 		srcs/utils/libft_helpers2.c \

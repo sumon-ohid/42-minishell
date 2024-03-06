@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd03.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 16:46:56 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/06 17:08:56 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/06 18:07:05 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,8 @@ void	wait_for_processes(int *pid, int *status, int processes, t_data *node)
 		else if (return_val == 0)
 		{
 			if (g_signal == CTRL_C)
-			{
 				kill(pid[counter], SIGINT);
-				g_signal = 0;
-			}
+			g_signal = 0;
 		}
 		else
 		{
@@ -38,8 +36,7 @@ void	wait_for_processes(int *pid, int *status, int processes, t_data *node)
 			else if (WIFSIGNALED(status[counter]) && counter == processes - 1
 				&& node->mode != HEREDOC)
 				write(STDOUT_FILENO, "\n", 1);
-			if (WIFEXITED(status[counter]) || WIFSIGNALED(status[counter]))
-				counter++;
+			counter++;
 		}
 	}
 }

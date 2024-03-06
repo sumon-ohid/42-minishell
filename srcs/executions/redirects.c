@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirects.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 18:46:23 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/06 16:20:52 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/06 18:17:57 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,11 @@ void	ft_restore(t_data *node)
 		ft_exit(node, -1, "dup2 failed");
 }
 
-int	ft_redirect_checker(t_token *chain, int mode, t_data *node, int killmode)
+int	ft_redirect_checker(t_token *proxy, int mode, t_data *node, int killmode)
 {
-	t_token	*proxy;
 	t_token	*mark;
 
 	mark = NULL;
-	proxy = chain;
 	while (proxy)
 	{
 		if (proxy->type >= 3 && proxy->type <= 5)
@@ -49,7 +47,8 @@ int	ft_redirect_checker(t_token *chain, int mode, t_data *node, int killmode)
 				else
 					return (0);
 			}
-			mark = NULL;
+			if (proxy->type == INFILE)
+				mark = NULL;
 		}
 		else if (proxy->type == HEREDOC)
 			mark = proxy;
