@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 14:59:41 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/06 18:35:05 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/06 18:40:21 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ void	ft_memset(void *b, int c, size_t len)
 		*ptr++ = (unsigned char)c;
 }
 
-char	*malloc_heredoc(char *ptr, size_t old_size, size_t new_size, t_data *node)
+char	*malloc_heredoc(char *ptr, size_t old_size, size_t new_size,
+	t_data *node)
 {
 	char	*new_ptr;
 
@@ -64,7 +65,7 @@ char	*append_line_to_heredoc(char *heredoc, char *line, size_t *len,
 	if (heredoc)
 	{
 		heredoc = malloc_heredoc(heredoc, *len,
-			*len + ft_strlen(line) + 2, node);
+				*len + ft_strlen(line) + 2, node);
 		if (*len > 0)
 			heredoc = ft_strjoin_node(heredoc, "\n", 1, node);
 		heredoc = ft_strjoin_node(heredoc, line, 1, node);
