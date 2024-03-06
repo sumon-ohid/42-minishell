@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 14:41:52 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/06 15:23:52 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/06 16:18:05 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,11 @@ int	digit_checker(char *str)
 		return (0);
 }
 
-int	exit_with_args(t_data *node, int exit_val, t_token *head)
+int	exit_with_args(t_data *node, int exit_val, t_token *head, int val)
 {
-	t_token *proxy;
+	t_token	*proxy;
 	int		counter;
-	int		val;
-	
+
 	proxy = head;
 	counter = 0;
 	while (proxy)

@@ -3,21 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 13:51:32 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/05 13:11:56 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/06 16:36:14 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-int	ft_lexer_error(char *line)
-{
-	free(line);
-	write(2, "minishell: syntax error near unexpected token\n", 47);
-	return (0);
-}
 
 int	check_invalid_sequences(char c, char prev_char, char *line)
 {
@@ -33,10 +26,6 @@ int	check_invalid_sequences(char c, char prev_char, char *line)
 		return (ft_lexer_error(line));
 	else if (c == '|' && prev_char == '<')
 		return (ft_lexer_error(line));
-	// else if (c == '>' && prev_char == '|')
-	// 	return (ft_lexer_error(line));
-	// else if (c == '<' && prev_char == '|')
-	// 	return (ft_lexer_error(line));
 	else if (c == '<' && prev_char == '<' && line[2] == '<')
 		return (ft_lexer_error(line));
 	else if (c == '>' && prev_char == '>' && line[2] == '>')
@@ -101,7 +90,7 @@ int	ft_lexical_checker(char *input, int in_single_quote, int in_double_quote,
 {
 	char	c;
 	int		i;
-	char 	*line;
+	char	*line;
 
 	i = 0;
 	line = remove_spaces(input);
@@ -116,15 +105,12 @@ int	ft_lexical_checker(char *input, int in_single_quote, int in_double_quote,
 		{
 			if (!check_invalid_sequences(c, prev_char, line)
 				|| !check_invalid_endings(c, line, i))
-			{
 				return (0);
-			}
 		}
 		prev_char = c;
 		i++;
 	}
 	if (in_single_quote || in_double_quote)
 		return (ft_lexer_error(line));
-	free(line);
-	return (1);
+	return (free(line), 1);
 }

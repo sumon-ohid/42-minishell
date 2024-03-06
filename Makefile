@@ -56,6 +56,7 @@ SRC = 	srcs/main/main.c \
 		srcs/signals/ft_lastvalue.c \
 		srcs/utils/ft_itoa.c \
 		srcs/parsing/ft_split_special_edition.c \
+		srcs/parsing/ft_split_extra.c \
 
 OBJ = $(SRC:.c=.o)
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_extra.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 14:35:54 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/29 09:48:25 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/06 16:26:00 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ char	**parse_input(char *line)
 	return (tokens);
 }
 
-// TODO: somehow we have to replace handle error with ft_exit,
-//	but for that we have to move node here
 char	*ft_upgrade_spaces(char *line, int i, int j, int in_quotes)
 {
 	char	*result;
@@ -65,4 +63,11 @@ int	quote_assigner(char *big, char *little)
 		return (DOUBLE_QUOTE);
 	else
 		return (NO_QUOTE);
+}
+
+int	ft_lexer_error(char *line)
+{
+	free(line);
+	write(2, "minishell: syntax error near unexpected token\n", 47);
+	return (0);
 }

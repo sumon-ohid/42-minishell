@@ -3,40 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:25:07 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/06 14:51:39 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/06 16:15:09 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-char	*copy_after_char(char *str, char c)
-{
-	int		i;
-	int		j;
-	char	*output;
-
-	i = 0;
-	j = 0;
-	if (ft_strchr(str, c) == 0)
-		return (ft_strdup(""));
-	while (str[i] != c)
-		i++;
-	i++;
-	output = malloc(sizeof(char) * ft_strlen(str + i) + 1);
-	if (!output)
-		return (NULL);
-	while (str[i])
-	{
-		output[j] = str[i];
-		i++;
-		j++;
-	}
-	output[j] = '\0';
-	return (output);
-}
 
 void	remove_many_spaces(char *envp)
 {
@@ -63,7 +37,6 @@ void	remove_many_spaces(char *envp)
 	tmp[j] = '\0';
 	ft_strcpy(envp, tmp);
 	free(tmp);
-
 }
 
 char	*get_env_value(char *arg, t_data *node)
@@ -95,7 +68,7 @@ char	*get_env_value(char *arg, t_data *node)
 	return ("");
 }
 
-int flag_check(char *str)
+int	flag_check(char *str)
 {
 	int	i;
 

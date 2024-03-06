@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo_extra.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 15:32:22 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/29 11:00:44 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/06 16:15:14 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,30 @@ void	print_argument(char *arg, t_data *node)
 		i++;
 	}
 	return ;
+}
+
+char	*copy_after_char(char *str, char c)
+{
+	int		i;
+	int		j;
+	char	*output;
+
+	i = 0;
+	j = 0;
+	if (ft_strchr(str, c) == 0)
+		return (ft_strdup(""));
+	while (str[i] != c)
+		i++;
+	i++;
+	output = malloc(sizeof(char) * ft_strlen(str + i) + 1);
+	if (!output)
+		return (NULL);
+	while (str[i])
+	{
+		output[j] = str[i];
+		i++;
+		j++;
+	}
+	output[j] = '\0';
+	return (output);
 }

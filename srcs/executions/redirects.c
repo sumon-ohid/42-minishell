@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirects.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 18:46:23 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/06 14:19:47 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/06 16:20:52 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	ft_restore(t_data *node)
 int	ft_redirect_checker(t_token *chain, int mode, t_data *node, int killmode)
 {
 	t_token	*proxy;
-	t_token *mark;
+	t_token	*mark;
 
 	mark = NULL;
 	proxy = chain;

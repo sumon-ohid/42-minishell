@@ -3,17 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize3.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 10:06:20 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/04 13:07:06 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/06 16:38:03 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-/*if (ft_strstr(str, "\""))
- DO SOMETHING HERE!*/
 char	*extract_var_name(char *str)
 {
 	int		i;
@@ -23,7 +21,8 @@ char	*extract_var_name(char *str)
 	output = malloc(sizeof(char) * (ft_strlen_till_char(str, ' ') + 1));
 	if (!output)
 		handle_error("malloc in extract_var_name failed", 1);
-	while (str[i] && str[i] != ' ' && str[i] != '$' && str[i] != '\"' && str[i] != '\'')
+	while (str[i] && str[i] != ' ' && str[i] != '$'
+		&& str[i] != '\"' && str[i] != '\'')
 	{
 		output[i] = str[i];
 		i++;
@@ -78,6 +77,7 @@ char	*handle_env_values(char *str, char *result, t_data *node, int *i)
 		char_append(&result, str[(*i)]);
 	return (result);
 }
+// echo $- don't know if we need to handle
 
 char	*handle_envp(char *str, t_data *node)
 {
@@ -97,11 +97,6 @@ char	*handle_envp(char *str, t_data *node)
 				result = handle_dollar_question(result, node, &i);
 			else if (str[i + 1] == '$')
 				result = handle_dollar_dollar(result, node, &i);
-			else if (str[i + 1] == '-')
-			{
-				printf("I knew it, Don't go this much crazy!\n");
-				i++;
-			}
 			else
 				result = handle_env_values(str, result, node, &i);
 		}

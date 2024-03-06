@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/06 15:19:15 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/06 16:40:05 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ extern volatile sig_atomic_t	g_signal;
 // for split
 typedef struct s_split
 {
-	int 			only_spaces;
+	int				only_spaces;
 	int				k;
 	char			quote;
 	int				flag;
@@ -139,7 +139,8 @@ char				*ft_itoa(int n);
 int					ft_strstr(const char *big, const char *little);
 char				*ft_quote_detector(char *big, char *little);
 char				*ft_strjoin(char *s1, char *s2, int save_flag);
-char				*ft_strjoin_node(char *s1, char *s2, int save_flag, t_data *node);
+char				*ft_strjoin_node(char *s1, char *s2, int save_flag,
+						t_data *node);
 int					ft_strlen(const char *str);
 char				*ft_substr(char const *s, unsigned int start, size_t len);
 char				*ft_strdup(const char *src);
@@ -147,6 +148,8 @@ int					ft_strcmp(char *s1, char *s2);
 int					ft_strncmp(char *s1, char *s2, size_t n);
 char				**ft_split(char const *s, char c, size_t i, size_t j);
 char				**ft_split_special(char *s, char c, char mode, size_t j);
+void				split_helper_pipes(char *s, char c, size_t *i,
+						char *output);				
 int					k_count(char const *s, int i, char c);
 void				ft_putstr(char *str);
 void				ft_putchar(char c);
@@ -191,7 +194,8 @@ int					ft_unset(t_data *node, t_token *token, char *str);
 char				*ft_getenv(char *name, t_data *node);
 char				*ft_lastval_str(t_data *node);
 void				ft_exit(t_data *node, int exit_val, char *msg);
-int					exit_with_args(t_data *node, int exit_val, t_token *head);
+int					exit_with_args(t_data *node, int exit_val,
+						t_token *head, int val);
 void				ft_early_exit(t_data *node, int exit_val, char *msg);
 void				ft_localvars(t_token **tokens, t_data *node, int processes);
 char				*copy_until_char(char *str, char c);
@@ -276,6 +280,7 @@ int					handle_error(char *error, int status);
 void				ft_putstr_fd(char *s, int fd);
 void				nocomm_error(char *name);
 void				directory_error(char *name);
+int					ft_lexer_error(char *line);
 
 // tokenizer
 int					ft_strlen_till_char(char *str, char c);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd01.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 17:28:11 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/03 13:52:54 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/06 16:19:58 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ int	execute_chain(t_data *node, t_token *chain, char *line, int processes)
 		else
 			proxy = proxy->next;
 	}
-	//ft_free_fds(node);
 	return (ft_redirect_checker(chain, 0, node, 1));
 }
 

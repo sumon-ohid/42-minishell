@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 10:40:57 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/06 15:14:51 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/06 16:22:19 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	check_for_heredoc(t_data *node, t_token **tokens, int processes)
 	return (1);
 }
 
-int		room_in_pipe(int *tomlo, t_data *node)
+int	room_in_pipe(int *tomlo, t_data *node)
 {
 	int	return_val;
 	int	taken_space;
@@ -82,7 +82,7 @@ void	write_in_chunks(char *text, size_t len, int *tomlo, t_data *node)
 
 void	heredoc_child(t_token *heredoc, t_data *node, int *tomlo)
 {
-	char 	*text;
+	char	*text;
 	size_t	len;
 
 	text = heredoc->heredoc_data;
@@ -121,61 +121,3 @@ void	read_from_heredoc(t_token *heredoc, t_data *node)
 	else if (pid == 0)
 		heredoc_child(heredoc, node, tomlo);
 }
-//write(tomlo[1], heredoc->heredoc_data, ft_strlen(heredoc->heredoc_data));
-/*
-int	write_in_chunks(char **text, int *tomlo)
-{
-	if (ft_strlen(*text) > 500)
-	{
-		write(tomlo[1], *text, 500);
-		*text = *text + 500;
-		return (0);
-	}
-	else
-	{
-		write(tomlo[1], *text, ft_strlen(*text));
-		return (1);
-	}
-}
-
-void	read_from_heredoc(t_token *heredoc, t_data *node)
-{
-	int		done;
-	int		*tomlo;
-	char 	*text;
-
-	done = 0;
-	text = heredoc->heredoc_data;
-	while (!done)
-	{
-		tomlo = malloc(sizeof(int) * 2);
-		if (!tomlo)
-			ft_exit(node, -1, "malloc at heredoc failed");
-		if (pipe(tomlo) == -1)
-		{
-			free(tomlo);
-			ft_exit(node, -1, "pipe creation for heredoc failed");
-		}
-		dup2(tomlo[0], STDIN_FILENO);
-		done = write_in_chunks(&text, tomlo);
-		close(tomlo[0]);
-		close(tomlo[1]);
-		free(tomlo);
-	}
-}
-
-int	heredoc_counter(t_token *tokens)
-{
-	t_token	*proxy;
-	int		counter;
-
-	proxy = tokens;
-	counter = 0;
-	while (proxy)
-	{
-		if (proxy->type == HEREDOC)
-			counter++;
-		proxy = proxy->next;
-	}
-	return (counter);
-}*/

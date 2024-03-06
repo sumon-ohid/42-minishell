@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lastvalue.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:55:33 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/02 19:58:59 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/06 16:38:38 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 int	ft_lastvalue(t_data *node)
 {
 	if (node->last_return == -2)
-		return(2);
+		return (2);
 	else if (node->last_return == -1)
 		return (1);
 	else if (node->last_return == -88)
 		return (130);
 	if (WIFEXITED(node->last_return))
-		return(WEXITSTATUS(node->last_return));
+		return (WEXITSTATUS(node->last_return));
 	else if (WIFSIGNALED(node->last_return))
-		return(WTERMSIG(node->last_return) + 128);
+		return (WTERMSIG(node->last_return) + 128);
 	else
-		return(127);
+		return (127);
 }
 
 char	*ft_lastval_str(t_data *node)
