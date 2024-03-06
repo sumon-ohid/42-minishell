@@ -95,44 +95,52 @@ static void	split_helper_pipes(char *s, char c, size_t *i, char *output)
 	output[k] = '\0';
 }
 
+static void process_quotes(char *s, char *quote, int *flag, size_t *i, int *j, int *only_spaces, char *output, int *k, char c)
+{
+    *quote = s[*i];
+    *flag = 1;
+    (*i)++;
+    *only_spaces = 1;
+    *j = *i;
+    while (s[*j] && s[*j] != *quote)
+    {
+        if (s[*j] != ' ')
+        {
+            *only_spaces = 0;
+            break;
+        }
+        (*j)++;
+    }
+    if (*only_spaces && s[*j] == *quote)
+    {
+        while (s[*j + 1] == ' ')
+            (*j)++;
+        if (s[*j + 1] == ' ' || s[*j + 1] == '\0' || s[*j + 1] == c)
+        {
+            output[(*k)++] = *quote;
+            output[(*k)++] = *quote;
+            *i = *j + 1;
+        }
+    }
+}
+
 static void split_helper(char *s, char c, size_t *i, char *output)
 {
     char quote;
     int flag;
-	int j;
+    int j;
     int k;
-	int only_spaces;
+    int only_spaces;
 
-	only_spaces = 0;
+    only_spaces = 0;
     quote = 0;
     flag = 0;
-	j = 0;
+    j = 0;
     k = 0;
     while (s[*i] && (s[*i] != c || quote))
     {
         if (!flag && (s[*i] == '\'' || s[*i] == '\"'))
-        {
-            quote = s[*i];
-            flag = 1;
-            (*i)++;
-            only_spaces = 1;
-            j = *i;
-            while (s[j] && s[j] != quote)
-            {
-                if (s[j] != ' ')
-                {
-                    only_spaces = 0;
-                    break;
-                }
-                j++;
-            }
-            if (only_spaces && s[j] == quote && (s[j + 1] == ' ' || s[j + 1] == '\0' || s[j + 1] == c))
-            {
-                output[k++] = quote;
-                output[k++] = quote;
-                (*i) = j + 1;
-            }
-        }
+            process_quotes(s, &quote, &flag, i, &j, &only_spaces, output, &k, c);
         else if (flag && (s[*i] == quote))
         {
             flag = 0;
@@ -140,14 +148,10 @@ static void split_helper(char *s, char c, size_t *i, char *output)
             (*i)++;
         }
         else
-        {
             output[k++] = s[(*i)++];
-        }
     }
     output[k] = '\0';
 }
-
-
 
 static int	l_count(char const *s, int i, char c)
 {
