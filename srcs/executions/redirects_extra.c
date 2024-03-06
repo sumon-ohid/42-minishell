@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 15:02:36 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/04 16:47:32 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/06 15:01:24 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,10 +113,6 @@ int	ft_redirector(t_token *chain, int file_type, int mode, t_data *node)
 	t_token	*mark1;
 
 	mark1 = chain;
-	/*while (mark1 && mark1->type != file_type)
-	{
-		mark1 = mark1->next;
-	}*/
 	if (!mark1)
 		ft_exit(node, -1, NULL);
 	if (file_type == INFILE)

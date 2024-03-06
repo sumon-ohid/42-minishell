@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/03 22:41:00 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/06 14:59:40 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,7 @@ char				*ft_itoa(int n);
 int					ft_strstr(const char *big, const char *little);
 char				*ft_quote_detector(char *big, char *little);
 char				*ft_strjoin(char *s1, char *s2, int save_flag);
+char				*ft_strjoin_node(char *s1, char *s2, int save_flag, t_data *node);
 int					ft_strlen(const char *str);
 char				*ft_substr(char const *s, unsigned int start, size_t len);
 char				*ft_strdup(const char *src);

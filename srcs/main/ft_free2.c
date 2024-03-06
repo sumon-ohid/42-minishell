@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 10:03:57 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/27 10:04:15 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/06 14:52:14 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,4 +17,58 @@ void	ft_cleanup(t_data *node, t_token **tokens, char *line, char **arr)
 	free_tokens(tokens, node->processes);
 	free(line);
 	free_arr(arr);
+}
+
+void	ft_free_array(char **str)
+{
+	int	i;
+
+	i = 0;
+	if (!str)
+		return ;
+	while (str[i])
+	{
+		free(str[i]);
+		i++;
+	}
+	free(str);
+	return ;
+}
+
+void	ft_free_fds(t_data *node)
+{
+	int	i;
+	int	**arr;
+
+	i = 0;
+	close_all(&node->fd, node->processes - 1);
+	arr = node->fd;
+	if (!arr)
+		return ;
+	while (i < node->processes - 1)
+	{
+		free(arr[i]);
+		arr[i] = NULL;
+		i++;
+	}
+	free(arr);
+	arr = NULL;
+	return ;
+}
+
+void	free_vars(t_vars *local_vars)
+{
+	t_vars	*cur;
+	t_vars	*prev;
+
+	cur = local_vars;
+	while (cur)
+	{
+		prev = cur;
+		cur = cur->next;
+		free(prev->str);
+		free(prev->first_half);
+		free(prev->second_half);
+		free(prev);
+	}
 }

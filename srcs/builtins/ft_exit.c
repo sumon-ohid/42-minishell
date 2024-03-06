@@ -6,81 +6,11 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 14:41:52 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/06 14:16:42 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/06 14:52:33 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-/*
-typedef struct s_data
-{
-	char			*line_for_export;
-	int				**fd;
-	int				*pid;
-	char				**envp; //no free
-	char				*oldpwd; //no free EXCEPT IF WE EVER USE CD
-						- should change this in CD
-	char				*pwd; //no free EXCEPT IF WE EVER USE CD
-						- should change this in CD
-	char				*home; //no_free
-	char			*line_temp;
-	struct s_data	*next;
-}						t_data;*/
-
-void	ft_free_array(char **str)
-{
-	int	i;
-
-	i = 0;
-	if (!str)
-		return ;
-	while (str[i])
-	{
-		free(str[i]);
-		i++;
-	}
-	free(str);
-	return ;
-}
-
-void	ft_free_fds(t_data *node)
-{
-	int	i;
-	int	**arr;
-
-	i = 0;
-	close_all(&node->fd, node->processes - 1);
-	arr = node->fd;
-	if (!arr)
-		return ;
-	while (i < node->processes - 1)
-	{
-		free(arr[i]);
-		arr[i] = NULL;
-		i++;
-	}
-	free(arr);
-	arr = NULL;
-	return ;
-}
-
-void	free_vars(t_vars *local_vars)
-{
-	t_vars	*cur;
-	t_vars	*prev;
-
-	cur = local_vars;
-	while (cur)
-	{
-		prev = cur;
-		cur = cur->next;
-		free(prev->str);
-		free(prev->first_half);
-		free(prev->second_half);
-		free(prev);
-	}
-}
 
 void	free_node(t_data *node)
 {
@@ -135,7 +65,8 @@ int	exit_with_args(t_data *node, int exit_val, t_token *head)
 		{
 			if (!digit_checker(proxy->str))
 			{
-				printf("exit\nminishell: exit: %s: numeric argument required\n", proxy->str);
+				printf("exit\nminishell: exit: %s: numeric argument
+					required\n", proxy->str);
 				ft_exit(node, 2, NULL);
 			}
 			val = ft_atoi(proxy->str);

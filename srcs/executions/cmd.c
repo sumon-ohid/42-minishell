@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 14:32:03 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/04 20:21:49 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/06 14:55:28 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,6 @@ void	free_resources(int **fd, int processes, t_data *node)
 void	do_child_stuff(char *line, t_data *node, int i, t_token **tokens)
 {
 	mode(node, CHILD);
-	//if (pipe_counter(line) - 1 != i)
-		//close(node->fd[i][0]);
 	if (i != 0)
 	{
 		if (dup2(node->fd[i - 1][0], STDIN_FILENO) == -1)
@@ -91,9 +89,8 @@ void	do_child_stuff(char *line, t_data *node, int i, t_token **tokens)
 		if (dup2(node->fd[i][1], STDOUT_FILENO) == -1)
 			exit_builtin(node);
 		close(node->fd[i][1]);
-		close(node->fd[i][0]); //THE SIGPIPE CLOSE
+		close(node->fd[i][0]);
 	}
-	//set_what_this_child_doesnt_need(&node->fd, i, node->processes - 1);
 	node->cur_proc = i;
 	node->in_child = 1;
 	execute_chain(node, tokens[i], line, node->processes);
@@ -123,22 +120,9 @@ void	fork_processes(int processes, t_data *node, t_token **tokens,
 	if (processes > 1)
 		close(node->fd[processes - 2][0]);
 }
-//this i removed from child execution:
-/* if (i != 0)
-	dup2(node->fd[i - 1][0], STDIN_FILENO); //protect these & close some stuff
-if (i != processes - 1)
-	dup2(node->fd[i][1], STDOUT_FILENO);
-close_what_this_child_doesnt_need(&node->fd, i, processes - 1);
-node->cur_proc = i;
-node->in_child = 1;
-execute_chain(node, tokens[i], line, processes);
-exit_builtin(node);*/
-
 
 int	executor_init(t_data *node, t_token **tokens, int processes, char *line)
 {
-	//int	pid[512];
-	//int	status[512];
 	int	**fd;
 	int	lastval;
 

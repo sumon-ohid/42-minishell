@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 20:21:29 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/02 20:14:19 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/06 14:59:55 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,9 @@ char	*extract_path(char *comm2, char **poss_paths, char *og_comm,
 	return (check_og_comm(og_comm, node));
 }
 
-// TODO: needs to be protected
 char	*pathfinder(char **envp, char *comm, t_data *node)
 {
-	char	**poss_paths;
+	char	**p_paths;
 	int		counter;
 	char	*comm2;
 	int		i;
@@ -78,13 +77,13 @@ char	*pathfinder(char **envp, char *comm, t_data *node)
 		return (free(comm2), "faill");
 	while (envp[counter][i] && envp[counter][i] != '/')
 		i++;
-	poss_paths = ft_split(&envp[counter][i], ':', 0, 0);
-	if (!poss_paths)
+	p_paths = ft_split(&envp[counter][i], ':', 0, 0);
+	if (!p_paths)
 		ft_exit(node, -1, "malloc failure at pathfinder");
 	counter = -1;
-	while (poss_paths[++counter])
-		poss_paths[counter] = ft_strjoin(poss_paths[counter], comm2, 1);
-	return (extract_path(comm2, poss_paths, comm, node));
+	while (p_paths[++counter])
+		p_paths[counter] = ft_strjoin_node(p_paths[counter], comm2, 1, node);
+	return (extract_path(comm2, p_paths, comm, node));
 }
 
 char	**comm_array(t_token *mark, t_data *node)

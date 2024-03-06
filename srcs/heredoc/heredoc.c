@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 10:40:57 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/06 14:22:38 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/06 15:02:02 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ void	read_from_heredoc(t_token *heredoc, t_data *node)
 		dup2(tomlo[0], STDIN_FILENO);
 		close(tomlo[0]);
 		close(tomlo[1]);
-		free(tomlo); //why does not freeeing tomlo not leak here?????
+		free(tomlo);
 		return ;
 	}
 	else if (pid == 0)

@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 17:31:58 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/04 19:23:28 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/06 14:56:09 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,6 @@ void	allocate_fd(int ***fd, int processes, t_data *node)
 		}
 		(*fd)[counter][0] = -1;
 		(*fd)[counter][1] = -1;
-		/*if (pipe((*fd)[counter]) == -1)
-		{
-			//free fds here
-			ft_exit(node, -1, "pipe creation failed");
-		}*/
 		counter++;
 	}
 }

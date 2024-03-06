@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:25:07 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/05 18:05:43 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/06 14:51:39 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,7 @@ char	*get_env_value(char *arg, t_data *node)
 				env_value = "";
 			else
 				env_value = arg;
-			free(tmp);
-			return (env_value);
+			return (free(tmp), env_value);
 		}
 		free(tmp);
 		i++;
