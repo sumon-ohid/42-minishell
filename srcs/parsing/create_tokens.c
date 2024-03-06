@@ -3,38 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:50:09 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/05 18:10:53 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/06 18:20:48 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-int	determine_type(char *word, int prev_type, int quote)
-{
-	if (!word)
-		return (0);
-	else if (ft_strcmp("<", word) == 0 && quote == NO_QUOTE)
-		return (REDIR_IN);
-	else if (ft_strcmp(">", word) == 0 && quote == NO_QUOTE)
-		return (REDIR_OUT);
-	else if (ft_strcmp("<<", word) == 0 && quote == NO_QUOTE)
-		return (HEREDOC);
-	else if (ft_strcmp(">>", word) == 0 && quote == NO_QUOTE)
-		return (REDIR_OUT_APPEND);
-	else if (ft_strcmp("|", word) == 0 && quote == NO_QUOTE)
-		return (PIPE);
-	else if (check_builtins(word) == 2 && (!prev_type || prev_type == INFILE
-			|| prev_type == DELIM))
-		return (EXPORT);
-	else if (check_builtins(word) == 0 && (!prev_type || prev_type == INFILE
-			|| prev_type == DELIM))
-		return (BUILTIN);
-	else
-		return (check_prevs(word, prev_type));
-}
 
 // TODO: account for $?
 t_token	*create_token(char *word, t_data *node)

@@ -6,11 +6,35 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:57:30 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/02 20:41:52 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/06 18:20:56 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+int	determine_type(char *word, int prev_type, int quote)
+{
+	if (!word)
+		return (0);
+	else if (ft_strcmp("<", word) == 0 && quote == NO_QUOTE)
+		return (REDIR_IN);
+	else if (ft_strcmp(">", word) == 0 && quote == NO_QUOTE)
+		return (REDIR_OUT);
+	else if (ft_strcmp("<<", word) == 0 && quote == NO_QUOTE)
+		return (HEREDOC);
+	else if (ft_strcmp(">>", word) == 0 && quote == NO_QUOTE)
+		return (REDIR_OUT_APPEND);
+	else if (ft_strcmp("|", word) == 0 && quote == NO_QUOTE)
+		return (PIPE);
+	else if (check_builtins(word) == 2 && (!prev_type || prev_type == INFILE
+			|| prev_type == DELIM))
+		return (EXPORT);
+	else if (check_builtins(word) == 0 && (!prev_type || prev_type == INFILE
+			|| prev_type == DELIM))
+		return (BUILTIN);
+	else
+		return (check_prevs(word, prev_type));
+}
 
 int	check_builtins(char *word)
 {

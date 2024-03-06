@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/06 16:45:02 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/06 18:34:04 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,8 +201,6 @@ void				ft_localvars(t_token **tokens, t_data *node, int processes);
 char				*copy_until_char(char *str, char c);
 char				*copy_after_char(char *str, char c);
 void				ft_localvars(t_token **tokens, t_data *node, int processes);
-char				*malloc_heredoc(char *ptr, size_t old_size,
-						size_t new_size);
 void				ft_setenv(t_data *node, char *name, char *value);
 int					handle_var_not_exists(t_data *node, char *var);
 int					ft_strlen_arr(char **arr);
@@ -212,17 +210,22 @@ int					entry_check(t_data *node, char *line);
 int					ft_lexical_checker(char *line, int in_single_quote,
 						int in_double_quote, char prev_char);
 char				*ft_upgrade_spaces(char *line, int i, int j, int in_quotes);
-t_token				**tokenizer(char *str);
 int					pipe_counter(char *str);
 char				*handle_envp(char *str, t_data *node);
-int					check_builtins(char *word);
-int					check_prevs(char *word, int prev_type);
 void				process_words(t_token ***origin, char **words, char *str,
 						t_data *node);
 int					quote_assigner(char *big, char *little);
 void				eof_free(t_data *node);
 
-// cmd01
+// tokenizer
+t_token				**tokenizer(char *str);
+int					ft_strlen_till_char(char *str, char c);
+void				char_append(char **str, char c);
+int					determine_type(char *word, int prev_type, int quote);
+int					check_builtins(char *word);
+int					check_prevs(char *word, int prev_type);
+
+// execution part
 int					ft_commander(t_token *chain, t_data *node);
 int					execute_chain(t_data *node, t_token *chain, char *line,
 						int processes);
@@ -231,17 +234,19 @@ void				set_what_this_child_doesnt_need(int ***origin, int index,
 int					exception_checker(t_token **tokens, int processes);
 int					executor_init(t_data *node, t_token **tokens, int processes,
 						char *line);
-
-// cmd02
 char				**parse_input(char *line);
 int					entry_check2(t_data *node, t_token *head, char *line);
 void				allocate_fd(int ***fd, int processes, t_data *node);
 void				fork_processes(int processes, t_data *node,
 						t_token **tokens, char *line);
-
-// cmd03
 void				wait_for_processes(int *pid, int *status,
 						int processes, t_data *node);
+char				*extract_path(char *comm2, char **poss_paths,
+						char *og_comm, t_data *node);
+char				*pathfinder(char **envp, char *comm, t_data *node);
+void				extract_find_execute(char **envp, t_token *mark,
+						t_data *node);
+void				parent_close(t_data *node, int i, int processes);
 
 // free memory
 void				ft_free_array(char **str);
@@ -258,7 +263,6 @@ void				ft_cleanup(t_data *node, t_token **tokens,
 						char *line, char **arr);
 
 // redirections
-
 int					ft_redirector(t_token *chain, int file_type,
 						int mode, t_data *node);
 int					ft_redirect_checker(t_token *chain, int mode,
@@ -266,14 +270,6 @@ int					ft_redirect_checker(t_token *chain, int mode,
 void				ft_set(t_data *node);
 void				ft_restore(t_data *node);
 void				close_all(int ***origin, int max);
-
-// execution part
-char				*extract_path(char *comm2, char **poss_paths,
-						char *og_comm, t_data *node);
-char				*pathfinder(char **envp, char *comm, t_data *node);
-void				extract_find_execute(char **envp, t_token *mark,
-						t_data *node);
-void				parent_close(t_data *node, int i, int processes);
 
 // signals
 void				mode(t_data *data, t_mode mode);
@@ -285,9 +281,5 @@ void				ft_putstr_fd(char *s, int fd);
 void				nocomm_error(char *name);
 void				directory_error(char *name);
 int					ft_lexer_error(char *line);
-
-// tokenizer
-int					ft_strlen_till_char(char *str, char c);
-void				char_append(char **str, char c);
 
 #endif

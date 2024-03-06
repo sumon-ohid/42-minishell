@@ -29,10 +29,10 @@ SRC = 	srcs/main/main.c \
 		srcs/utils/libft_helpers2.c \
 		srcs/utils/libft_helpers3.c \
 		srcs/utils/libft_helpers4.c \
-		srcs/parsing/tokenize.c\
-		srcs/parsing/tokenize1.c\
-		srcs/parsing/tokenize2.c\
-		srcs/parsing/tokenize3.c\
+		srcs/parsing/create_tokens.c\
+		srcs/parsing/tokenize_values.c\
+		srcs/parsing/env_expander.c\
+		srcs/parsing/token_helpers.c\
 		srcs/builtins/ft_cd.c \
 		srcs/builtins/ft_echo.c \
 		srcs/builtins/ft_echo_extra.c \
