@@ -95,62 +95,60 @@ static void	split_helper_pipes(char *s, char c, size_t *i, char *output)
 	output[k] = '\0';
 }
 
-static void process_quotes(char *s, char *quote, int *flag, size_t *i, int *j, int *only_spaces, char *output, int *k, char c)
+static void process_quotes(char *s, size_t *i, char *output, t_split *data)
 {
-    *quote = s[*i];
-    *flag = 1;
+    data->quote = s[*i];
+    data->flag = 1;
     (*i)++;
-    *only_spaces = 1;
-    *j = *i;
-    while (s[*j] && s[*j] != *quote)
+    data->only_spaces = 1;
+    while (s[*i] && s[*i] != data->quote)
     {
-        if (s[*j] != ' ')
+        if (s[*i] != ' ')
         {
-            *only_spaces = 0;
+            data->only_spaces = 0;
             break;
         }
-        (*j)++;
+        (*i)++;
     }
-    if (*only_spaces && s[*j] == *quote)
+    if (data->only_spaces && s[*i] == data->quote)
     {
-        while (s[*j + 1] == ' ')
-            (*j)++;
-        if (s[*j + 1] == ' ' || s[*j + 1] == '\0' || s[*j + 1] == c)
+        while (s[*i + 1] == ' ')
+            (*i)++;
+        if (s[*i + 1] == ' ' || s[*i + 1] == '\0')
         {
-            output[(*k)++] = *quote;
-            output[(*k)++] = *quote;
-            *i = *j + 1;
+            output[data->k++] = data->quote;
+            output[data->k++] = data->quote;
+            *i = *i + 1;
         }
     }
 }
 
 static void split_helper(char *s, char c, size_t *i, char *output)
 {
-    char quote;
-    int flag;
-    int j;
-    int k;
-    int only_spaces;
+    t_split *data;
 
-    only_spaces = 0;
-    quote = 0;
-    flag = 0;
-    j = 0;
-    k = 0;
-    while (s[*i] && (s[*i] != c || quote))
+    data = malloc(sizeof(t_split));
+    if (data == NULL)
+        return;
+    data->quote = 0;
+    data->flag = 0;
+    data->k = 0;
+	data->only_spaces = 0;
+    while (s[*i] && (s[*i] != c || data->quote))
     {
-        if (!flag && (s[*i] == '\'' || s[*i] == '\"'))
-            process_quotes(s, &quote, &flag, i, &j, &only_spaces, output, &k, c);
-        else if (flag && (s[*i] == quote))
+        if (!data->flag && (s[*i] == '\'' || s[*i] == '\"'))
+            process_quotes(s, i, output, data);
+        else if (data->flag && (s[*i] == data->quote))
         {
-            flag = 0;
-            quote = 0;
+            data->flag = 0;
+            data->quote = 0;
             (*i)++;
         }
         else
-            output[k++] = s[(*i)++];
+            output[data->k++] = s[(*i)++];
     }
-    output[k] = '\0';
+    output[data->k] = '\0';
+    free(data);
 }
 
 static int	l_count(char const *s, int i, char c)

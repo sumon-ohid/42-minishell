@@ -68,6 +68,15 @@
 // for signals
 extern volatile sig_atomic_t	g_signal;
 
+// for split
+typedef struct s_split
+{
+	int 			only_spaces;
+	int				k;
+	char			quote;
+	int				flag;
+}					t_split;
+
 // token mode
 typedef struct s_token
 {
