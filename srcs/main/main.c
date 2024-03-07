@@ -3,14 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:17:43 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/06 16:12:02 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/07 13:26:13 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+void init_tokens(t_data *node)
+{
+	t_token **tokens;
+
+	tokens = ft_calloc(sizeof(t_token *), node->processes);
+	if (!tokens)
+		ft_exit(node, 1, "Memory allocation failed at entry check"); //this should be changed
+	while (i < node->processes)
+		tokens[i++] = NULL;
+	node->tokens = tokens;
+	mole_parser(&tokens, /*arr,*/ node->input_line, node);
+	node->tokens = tokens;
+}
 
 int	entry_check(t_data *node, char *line)
 {
@@ -20,17 +34,14 @@ int	entry_check(t_data *node, char *line)
 
 	if (!ft_lexical_checker(line, 0, 0, '\0'))
 		return (-2);
-	line = ft_upgrade_spaces(line, 0, 0, 0);
-	tokens = ft_calloc(sizeof(t_token *), pipe_counter(line));
-	if (!tokens)
-		ft_exit(node, 1, "Memory allocation failed at entry check");
-	arr = parse_input(line);
-	if (!arr)
-		ft_exit(node, 1, "Memory allocation failed at entry check");
+	//line = ft_upgrade_spaces(line, 0, 0, 0);
 	node->input_line = line;
-	node->arr = arr;
-	process_words(&tokens, arr, line, node);
-	node->tokens = tokens;
+	node->processes = pipe_counter(line);
+	init_tokens(node);
+	/*arr = parse_input(line);
+	if (!arr)
+		ft_exit(node, 1, "Memory allocation failed at entry check");*/
+	//node->arr = arr;
 	if (!check_for_heredoc(node, tokens, pipe_counter(line)))
 		return (2);
 	ret_val = executor_init(node, tokens, pipe_counter(line), line);
