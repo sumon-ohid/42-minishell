@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokenize2.c                                        :+:      :+:    :+:   */
+/*   token_helpers.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 11:28:51 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/29 14:13:43 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/07 14:16:33 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ char	*copy_until_char(char *str, char c)
 	i = 0;
 	if (ft_strchr(str, c) == 0)
 		return (ft_strdup(str));
+	if (str[0] == c)
+		return (ft_strdup(NULL));
 	while (str[i] && str[i] != c)
 		i++;
 	output = malloc(sizeof(char) * (i + 1));

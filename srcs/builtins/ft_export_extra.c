@@ -6,7 +6,7 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 09:03:06 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/27 11:46:44 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/07 14:17:21 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,12 @@ int	var_name_check(char *var)
 
 	i = 0;
 	var_name = copy_until_char(var, '=');
-	while (var_name[i] && var_name[i] != '=')
+	if (var_name == NULL)
+	{
+		free(var_name);
+		return (1);
+	}
+	while (var_name[i])
 	{
 		if (!ft_isalpha(var_name[i]) && var_name[i] != '_')
 		{
@@ -27,11 +32,6 @@ int	var_name_check(char *var)
 			return (1);
 		}
 		i++;
-	}
-	if (var_name[i] == '=' && !ft_isalpha(var_name[i - 1]))
-	{
-		free(var_name);
-		return (1);
 	}
 	free(var_name);
 	return (0);
@@ -66,6 +66,7 @@ int	handle_var_exist_in_envp(t_data *node, char *var)
 		}
 		i++;
 	}
+	free(var_name);
 	return (1);
 }
 
