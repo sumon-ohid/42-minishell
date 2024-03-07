@@ -6,17 +6,16 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 10:03:57 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/06 15:18:54 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/07 15:18:07 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	ft_cleanup(t_data *node, t_token **tokens, char *line, char **arr)
+void	ft_cleanup(t_data *node, t_token **tokens, char *line)
 {
 	free_tokens(tokens, node->processes);
 	free(line);
-	free_arr(arr);
 }
 
 void	ft_free_array(char **str)

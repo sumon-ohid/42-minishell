@@ -29,6 +29,7 @@ SRC = 	srcs/main/main.c \
 		srcs/utils/libft_helpers2.c \
 		srcs/utils/libft_helpers3.c \
 		srcs/utils/libft_helpers4.c \
+		srcs/parsing/mole_parser.c\
 		srcs/parsing/create_tokens.c\
 		srcs/parsing/tokenize_values.c\
 		srcs/parsing/env_expander.c\

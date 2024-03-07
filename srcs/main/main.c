@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:17:43 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/07 13:26:13 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/07 15:35:54 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 void init_tokens(t_data *node)
 {
 	t_token **tokens;
+	int		i;
 
+	i = 0;
 	tokens = ft_calloc(sizeof(t_token *), node->processes);
 	if (!tokens)
 		ft_exit(node, 1, "Memory allocation failed at entry check"); //this should be changed
@@ -28,8 +30,6 @@ void init_tokens(t_data *node)
 
 int	entry_check(t_data *node, char *line)
 {
-	char	**arr;
-	t_token	**tokens;
 	int		ret_val;
 
 	if (!ft_lexical_checker(line, 0, 0, '\0'))
@@ -37,15 +37,16 @@ int	entry_check(t_data *node, char *line)
 	//line = ft_upgrade_spaces(line, 0, 0, 0);
 	node->input_line = line;
 	node->processes = pipe_counter(line);
+	printf("we have %d processes\n", node->processes);
 	init_tokens(node);
 	/*arr = parse_input(line);
 	if (!arr)
 		ft_exit(node, 1, "Memory allocation failed at entry check");*/
 	//node->arr = arr;
-	if (!check_for_heredoc(node, tokens, pipe_counter(line)))
+	if (!check_for_heredoc(node, node->tokens, pipe_counter(line)))
 		return (2);
-	ret_val = executor_init(node, tokens, pipe_counter(line), line);
-	ft_cleanup(node, tokens, line, arr);
+	ret_val = executor_init(node, node->tokens, pipe_counter(line), line);
+	ft_cleanup(node, node->tokens, line);
 	if (node->last_return == -99)
 		return (-1);
 	else

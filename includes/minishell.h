@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/06 18:34:04 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/07 15:17:58 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,11 +128,16 @@ typedef struct s_data
 	char				*input_line;
 	char				*line_temp;
 	char				**arr;
+	char				quote;
 	t_vars				*local_vars;
 	t_mode				mode;
 	t_token				**tokens;
 	struct s_data		*next;
 }						t_data;
+
+void    mole_parser(t_token ***origin, char *input, t_data *node);
+void	create_and_link_token(t_token ***origin, int current, char *word,
+		t_data *node);
 
 // libft_helpers
 char				*ft_itoa(int n);
@@ -214,7 +219,7 @@ int					pipe_counter(char *str);
 char				*handle_envp(char *str, t_data *node);
 void				process_words(t_token ***origin, char **words, char *str,
 						t_data *node);
-int					quote_assigner(char *big, char *little);
+int					quote_assigner(char quote);
 void				eof_free(t_data *node);
 
 // tokenizer
@@ -259,8 +264,7 @@ void				exit_builtin(t_data *node);
 void				ft_free_fds(t_data *node);
 void				free_vars(t_vars *local_vars);
 void				free_poss_paths(char **poss_paths);
-void				ft_cleanup(t_data *node, t_token **tokens,
-						char *line, char **arr);
+void				ft_cleanup(t_data *node, t_token **tokens, char *line);
 
 // redirections
 int					ft_redirector(t_token *chain, int file_type,

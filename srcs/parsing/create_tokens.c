@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokenize.c                                         :+:      :+:    :+:   */
+/*   create_tokens.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:50:09 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/06 18:20:48 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/07 15:09:21 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_token	*create_token(char *word, t_data *node)
 	new->next = NULL;
 	new->arr = NULL;
 	new->heredoc_data = NULL;
-	new->quote = quote_assigner(node->line_temp, word);
+	new->quote = quote_assigner(node->quote);
 	if (ft_strstr(word, "$") && new->quote != SINGLE_QUOTE)
 		new->str = handle_envp(word, node);
 	else
