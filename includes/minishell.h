@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/07 15:44:35 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/07 17:30:02 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,15 @@
 # define NOT_EXIST 0
 # define EXIST_ENVP 1
 # define EXIST_LOCAL_VARS 2
+
+//delim types
+# define NONE 0
+# define SPC 1
+# define PIP 2
+# define REDIR 3
+# define EOF 4
+# define QUOTE 5
+# define ENV 6
 
 // for signals
 extern volatile sig_atomic_t	g_signal;
