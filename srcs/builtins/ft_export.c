@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:27:41 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/29 18:35:39 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/07 13:26:30 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,18 @@ int	handle_export_no_args(t_data *node)
 	int		i;
 	char	*var_value;
 	char	*var_name;
+	char	*tmp;
 
 	sort_env(node->envp, ft_strlen_arr(node->envp));
 	i = 0;
 	while (node->envp[i])
 	{
 		var_name = copy_until_char(node->envp[i], '=');
-		var_value = copy_after_char(node->envp[i], '=');
+		tmp = copy_after_char(node->envp[i], '=');
+		var_value = remove_quote(tmp);
 		printf("declare -x %s=\"%s\"\n", var_name, var_value);
 		free(var_name);
+		free(tmp);
 		free(var_value);
 		i++;
 	}
@@ -110,7 +113,7 @@ int	ft_export(t_data *node, t_token *token, char *str)
 	char	**var;
 
 	(void)token;
-	var = ft_split_special(str, ' ', 'E', 0);
+	var = ft_split_special(str, ' ', 'P', 0);
 	if (var == NULL)
 		ft_exit(node, 1, "Malloc failed at ft_export function");
 	if (ft_strcmp(var[0], "export") == 0 && var[1] == NULL)

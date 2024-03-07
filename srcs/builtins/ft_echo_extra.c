@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo_extra.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 15:32:22 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/06 16:15:14 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/07 09:50:29 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,7 @@ void	print_argument(char *arg, t_data *node)
 	}
 	while (arg[i])
 	{
-		if (arg[i] == '~')
-			ft_putstr(getenv("HOME"));
-		else
-			ft_putchar(arg[i]);
+		ft_putchar(arg[i]);
 		i++;
 	}
 	return ;

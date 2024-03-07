@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokenize3.c                                        :+:      :+:    :+:   */
+/*   env_expander.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 10:06:20 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/06 16:49:46 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/07 13:27:08 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,21 +57,48 @@ char	*handle_dollar_dollar(char *result, t_data *node, int *i)
 	return (result);
 }
 
+char	*remove_quote(char *str)
+{
+	int		i;
+	int		j;
+	char	*output;
+
+	i = 0;
+	j = 0;
+	output = malloc(sizeof(char) * (ft_strlen(str) + 1));
+	if (!output)
+		return (0);
+	while (str[i])
+	{
+		if (str[i] != '\"' && str[i] != '\'')
+		{
+			output[j] = str[i];
+			j++;
+		}
+		i++;
+	}
+	output[j] = '\0';
+	return (output);
+}
+
 char	*handle_env_values(char *str, char *result, t_data *node, int *i)
 {
 	char	*var_name;
 	char	*var_value;
+	char	*tmp;
 
 	if ((str[(*i) + 1] >= 'A' && str[(*i) + 1] <= 'Z') || (str[(*i) + 1] >= 'a'
 			&& str[(*i) + 1] <= 'z'))
 	{
 		var_name = extract_var_name(str + (*i) + 1);
-		var_value = get_env_value(var_name, node);
+		tmp = get_env_value(var_name, node);
+		var_value = remove_quote(tmp);
 		result = ft_strjoin(result, var_value, 1);
 		if (!result)
 			ft_exit(node, -1, "malloc failed at handle envp");
 		(*i) += ft_strlen(var_name);
 		free(var_name);
+		free(var_value);
 	}
 	else
 		char_append(&result, str[(*i)]);
