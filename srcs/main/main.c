@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:17:43 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/07 15:35:54 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/07 15:59:36 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ int	entry_check(t_data *node, char *line)
 	//line = ft_upgrade_spaces(line, 0, 0, 0);
 	node->input_line = line;
 	node->processes = pipe_counter(line);
-	printf("we have %d processes\n", node->processes);
 	init_tokens(node);
 	/*arr = parse_input(line);
 	if (!arr)
@@ -95,9 +94,9 @@ void	ft_initialize(t_data *node, char **envp)
 
 	while (1)
 	{
-		mode(node, INTERACTIVE);
+		//mode(node, INTERACTIVE);
 		input = readline(GREEN "minishell$ " RESET);
-		mode(node, NON_INTERACTIVE);
+		//mode(node, NON_INTERACTIVE);
 		if (!input)
 		{
 			eof_free(node);

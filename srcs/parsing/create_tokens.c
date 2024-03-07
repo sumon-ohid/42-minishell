@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:50:09 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/07 15:09:21 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/07 16:03:12 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void	create_and_link_token(t_token ***origin, int current, char *word,
 	t_token	*cur;
 	t_token	**tokens;
 
+	node->parse_flag = 1;
 	tokens = *origin;
 	cur = tokens[current];
 	proxy = cur;

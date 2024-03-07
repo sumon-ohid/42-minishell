@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/07 15:17:58 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/07 15:44:35 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 # include <sys/wait.h>
 # include <unistd.h>
 # include <signal.h>
+# include <stdbool.h>
 
 // TOKEN TYPES
 # define COMMAND 1
@@ -127,8 +128,8 @@ typedef struct s_data
 	char				*home;
 	char				*input_line;
 	char				*line_temp;
-	char				**arr;
 	char				quote;
+	bool				parse_flag;
 	t_vars				*local_vars;
 	t_mode				mode;
 	t_token				**tokens;
