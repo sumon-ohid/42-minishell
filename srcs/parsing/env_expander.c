@@ -6,7 +6,7 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 10:06:20 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/07 14:50:30 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/07 13:27:08 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,30 +81,6 @@ char	*remove_quote(char *str)
 	return (output);
 }
 
-void	remove_spaces_before(char **str)
-{
-	int		i;
-	int		j;
-	char	*output;
-
-	i = 0;
-	j = 0;
-	output = malloc(sizeof(char) * (ft_strlen(*str) + 1));
-	if (!output)
-		return ;
-	while ((*str)[i] == ' ')
-		i++;
-	while ((*str)[i])
-	{
-		output[j] = (*str)[i];
-		i++;
-		j++;
-	}
-	output[j] = '\0';
-	free(*str);
-	*str = output;
-}
-
 char	*handle_env_values(char *str, char *result, t_data *node, int *i)
 {
 	char	*var_name;
@@ -117,7 +93,6 @@ char	*handle_env_values(char *str, char *result, t_data *node, int *i)
 		var_name = extract_var_name(str + (*i) + 1);
 		tmp = get_env_value(var_name, node);
 		var_value = remove_quote(tmp);
-		remove_spaces_before(&var_value);
 		result = ft_strjoin(result, var_value, 1);
 		if (!result)
 			ft_exit(node, -1, "malloc failed at handle envp");
