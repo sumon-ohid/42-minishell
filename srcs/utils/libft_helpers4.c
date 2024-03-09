@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 12:48:37 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/09 17:50:09 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/09 18:03:21 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	ft_lstadd_back(t_element **lst, t_element *nw)
 {
 	t_element *proxy;
 	
-	if (!new || !lst)
+	if (!nw || !lst)
 		return ;
 	proxy = *lst;
 	if (!proxy)

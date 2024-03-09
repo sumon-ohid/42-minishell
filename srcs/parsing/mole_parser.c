@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:05:04 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/09 18:02:27 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/09 18:10:05 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int    delim_type(char c, t_data *node)
 bool is_breaker(char c, t_data *node)
 {
     if (delim_type(c, node) >= 1 && delim_type(c, node) <= 4)
-        return (true):
+        return (true);
     else
         return (false);
 }
@@ -100,12 +100,12 @@ void skip(char *str, int *cur, char mode, t_data *node)
     if (mode == 'S')
     {
         while (delim_type(str[*cur], node) == SPC)
-            *cur++;
+            (*cur)++;
     }
     else if (mode == 'C')
     {
         while (delim_type(str[*cur], node) == NONE)
-            *cur++;
+            (*cur)++;
     } 
 }
 
@@ -186,19 +186,19 @@ void    mole_parser(t_token ***origin, char *input, t_data *node)
         if (!input[end])
             return ;
         else
-            detach_tokens(&end, origin, node, *start);
+            detach_tokens(&end, origin, node);
     }
 }
 
-void    detach_tokens(int *end, t_token ***origin, t_data *node, int *start)
+void    detach_tokens(int *end, t_token ***origin, t_data *node)
 {
     char    *str;
-    size_t  size_left;
+    size_t  chars_left;
     char    *result;
 
     str = node->input_line;
     chars_left = (ft_strlen(str) - *end) - 1;
-    if (is_breaker(str[*end]))
+    if (is_breaker(str[*end], node))
     {
         *end = create_breakertoken(*end, node, origin, node->processes);
         return ;
@@ -208,12 +208,12 @@ void    detach_tokens(int *end, t_token ***origin, t_data *node, int *start)
         if (saved_nulltoken(*end, node, origin, node->processes))
             return ;
     }
-    result = expand_append(origin, node, end);
+    result = expand_append(node, end);
     node->quote = SINGLE_QUOTE;
-    create_and_link_token(origin, proc, result, node);
+    create_and_link_token(origin, node->processes, result, node);
 }
 
-void    expand_append(t_token ***origin, t_data *node, int *end)
+char    *expand_append(t_data *node, int *end)
 {
     int         start;
     char        *str;
@@ -230,14 +230,14 @@ void    expand_append(t_token ***origin, t_data *node, int *end)
             (*end)++;
         while (!delim_type(str[*end], node))
             (*end)++;
-        create_element(&elements, node, start, end);
+        create_element(&elements, node, start, *end);
         if (node->quote && delim_type(str[*end], node) == QUOTE)
         {
             node->quote = 0;
             (*end)++;
         }
     }
-    result = concatenate_elements(elements, node)
+    result = concatenate_elements(elements, node);
     free_elements(elements);
     return (result);
 }
@@ -250,11 +250,11 @@ void create_element(t_element **elements, t_data *node, int start, int end)
     new = malloc(sizeof(t_element));
     if (!new)
         ft_exit(node, -1, "malloc failed in parsing");
-    data = ft_substr_clean(input, start, (end - start), node);
+    data = ft_substr_clean(node->input_line, start, (end - start), node);
     if (data[0] == '$')
     {
         new->str = handle_envp(data, node); //is this properly protected against malloc fails?
-        free(data;)
+        free(data);
     }
     else
         new->str = data;
@@ -267,7 +267,7 @@ char *concatenate_elements(t_element *elements, t_data *node)
     char *result;
 
     if (!elements)
-        return ;
+        ft_exit(node, -1, "something went wrong with elements");
     result = ft_strdup(elements->str);
     if (!result)
         ft_exit(node, -1, "strdup failed at parsing");
