@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:05:04 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/09 18:40:22 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/09 19:04:02 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,6 +187,7 @@ void    mole_parser(t_token ***origin, char *input, t_data *node)
             return ;
         else
             detach_tokens(&end, origin, node);
+        node->quote = 0;
     }
 }
 
@@ -225,7 +226,7 @@ char    *expand_append(t_data *node, int *end)
     str = node->input_line;
     while (!is_breaker(str[*end], node))
     {
-        if (delim_type(str[*end], node) == QUOTE)
+        if (delim_type(str[*end], node) == QUOTE && !node->quote)
             node->quote = str[(*end)++];
         start = *end;
         if (!node->quote)
