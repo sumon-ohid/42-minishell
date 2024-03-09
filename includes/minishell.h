@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/09 15:51:05 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/09 15:58:20 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,13 @@ typedef struct s_token
 	struct s_token	*previous;
 	struct s_token	*next;
 }					t_token;
+
+//token elements
+typedef struct s_element
+{
+	char				*str;
+	struct s_element	*next;
+}					t_element;
 
 //internal vars list
 typedef struct s_vars
