@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:05:04 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/09 19:04:02 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/09 19:52:09 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int    delim_type(char c, t_data *node)
         return (5);
     else if (c == '\'' && node->quote != '\"')
         return (5);
-    else if (c == '$')
+    else if (c == '$' && !(node->quote)) //not sure if this is a good idea
         return (6);
     else
         return (0);
@@ -224,7 +224,7 @@ char    *expand_append(t_data *node, int *end)
 
     elements = NULL;
     str = node->input_line;
-    while (!is_breaker(str[*end], node))
+    while (str[*end] && !is_breaker(str[*end], node))
     {
         if (delim_type(str[*end], node) == QUOTE && !node->quote)
             node->quote = str[(*end)++];
@@ -235,10 +235,8 @@ char    *expand_append(t_data *node, int *end)
             (*end)++;
         create_element(&elements, node, start, *end);
         if (node->quote && delim_type(str[*end], node) == QUOTE)
-        {
-            node->quote = 0;
             (*end)++;
-        }
+        node->quote = 0;
     }
     result = concatenate_elements(elements, node);
     free_elements(elements);
@@ -254,6 +252,11 @@ void create_element(t_element **elements, t_data *node, int start, int end)
     if (!new)
         ft_exit(node, -1, "malloc failed in parsing");
     data = ft_substr_clean(node->input_line, start, (end - start), node);
+    if (!data)
+    {
+        printf("start is %d and end is %d\n", start, end);
+        exit(0);
+    }
     if (data[0] == '$')
     {
         new->str = handle_envp(data, node); //is this properly protected against malloc fails?
