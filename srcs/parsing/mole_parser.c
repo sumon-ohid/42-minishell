@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:05:04 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/09 20:29:23 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/09 20:43:58 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,7 +207,10 @@ void    detach_tokens(int *end, t_token ***origin, t_data *node)
     else if (chars_left >= 2 && delim_type(str[*end], node) == QUOTE)
     {
         if (saved_nulltoken(*end, node, origin, node->processes))
+        {
+            *end += 2;
             return ;
+        }
     }
     result = expand_append(node, end);
     node->quote = SINGLE_QUOTE;
