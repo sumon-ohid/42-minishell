@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/09 18:08:23 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/09 20:27:36 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -278,7 +278,7 @@ void				wait_for_processes(int *pid, int *status,
 char				*extract_path(char *comm2, char **poss_paths,
 						char *og_comm, t_data *node);
 char				*pathfinder(char **envp, char *comm, t_data *node);
-void				extract_find_execute(char **envp, t_token *mark,
+void				extract_find_execute(char **envp, char **comms,
 						t_data *node);
 void				parent_close(t_data *node, int i, int processes);
 

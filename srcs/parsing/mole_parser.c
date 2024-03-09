@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:05:04 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/09 19:52:09 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/09 20:29:23 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -249,15 +249,10 @@ void create_element(t_element **elements, t_data *node, int start, int end)
     char *data;
 
     new = malloc(sizeof(t_element));
-    if (!new)
-        ft_exit(node, -1, "malloc failed in parsing");
+    if (!new /*|| (end - start) == 0*/)
+        ft_exit(node, -1, "error in parsing part");
     data = ft_substr_clean(node->input_line, start, (end - start), node);
-    if (!data)
-    {
-        printf("start is %d and end is %d\n", start, end);
-        exit(0);
-    }
-    if (data[0] == '$')
+    if (ft_strstr(data, "$") && node->quote != '\'')
     {
         new->str = handle_envp(data, node); //is this properly protected against malloc fails?
         free(data);

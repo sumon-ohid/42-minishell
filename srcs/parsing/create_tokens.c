@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:50:09 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/07 16:03:12 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/09 20:00:24 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,14 @@ t_token	*create_token(char *word, t_data *node)
 	new->arr = NULL;
 	new->heredoc_data = NULL;
 	new->quote = quote_assigner(node->quote);
-	if (ft_strstr(word, "$") && new->quote != SINGLE_QUOTE)
+	/*if (ft_strstr(word, "$") && new->quote != SINGLE_QUOTE)
 		new->str = handle_envp(word, node);
 	else
-	{
+	{*/
 		new->str = ft_strdup(word);
 		if (!new->str)
 			ft_early_exit(node, -1, "memory allocation failed at create token");
-	}
+	//}
 	new->type = 0;
 	return (new);
 }
