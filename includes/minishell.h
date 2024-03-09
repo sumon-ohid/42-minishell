@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/07 17:30:02 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/09 15:51:05 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@
 # define BUILTIN 12
 # define SET 13
 # define EXPORT 14
+# define EMPTY 15
 
 // signals
 # define CTRL_C 1

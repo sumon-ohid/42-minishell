@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:17:43 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/07 15:59:36 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/09 15:21:23 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void init_tokens(t_data *node)
 	int		i;
 
 	i = 0;
+	node->processes = pipe_counter(node->input_line);
 	tokens = ft_calloc(sizeof(t_token *), node->processes);
 	if (!tokens)
 		ft_exit(node, 1, "Memory allocation failed at entry check"); //this should be changed
@@ -36,7 +37,6 @@ int	entry_check(t_data *node, char *line)
 		return (-2);
 	//line = ft_upgrade_spaces(line, 0, 0, 0);
 	node->input_line = line;
-	node->processes = pipe_counter(line);
 	init_tokens(node);
 	/*arr = parse_input(line);
 	if (!arr)

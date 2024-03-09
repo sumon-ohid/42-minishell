@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:05:04 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/07 17:31:55 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/09 15:48:55 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,20 +95,18 @@ bool is_breaker(char c, t_data *node)
         return (false);
 }
 
-int skip(char *str, int cur, char mode, t_data *node)
+void skip(char *str, int *cur, char mode, t_data *node)
 {
     if (mode == 'S')
     {
-        while (delim_type(str[cur], node) == SPC)
-            cur++;
+        while (delim_type(str[*cur], node) == SPC)
+            *cur++;
     }
     else if (mode == 'C')
     {
-        while (delim_type(str[cur], node) == NONE)
-            cur++;
-    }
-    return (cur);
-    
+        while (delim_type(str[*cur], node) == NONE)
+            *cur++;
+    } 
 }
 
 //void    test_waters()
@@ -118,17 +116,19 @@ int save_nulltoken(int end, t_data *node, t_token ***origin, int proc)
     char *str;
 
     str = node->input_line;
-    if ((str[end] == '\"' && str[end + 1] == '\"')
+    if (str[end + 2] != '\0' && delim_type(str[end + 2], node) != SPC)
+        return (0);
+    else if ((str[end] == '\"' && str[end + 1] == '\"')
         || (str[end] == '\'' && str[end + 1] == '\''))
     {
         node->parse_flag = 1;
         create_and_link_token(origin, proc, "", node);
-        return (end + 2);
+        return (1);
     }
-    return (end);
+    return (0);
 }
 
-int    parse_redirection(int end, t_data *node, t_token ***origin, int proc)
+int    create_breakertoken(int end, t_data *node, t_token ***origin, int proc)
 {
     char *str;
 
@@ -150,19 +150,19 @@ int    parse_redirection(int end, t_data *node, t_token ***origin, int proc)
     }
     else if (str[end] == '|')
     {
+        node->processes += 1;
         node->parse_flag = 1;
         return (end + 1);
     }
-    return (save_nulltoken(end, node, origin, proc));
+    return (end);//(save_nulltoken(end, node, origin, proc));
 }
 
-void    init_values(int *start, int *end, int *proc, t_data *node)
+void    init_values(int *end, t_data *node)
 {
-    *start = 0;
     *end = 0;
     node->quote = 0;
     node->parse_flag = 0;
-    *proc = 0;
+    node->processes = 0;
 }
 
 //SKIP SPC ONLY - MARK SPOT
@@ -177,15 +177,45 @@ void    init_values(int *start, int *end, int *proc, t_data *node)
 //GO BACK TO BEGINNING
 void    mole_parser(t_token ***origin, char *input, t_data *node)
 {
-    int     start;
     int     end;
-    int     proc;
-    
-    init_values(&start, &end, &proc, node);
-    end = skip(input, end, 'S', node);
-    //what if i find a delim here??
+
+    init_values(&end, node);
+    while (input[end])
+    {
+        skip(input, &end, 'S', node);
+        if (!input[end])
+            return ;
+        else
+            detach_tokens(&end, origin, node, *start);
+    }
+        
     start = end;
     end = skip(input, end, 'C', node);
+    
+}
+
+void    detach_tokens(int *end, t_token ***origin, t_data *node, int *start)
+{
+    char    *str;
+    size_t  size_left;
+
+    str = node->input_line;
+    chars_left = (ft_strlen(str) - *end) - 1;
+    if (is_breaker(str[*end]))
+    {
+        *end = create_breakertoken(*end, node, origin, node->processes);
+        return ;
+    }
+    else if (chars_left >= 2 && delim_type(str[*end], node) == QUOTE)
+    {
+        if (save_nulltoken(*end, node, origin, node->processes))
+            return ;
+    }
+    expand_append(origin, node, end);
+}
+
+void    expand_append(t_token ***origin, t_data *node, int *end)
+{
     
 }
 
