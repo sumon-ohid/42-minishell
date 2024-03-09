@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:05:04 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/09 18:10:05 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/09 18:40:22 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,6 +211,7 @@ void    detach_tokens(int *end, t_token ***origin, t_data *node)
     result = expand_append(node, end);
     node->quote = SINGLE_QUOTE;
     create_and_link_token(origin, node->processes, result, node);
+    free(result);
 }
 
 char    *expand_append(t_data *node, int *end)
@@ -220,6 +221,7 @@ char    *expand_append(t_data *node, int *end)
     t_element   *elements;
     char        *result;
 
+    elements = NULL;
     str = node->input_line;
     while (!is_breaker(str[*end], node))
     {
