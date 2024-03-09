@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 12:48:37 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/06 14:59:12 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/09 17:50:09 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,3 +58,20 @@ char	*ft_strjoin_node(char *s1, char *s2, int save_flag, t_data *node)
 		free(s1);
 	return (new_str);
 }
+void	ft_lstadd_back(t_element **lst, t_element *nw)
+{
+	t_element *proxy;
+	
+	if (!new || !lst)
+		return ;
+	proxy = *lst;
+	if (!proxy)
+		*lst = nw;
+	else
+	{
+		while (proxy->next)
+			proxy = proxy->next;
+		proxy->next = nw;
+	}
+}
+

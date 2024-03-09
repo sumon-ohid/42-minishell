@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:05:04 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/09 16:20:26 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/09 18:02:27 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,10 +188,6 @@ void    mole_parser(t_token ***origin, char *input, t_data *node)
         else
             detach_tokens(&end, origin, node, *start);
     }
-        
-    start = end;
-    end = skip(input, end, 'C', node);
-    
 }
 
 void    detach_tokens(int *end, t_token ***origin, t_data *node, int *start)
@@ -241,8 +237,63 @@ void    expand_append(t_token ***origin, t_data *node, int *end)
             (*end)++;
         }
     }
-    result = concatenate_elements()
+    result = concatenate_elements(elements, node)
+    free_elements(elements);
     return (result);
+}
+
+void create_element(t_element **elements, t_data *node, int start, int end)
+{
+    t_element *new;
+    char *data;
+
+    new = malloc(sizeof(t_element));
+    if (!new)
+        ft_exit(node, -1, "malloc failed in parsing");
+    data = ft_substr_clean(input, start, (end - start), node);
+    if (data[0] == '$')
+    {
+        new->str = handle_envp(data, node); //is this properly protected against malloc fails?
+        free(data;)
+    }
+    else
+        new->str = data;
+    new->next = NULL;
+    ft_lstadd_back(elements, new);
+}
+
+char *concatenate_elements(t_element *elements, t_data *node)
+{
+    char *result;
+
+    if (!elements)
+        return ;
+    result = ft_strdup(elements->str);
+    if (!result)
+        ft_exit(node, -1, "strdup failed at parsing");
+    while (elements->next)
+    {
+        elements = elements->next;
+        result = ft_strjoin_node(result, elements->str, 1, node);
+    }
+    return (result);
+}
+
+void free_elements(t_element *elements)
+{
+    t_element *cur;
+    t_element *prev;
+
+    cur = elements;
+    if (!cur)
+        return ;
+    while (cur)
+    {
+        prev = cur;
+        cur = cur->next;
+        free(prev->str);
+        free(prev);
+    }
 }
 
 /*void    mole_parser(t_token ***origin, char *input, t_data *node)
