@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 13:51:32 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/06 16:36:14 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/10 16:29:11 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,11 @@ char	*remove_spaces(char *input)
 	j = 0;
 	line = malloc(ft_strlen(input) + 1);
 	if (!line)
-		return (NULL);
+	{
+		free(input);
+		write(2, "error in lexer part\n", 20);
+		exit(-1);
+	}
 	while (input[i] != '\0')
 	{
 		if (input[i] != ' ')

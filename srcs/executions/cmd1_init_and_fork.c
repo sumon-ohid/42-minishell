@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd.c                                              :+:      :+:    :+:   */
+/*   cmd1_init_and_fork.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 14:32:03 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/06 16:44:30 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/10 16:30:00 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,11 @@ int	executor_init(t_data *node, t_token **tokens, int processes, char *line)
 		return (0);
 	}
 	node->pid = malloc(sizeof(int) * processes);
+	if (!node->pid)
+		ft_exit(node, -1, "malloc failed at executor");
 	node->status = malloc(sizeof(int) * processes);
+	if (!node->status)
+		ft_exit(node, -1, "malloc failed at executor");
 	fork_processes(processes, node, tokens, line);
 	close_all(&fd, processes - 1);
 	wait_for_processes(node->pid, node->status, processes, node);
