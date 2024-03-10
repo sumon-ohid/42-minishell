@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/10 16:26:12 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/10 17:14:34 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,7 +153,7 @@ typedef struct s_data
 
 // take_input
 int					entry_check(t_data *node, char *line);
-int					ft_lexical_checker(char *line, int in_single_quote,
+int					ft_lexical_checker(t_data *node, int in_single_quote,
 						int in_double_quote, char prev_char);
 char				*ft_upgrade_spaces(char *line, int i, int j, int in_quotes);
 int					pipe_counter(char *str);
@@ -167,9 +167,11 @@ void				eof_free(t_data *node);
 //mole_parser
 
 void    			mole_parser(t_token ***origin, char *input, t_data *node);
+int    				delim_type(char c, t_data *node);
 void				create_and_link_token(t_token ***origin, int current, char *word,
 						t_data *node);
 void				skip(char *str, int *cur, char mode, t_data *node);
+bool 				is_breaker(char c, t_data *node);
 void    			detach_tokens(int *end, t_token ***origin, t_data *node);
 int					create_breakertoken(int end, t_data *node, int proc);
 int					saved_nulltoken(int end, t_data *node, t_token ***origin, int proc);
@@ -270,6 +272,8 @@ char				*ft_strjoin_node(char *s1, char *s2, int save_flag,
 						t_data *node);
 int					ft_strlen(const char *str);
 char				*ft_substr(char const *s, unsigned int start, size_t len);
+char				*ft_substr_clean(char const *s, unsigned int start,
+						size_t len, t_data *node);
 char				*ft_strdup(const char *src);
 int					ft_strcmp(char *s1, char *s2);
 int					ft_strncmp(char *s1, char *s2, size_t n);

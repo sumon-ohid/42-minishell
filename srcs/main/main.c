@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:17:43 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/10 16:33:59 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/10 17:01:45 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ int	entry_check(t_data *node, char *line)
 {
 	int		ret_val;
 
-	if (!ft_lexical_checker(line, 0, 0, '\0'))
-		return (-2);
 	node->input_line = line;
+	if (!ft_lexical_checker(node, 0, 0, '\0'))
+		return (-2);
 	init_tokens(node);
 	if (!check_for_heredoc(node, node->tokens, pipe_counter(line)))
 		return (2);

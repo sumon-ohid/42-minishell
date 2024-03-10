@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 12:48:37 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/10 15:45:57 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/10 17:04:11 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,31 @@ void	ft_lstadd_back(t_element **lst, t_element *nw)
 			proxy = proxy->next;
 		proxy->next = nw;
 	}
+}
+
+char	*ft_substr_clean(char const *s, unsigned int start, size_t len, t_data *node)
+{
+	unsigned int	counter;
+	char			*sub_str;
+
+	counter = start;
+	if (start >= ((unsigned int)ft_strlen(s)))
+		parse_error(node, 1, "substr failed at parsing", -1);
+	while (s[counter])
+		counter++;
+	if ((counter - start) < len)
+		sub_str = (char *)malloc(sizeof(char) * ((counter - start) + 1));
+	else
+		sub_str = (char *)malloc(sizeof(char) * (len + 1));
+	if (!sub_str)
+		parse_error(node, 1, "substr failed at parsing", -1);
+	counter = 0;
+	while (len && s[start])
+	{
+		sub_str[counter++] = s[start++];
+		len--;
+	}
+	sub_str[counter] = '\0';
+	return (sub_str);
 }
 
