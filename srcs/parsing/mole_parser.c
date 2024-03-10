@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:05:04 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/10 14:51:27 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/10 15:45:27 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,16 @@ int saved_nulltoken(int end, t_data *node, t_token ***origin, int proc)
     return (0);
 }
 
-int    create_breakertoken(int end, t_data *node, t_token ***origin, int proc)
+void   breakermaker(int proc, int end, t_data *node, int num)
+{
+    char *result;
+
+    result = ft_substr_clean(node->input_line, end, num, node);
+    create_and_link_token(&(node->tokens), proc, result, node);
+    free(result);
+}
+
+int    create_breakertoken(int end, t_data *node, int proc)
 {
     char *str;
 
@@ -113,14 +122,12 @@ int    create_breakertoken(int end, t_data *node, t_token ***origin, int proc)
     if ((str[end] == '>' && str[end + 1] == '>')
         || (str[end] == '<' && str[end + 1] == '<'))
     {
-        create_and_link_token(origin, proc,
-            ft_substr_clean(str, end, 2, node), node);
+        breakermaker(proc, end, node, 2);
         return (end + 2);
     }
     else if (str[end] == '<' || str[end] == '>')
     {
-        create_and_link_token(origin, proc,
-            ft_substr_clean(str, end, 1, node), node);
+        breakermaker(proc, end, node, 1);
         return (end + 1);
     }
     else if (str[end] == '|')
@@ -164,7 +171,7 @@ void    detach_tokens(int *end, t_token ***origin, t_data *node)
     chars_left = (ft_strlen(str) - *end) - 1;
     if (is_breaker(str[*end], node))
     {
-        *end = create_breakertoken(*end, node, origin, node->processes);
+        *end = create_breakertoken(*end, node, node->processes);
         return ;
     }
     else if (chars_left >= 2 && delim_type(str[*end], node) == QUOTE)
@@ -185,10 +192,9 @@ char    *expand_append(t_data *node, int *end)
 {
     int         start;
     char        *str;
-    t_element   *elements;
     char        *result;
 
-    elements = NULL;
+    node->elements = NULL;
     str = node->input_line;
     while (str[*end] && !is_breaker(str[*end], node))
     {
@@ -199,13 +205,14 @@ char    *expand_append(t_data *node, int *end)
             (*end)++;
         while (!delim_type(str[*end], node))
             (*end)++;
-        create_element(&elements, node, start, *end);
+        create_element(&(node->elements), node, start, *end);
         if (node->quote && delim_type(str[*end], node) == QUOTE)
             (*end)++;
         node->quote = 0;
     }
-    result = concatenate_elements(elements, node);
-    free_elements(elements);
+    result = concatenate_elements(node->elements, node);
+    free_elements(node->elements);
+    node->elements = NULL;
     return (result);
 }
 
@@ -215,9 +222,14 @@ void create_element(t_element **elements, t_data *node, int start, int end)
     char *data;
 
     new = malloc(sizeof(t_element));
-    if (!new /*|| (end - start) == 0*/)
-        ft_exit(node, -1, "error in parsing part");
-    data = ft_substr_clean(node->input_line, start, (end - start), node);
+    if (!new)
+        parse_error(node, 1, "error at create_element", -1);
+    data = ft_substr(node->input_line, start, (end - start));
+    if (!data)
+    {
+        free(new);
+        parse_error(node, 1, "error at create_element", -1);
+    }
     if (ft_strstr(data, "$") && node->quote != '\'')
     {
         new->str = handle_envp(data, node); //is this properly protected against malloc fails?
@@ -234,14 +246,16 @@ char *concatenate_elements(t_element *elements, t_data *node)
     char *result;
 
     if (!elements)
-        ft_exit(node, -1, "something went wrong with elements");
+        parse_error(node, 1, "something went wrong with elements", -1);
     result = ft_strdup(elements->str);
     if (!result)
-        ft_exit(node, -1, "strdup failed at parsing");
+        parse_error(node, 1, "strdup failed at parsing", -1);
     while (elements->next)
     {
         elements = elements->next;
-        result = ft_strjoin_node(result, elements->str, 1, node);
+        result = ft_strjoin(result, elements->str, 1);
+        if (!result)
+            parse_error(node, 1, "strjoin failed at parsing", -1);
     }
     return (result);
 }

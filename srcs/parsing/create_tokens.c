@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:50:09 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/10 14:41:31 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/10 15:34:40 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,23 @@ t_token	*create_token(char *word, t_data *node)
 		return (0);
 	new = malloc(sizeof(t_token));
 	if (!new)
-		ft_exit(node, -1, "memory allocation failed at create token");
+	{
+		free(word);
+		parse_error(node, 1, "memory allocation failed at create token", -1);
+	}
 	new->previous = NULL;
 	new->next = NULL;
 	new->arr = NULL;
 	new->heredoc_data = NULL;
 	new->quote = quote_assigner(node->quote);
+	new->str = NULL;
 	new->str = ft_strdup(word);
 	if (!new->str)
-		ft_early_exit(node, -1, "memory allocation failed at create token");
+	{
+		free(word);
+		free(new);
+		parse_error(node, 1, "memory allocation failed at create token", -1);
+	}
 	new->type = 0;
 	return (new);
 }
@@ -94,10 +102,4 @@ int	quote_assigner(char quote)
 		return (NO_QUOTE);
 }
 
-int	ft_lexer_error(char *line)
-{
-	free(line);
-	write(2, "minishell: syntax error near unexpected token\n", 47);
-	return (0);
-}
 

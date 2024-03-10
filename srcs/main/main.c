@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:17:43 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/10 14:49:38 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/10 15:13:03 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,13 @@ void init_tokens(t_data *node)
 
 	i = 0;
 	node->processes = pipe_counter(node->input_line);
-	tokens = ft_calloc(sizeof(t_token *), node->processes);
+	tokens = ft_calloc(sizeof(t_token *), node->processes + 1);
 	if (!tokens)
 		parse_error(node, 0, "malloc at init tokens failed", -1);
-	while (i < node->processes)
+	while (i <= node->processes)
 		tokens[i++] = NULL;
 	node->tokens = tokens;
 	mole_parser(&(node->tokens), node->input_line, node);
-	//node->tokens = tokens;
 }
 
 int	entry_check(t_data *node, char *line)

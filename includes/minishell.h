@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/10 14:51:53 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/10 15:30:01 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,7 @@ typedef struct s_data
 	t_vars				*local_vars;
 	t_mode				mode;
 	t_token				**tokens;
+	t_element			*elements;
 	struct s_data		*next;
 }						t_data;
 
@@ -170,7 +171,7 @@ void				create_and_link_token(t_token ***origin, int current, char *word,
 						t_data *node);
 void				skip(char *str, int *cur, char mode, t_data *node);
 void    			detach_tokens(int *end, t_token ***origin, t_data *node);
-int					create_breakertoken(int end, t_data *node, t_token ***origin, int proc);
+int					create_breakertoken(int end, t_data *node, int proc);
 int					saved_nulltoken(int end, t_data *node, t_token ***origin, int proc);
 char    			*expand_append(t_data *node, int *end);
 void 				create_element(t_element **elements, t_data *node, int start, int end);

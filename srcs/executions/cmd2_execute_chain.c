@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 17:28:11 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/09 20:44:42 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/10 14:54:08 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,31 +34,6 @@ void	close_all(int ***origin, int max)
 		counter++;
 	}
 }
-
-/*int	ft_commander(t_token *chain, t_data *node)
-{
-	t_token	*mark;
-	char	*tmp;
-
-	while (chain && chain->type != COMMAND)
-		chain = chain->next;
-	mark = chain;
-	chain = chain->next;
-	while (chain && chain->type == FLAG)
-	{
-		tmp = ft_strjoin(mark->str, " ", 1);
-		mark->str = tmp;
-		if (!mark->str)
-			ft_exit(node, -1, "memory allocation in commander failed");
-		tmp = ft_strjoin(mark->str, chain->str, 1);
-		mark->str = tmp;
-		if (!mark->str)
-			ft_exit(node, -1, "memory allocation in commander failed");
-		chain = chain->next;
-	}
-	extract_find_execute(node->envp, mark, node, chain);
-	return (0);
-}*/
 
 int	count_array_size(t_token *chain)
 {

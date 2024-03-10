@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 21:31:07 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/26 15:03:41 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/10 15:46:26 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,16 @@ char	*ft_strjoin(char *s1, char *s2, int save_flag)
 		return (0);
 	new_str = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
 	if (!new_str)
+	{
+		if (save_flag)
+			free(s1);
 		return (NULL);
+	}
 	ctr1 = 0;
 	ctr2 = 0;
 	while (s1[ctr1])
-	{
-		new_str[ctr1] = s1[ctr1];
-		ctr1++;
-	}
+		new_str[ctr1++] = s1[ctr2++];
+	ctr2 = 0;
 	while (s2[ctr2])
 		new_str[ctr1++] = s2[ctr2++];
 	new_str[ctr1] = '\0';

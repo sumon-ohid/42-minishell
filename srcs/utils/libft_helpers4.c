@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 12:48:37 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/09 18:03:21 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/10 15:45:57 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	*ft_strjoin_node(char *s1, char *s2, int save_flag, t_data *node)
 
 	if (!s1 || !s2)
 		return (0);
-	new_str = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	new_str = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1); //revisit!
 	if (!new_str)
 		ft_exit(node, -1, "malloc failed at strjoin");
 	ctr1 = 0;
