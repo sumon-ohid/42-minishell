@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 14:41:52 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/07 15:48:41 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/10 17:44:52 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	exit_with_args(t_data *node, int exit_val, t_token *head, int val)
 	{
 		if (proxy->type == FLAG)
 		{
-			if (!digit_checker(proxy->str))
+			if (!digit_checker(proxy->str) && counter == 0)
 			{
 				printf("exit\nminishell: exit: %s: numeric argument required\n",
 					proxy->str);

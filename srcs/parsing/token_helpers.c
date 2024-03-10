@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 11:28:51 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/10 14:38:03 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/10 18:06:47 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,26 +65,3 @@ void	char_append(char **str, char c)
 	*str = new_str;
 }
 
-char	**dup_envp(char **envp)
-{
-	int		counter;
-	char	**result;
-	int		counter2;
-
-	counter = 0;
-	while (envp[counter])
-		counter++;
-	result = malloc(sizeof(char *) * counter);
-	if (!result)
-		return (NULL);
-	counter2 = 0;
-	while (counter2 < counter - 1)
-	{
-		result[counter2] = ft_strdup(envp[counter2]);
-		if (!result[counter2])
-			return (NULL);
-		counter2++;
-	}
-	result[counter2] = NULL;
-	return (result);
-}

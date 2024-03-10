@@ -18,6 +18,7 @@ WHITE = \033[0;97m
 RESET = \033[0m
 
 SRC = 	srcs/main/main.c \
+		srcs/main/prepare_env.c \
 		srcs/main/ft_free.c \
 		srcs/main/ft_free2.c \
 		srcs/main/handle_error.c \

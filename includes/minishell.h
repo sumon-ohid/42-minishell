@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/10 17:14:34 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/10 18:43:35 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,7 +157,7 @@ int					ft_lexical_checker(t_data *node, int in_single_quote,
 						int in_double_quote, char prev_char);
 char				*ft_upgrade_spaces(char *line, int i, int j, int in_quotes);
 int					pipe_counter(char *str);
-char				**dup_envp(char **envp);
+char				**dup_envp(char **envp, t_data *node);
 char				*handle_envp(char *str, t_data *node);
 void				process_words(t_token ***origin, char **words, char *str,
 						t_data *node);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:24:36 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/06 16:15:39 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/10 18:28:54 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ char	*get_current_directory(void)
 
 	dir = getcwd(NULL, 0);
 	if (dir == NULL)
-		perror("getcwd failed");
+		perror("getcwd failed"); //should we exit here?
 	return (dir);
 }
 

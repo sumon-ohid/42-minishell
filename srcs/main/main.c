@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:17:43 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/10 17:01:45 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/10 18:43:08 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,9 @@ int	main(int argc, char **argv, char **envp)
 	if (node == NULL)
 		handle_error("Memory allocation failed for node.", 1);
 	ft_set(node);
-	node->envp = dup_envp(envp);
+	node->envp = dup_envp(envp, node);
+	if (!node->envp)
+		parse_error(node, -1, "dup_envp failed", 0);
 	node->last_return = 0;
 	ft_initialize(node);
 	close(node->std_in);
