@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 10:03:57 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/07 15:18:07 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/10 14:43:46 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	free_vars(t_vars *local_vars)
 void	eof_free(t_data *node)
 {
 	printf("exit\n");
-	free_vars(node->local_vars);
+	//free_vars(node->local_vars);
 	ft_free_array(node->envp);
 	if (node->std_in != -1)
 		close(node->std_in);

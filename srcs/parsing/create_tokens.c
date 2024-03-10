@@ -6,13 +6,12 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:50:09 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/09 20:00:24 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/10 14:41:31 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-// TODO: account for $?
 t_token	*create_token(char *word, t_data *node)
 {
 	t_token	*new;
@@ -27,14 +26,9 @@ t_token	*create_token(char *word, t_data *node)
 	new->arr = NULL;
 	new->heredoc_data = NULL;
 	new->quote = quote_assigner(node->quote);
-	/*if (ft_strstr(word, "$") && new->quote != SINGLE_QUOTE)
-		new->str = handle_envp(word, node);
-	else
-	{*/
-		new->str = ft_strdup(word);
-		if (!new->str)
-			ft_early_exit(node, -1, "memory allocation failed at create token");
-	//}
+	new->str = ft_strdup(word);
+	if (!new->str)
+		ft_early_exit(node, -1, "memory allocation failed at create token");
 	new->type = 0;
 	return (new);
 }
@@ -70,7 +64,6 @@ void	create_and_link_token(t_token ***origin, int current, char *word,
 	t_token	*cur;
 	t_token	**tokens;
 
-	node->parse_flag = 1;
 	tokens = *origin;
 	cur = tokens[current];
 	proxy = cur;
@@ -89,56 +82,22 @@ void	create_and_link_token(t_token ***origin, int current, char *word,
 				proxy->next->quote);
 	}
 }
-
-void	process_words(t_token ***origin, char **units, char *str, t_data *node)
+int	quote_assigner(char quote)
 {
-	int		counter;
-	int		counter2;
-	char	**words;
-
-	counter = 0;
-	counter2 = 0;
-	node->line_temp = str;
-	while (counter2 < pipe_counter(str))
-	{
-		words = ft_split_special(units[counter2], ' ', 'X', 0);
-		if (!words)
-			ft_early_exit(node, -1, "malloc failed at process_words function");
-		while (words[counter])
-		{
-			create_and_link_token(origin, counter2, words[counter], node);
-			counter++;
-		}
-		counter2++;
-		counter = 0;
-		ft_free_array(words);
-	}
+	if (quote == 0)
+		return (NO_QUOTE);
+	else if (quote == '\'')
+		return (SINGLE_QUOTE);
+	else if (quote == '\"')
+		return (DOUBLE_QUOTE);
+	else
+		return (NO_QUOTE);
 }
 
-/*void	process_words(t_token **tokens, char **units, char *str, t_data *node)
+int	ft_lexer_error(char *line)
 {
-	int		counter;
-	int		counter2;
-	char	**words;
+	free(line);
+	write(2, "minishell: syntax error near unexpected token\n", 47);
+	return (0);
+}
 
-	tokens = ft_calloc(sizeof(t_token *), pipe_counter(node->input_line));
-	if (!tokens)
-		ft_exit(node, 1, "Memory allocation failed at entry check");
-	counter = 0;
-	counter2 = 0;
-	node->line_temp = str;
-	while (counter2 < pipe_counter(str))
-	{
-		words = ft_split_special(units[counter2], ' ', 'X', 0);
-		if (!words)
-			ft_early_exit(node, -1, "malloc failed at process_words function");
-		while (words[counter])
-		{
-			create_and_link_token(&tokens, counter2, words[counter], node);
-			counter++;
-		}
-		counter2++;
-		counter = 0;
-		ft_free_array(words);
-	}
-}*/

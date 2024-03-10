@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/09 20:27:36 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/10 14:51:53 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,6 @@ typedef enum s_mode
 typedef struct s_data
 {
 	int					last_return;
-	int					env_len;
 	int					**fd;
 	int					processes;
 	int					*pid;
@@ -144,61 +143,83 @@ typedef struct s_data
 	char				*pwd;
 	char				*home;
 	char				*input_line;
-	char				*line_temp;
 	char				quote;
-	bool				parse_flag;
 	t_vars				*local_vars;
 	t_mode				mode;
 	t_token				**tokens;
 	struct s_data		*next;
 }						t_data;
 
+// take_input
+int					entry_check(t_data *node, char *line);
+int					ft_lexical_checker(char *line, int in_single_quote,
+						int in_double_quote, char prev_char);
+char				*ft_upgrade_spaces(char *line, int i, int j, int in_quotes);
+int					pipe_counter(char *str);
+char				**dup_envp(char **envp);
+char				*handle_envp(char *str, t_data *node);
+void				process_words(t_token ***origin, char **words, char *str,
+						t_data *node);
+int					quote_assigner(char quote);
+void				eof_free(t_data *node);
+
 //mole_parser
 
-void    mole_parser(t_token ***origin, char *input, t_data *node);
-void	create_and_link_token(t_token ***origin, int current, char *word,
-		t_data *node);
-void	skip(char *str, int *cur, char mode, t_data *node);
-void    detach_tokens(int *end, t_token ***origin, t_data *node);
-int		create_breakertoken(int end, t_data *node, t_token ***origin, int proc);
-int		saved_nulltoken(int end, t_data *node, t_token ***origin, int proc);
-char    *expand_append(t_data *node, int *end);
-void 	create_element(t_element **elements, t_data *node, int start, int end);
-char 	*concatenate_elements(t_element *elements, t_data *node);
-void 	free_elements(t_element *elements);
-
-// libft_helpers
-char				*ft_itoa(int n);
-int					ft_strstr(const char *big, const char *little);
-char				*ft_quote_detector(char *big, char *little);
-char				*ft_strjoin(char *s1, char *s2, int save_flag);
-char				*ft_strjoin_node(char *s1, char *s2, int save_flag,
+void    			mole_parser(t_token ***origin, char *input, t_data *node);
+void				create_and_link_token(t_token ***origin, int current, char *word,
 						t_data *node);
-int					ft_strlen(const char *str);
-char				*ft_substr(char const *s, unsigned int start, size_t len);
-char				*ft_strdup(const char *src);
-int					ft_strcmp(char *s1, char *s2);
-int					ft_strncmp(char *s1, char *s2, size_t n);
-char				**ft_split(char const *s, char c, size_t i, size_t j);
-char				**ft_split_special(char *s, char c, char mode, size_t j);
-void				split_helper_pipes(char *s, char c, size_t *i,
-						char *output);				
-int					k_count(char const *s, int i, char c);
-void				ft_putstr(char *str);
-void				ft_putchar(char c);
-char				*ft_strndup(const char *s, size_t n);
-void				*ft_memcpy(void *dest, const void *src, size_t n);
-void				*ft_calloc(size_t nmemb, size_t size);
-char				**ft_malloc(int size, char **str);
-char				*ft_strcpy(char *s1, char *s2);
-char				**ft_realloc(void *ptr, size_t old_size, size_t new_size);
-int					ft_putnbr(int n);
-int					ft_strchr(char *str, char c);
-int					ft_isspace(int c);
-int					ft_isalnum(int c);
-int					ft_atoi(const char *str);
-int					ft_isalpha(char c);
-void				ft_lstadd_back(t_element **lst, t_element *nw);
+void				skip(char *str, int *cur, char mode, t_data *node);
+void    			detach_tokens(int *end, t_token ***origin, t_data *node);
+int					create_breakertoken(int end, t_data *node, t_token ***origin, int proc);
+int					saved_nulltoken(int end, t_data *node, t_token ***origin, int proc);
+char    			*expand_append(t_data *node, int *end);
+void 				create_element(t_element **elements, t_data *node, int start, int end);
+char 				*concatenate_elements(t_element *elements, t_data *node);
+void 				free_elements(t_element *elements);
+
+// tokenizer
+t_token				**tokenizer(char *str);
+int					ft_strlen_till_char(char *str, char c);
+void				char_append(char **str, char c);
+int					determine_type(char *word, int prev_type, int quote);
+int					check_builtins(char *word);
+int					check_prevs(char *word, int prev_type);
+
+// execution part
+int					ft_commander(t_token *chain, t_data *node);
+int					execute_chain(t_data *node, t_token *chain, char *line,
+						int processes);
+void				set_what_this_child_doesnt_need(int ***origin, int index,
+						int max);
+int					exception_checker(t_token **tokens, int processes);
+int					executor_init(t_data *node, t_token **tokens, int processes,
+						char *line);
+char				**parse_input(char *line);
+int					entry_check2(t_data *node, t_token *head, char *line);
+void				allocate_fd(int ***fd, int processes, t_data *node);
+void				fork_processes(int processes, t_data *node,
+						t_token **tokens, char *line);
+void				wait_for_processes(int *pid, int *status,
+						int processes, t_data *node);
+char				*extract_path(char *comm2, char **poss_paths,
+						char *og_comm, t_data *node);
+char				*pathfinder(char **envp, char *comm, t_data *node);
+void				extract_find_execute(char **envp, char **comms,
+						t_data *node);
+void				parent_close(t_data *node, int i, int processes);
+
+// redirections
+int					ft_redirector(t_token *chain, int file_type,
+						int mode, t_data *node);
+int					ft_redirect_checker(t_token *chain, int mode,
+						t_data *node, int killmode);
+void				ft_set(t_data *node);
+void				ft_restore(t_data *node);
+void				close_all(int ***origin, int max);
+
+// signals
+void				mode(t_data *data, t_mode mode);
+int					ft_lastvalue(t_data *node);
 
 // heredoc
 char				*ft_heredoc(t_data *node, char *str);
@@ -239,48 +260,38 @@ void				ft_setenv(t_data *node, char *name, char *value);
 int					handle_var_not_exists(t_data *node, char *var);
 int					ft_strlen_arr(char **arr);
 
-// take_input
-int					entry_check(t_data *node, char *line);
-int					ft_lexical_checker(char *line, int in_single_quote,
-						int in_double_quote, char prev_char);
-char				*ft_upgrade_spaces(char *line, int i, int j, int in_quotes);
-int					pipe_counter(char *str);
-char				*handle_envp(char *str, t_data *node);
-void				process_words(t_token ***origin, char **words, char *str,
+// libft_helpers
+char				*ft_itoa(int n);
+int					ft_strstr(const char *big, const char *little);
+char				*ft_quote_detector(char *big, char *little);
+char				*ft_strjoin(char *s1, char *s2, int save_flag);
+char				*ft_strjoin_node(char *s1, char *s2, int save_flag,
 						t_data *node);
-int					quote_assigner(char quote);
-void				eof_free(t_data *node);
-
-// tokenizer
-t_token				**tokenizer(char *str);
-int					ft_strlen_till_char(char *str, char c);
-void				char_append(char **str, char c);
-int					determine_type(char *word, int prev_type, int quote);
-int					check_builtins(char *word);
-int					check_prevs(char *word, int prev_type);
-
-// execution part
-int					ft_commander(t_token *chain, t_data *node);
-int					execute_chain(t_data *node, t_token *chain, char *line,
-						int processes);
-void				set_what_this_child_doesnt_need(int ***origin, int index,
-						int max);
-int					exception_checker(t_token **tokens, int processes);
-int					executor_init(t_data *node, t_token **tokens, int processes,
-						char *line);
-char				**parse_input(char *line);
-int					entry_check2(t_data *node, t_token *head, char *line);
-void				allocate_fd(int ***fd, int processes, t_data *node);
-void				fork_processes(int processes, t_data *node,
-						t_token **tokens, char *line);
-void				wait_for_processes(int *pid, int *status,
-						int processes, t_data *node);
-char				*extract_path(char *comm2, char **poss_paths,
-						char *og_comm, t_data *node);
-char				*pathfinder(char **envp, char *comm, t_data *node);
-void				extract_find_execute(char **envp, char **comms,
-						t_data *node);
-void				parent_close(t_data *node, int i, int processes);
+int					ft_strlen(const char *str);
+char				*ft_substr(char const *s, unsigned int start, size_t len);
+char				*ft_strdup(const char *src);
+int					ft_strcmp(char *s1, char *s2);
+int					ft_strncmp(char *s1, char *s2, size_t n);
+char				**ft_split(char const *s, char c, size_t i, size_t j);
+char				**ft_split_special(char *s, char c, char mode, size_t j);
+void				split_helper_pipes(char *s, char c, size_t *i,
+						char *output);				
+int					k_count(char const *s, int i, char c);
+void				ft_putstr(char *str);
+void				ft_putchar(char c);
+char				*ft_strndup(const char *s, size_t n);
+void				*ft_memcpy(void *dest, const void *src, size_t n);
+void				*ft_calloc(size_t nmemb, size_t size);
+char				**ft_malloc(int size, char **str);
+char				*ft_strcpy(char *s1, char *s2);
+char				**ft_realloc(void *ptr, size_t old_size, size_t new_size);
+int					ft_putnbr(int n);
+int					ft_strchr(char *str, char c);
+int					ft_isspace(int c);
+int					ft_isalnum(int c);
+int					ft_atoi(const char *str);
+int					ft_isalpha(char c);
+void				ft_lstadd_back(t_element **lst, t_element *nw);
 
 // free memory
 void				ft_free_array(char **str);
@@ -295,24 +306,12 @@ void				free_vars(t_vars *local_vars);
 void				free_poss_paths(char **poss_paths);
 void				ft_cleanup(t_data *node, t_token **tokens, char *line);
 
-// redirections
-int					ft_redirector(t_token *chain, int file_type,
-						int mode, t_data *node);
-int					ft_redirect_checker(t_token *chain, int mode,
-						t_data *node, int killmode);
-void				ft_set(t_data *node);
-void				ft_restore(t_data *node);
-void				close_all(int ***origin, int max);
-
-// signals
-void				mode(t_data *data, t_mode mode);
-int					ft_lastvalue(t_data *node);
-
 // handle errors
 int					handle_error(char *error, int status);
 void				ft_putstr_fd(char *s, int fd);
 void				nocomm_error(char *name);
 void				directory_error(char *name);
 int					ft_lexer_error(char *line);
+void    			parse_error(t_data *node, int flag, char *msg, int value);
 
 #endif
