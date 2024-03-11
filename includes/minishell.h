@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/11 16:55:45 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/11 17:35:16 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,6 @@ typedef struct s_data
 	char				*input_line;
 	char				quote;
 	char				command_flag;
-	t_vars				*local_vars;
 	t_mode				mode;
 	t_token				**tokens;
 	t_element			*elements;
