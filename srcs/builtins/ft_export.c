@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-#include <stdlib.h>
 
 void	sort_env(char **arr, int n)
 {
@@ -52,6 +51,8 @@ int	handle_export_no_args(t_data *node)
 		if (!tmp)
 			ft_exit(node, -1, "malloc failed at ft_export function");
 		var_value = remove_quote(tmp);
+		if (!var_value)
+			ft_exit(node, -1, "malloc failed at ft_export function");
 		printf("declare -x %s=\"%s\"\n", var_name, var_value);
 		free(var_name);
 		free(tmp);

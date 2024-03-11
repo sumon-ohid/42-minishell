@@ -12,6 +12,11 @@
 
 #include "../../includes/minishell.h"
 
+int	ft_isdigit(int c)
+{
+	return (c >= '0' && c <= '9');
+}
+
 int	var_name_check(char *var)
 {
 	int		i;
@@ -21,19 +26,19 @@ int	var_name_check(char *var)
 	var_name = copy_until_char(var, '=');
 	if (!var_name)
 		return (1);
+	if (var[0] == '=')
+	{
+		free(var_name);
+		return (1);
+	}
 	while (var_name[i] && var_name[i] != '=')
 	{
-		if (!ft_isalpha(var_name[i]) && var_name[i] != '_')
+		if (ft_isdigit(var_name[0]) && var_name[i] != '_')
 		{
 			free(var_name);
 			return (1);
 		}
 		i++;
-	}
-	if (var_name[i] == '=' && !ft_isalpha(var_name[i - 1]))
-	{
-		free(var_name);
-		return (1);
 	}
 	free(var_name);
 	return (0);
@@ -72,6 +77,7 @@ int	handle_var_exist_in_envp(t_data *node, char *var)
 		}
 		i++;
 	}
+	free(var_name);
 	return (1);
 }
 

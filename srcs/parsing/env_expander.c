@@ -71,7 +71,11 @@ char	*handle_env_values(char *str, char *result, t_data *node, int *i)
 		var_value = remove_quote(tmp);
 		result = ft_strjoin(result, var_value, 1);
 		if (!result)
+		{
+			free(var_name);
+			free(var_value);
 			ft_exit(node, -1, "malloc failed at handle envp");
+		}
 		(*i) += ft_strlen(var_name);
 		free(var_name);
 		free(var_value);
