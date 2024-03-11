@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft_helper5.c                                    :+:      :+:    :+:   */
+/*   libft_helpers5.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 22:03:01 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/11 22:03:52 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/11 22:29:08 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,12 @@ void	close_all(int ***origin, int max)
 		}
 		counter++;
 	}
+}
+
+void	env_quit(char **result, t_data *node)
+{
+	if (result)
+		ft_free_array(result);
+	free(node);
+	handle_error("env preparation failed", -1);
 }

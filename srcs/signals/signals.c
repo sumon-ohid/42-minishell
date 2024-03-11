@@ -6,12 +6,11 @@
 /*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 13:00:50 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/11 22:09:53 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/11 22:31:17 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-#include <readline/readline.h>
 
 volatile sig_atomic_t	g_signal = 0;
 

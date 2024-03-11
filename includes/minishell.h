@@ -6,7 +6,7 @@
 /*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/11 22:01:15 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/11 22:29:28 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -307,6 +307,7 @@ int					ft_isalnum(int c);
 int					ft_atoi(const char *str);
 int					ft_isalpha(char c);
 void				ft_lstadd_back(t_element **lst, t_element *nw);
+void				env_quit(char **result, t_data *node);
 
 // free memory
 void				ft_free_array(char **str);
