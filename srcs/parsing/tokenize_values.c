@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:57:30 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/10 14:25:26 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/11 16:40:17 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ int	determine_type(char *word, int prev_type, int quote)
 		return (0);
 	else if (ft_strcmp("<", word) == 0 && quote == NO_QUOTE)
 		return (REDIR_IN);
-	else if (ft_strcmp(">", word) == 0 && quote == NO_QUOTE)
+	else if ((ft_strcmp(">", word) == 0 || ft_strcmp(">|", word) == 0)
+		&& quote == NO_QUOTE)
 		return (REDIR_OUT);
 	else if (ft_strcmp("<<", word) == 0 && quote == NO_QUOTE)
 		return (HEREDOC);
