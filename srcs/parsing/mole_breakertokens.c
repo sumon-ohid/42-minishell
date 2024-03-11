@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 17:06:52 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/10 17:12:40 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/11 16:18:02 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ int    create_breakertoken(int end, t_data *node, int proc)
         breakermaker(proc, end, node, 2);
         return (end + 2);
     }
+    else if (str[end] == '>' && str[end + 1] == '|')
     else if (str[end] == '<' || str[end] == '>')
     {
         breakermaker(proc, end, node, 1);

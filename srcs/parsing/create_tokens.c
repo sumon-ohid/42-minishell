@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_tokens.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:50:09 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/11 12:13:12 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/11 16:07:34 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_token	*create_token(char *word, t_data *node)
 	new->type = 0;
 	return (new);
 }
-
+/*
 int	pipe_counter(char *str)
 {
 	int	counter;
@@ -59,6 +59,32 @@ int	pipe_counter(char *str)
 		else if ((str[counter] == '\'' || str[counter] == '\"') && in_quotes)
 			in_quotes = 0;
 		else if (str[counter] == '|' && !in_quotes)
+			pipes++;
+		counter++;
+	}
+	return (pipes + 1);
+}*/
+
+int	pipe_counter(char *str)
+{
+	int		counter;
+	int		pipes;
+	char 	quote_char;
+
+	if (!str)
+		return (0);
+	counter = 0;
+	pipes = 0;
+	quote_char = 0;
+	while (str[counter])
+	{
+		if ((str[counter] == '\'' || str[counter] == '\"') && !quote_char)
+			quote_char = str[counter];
+		else if ((str[counter] == '\'' || str[counter] == '\"')
+			&& quote_char == str[counter])
+			quote_char = 0;
+		else if (str[counter] == '|' && !quote_char
+			&& counter > 0 && str[counter - 1] != '>')
 			pipes++;
 		counter++;
 	}
