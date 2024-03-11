@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 17:28:11 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/11 17:32:02 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/11 19:38:48 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ int	execute_chain(t_data *node, t_token *chain, char *line, int processes)
 		else
 			proxy = proxy->next;
 	}
-	return (ft_redirect_checker(chain, 0, node, 1));
+	return (ft_redirect_checker(chain, 1, node, 1));
 }
 
 void	set_what_this_child_doesnt_need(int ***origin, int index, int max)
