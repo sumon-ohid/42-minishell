@@ -6,7 +6,7 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 18:06:23 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/11 17:42:47 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/11 18:02:47 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void    adjust_shlevel(char **env, t_data *node)
         if (ft_strcmp(var_name, "SHLVL") == 0)
         {
             var_value = copy_after_char(env[i], '=');
+            if (!var_value)
+                return;
             shlvl = ft_atoi(var_value);
             shlvl++;
             free(var_value);   

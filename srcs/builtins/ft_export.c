@@ -6,7 +6,7 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:27:41 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/07 13:26:30 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/11 18:02:19 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,11 @@ int	handle_export_no_args(t_data *node)
 	while (node->envp[i])
 	{
 		var_name = copy_until_char(node->envp[i], '=');
+		if (!var_name)
+			ft_exit(node, -1, "malloc failed at ft_export function");
 		tmp = copy_after_char(node->envp[i], '=');
+		if (!tmp)
+			ft_exit(node, -1, "malloc failed at ft_export function");
 		var_value = remove_quote(tmp);
 		printf("declare -x %s=\"%s\"\n", var_name, var_value);
 		free(var_name);
@@ -65,9 +69,13 @@ int	check_if_var_exists(t_data *node, char *var)
 
 	i = 0;
 	var_name = copy_until_char(var, '=');
+	if (!var_name)
+		ft_exit(node, -1, "malloc failed at ft_export function");
 	while (node->envp[i])
 	{
 		name_before_equal = copy_until_char(node->envp[i], '=');
+		if (!name_before_equal)
+			ft_exit(node, -1, "malloc failed at ft_export function");
 		if (ft_strcmp(name_before_equal, var_name) == 0)
 		{
 			free(name_before_equal);

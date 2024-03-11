@@ -6,7 +6,7 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 09:03:06 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/27 11:46:44 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/11 18:01:37 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	var_name_check(char *var)
 
 	i = 0;
 	var_name = copy_until_char(var, '=');
+	if (!var_name)
+		return (1);
 	while (var_name[i] && var_name[i] != '=')
 	{
 		if (!ft_isalpha(var_name[i]) && var_name[i] != '_')
@@ -54,6 +56,8 @@ int	handle_var_exist_in_envp(t_data *node, char *var)
 
 	i = 0;
 	var_name = copy_until_char(var, '=');
+	if (!var_name)
+		ft_exit(node, -1, "malloc failed at ft_export function");
 	while (node->envp[i])
 	{
 		if (ft_strncmp(node->envp[i], var_name, ft_strlen(var_name)) == 0
