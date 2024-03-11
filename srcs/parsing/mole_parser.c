@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:05:04 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/10 17:07:59 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/11 12:31:24 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void    detach_tokens(int *end, t_token ***origin, t_data *node)
     char    *result;
 
     str = node->input_line;
-    chars_left = (ft_strlen(str) - *end) - 1;
+    chars_left = (ft_strlen(str) - *end);
     if (is_breaker(str[*end], node))
     {
         *end = create_breakertoken(*end, node, node->processes);
@@ -97,6 +97,8 @@ void    detach_tokens(int *end, t_token ***origin, t_data *node)
         }
     }
     result = expand_append(node, end);
+    if (ft_strcmp(result, "") == 0)
+        return (free(result));
     node->quote = SINGLE_QUOTE;
     create_and_link_token(origin, node->processes, result, node);
     free(result);
