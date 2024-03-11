@@ -3,10 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
+<<<<<<< HEAD
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:24:36 by msumon            #+#    #+#             */
 /*   Updated: 2024/03/10 18:28:54 by mhuszar          ###   ########.fr       */
+=======
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/17 09:24:36 by msumon            #+#    #+#             */
+/*   Updated: 2024/03/07 09:28:07 by msumon           ###   ########.fr       */
+>>>>>>> main
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +76,7 @@ char	*get_current_directory(void)
 
 int	change_directory(char *str, t_data *node)
 {
-	if (str == NULL || ft_strcmp(str, "--") == 0 || ft_strcmp(str, "~") == 0)
+	if (str == NULL)
 	{
 		node->home = ft_getenv("HOME", node);
 		if (node->home == NULL)

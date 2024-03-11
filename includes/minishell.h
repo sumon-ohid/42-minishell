@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/03/10 18:43:35 by mhuszar          ###   ########.fr       */
+=======
+/*   Updated: 2024/03/07 13:20:56 by msumon           ###   ########.fr       */
+>>>>>>> main
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -262,6 +266,7 @@ void				ft_localvars(t_token **tokens, t_data *node, int processes);
 void				ft_setenv(t_data *node, char *name, char *value);
 int					handle_var_not_exists(t_data *node, char *var);
 int					ft_strlen_arr(char **arr);
+char				*remove_quote(char *str);
 
 // libft_helpers
 char				*ft_itoa(int n);

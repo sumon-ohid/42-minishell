@@ -65,6 +65,12 @@ static void	process_quotes(char *s, size_t *i, char *output, t_split *data)
 			output[data->k++] = data->quote;
 			*i = *i + 1;
 		}
+		 else if (s[*i + 1] != ' ' && s[*i + 1] != '\0')
+        {
+            output[data->k++] = s[*i + 1];
+			while (s[*i + 1] != ' ' && s[*i + 1] != '\0')
+				(*i)++;
+        }
 	}
 }
 
