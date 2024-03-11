@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 20:21:29 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/10 14:54:18 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/11 21:20:28 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,5 +108,5 @@ void	extract_find_execute(char **envp, char **comms, t_data *node)
 		ft_free_fds(node);
 	free(comms);
 	free(path);
-	ft_exit(node, 127, NULL);
+	ft_exit(node, 126, NULL);
 }
