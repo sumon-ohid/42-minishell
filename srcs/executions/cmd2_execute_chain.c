@@ -3,41 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   cmd2_execute_chain.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 17:28:11 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/11 19:38:48 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/11 22:08:27 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	close_all(int ***origin, int max)
-{
-	int	**fd;
-	int	counter;
-
-	fd = *origin;
-	counter = 0;
-	while (counter < max)
-	{
-		if (fd[counter][0] != -1)
-		{
-			close(fd[counter][0]);
-			fd[counter][0] = -1;
-		}
-		if (fd[counter][1] != -1)
-		{
-			close(fd[counter][1]);
-			fd[counter][1] = -1;
-		}
-		counter++;
-	}
-}
-
 int	count_array_size(t_token *chain)
 {
-	int counter;
+	int	counter;
 
 	counter = 0;
 	while (chain && chain->type != COMMAND)
@@ -58,9 +35,10 @@ int	count_array_size(t_token *chain)
 
 int	ft_commander(t_token *chain, t_data *node)
 {
-	int		counter = 0;
-	char 	**array;
+	int		counter;
+	char	**array;
 
+	counter = 0;
 	array = malloc(sizeof(char *) * count_array_size(chain));
 	while (chain && chain->type != COMMAND)
 		chain = chain->next;

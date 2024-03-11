@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:25:24 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/07 13:01:38 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/11 21:54:37 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	print_env_var(char *env_var)
 	while (env_var[j])
 	{
 		if ((env_var[j] == '\'' || env_var[j] == '\"') && (j == 0 || env_var[j
-				- 1] != '\\'))
+					- 1] != '\\'))
 		{
 			handle_quotes_env(env_var[j], &in_quotes, &quote_char);
 			j++;

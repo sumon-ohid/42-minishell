@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 10:03:57 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/11 16:25:24 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/11 21:56:29 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ void	eof_free(t_data *node)
 {
 	printf("exit\n");
 	free(node->oldpwd);
-	//free_vars(node->local_vars);
 	ft_free_array(node->envp);
 	if (node->std_in != -1)
 		close(node->std_in);

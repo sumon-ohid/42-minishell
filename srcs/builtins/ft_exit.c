@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 14:41:52 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/11 17:27:37 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/11 21:54:09 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	free_node(t_data *node)
 {
 	free(node->oldpwd);
 	free_tokens(node->tokens, node->processes);
-	//free_vars(node->local_vars);
 	if (node->std_in != -1)
 		close(node->std_in);
 	if (node->std_out != -1)
@@ -28,7 +27,6 @@ void	free_node(t_data *node)
 	if (node->pid)
 		free(node->pid);
 	node->pid = NULL;
-	//ft_free_array(node->arr);
 	ft_free_array(node->envp);
 	free(node);
 }
@@ -85,8 +83,6 @@ void	ft_early_exit(t_data *node, int exit_val, char *msg)
 {
 	free(node->input_line);
 	ft_free_array(node->envp);
-	//ft_free_array(node->arr);
-	//free_vars(node->local_vars);
 	if (node->std_in != -1)
 		close(node->std_in);
 	if (node->std_out != -1)

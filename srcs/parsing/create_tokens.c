@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_tokens.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:50:09 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/11 16:56:13 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/11 21:52:47 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	pipe_counter(char *str)
 {
 	int		counter;
 	int		pipes;
-	char 	quote_char;
+	char	quote_char;
 
 	if (!str)
 		return (0);
@@ -116,6 +116,7 @@ void	create_and_link_token(t_token ***origin, int current, char *word,
 				proxy->next->quote, node);
 	}
 }
+
 int	quote_assigner(char quote)
 {
 	if (quote == 0)
@@ -127,5 +128,3 @@ int	quote_assigner(char quote)
 	else
 		return (NO_QUOTE);
 }
-
-

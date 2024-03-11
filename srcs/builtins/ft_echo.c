@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:25:07 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/09 19:03:16 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/11 21:56:05 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,6 @@ void	ft_echo(char *line, t_data *node, t_token *head)
 	{
 		if (head->type == FLAG)
 		{
-			//remove_quote_if_inside_no_quotes(head->str);
 			if (fl)
 				ft_putchar(' ');
 			print_argument(head->str, node);

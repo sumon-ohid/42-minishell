@@ -6,7 +6,7 @@
 /*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:24:36 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/11 21:43:07 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/11 22:08:54 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,74 +41,74 @@ int	change_directory(char *str, t_data *node)
 	return (0);
 }
 
-int handle_oldpwd_null(t_data *node, char *str, char *pwd, char *line)
+int	handle_oldpwd_null(t_data *node, char *str, char *pwd, char *line)
 {
-	int ret;
+	int	ret;
 
 	ret = 0;
-    ft_unsetenv(node, "OLDPWD");
-    node->old_turn = 1;
-    free(node->oldpwd);
-    node->oldpwd = get_current_directory();
+	ft_unsetenv(node, "OLDPWD");
+	node->old_turn = 1;
+	free(node->oldpwd);
+	node->oldpwd = get_current_directory();
 	if (!node->oldpwd)
 		ft_exit(node, -1, "getcwd failed");
-    ret = change_directory(str, node);
-    free(pwd);
-    free(line);
-    return (ret);
+	ret = change_directory(str, node);
+	free(pwd);
+	free(line);
+	return (ret);
 }
 
-int handle_oldpwd_null_old_turn(t_data *node, char *str, char *pwd, char *line)
+int	handle_oldpwd_null_old_turn(t_data *node, char *str, char *pwd, char *line)
 {
-	int ret;
-	int var_exists;
+	int	ret;
+	int	var_exists;
 
 	var_exists = 0;
 	ret = 0;
-    line = ft_strjoin("OLDPWD=", node->oldpwd, 0);
+	line = ft_strjoin("OLDPWD=", node->oldpwd, 0);
 	if (!line)
 		ft_exit(node, -1, "malloc failed in handle_oldpwd_null_old_turn");
-    var_exists = check_if_var_exists(node, line);
-    if (var_exists)
+	var_exists = check_if_var_exists(node, line);
+	if (var_exists)
 	{
 		if (handle_var_exist_in_envp(node, line) == -1)
 			ft_exit(node, -1, "malloc failed in handle_oldpwd_null_old_turn");
 	}
-    else
-        handle_var_not_exists(node, line);
-    ret = change_directory(str, node);
-    free(node->oldpwd);
-    node->oldpwd = get_current_directory();
+	else
+		handle_var_not_exists(node, line);
+	ret = change_directory(str, node);
+	free(node->oldpwd);
+	node->oldpwd = get_current_directory();
 	if (!node->oldpwd)
 		ft_exit(node, -1, "getcwd failed");
-    free(pwd);
-    free(line);
-    return ret;
+	free(pwd);
+	free(line);
+	return (ret);
 }
 
 int	ft_cd(char *str, t_data *node)
 {
-    char	*oldpwd;
-    char	*pwd;
-    int		ret;
-    char	*line;
-    
-    ret = 0;
-    pwd = NULL;
-    line = NULL;
+	char	*oldpwd;
+	char	*pwd;
+	int		ret;
+	char	*line;
+
+	ret = 0;
+	pwd = NULL;
+	line = NULL;
 	oldpwd = ft_getenv("PWD", node);
 	if (oldpwd == NULL && !(node->old_turn))
-        return (handle_oldpwd_null(node, str, pwd, line));
-    if (oldpwd == NULL && node->old_turn == 1)
-        return (handle_oldpwd_null_old_turn(node, str, pwd, line));
-    ret = change_directory(str, node);
-    pwd = get_current_directory();
-    if (pwd == NULL)
-        ft_exit(node, -1, "getcwd failed");
-    ft_setenv(node, "OLDPWD", oldpwd);
-    ft_setenv(node, "PWD", pwd);
-    free(pwd);
-    return (ret);
+		return (handle_oldpwd_null(node, str, pwd, line));
+	if (oldpwd == NULL && node->old_turn == 1)
+		return (handle_oldpwd_null_old_turn(node, str, pwd, line));
+	ret = change_directory(str, node);
+	pwd = get_current_directory();
+	if (pwd == NULL)
+		ft_exit(node, -1, "getcwd failed");
+	ft_setenv(node, "OLDPWD", oldpwd);
+	ft_setenv(node, "PWD", pwd);
+	free(pwd);
+	return (ret);
 }
 
 // int	ft_cd(char *str, t_data *node)
@@ -118,7 +118,7 @@ int	ft_cd(char *str, t_data *node)
 // 	int		ret;
 // 	char	*line;
 // 	int		var_exists;
-	
+
 // 	var_exists = 0;
 // 	ret = 0;
 // 	pwd = NULL;

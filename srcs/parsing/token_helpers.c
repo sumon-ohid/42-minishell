@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_helpers.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 11:28:51 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/11 17:39:47 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/11 21:53:39 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,3 @@ void	char_append(char **str, char c)
 	free(*str);
 	*str = new_str;
 }
-

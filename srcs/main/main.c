@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:17:43 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/11 20:35:59 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/11 22:04:41 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void init_tokens(t_data *node)
+void	init_tokens(t_data *node)
 {
-	t_token **tokens;
+	t_token	**tokens;
 	int		i;
 
 	i = 0;
@@ -30,7 +30,7 @@ void init_tokens(t_data *node)
 
 int	entry_check(t_data *node, char *line)
 {
-	int		ret_val;
+	int	ret_val;
 
 	node->input_line = line;
 	if (!ft_lexical_checker(node, 0, 0, '\0'))

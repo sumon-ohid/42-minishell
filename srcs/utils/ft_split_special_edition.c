@@ -6,7 +6,7 @@
 /*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 14:27:31 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/06 16:34:14 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/11 21:57:38 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,6 @@ static void	process_quotes(char *s, size_t *i, char *output, t_split *data)
 			output[data->k++] = data->quote;
 			*i = *i + 1;
 		}
-		 else if (s[*i + 1] != ' ' && s[*i + 1] != '\0')
-        {
-            output[data->k++] = s[*i + 1];
-			while (s[*i + 1] != ' ' && s[*i + 1] != '\0')
-				(*i)++;
-        }
 	}
 }
 

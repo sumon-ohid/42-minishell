@@ -56,6 +56,7 @@ SRC = 	srcs/main/main.c \
 		srcs/utils/libft_helpers2.c \
 		srcs/utils/libft_helpers3.c \
 		srcs/utils/libft_helpers4.c \
+		srcs/utils/libft_helpers5.c \
 		srcs/utils/ft_split.c \
 		srcs/utils/ft_atoi.c \
 		srcs/utils/ft_itoa.c \

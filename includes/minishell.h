@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/11 20:05:27 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/11 22:01:15 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,29 +165,32 @@ void				process_words(t_token ***origin, char **words, char *str,
 						t_data *node);
 int					quote_assigner(char quote);
 void				eof_free(t_data *node);
-void    			adjust_shlevel(char **env, t_data *node);
+void				adjust_shlevel(char **env, t_data *node);
 
 //mole_parser
 
-void    			mole_parser(t_token ***origin, char *input, t_data *node);
-int    				delim_type(char c, t_data *node);
-void				create_and_link_token(t_token ***origin, int current, char *word,
-						t_data *node);
+void				mole_parser(t_token ***origin, char *input, t_data *node);
+int					delim_type(char c, t_data *node);
+void				create_and_link_token(t_token ***origin, int current,
+						char *word, t_data *node);
 void				skip(char *str, int *cur, char mode, t_data *node);
-bool 				is_breaker(char c, t_data *node);
-void    			detach_tokens(int *end, t_token ***origin, t_data *node);
+bool				is_breaker(char c, t_data *node);
+void				detach_tokens(int *end, t_token ***origin, t_data *node);
 int					create_breakertoken(int end, t_data *node, int proc);
-int					saved_nulltoken(int end, t_data *node, t_token ***origin, int proc);
-char    			*expand_append(t_data *node, int *end);
-void 				create_element(t_element **elements, t_data *node, int start, int end);
-char 				*concatenate_elements(t_element *elements, t_data *node);
-void 				free_elements(t_element *elements);
+int					saved_nulltoken(int end, t_data *node, t_token ***origin,
+						int proc);
+char				*expand_append(t_data *node, int *end);
+void				create_element(t_element **elements, t_data *node,
+						int start, int end);
+char				*concatenate_elements(t_element *elements, t_data *node);
+void				free_elements(t_element *elements);
 
 // tokenizer
 t_token				**tokenizer(char *str);
 int					ft_strlen_till_char(char *str, char c);
 void				char_append(char **str, char c);
-int					determine_type(char *word, int prev_type, int quote, t_data *node);
+int					determine_type(char *word, int prev_type, int quote,
+						t_data *node);
 int					check_builtins(char *word);
 int					check_prevs(char *word, int prev_type, t_data *node);
 
@@ -324,6 +327,6 @@ void				ft_putstr_fd(char *s, int fd);
 void				nocomm_error(char *name);
 void				directory_error(char *name);
 int					ft_lexer_error(char *line);
-void    			parse_error(t_data *node, int flag, char *msg, int value);
+void				parse_error(t_data *node, int flag, char *msg, int value);
 
 #endif
