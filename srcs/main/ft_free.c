@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 18:25:41 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/06 15:15:12 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/10 15:33:41 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	free_arr(char **arr)
 	free(arr);
 }
 
-void	free_tokens(t_token **tokens, int processes)
+/*void	free_tokens(t_token **tokens, int processes)
 {
 	t_token	*proxy;
 	t_token	*previous;
@@ -57,6 +57,33 @@ void	free_tokens(t_token **tokens, int processes)
 			proxy = proxy->next;
 			free(previous->heredoc_data);
 			free(previous->str);
+			free(previous);
+		}
+		counter++;
+	}
+	free(tokens);
+}*/
+
+void	free_tokens(t_token **tokens, int processes)
+{
+	t_token	*proxy;
+	t_token	*previous;
+	int		counter;
+
+	(void)processes;
+	counter = 0;
+	while (tokens[counter])
+	{
+		proxy = tokens[counter];
+		if (!proxy)
+			return ;
+		while (proxy)
+		{
+			previous = proxy;
+			proxy = proxy->next;
+			free(previous->heredoc_data);
+			if (previous->str)
+				free(previous->str);
 			free(previous);
 		}
 		counter++;

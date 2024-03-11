@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 13:51:32 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/06 16:36:14 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/10 17:02:28 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	check_invalid_next_chars(char c, char *line, int i)
 	return (1);
 }
 
-char	*remove_spaces(char *input)
+char	*remove_spaces(char *input, t_data *node)
 {
 	int		i;
 	int		j;
@@ -71,7 +71,12 @@ char	*remove_spaces(char *input)
 	j = 0;
 	line = malloc(ft_strlen(input) + 1);
 	if (!line)
-		return (NULL);
+	{
+		free(input);
+		ft_free_array(node->envp);
+		free(node);
+		handle_error("malloc failed at lexer", -1);
+	}
 	while (input[i] != '\0')
 	{
 		if (input[i] != ' ')
@@ -85,7 +90,7 @@ char	*remove_spaces(char *input)
 	return (line);
 }
 
-int	ft_lexical_checker(char *input, int in_single_quote, int in_double_quote,
+int	ft_lexical_checker(t_data *node, int in_single_quote, int in_double_quote,
 		char prev_char)
 {
 	char	c;
@@ -93,7 +98,7 @@ int	ft_lexical_checker(char *input, int in_single_quote, int in_double_quote,
 	char	*line;
 
 	i = 0;
-	line = remove_spaces(input);
+	line = remove_spaces(node->input_line, node);
 	while ((line[i]) != '\0')
 	{
 		c = line[i];

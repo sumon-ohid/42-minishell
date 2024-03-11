@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 10:40:57 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/06 16:22:19 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/07 15:49:00 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	check_for_heredoc(t_data *node, t_token **tokens, int processes)
 				if (!proxy->heredoc_data)
 				{
 					free_tokens(tokens, processes);
-					ft_free_array(node->arr);
+					//ft_free_array(node->arr);
 					free(node->input_line);
 					return (0);
 				}

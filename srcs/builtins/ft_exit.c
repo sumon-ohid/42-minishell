@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 14:41:52 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/06 16:18:05 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/10 17:44:52 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	free_node(t_data *node)
 	if (node->pid)
 		free(node->pid);
 	node->pid = NULL;
-	ft_free_array(node->arr);
+	//ft_free_array(node->arr);
 	ft_free_array(node->envp);
 	free(node);
 }
@@ -62,7 +62,7 @@ int	exit_with_args(t_data *node, int exit_val, t_token *head, int val)
 	{
 		if (proxy->type == FLAG)
 		{
-			if (!digit_checker(proxy->str))
+			if (!digit_checker(proxy->str) && counter == 0)
 			{
 				printf("exit\nminishell: exit: %s: numeric argument required\n",
 					proxy->str);
@@ -84,7 +84,7 @@ void	ft_early_exit(t_data *node, int exit_val, char *msg)
 {
 	free(node->input_line);
 	ft_free_array(node->envp);
-	ft_free_array(node->arr);
+	//ft_free_array(node->arr);
 	free_vars(node->local_vars);
 	if (node->std_in != -1)
 		close(node->std_in);

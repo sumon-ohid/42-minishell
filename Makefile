@@ -18,21 +18,25 @@ WHITE = \033[0;97m
 RESET = \033[0m
 
 SRC = 	srcs/main/main.c \
-		srcs/utils/ft_split.c \
-		srcs/utils/ft_atoi.c \
-		srcs/executions/cmd1_init_and_fork.c \
-		srcs/executions/cmd2_execute_chain.c \
-		srcs/executions/cmd3_builtins.c \
-		srcs/executions/waiting.c \
-		srcs/utils/libft_helpers.c \
-		srcs/utils/libft_helpers1.c \
-		srcs/utils/libft_helpers2.c \
-		srcs/utils/libft_helpers3.c \
-		srcs/utils/libft_helpers4.c \
+		srcs/main/prepare_env.c \
+		srcs/main/ft_free.c \
+		srcs/main/ft_free2.c \
+		srcs/main/handle_error.c \
+		srcs/parsing/lexer.c \
+		srcs/parsing/mole_parser.c\
+		srcs/parsing/mole_breakertokens.c\
+		srcs/parsing/mole_soft_tokens.c\
 		srcs/parsing/create_tokens.c\
 		srcs/parsing/tokenize_values.c\
 		srcs/parsing/env_expander.c\
 		srcs/parsing/token_helpers.c\
+		srcs/executions/cmd1_init_and_fork.c \
+		srcs/executions/cmd2_execute_chain.c \
+		srcs/executions/cmd3_builtins.c \
+		srcs/executions/pipex.c \
+		srcs/executions/waiting.c \
+		srcs/executions/redirects.c \
+		srcs/executions/redirects_extra.c \
 		srcs/builtins/ft_cd.c \
 		srcs/builtins/ft_echo.c \
 		srcs/builtins/ft_echo_extra.c \
@@ -43,21 +47,21 @@ SRC = 	srcs/main/main.c \
 		srcs/builtins/ft_unset.c \
 		srcs/builtins/ft_exit.c \
 		srcs/builtins/ft_localvars.c \
-		srcs/main/ft_free.c \
-		srcs/main/ft_free2.c \
-		srcs/main/handle_error.c \
 		srcs/heredoc/heredoc.c \
 		srcs/heredoc/heredoc_extra.c \
-		srcs/executions/pipex.c \
 		srcs/signals/signals.c \
-		srcs/executions/redirects.c \
-		srcs/executions/redirects_extra.c \
-		srcs/parsing/lexer.c \
-		srcs/parsing/lexer_extra.c \
 		srcs/signals/ft_lastvalue.c \
+		srcs/utils/libft_helpers.c \
+		srcs/utils/libft_helpers1.c \
+		srcs/utils/libft_helpers2.c \
+		srcs/utils/libft_helpers3.c \
+		srcs/utils/libft_helpers4.c \
+		srcs/utils/ft_split.c \
+		srcs/utils/ft_atoi.c \
 		srcs/utils/ft_itoa.c \
-		srcs/parsing/ft_split_special_edition.c \
-		srcs/parsing/ft_split_extra.c \
+		srcs/utils/ft_split_special_edition.c \
+		srcs/utils/ft_split_extra.c \
+		
 
 OBJ = $(SRC:.c=.o)
 

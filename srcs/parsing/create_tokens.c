@@ -6,13 +6,16 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:50:09 by msumon            #+#    #+#             */
+<<<<<<< HEAD
+/*   Updated: 2024/03/10 15:34:40 by mhuszar          ###   ########.fr       */
+=======
 /*   Updated: 2024/03/07 11:24:54 by msumon           ###   ########.fr       */
+>>>>>>> main
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-// TODO: account for $?
 t_token	*create_token(char *word, t_data *node)
 {
 	t_token	*new;
@@ -21,19 +24,22 @@ t_token	*create_token(char *word, t_data *node)
 		return (0);
 	new = malloc(sizeof(t_token));
 	if (!new)
-		ft_exit(node, -1, "memory allocation failed at create token");
+	{
+		free(word);
+		parse_error(node, 1, "memory allocation failed at create token", -1);
+	}
 	new->previous = NULL;
 	new->next = NULL;
 	new->arr = NULL;
 	new->heredoc_data = NULL;
-	new->quote = quote_assigner(node->line_temp, word);
-	if (ft_strstr(word, "$") && new->quote != SINGLE_QUOTE)
-		new->str = handle_envp(word, node);
-	else
+	new->quote = quote_assigner(node->quote);
+	new->str = NULL;
+	new->str = ft_strdup(word);
+	if (!new->str)
 	{
-		new->str = ft_strdup(word);
-		if (!new->str)
-			ft_early_exit(node, -1, "memory allocation failed at create token");
+		free(word);
+		free(new);
+		parse_error(node, 1, "memory allocation failed at create token", -1);
 	}
 	new->type = 0;
 	return (new);
@@ -88,56 +94,16 @@ void	create_and_link_token(t_token ***origin, int current, char *word,
 				proxy->next->quote);
 	}
 }
-
-void	process_words(t_token ***origin, char **units, char *str, t_data *node)
+int	quote_assigner(char quote)
 {
-	int		counter;
-	int		counter2;
-	char	**words;
-
-	counter = 0;
-	counter2 = 0;
-	node->line_temp = str;
-	while (counter2 < pipe_counter(str))
-	{
-		words = ft_split_special(units[counter2], ' ', 'X', 0);
-		if (!words)
-			ft_early_exit(node, -1, "malloc failed at process_words function");
-		while (words[counter])
-		{
-			create_and_link_token(origin, counter2, words[counter], node);
-			counter++;
-		}
-		counter2++;
-		counter = 0;
-		ft_free_array(words);
-	}
+	if (quote == 0)
+		return (NO_QUOTE);
+	else if (quote == '\'')
+		return (SINGLE_QUOTE);
+	else if (quote == '\"')
+		return (DOUBLE_QUOTE);
+	else
+		return (NO_QUOTE);
 }
 
-/*void	process_words(t_token **tokens, char **units, char *str, t_data *node)
-{
-	int		counter;
-	int		counter2;
-	char	**words;
 
-	tokens = ft_calloc(sizeof(t_token *), pipe_counter(node->input_line));
-	if (!tokens)
-		ft_exit(node, 1, "Memory allocation failed at entry check");
-	counter = 0;
-	counter2 = 0;
-	node->line_temp = str;
-	while (counter2 < pipe_counter(str))
-	{
-		words = ft_split_special(units[counter2], ' ', 'X', 0);
-		if (!words)
-			ft_early_exit(node, -1, "malloc failed at process_words function");
-		while (words[counter])
-		{
-			create_and_link_token(&tokens, counter2, words[counter], node);
-			counter++;
-		}
-		counter2++;
-		counter = 0;
-		ft_free_array(words);
-	}
-}*/

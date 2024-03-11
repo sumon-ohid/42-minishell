@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd01.c                                            :+:      :+:    :+:   */
+/*   cmd2_execute_chain.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 17:28:11 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/06 16:19:58 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/10 14:54:08 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,30 +35,48 @@ void	close_all(int ***origin, int max)
 	}
 }
 
-int	ft_commander(t_token *chain, t_data *node)
+int	count_array_size(t_token *chain)
 {
-	char	**environ;
-	t_token	*mark;
-	char	*tmp;
+	int counter;
 
-	environ = node->envp;
+	counter = 0;
 	while (chain && chain->type != COMMAND)
 		chain = chain->next;
-	mark = chain;
-	chain = chain->next;
-	while (chain && chain->type == FLAG)
+	if (chain)
 	{
-		tmp = ft_strjoin(mark->str, " ", 1);
-		mark->str = tmp;
-		if (!mark->str)
-			ft_exit(node, -1, "memory allocation in commander failed");
-		tmp = ft_strjoin(mark->str, chain->str, 1);
-		mark->str = tmp;
-		if (!mark->str)
-			ft_exit(node, -1, "memory allocation in commander failed");
+		counter++;
 		chain = chain->next;
 	}
-	extract_find_execute(environ, mark, node);
+	while (chain && chain->type == FLAG)
+	{
+		counter++;
+		chain = chain->next;
+	}
+	return (counter + 1);
+}
+
+int	ft_commander(t_token *chain, t_data *node)
+{
+	int		counter = 0;
+	char 	**array;
+
+	array = malloc(sizeof(char *) * count_array_size(chain));
+	while (chain && chain->type != COMMAND)
+		chain = chain->next;
+	if (chain)
+	{
+		array[counter] = chain->str;
+		counter++;
+		chain = chain->next;
+	}
+	while (chain && chain->type == FLAG)
+	{
+		array[counter] = chain->str;
+		counter++;
+		chain = chain->next;
+	}
+	array[counter] = NULL;
+	extract_find_execute(node->envp, array, node);
 	return (0);
 }
 

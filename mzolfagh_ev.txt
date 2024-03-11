@@ -24,7 +24,7 @@ DONE -echo "'$USER'" and echo "$USER'" has expansion problem
 
 DONE (for nothing only) -ambiguous redirection is not implemented (when you redirect to an expansion which expand to 0 or more than 1 thing)
 
--empty promt ("") sould return command not found
+DONE -empty promt ("") sould return command not found
 
 DONE -export A="hello       world" seperates hello and world as differet tokens (check it with echo $A)(also be carefull to not mess the case below by fixing this:
 export A="123 | cat"; echo $A;)
@@ -37,4 +37,4 @@ NO -mkdir a; cd a; mkdir b; cd b; rm -rf ../../a; cd .. exit your minishell (it 
 
 -unset TERM; clear shouldnt work; (DIRTY clear technique!!!)
 
--cat | ls doesnt work properly (its because you dont wait() correctly)
+DONE -cat | ls doesnt work properly (its because you dont wait() correctly)

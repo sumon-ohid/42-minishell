@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 20:21:29 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/06 20:42:46 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/10 14:54:18 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,47 +86,18 @@ char	*pathfinder(char **envp, char *comm, t_data *node)
 	return (extract_path(comm2, p_paths, comm, node));
 }
 
-char	**comm_array(t_token *mark, t_data *node)
+void	extract_find_execute(char **envp, char **comms, t_data *node)
 {
-	char	*full_comm;
-	char	**result;
-
-	full_comm = mark->str;
-	if (!full_comm || ft_strcmp("", full_comm) == 0)
-		ft_exit(node, 127, NULL);
-	if (mark->quote == NO_QUOTE)
-		return (ft_split(full_comm, ' ', 0, 0));
-	else
-	{
-		result = malloc(sizeof(char *) * 2);
-		if (!result)
-			ft_exit(node, -1, "malloc failure during execution");
-		result[0] = ft_strdup(full_comm);
-		if (!result[0])
-			ft_exit(node, -1, "malloc failure during execution");
-		result[1] = NULL;
-	}
-	return (result);
-}
-
-void	extract_find_execute(char **envp, t_token *mark, t_data *node)
-{
-	char	**comms;
 	char	*path;
 	int		counter;
 
 	counter = 0;
-	comms = comm_array(mark, node);
-	if (!comms)
-		ft_exit(node, -1, "malloc failure");
-	while (comms[counter])
-		counter++;
 	path = pathfinder(envp, comms[0], node);
 	if (ft_strcmp(path, "faill") == 0 || !path)
 	{
 		ft_free_fds(node);
 		nocomm_error(comms[0]);
-		free_everything(comms, counter);
+		free(comms);
 		ft_exit(node, 127, NULL);
 	}
 	close(node->std_in);
@@ -135,7 +106,7 @@ void	extract_find_execute(char **envp, t_token *mark, t_data *node)
 	directory_error(comms[0]);
 	if (node->processes > 1)
 		ft_free_fds(node);
-	free_everything(comms, counter);
+	free(comms);
 	free(path);
 	ft_exit(node, 127, NULL);
 }

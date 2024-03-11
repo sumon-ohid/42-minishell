@@ -3,72 +3,51 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:17:43 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/06 16:12:02 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/10 18:43:08 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+void init_tokens(t_data *node)
+{
+	t_token **tokens;
+	int		i;
+
+	i = 0;
+	node->processes = pipe_counter(node->input_line);
+	tokens = ft_calloc(sizeof(t_token *), node->processes + 1);
+	if (!tokens)
+		parse_error(node, 0, "malloc at init tokens failed", -1);
+	while (i <= node->processes)
+		tokens[i++] = NULL;
+	node->tokens = tokens;
+	mole_parser(&(node->tokens), node->input_line, node);
+}
+
 int	entry_check(t_data *node, char *line)
 {
-	char	**arr;
-	t_token	**tokens;
 	int		ret_val;
 
-	if (!ft_lexical_checker(line, 0, 0, '\0'))
-		return (-2);
-	line = ft_upgrade_spaces(line, 0, 0, 0);
-	tokens = ft_calloc(sizeof(t_token *), pipe_counter(line));
-	if (!tokens)
-		ft_exit(node, 1, "Memory allocation failed at entry check");
-	arr = parse_input(line);
-	if (!arr)
-		ft_exit(node, 1, "Memory allocation failed at entry check");
 	node->input_line = line;
-	node->arr = arr;
-	process_words(&tokens, arr, line, node);
-	node->tokens = tokens;
-	if (!check_for_heredoc(node, tokens, pipe_counter(line)))
+	if (!ft_lexical_checker(node, 0, 0, '\0'))
+		return (-2);
+	init_tokens(node);
+	if (!check_for_heredoc(node, node->tokens, pipe_counter(line)))
 		return (2);
-	ret_val = executor_init(node, tokens, pipe_counter(line), line);
-	ft_cleanup(node, tokens, line, arr);
+	ret_val = executor_init(node, node->tokens, pipe_counter(line), line);
+	ft_cleanup(node, node->tokens, line);
 	if (node->last_return == -99)
 		return (-1);
 	else
 		return (ret_val);
 }
 
-char	**dup_envp(char **envp)
+void	initialize_node(t_data *node)
 {
-	int		counter;
-	char	**result;
-	int		counter2;
-
-	counter = 0;
-	while (envp[counter])
-		counter++;
-	result = malloc(sizeof(char *) * counter);
-	if (!result)
-		return (NULL);
-	counter2 = 0;
-	while (counter2 < counter - 1)
-	{
-		result[counter2] = ft_strdup(envp[counter2]);
-		if (!result[counter2])
-			return (NULL);
-		counter2++;
-	}
-	result[counter2] = NULL;
-	return (result);
-}
-
-void	initialize_node(t_data *node, char **envp)
-{
-	(void)envp;
-	node->env_len = 0;
 	node->home = getenv("HOME");
 	node->oldpwd = getenv("OLDPWD");
 	node->pwd = getenv("PWD");
@@ -77,7 +56,7 @@ void	initialize_node(t_data *node, char **envp)
 	node->pid = NULL;
 }
 
-void	ft_initialize(t_data *node, char **envp)
+void	ft_initialize(t_data *node)
 {
 	char	*input;
 
@@ -99,7 +78,7 @@ void	ft_initialize(t_data *node, char **envp)
 			}
 			if (ft_strcmp(input, "\n") == 0)
 				break ;
-			initialize_node(node, envp);
+			initialize_node(node);
 			add_history(input);
 			node->last_return = entry_check(node, input);
 		}
@@ -117,9 +96,11 @@ int	main(int argc, char **argv, char **envp)
 	if (node == NULL)
 		handle_error("Memory allocation failed for node.", 1);
 	ft_set(node);
-	node->envp = dup_envp(envp);
+	node->envp = dup_envp(envp, node);
+	if (!node->envp)
+		parse_error(node, -1, "dup_envp failed", 0);
 	node->last_return = 0;
-	ft_initialize(node, envp);
+	ft_initialize(node);
 	close(node->std_in);
 	close(node->std_out);
 	return (0);
