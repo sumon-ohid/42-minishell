@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:17:43 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/11 13:17:20 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/11 16:54:11 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	initialize_node(t_data *node)
 	node->in_child = 0;
 	node->status = NULL;
 	node->pid = NULL;
+	node->command_flag = 0;
 }
 
 void	ft_initialize(t_data *node)

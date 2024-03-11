@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:50:09 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/11 16:07:34 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/11 16:56:13 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ void	create_and_link_token(t_token ***origin, int current, char *word,
 	if (!cur)
 	{
 		cur = create_token(word, node);
-		cur->type = determine_type(word, 0, cur->quote);
+		cur->type = determine_type(word, 0, cur->quote, node);
 		tokens[current] = cur;
 	}
 	else
@@ -113,7 +113,7 @@ void	create_and_link_token(t_token ***origin, int current, char *word,
 			proxy = proxy->next;
 		proxy->next = create_token(word, node);
 		proxy->next->type = determine_type(word, proxy->type,
-				proxy->next->quote);
+				proxy->next->quote, node);
 	}
 }
 int	quote_assigner(char quote)

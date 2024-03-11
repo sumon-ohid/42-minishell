@@ -6,13 +6,13 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:57:30 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/11 16:40:17 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/11 16:56:40 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	determine_type(char *word, int prev_type, int quote)
+int	determine_type(char *word, int prev_type, int quote, t_data *node)
 {
 	if (!word)
 		return (0);
@@ -27,14 +27,18 @@ int	determine_type(char *word, int prev_type, int quote)
 		return (REDIR_OUT_APPEND);
 	else if (ft_strcmp("|", word) == 0 && quote == NO_QUOTE)
 		return (PIPE);
-	else if (check_builtins(word) == 2 && (!prev_type || prev_type == INFILE
-			|| prev_type == DELIM))
+	else if (check_builtins(word) == 2 && !(node->command_flag))//(!prev_type || prev_type == INFILE || prev_type == DELIM))
+	{
+		node->command_flag = 1;
 		return (EXPORT);
-	else if (check_builtins(word) == 0 && (!prev_type || prev_type == INFILE
-			|| prev_type == DELIM))
+	}
+	else if (check_builtins(word) == 0 && !(node->command_flag))//(!prev_type || prev_type == INFILE || prev_type == DELIM))
+	{
+		node->command_flag = 1;
 		return (BUILTIN);
+	}
 	else
-		return (check_prevs(word, prev_type));
+		return (check_prevs(word, prev_type, node));
 }
 
 int	check_builtins(char *word)
@@ -77,7 +81,7 @@ int	check_assign(char *word)
 	return (0);
 }
 
-int	check_prevs(char *word, int prev_type)
+int	check_prevs(char *word, int prev_type, t_data *node)
 {
 	if (!word)
 		return (0);
@@ -91,9 +95,11 @@ int	check_prevs(char *word, int prev_type)
 		return (OUTFILE_APPEND);
 	else if (prev_type == REDIR_IN)
 		return (INFILE);
-	else if (prev_type == BUILTIN || prev_type == COMMAND || prev_type == FLAG
-		|| prev_type == EXPORT)
+	else if (node->command_flag)//(prev_type == BUILTIN || prev_type == COMMAND || prev_type == FLAG || prev_type == EXPORT)
 		return (FLAG);
 	else
+	{
+		node->command_flag = 1;
 		return (COMMAND);
+	}
 }
