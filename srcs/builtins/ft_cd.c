@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:24:36 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/11 20:42:21 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/11 21:43:07 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,7 @@ int	ft_cd(char *str, t_data *node)
     char	*pwd;
     int		ret;
     char	*line;
-    int		var_exists;
     
-    var_exists = 0;
     ret = 0;
     pwd = NULL;
     line = NULL;

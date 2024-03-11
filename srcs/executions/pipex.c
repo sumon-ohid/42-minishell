@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 20:21:29 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/11 21:20:28 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/11 21:42:59 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,9 +89,7 @@ char	*pathfinder(char **envp, char *comm, t_data *node)
 void	extract_find_execute(char **envp, char **comms, t_data *node)
 {
 	char	*path;
-	int		counter;
 
-	counter = 0;
 	path = pathfinder(envp, comms[0], node);
 	if (ft_strcmp(path, "faill") == 0 || !path)
 	{
