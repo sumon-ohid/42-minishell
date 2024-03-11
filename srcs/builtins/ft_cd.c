@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:24:36 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/11 16:39:45 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/11 20:42:21 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,10 @@ int handle_oldpwd_null_old_turn(t_data *node, char *str, char *pwd, char *line)
 		ft_exit(node, -1, "malloc failed in handle_oldpwd_null_old_turn");
     var_exists = check_if_var_exists(node, line);
     if (var_exists)
-        handle_var_exist_in_envp(node, line);
+	{
+		if (handle_var_exist_in_envp(node, line) == -1)
+			ft_exit(node, -1, "malloc failed in handle_oldpwd_null_old_turn");
+	}
     else
         handle_var_not_exists(node, line);
     ret = change_directory(str, node);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 13:51:32 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/11 19:08:41 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/11 20:47:48 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ char	*remove_spaces_keep_one(char *input, t_data *node)
 	j = 0;
 	line = malloc(sizeof(char) * ft_strlen(input) + 1);
 	if (!line)
-		ft_exit(node, 1, "malloc failed in remove_spaces_keep_one");
+		parse_error(node, 0, "malloc at lexer failed", -1);
 	while (input[i])
 	{
 		if (input[i] == ' ' && input[i + 1] == ' ')

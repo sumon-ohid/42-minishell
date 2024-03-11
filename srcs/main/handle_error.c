@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 14:37:29 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/10 15:34:46 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/11 20:33:09 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void    parse_error(t_data *node, int flag, char *msg, int value)
         close(node->std_out);
     ft_free_array(node->envp);
     free(node->input_line);
+	free(node->oldpwd);
     free(node);
     handle_error(msg, value);
 }

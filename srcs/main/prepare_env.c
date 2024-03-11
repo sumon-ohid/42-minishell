@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 18:06:23 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/11 20:23:18 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/11 20:43:30 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,9 @@ void    adjust_shlevel(char **env, t_data *node)
     char    *line;
     char    *var_value;
     
-    i = 0;
+    i = -1;
     shlvl = 0;
-    while (env[i])
+    while (env[++i])
     {
         if (ft_strstr(env[i], "SHLVL="))
         {
@@ -89,10 +89,10 @@ void    adjust_shlevel(char **env, t_data *node)
             free(var_value);
             if (!line)
                 env_quit(env, node);
-            handle_var_exist_in_envp(node, line);
+            if (handle_var_exist_in_envp(node, line) == 1)
+                env_quit(env, node);
             free(line);
         }
-        i++;
     }
 }
 

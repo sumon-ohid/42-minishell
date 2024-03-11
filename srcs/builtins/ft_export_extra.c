@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export_extra.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 09:03:06 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/11 18:01:37 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/11 20:40:00 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	handle_var_exist_in_envp(t_data *node, char *var)
 	i = 0;
 	var_name = copy_until_char(var, '=');
 	if (!var_name)
-		ft_exit(node, -1, "malloc failed at ft_export function");
+		return (-1);
 	while (node->envp[i])
 	{
 		if (ft_strncmp(node->envp[i], var_name, ft_strlen(var_name)) == 0
@@ -66,6 +66,8 @@ int	handle_var_exist_in_envp(t_data *node, char *var)
 			free(var_name);
 			free(node->envp[i]);
 			node->envp[i] = ft_strdup(var);
+			if (!node->envp[i])
+				return (-1);
 			return (0);
 		}
 		i++;

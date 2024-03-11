@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:17:43 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/11 20:05:04 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/11 20:35:59 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int	main(int argc, char **argv, char **envp)
 	ft_set(node);
 	node->envp = dup_envp(envp, node);
 	if (!node->envp)
-		parse_error(node, -1, "dup_envp failed", 0);
+		parse_error(node, 0, "dup_envp failed", -1);
 	adjust_shlevel(node->envp, node);
 	node->last_return = 0;
 	ft_initialize(node);
