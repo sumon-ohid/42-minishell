@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 18:46:23 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/06 18:17:57 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/11 13:17:25 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@ void	ft_set(t_data *node)
 	node->std_out = dup(STDOUT_FILENO);
 	if (node->std_out == -1)
 		ft_exit(node, -1, "dup failed");
+	node->old_turn = 0;
+	node->oldpwd = getenv("OLDPWD");
+	node->pwd = getenv("PWD");
 }
 
 void	ft_restore(t_data *node)

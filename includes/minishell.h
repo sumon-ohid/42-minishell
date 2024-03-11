@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/11 12:39:49 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/11 13:41:01 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,7 @@ typedef struct s_data
 	char				**envp;
 	char				*oldpwd;
 	char				*pwd;
+	int					old_turn;
 	char				*home;
 	char				*input_line;
 	char				quote;
@@ -262,8 +263,10 @@ char				*copy_after_char(char *str, char c);
 void				ft_localvars(t_token **tokens, t_data *node, int processes);
 void				ft_setenv(t_data *node, char *name, char *value);
 int					handle_var_not_exists(t_data *node, char *var);
+int					check_if_var_exists(t_data *node, char *var);
 int					ft_strlen_arr(char **arr);
 char				*remove_quote(char *str);
+void				ft_unsetenv(t_data *node, char *str);
 
 // libft_helpers
 char				*ft_itoa(int n);

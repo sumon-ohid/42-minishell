@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:17:43 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/10 18:43:08 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/11 13:17:20 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,6 @@ int	entry_check(t_data *node, char *line)
 void	initialize_node(t_data *node)
 {
 	node->home = getenv("HOME");
-	node->oldpwd = getenv("OLDPWD");
-	node->pwd = getenv("PWD");
 	node->in_child = 0;
 	node->status = NULL;
 	node->pid = NULL;

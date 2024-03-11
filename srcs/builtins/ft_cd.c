@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:24:36 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/11 12:13:18 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/11 13:43:31 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_setenv(t_data *node, char *name, char *value)
 	new_entry = ft_strjoin(str, value, 1);
 	if (!new_entry)
 		ft_exit(node, -1, "malloc fail in setenv");
-	free(value);
+	//free(value);
 	while (node->envp[i])
 	{
 		if (ft_strncmp(node->envp[i], name, ft_strlen(name)) == 0
@@ -37,7 +37,7 @@ void	ft_setenv(t_data *node, char *name, char *value)
 		}
 		i++;
 	}
-	free(new_entry);
+	//free(new_entry);
 }
 
 char	*ft_getenv(char *name, t_data *node)
@@ -101,11 +101,32 @@ int	ft_cd(char *str, t_data *node)
 	char	*oldpwd;
 	char	*pwd;
 	int		ret;
-
+	char	*line;
+	int		var_exists;
+	
+	var_exists = 0;
 	ret = 0;
-	oldpwd = get_current_directory();
-	if (oldpwd == NULL)
-		ft_exit(node, -1, "getcwd failed");
+	oldpwd = ft_getenv("PWD", node);//get_current_directory();
+	if (oldpwd == NULL && !(node->old_turn))
+	{
+		ft_unsetenv(node, "OLDPWD");
+		node->old_turn = 1;
+		node->oldpwd = get_current_directory();
+		ret = change_directory(str, node);
+		return (ret);
+	}
+	if (oldpwd == NULL && node->old_turn == 1)
+	{
+		line = ft_strjoin("OLDPWD=", node->oldpwd, 0); //need to protect & free
+		var_exists = check_if_var_exists(node, line);
+		if (var_exists)
+			handle_var_exist_in_envp(node, line);
+		else
+			handle_var_not_exists(node, line);
+		ret = change_directory(str, node);
+		node->oldpwd = get_current_directory();
+		return (ret);
+	}
 	ret = change_directory(str, node);
 	pwd = get_current_directory();
 	if (pwd == NULL)
