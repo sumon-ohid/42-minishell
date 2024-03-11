@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 13:51:32 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/10 17:02:28 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/11 12:36:45 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	check_invalid_sequences(char c, char prev_char, char *line)
+int	check_invalid_sequences(char c, char prev_char, char *line, int i)
 {
 	if (c == '|' && prev_char == '|')
 		return (ft_lexer_error(line));
@@ -26,9 +26,9 @@ int	check_invalid_sequences(char c, char prev_char, char *line)
 		return (ft_lexer_error(line));
 	else if (c == '|' && prev_char == '<')
 		return (ft_lexer_error(line));
-	else if (c == '<' && prev_char == '<' && line[2] == '<')
+	else if (c == '<' && prev_char == '<' && line[i + 1] == '<')
 		return (ft_lexer_error(line));
-	else if (c == '>' && prev_char == '>' && line[2] == '>')
+	else if (c == '>' && prev_char == '>' && line[i + 1] == '>')
 		return (ft_lexer_error(line));
 	return (1);
 }
@@ -108,7 +108,7 @@ int	ft_lexical_checker(t_data *node, int in_single_quote, int in_double_quote,
 			in_double_quote = !in_double_quote;
 		if (!in_single_quote && !in_double_quote)
 		{
-			if (!check_invalid_sequences(c, prev_char, line)
+			if (!check_invalid_sequences(c, prev_char, line, i)
 				|| !check_invalid_endings(c, line, i))
 				return (0);
 		}
