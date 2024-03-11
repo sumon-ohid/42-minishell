@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 17:06:52 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/11 16:41:47 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/11 17:14:28 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int    create_breakertoken(int end, t_data *node, int proc)
     }
     else if (str[end] == '|')
     {
+        node->command_flag = 0;
         node->processes += 1;
         return (end + 1);
     }
