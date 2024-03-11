@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/11 17:35:16 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/11 20:05:27 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,6 +165,7 @@ void				process_words(t_token ***origin, char **words, char *str,
 						t_data *node);
 int					quote_assigner(char quote);
 void				eof_free(t_data *node);
+void    			adjust_shlevel(char **env, t_data *node);
 
 //mole_parser
 
