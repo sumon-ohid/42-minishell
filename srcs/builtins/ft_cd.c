@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:24:36 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/11 13:43:31 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/11 16:24:26 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	ft_setenv(t_data *node, char *name, char *value)
 	new_entry = ft_strjoin(str, value, 1);
 	if (!new_entry)
 		ft_exit(node, -1, "malloc fail in setenv");
-	//free(value);
 	while (node->envp[i])
 	{
 		if (ft_strncmp(node->envp[i], name, ft_strlen(name)) == 0
@@ -37,7 +36,7 @@ void	ft_setenv(t_data *node, char *name, char *value)
 		}
 		i++;
 	}
-	//free(new_entry);
+	free(new_entry);
 }
 
 char	*ft_getenv(char *name, t_data *node)
@@ -63,7 +62,7 @@ char	*get_current_directory(void)
 
 	dir = getcwd(NULL, 0);
 	if (dir == NULL)
-		perror("getcwd failed"); //should we exit here?
+		perror("getcwd failed");
 	return (dir);
 }
 
@@ -106,13 +105,18 @@ int	ft_cd(char *str, t_data *node)
 	
 	var_exists = 0;
 	ret = 0;
-	oldpwd = ft_getenv("PWD", node);//get_current_directory();
+	pwd = NULL;
+	line = NULL;
+	oldpwd = ft_strdup(ft_getenv("PWD", node));
 	if (oldpwd == NULL && !(node->old_turn))
 	{
 		ft_unsetenv(node, "OLDPWD");
 		node->old_turn = 1;
+		free(node->oldpwd);
 		node->oldpwd = get_current_directory();
 		ret = change_directory(str, node);
+		free(pwd);
+		free(line);
 		return (ret);
 	}
 	if (oldpwd == NULL && node->old_turn == 1)
@@ -124,7 +128,10 @@ int	ft_cd(char *str, t_data *node)
 		else
 			handle_var_not_exists(node, line);
 		ret = change_directory(str, node);
+		free(node->oldpwd);
 		node->oldpwd = get_current_directory();
+		free(pwd);
+		free(line);
 		return (ret);
 	}
 	ret = change_directory(str, node);
@@ -133,5 +140,7 @@ int	ft_cd(char *str, t_data *node)
 		ft_exit(node, -1, "getcwd failed");
 	ft_setenv(node, "OLDPWD", oldpwd);
 	ft_setenv(node, "PWD", pwd);
+	free(pwd);
+	free(oldpwd);
 	return (ret);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirects.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 18:46:23 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/11 13:17:25 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/11 16:22:37 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ void	ft_set(t_data *node)
 	if (node->std_out == -1)
 		ft_exit(node, -1, "dup failed");
 	node->old_turn = 0;
-	node->oldpwd = getenv("OLDPWD");
+	node->oldpwd = ft_strdup(getenv("OLDPWD"));
+	if (!node->oldpwd)
+		ft_exit(node, -1, "dup failed");
 	node->pwd = getenv("PWD");
 }
 
