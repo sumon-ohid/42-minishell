@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/11 13:41:01 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/11 16:40:15 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -238,6 +238,7 @@ void				read_from_heredoc(t_token *heredoc, t_data *node);
 
 // builtins
 int					ft_cd(char *str, t_data *node);
+char				*get_current_directory(void);
 void				ft_echo(char *line, t_data *node, t_token *head);
 void				show_dir(void);
 void				print_argument(char *arg, t_data *node);

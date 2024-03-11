@@ -38,6 +38,7 @@ SRC = 	srcs/main/main.c \
 		srcs/executions/redirects.c \
 		srcs/executions/redirects_extra.c \
 		srcs/builtins/ft_cd.c \
+		srcs/builtins/cd_extra.c \
 		srcs/builtins/ft_echo.c \
 		srcs/builtins/ft_echo_extra.c \
 		srcs/builtins/ft_env.c \
