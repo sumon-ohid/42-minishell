@@ -8,6 +8,7 @@ MiniShell is a minimalistic shell program designed to replicate the basic functi
 - **Command Execution**: Execute commands entered by the user.
 - **Built-in Commands**: Supports built-in commands such as `cd`, `pwd`, `echo`, `export`, `unset`, `exit` etc.
 - **Input/Output Redirection**: Supports input/output redirection using `<` and `>` operators.
+- **Heredoc/Append Mode**: Supports heredoc and append using `<<` and `>>` operators.
 - **Pipeline Commands**: Supports chaining multiple commands together using the `|` operator.
 - **Signal Handling**: Handles signals such as `Ctrl+C` for interrupt and `Ctrl+D` for exit.
 
