@@ -3,19 +3,49 @@
 /*                                                        :::      ::::::::   */
 /*   prepare_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 18:06:23 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/10 18:44:37 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/11 17:42:47 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-/*void    adjust_shlevel(char **env, t_data *node)
+void    adjust_shlevel(char **env, t_data *node)
 {
-    //we will write this tomorrow
-}*/
+    int     i;
+    int     shlvl;
+    char    *var_name;
+    char    *var_value;
+    
+    i = 0;
+    (void)node;
+    shlvl = 0;
+    while (env[i])
+    {
+        var_name = copy_until_char(env[i], '=');
+        if (!var_name)
+            return;
+        if (ft_strcmp(var_name, "SHLVL") == 0)
+        {
+            var_value = copy_after_char(env[i], '=');
+            shlvl = ft_atoi(var_value);
+            shlvl++;
+            free(var_value);   
+            var_value = ft_itoa(shlvl);
+            free(env[i]);
+            var_name = ft_strjoin(var_name, "=", 1);
+            env[i] = ft_strjoin(var_name, var_value, 1);
+            if (!env[i])
+                ft_exit(node, 1, "shlvl malloc failed");
+            free(var_value);
+            break;
+        }
+        free(var_name);
+        i++;
+    }
+}
 
 void    env_quit(char **result, t_data *node)
 {
@@ -76,6 +106,6 @@ char	**dup_envp(char **envp, t_data *node)
 			return (NULL);
 		counter2++;
 	}
-	//adjust_shlevel(result, node);
+	adjust_shlevel(result, node);
 	return (result);
 }

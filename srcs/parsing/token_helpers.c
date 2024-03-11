@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_helpers.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 11:28:51 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/10 18:06:47 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/11 17:39:47 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*copy_until_char(char *str, char c)
 		i++;
 	output = malloc(sizeof(char) * (i + 1));
 	if (!output)
-		handle_error("malloc in copy_until_char failed", 1);
+		return (NULL);
 	i = 0;
 	while (str[i] && str[i] != c)
 	{
