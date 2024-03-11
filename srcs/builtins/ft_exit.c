@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 14:41:52 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/11 16:23:22 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/11 17:27:37 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	free_node(t_data *node)
 {
 	free(node->oldpwd);
 	free_tokens(node->tokens, node->processes);
-	free_vars(node->local_vars);
+	//free_vars(node->local_vars);
 	if (node->std_in != -1)
 		close(node->std_in);
 	if (node->std_out != -1)
@@ -86,7 +86,7 @@ void	ft_early_exit(t_data *node, int exit_val, char *msg)
 	free(node->input_line);
 	ft_free_array(node->envp);
 	//ft_free_array(node->arr);
-	free_vars(node->local_vars);
+	//free_vars(node->local_vars);
 	if (node->std_in != -1)
 		close(node->std_in);
 	if (node->std_out != -1)

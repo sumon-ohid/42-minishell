@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirects.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 18:46:23 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/11 16:22:37 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/11 17:26:29 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,31 @@
 
 void	ft_set(t_data *node)
 {
-	node->local_vars = NULL;
 	node->std_in = dup(STDIN_FILENO);
 	if (node->std_in == -1)
-		ft_exit(node, -1, "dup failed");
+	{
+		free(node);
+		handle_error("ft_set failed", -1);
+	}
 	node->std_out = dup(STDOUT_FILENO);
 	if (node->std_out == -1)
-		ft_exit(node, -1, "dup failed");
+	{
+		close(node->std_in);
+		free(node);
+		handle_error("ft_set failed", -1);
+	}
 	node->old_turn = 0;
+	node->pwd = getenv("PWD");
+	if (!getenv("OLDPWD"))
+		return ;
 	node->oldpwd = ft_strdup(getenv("OLDPWD"));
 	if (!node->oldpwd)
-		ft_exit(node, -1, "dup failed");
-	node->pwd = getenv("PWD");
+	{
+		close(node->std_in);
+		close(node->std_out);
+		free(node);
+		handle_error("ft_set failed", -1);
+	}
 }
 
 void	ft_restore(t_data *node)

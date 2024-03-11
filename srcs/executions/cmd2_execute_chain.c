@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 17:28:11 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/10 14:54:08 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/11 17:32:02 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,10 @@ int	count_array_size(t_token *chain)
 		counter++;
 		chain = chain->next;
 	}
-	while (chain && chain->type == FLAG)
+	while (chain)
 	{
-		counter++;
+		if (chain->type == FLAG)
+			counter++;
 		chain = chain->next;
 	}
 	return (counter + 1);
@@ -69,10 +70,13 @@ int	ft_commander(t_token *chain, t_data *node)
 		counter++;
 		chain = chain->next;
 	}
-	while (chain && chain->type == FLAG)
+	while (chain)
 	{
-		array[counter] = chain->str;
-		counter++;
+		if (chain->type == FLAG)
+		{
+			array[counter] = chain->str;
+			counter++;
+		}
 		chain = chain->next;
 	}
 	array[counter] = NULL;

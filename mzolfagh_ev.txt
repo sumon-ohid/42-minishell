@@ -12,7 +12,7 @@ DONE -"_=" doesnt work (it about =)\
 
 DONE - echo + etc doesnt work
 
--env is one line less than it should be (_=/usr/bin/env)
+DONE (but it doesnt update) -env is one line less than it should be (_=/usr/bin/env)
 
 -SHLVL doesnt increase
 

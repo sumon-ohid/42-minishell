@@ -6,24 +6,11 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 14:32:03 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/10 16:30:00 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/11 17:29:20 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-/*void	wait_for_processes(int *pid, int *status, int processes, t_data *node)
-{
-	int	counter;
-
-	(void)node;
-	counter = 0;
-	while (counter < processes)
-	{
-		waitpid(pid[counter], &status[counter], 0);
-		counter++;
-	}
-}*/
 
 void	free_resources(int **fd, int processes, t_data *node)
 {

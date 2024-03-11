@@ -6,13 +6,13 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 13:17:31 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/02/26 15:04:19 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/11 17:27:25 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-t_vars	*create_vars_node(char *str, t_data *node)
+/*t_vars	*create_vars_node(char *str, t_data *node)
 {
 	int		counter;
 	t_vars	*new;
@@ -92,4 +92,4 @@ void	ft_localvars(t_token **tokens, t_data *node, int processes)
 		}
 		counter++;
 	}
-}
+}*/
