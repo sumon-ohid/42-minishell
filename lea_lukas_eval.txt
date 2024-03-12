@@ -23,7 +23,7 @@ REMOVED - "$$" expands but only in quotes??
 DONE - echo || echo should be syntax error
 - chmod 000 inflie, cat < infile is not found (should be perm denied)
 - cat << "$USER" -> mhuszar should not be a delim!
-- cd : too many arguments should be handled
+DONE - cd : too many arguments should be handled
 - export VAR="hehe haha" should break into 2 tokens
 DONE - export PIPE="|" then echo $PIPE - WHY DOES IT WORK??
 - cat | cat | cat etc then Ctrl+\ prints a shit ton of QUIT msg

@@ -3,24 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   cmd3_builtins.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 17:31:58 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/12 18:16:23 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/12 19:27:57 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+int	prepare_cd(t_data *node, t_token *head)
+{
+	if (head->next && !head->next->next)
+		return (ft_cd(head->next->str, node));
+	else if (!head->next)
+		return (ft_cd(NULL, node));
+	else if (head->next->next)
+	{
+		ft_putstr_fd("minishell: cd: too many arguments\n", 2);
+		return (-1);
+	}
+	return (0);
+}
+
 int	entry_check2(t_data *node, t_token *head, char *line)
 {
 	if (ft_strcmp(head->str, "cd") == 0)
-	{
-		if (head->next)
-			return (ft_cd(head->next->str, node));
-		else
-			return (ft_cd(NULL, node));
-	}
+		return (prepare_cd(node, head));
 	else if (ft_strcmp(head->str, "echo") == 0)
 		ft_echo(line, node, head);
 	else if (ft_strcmp(head->str, "env") == 0)
