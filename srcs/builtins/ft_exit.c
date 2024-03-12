@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 14:41:52 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/12 13:41:06 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/12 21:21:33 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	digit_checker(char *str)
 		return (0);
 	while (str[counter] >= '0' && str[counter] <= '9')
 		counter++;
-	if (!str[counter] && counter < 20)
+	if (!str[counter] && counter < 20 /*&& check_atoll(str)*/)
 		return (1);
 	else
 		return (0);

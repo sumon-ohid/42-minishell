@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 17:54:33 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/03 22:40:37 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/12 20:18:21 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,29 @@ int	ft_atoi(const char *str)
 		return (nb * -1);
 	return (nb);
 }
+#include<stdint.h>
+
+/*int	check_atoll(char *str)
+{
+	char 	*num;
+	char 	*num2;
+	int		i;
+	
+	
+	if (ft_strlen(str) > 20 || (ft_strlen(str) > 19 str[0] != '-'))
+		return (0);
+	num = "9223372036854775807";
+	num2 = "-9223372036854775808";
+	i = 0;
+	while (str[i] <= num[i] && str[i])
+		i++;
+	if (!str[i])
+		return (1);
+	i = 1;
+	while (str[i] <= num2[i] && str[i])
+		i++;
+	
+}*/
 /*
 #include<stdio.h>
 int	main(void)

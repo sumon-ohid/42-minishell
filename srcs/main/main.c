@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:17:43 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/11 22:04:41 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/12 21:23:01 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,17 +64,17 @@ void	ft_initialize(t_data *node)
 		mode(node, INTERACTIVE);
 		input = readline(GREEN "minishell$ " RESET);
 		mode(node, NON_INTERACTIVE);
+		if (g_signal == CTRL_C)
+		{
+			node->last_return = 2;
+			g_signal = 0;
+		}
 		if (!input)
 		{
 			eof_free(node);
 		}
 		else if (*input)
 		{
-			if (g_signal == CTRL_C)
-			{
-				node->last_return = 2;
-				g_signal = 0;
-			}
 			if (ft_strcmp(input, "\n") == 0)
 				break ;
 			initialize_node(node);
@@ -83,6 +83,48 @@ void	ft_initialize(t_data *node)
 		}
 	}
 }
+
+// void	ft_initialize(t_data *node)
+// {
+// 	char	*input;
+
+// 	while (1)
+// 	{
+// 		mode(node, INTERACTIVE);
+// 		if (isatty(fileno(stdin)))
+// 			input = readline(GREEN "minishell$ " RESET);
+// 		else
+// 		{
+// 			char *line;
+// 			line = get_next_line(fileno(stdin));
+// 			input = ft_strtrim(line, "\n");
+// 			free(line);
+// 		}
+// 		mode(node, NON_INTERACTIVE);
+// 		if (g_signal == CTRL_C)
+// 		{
+// 			node->last_return = 2;
+// 			g_signal = 0;
+// 		}
+// 		if (!input)
+// 		{
+// 			eof_free(node);
+// 		}
+// 		else if (*input)
+// 		{
+// 			if (g_signal == CTRL_C)
+// 			{
+// 				node->last_return = 2;
+// 				g_signal = 0;
+// 			}
+// 			if (ft_strcmp(input, "\n") == 0)
+// 				break ;
+// 			initialize_node(node);
+// 			add_history(input);
+// 			node->last_return = entry_check(node, input);
+// 		}
+// 	}
+// }
 
 int	main(int argc, char **argv, char **envp)
 {

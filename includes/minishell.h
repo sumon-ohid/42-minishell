@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/12 18:48:27 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/12 21:25:11 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@
 # define GREEN "\033[32m"
 # define RED "\033[31m"
 # define RESET "\033[0m"
+
+#ifndef BUFFER_SIZE
+# define BUFFER_SIZE 100
+#endif
 
 // headers
 # include <dirent.h>
@@ -308,10 +312,14 @@ int					ft_strchr(char *str, char c);
 int					ft_isspace(int c);
 int					ft_isalnum(int c);
 int					ft_atoi(const char *str);
+int					check_atoll(const char *str);
 int					ft_isalpha(char c);
 void				ft_lstadd_back(t_element **lst, t_element *nw);
 void				env_quit(char **result, t_data *node);
 int					ft_printerr(const char *tipus, ...);
+//char				*get_next_line(int fd);
+char				*ft_strtrim(char *s1, char *set);
+size_t				ft_strlcpy(char *dst, char *src, size_t size);
 
 // free memory
 void				ft_free_array(char **str);

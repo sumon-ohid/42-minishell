@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 10:03:57 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/12 18:25:25 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/12 21:21:36 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,9 @@ void	free_node(t_data *node)
 
 void	eof_free(t_data *node)
 {
+	int val;
+	
+	val = ft_lastvalue(node);
 	printf("exit\n");
 	free(node->oldpwd);
 	ft_free_array(node->envp);
@@ -84,5 +87,5 @@ void	eof_free(t_data *node)
 	if (node->std_out != -1)
 		close(node->std_out);
 	free(node);
-	exit(EXIT_FAILURE);
+	exit(val);
 }
