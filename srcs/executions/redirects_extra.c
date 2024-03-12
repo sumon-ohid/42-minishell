@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 15:02:36 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/12 11:36:58 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/12 11:57:41 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,6 @@ int	str_is_nothing(char *str)
 	if (!str)
 		return (1);
 	if (ft_strcmp(str, "") == 0)
-		return (1);
-	while (str[c] && (str[c] == ' ' || (str[c] >= 9 && str[c] <= 11)))
-		c++;
-	if (!str[c])
 		return (1);
 	else
 		return (0);
@@ -58,9 +54,9 @@ int	redirect_out(char *output, int mode, t_data *node)
 {
 	int	fd2;
 
-	/*if (str_is_nothing(output))
-		return (printf("minishell: ambiguous redirect\n"),
-			node->last_return = -99, 0);*/
+	if (str_is_nothing(output))
+		return (printf("minishell: : No such file or directory\n"),
+			node->last_return = -99, 0);
 	fd2 = open(output, O_TRUNC | O_WRONLY | O_CREAT, 0644);
 	if (fd2 == -1)
 	{
@@ -86,9 +82,9 @@ int	redirect_out_append(char *output, int mode, t_data *node)
 {
 	int	fd2;
 
-	/*if (str_is_nothing(output))
-		return (printf("minishell: ambiguous redirect\n"),
-			node->last_return = -99, 0);*/
+	if (str_is_nothing(output))
+		return (printf("minishell: : No such file or directory\n"),
+			node->last_return = -99, 0);
 	fd2 = open(output, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (fd2 == -1)
 	{
