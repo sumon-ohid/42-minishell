@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 15:02:36 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/12 11:57:41 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/12 12:31:13 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	redirect_out(char *output, int mode, t_data *node)
 	int	fd2;
 
 	if (str_is_nothing(output))
-		return (printf("minishell: : No such file or directory\n"),
+		return (ft_putstr_fd("minishell: : No such file or directory\n", 2),
 			node->last_return = -99, 0);
 	fd2 = open(output, O_TRUNC | O_WRONLY | O_CREAT, 0644);
 	if (fd2 == -1)
@@ -83,7 +83,7 @@ int	redirect_out_append(char *output, int mode, t_data *node)
 	int	fd2;
 
 	if (str_is_nothing(output))
-		return (printf("minishell: : No such file or directory\n"),
+		return (ft_putstr_fd("minishell: : No such file or directory\n", 2),
 			node->last_return = -99, 0);
 	fd2 = open(output, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (fd2 == -1)
@@ -106,14 +106,36 @@ int	redirect_out_append(char *output, int mode, t_data *node)
 	return (1);
 }
 
+bool	expands_to_multiples(t_token *mark, t_data *node)
+{
+	char	*str;
+	int		i;
+
+	str = mark->str;
+	i = 0;
+	if (mark->exported == false)
+		return (false);
+	skip(str, &i, 'S', node);
+	if (!str[i])
+		return (false);
+	skip(str, &i, 'X', node);
+	if (!str[i])
+		return (false);
+	skip(str, &i, 'S', node);
+	if (!str[i])
+		return (false);
+	else
+		return (true);	
+}
+
 int	ft_redirector(t_token *chain, int file_type, int mode, t_data *node)
 {
 	t_token	*mark1;
 
 	mark1 = chain;
-	if (!mark1)
+	if (!mark1 || expands_to_multiples(mark1, node))
 	{
-		return (printf("minishell: ambiguous redirect\n"),
+		return (ft_putstr_fd("minishell: ambiguous redirect\n", 2),
 			node->last_return = -99, 0);
 	}
 	if (file_type == INFILE)

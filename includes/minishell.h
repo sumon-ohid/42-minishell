@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/11 22:29:28 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/12 12:20:57 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,9 @@ typedef struct s_token
 {
 	char			*str;
 	int				type;
-	char			**arr;
 	char			*heredoc_data;
 	int				quote;
+	bool			exported;
 	struct s_token	*previous;
 	struct s_token	*next;
 }					t_token;
@@ -146,6 +146,7 @@ typedef struct s_data
 	char				*home;
 	char				*input_line;
 	char				quote;
+	bool				exported;
 	char				command_flag;
 	t_mode				mode;
 	t_token				**tokens;

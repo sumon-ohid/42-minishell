@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_tokens.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:50:09 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/11 21:52:47 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/12 12:20:41 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,8 @@ t_token	*create_token(char *word, t_data *node)
 	}
 	new->previous = NULL;
 	new->next = NULL;
-	new->arr = NULL;
 	new->heredoc_data = NULL;
 	new->quote = quote_assigner(node->quote);
-	new->str = NULL;
 	new->str = ft_strdup(word);
 	if (!new->str)
 	{
@@ -38,6 +36,8 @@ t_token	*create_token(char *word, t_data *node)
 		parse_error(node, 1, "memory allocation failed at create token", -1);
 	}
 	new->type = 0;
+	new->exported = node->exported;
+	node->exported = false;
 	return (new);
 }
 /*

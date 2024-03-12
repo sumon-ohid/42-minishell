@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mole_soft_tokens.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 17:05:36 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/11 21:47:24 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/12 12:21:20 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,9 @@ char	*concatenate_elements(t_element *elements, t_data *node)
 {
 	char	*result;
 
+	node->exported = false;
+	if (elements->exported == true)
+		node->exported = true;
 	if (!elements || !elements->str)
 		parse_error(node, 1, "something went wrong with elements", -1);
 	if (elements->str[0] == ' ' && elements->exported == true)
@@ -82,6 +85,8 @@ char	*concatenate_elements(t_element *elements, t_data *node)
 	while (elements->next)
 	{
 		elements = elements->next;
+		if (elements->exported == true)
+			node->exported = true;
 		result = ft_strjoin(result, elements->str, 1);
 		if (!result)
 			parse_error(node, 1, "strjoin failed at parsing", -1);

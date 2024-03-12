@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mole_parser.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:05:04 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/11 21:46:36 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/12 12:29:28 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,11 @@ void	skip(char *str, int *cur, char mode, t_data *node)
 	else if (mode == 'C')
 	{
 		while (delim_type(str[*cur], node) == NONE)
+			(*cur)++;
+	}
+	else if (mode == 'X')
+	{
+		while (delim_type(str[*cur], node) != SPC && str[*cur])
 			(*cur)++;
 	}
 }
