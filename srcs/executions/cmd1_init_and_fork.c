@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 14:32:03 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/11 17:29:20 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/12 10:42:15 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,7 @@ int	executor_init(t_data *node, t_token **tokens, int processes, char *line)
 	node->fd = fd;
 	if (exception_checker(tokens, processes))
 	{
-		execute_chain(node, tokens[0], line, 0);
-		return (0);
+		return(execute_chain(node, tokens[0], line, 0));
 	}
 	node->pid = malloc(sizeof(int) * processes);
 	if (!node->pid)

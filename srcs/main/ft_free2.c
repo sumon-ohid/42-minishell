@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 10:03:57 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/11 21:56:29 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/12 10:38:44 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,21 +55,23 @@ void	ft_free_fds(t_data *node)
 	return ;
 }
 
-void	free_vars(t_vars *local_vars)
+void	free_node(t_data *node)
 {
-	t_vars	*cur;
-	t_vars	*prev;
-
-	cur = local_vars;
-	while (cur)
-	{
-		prev = cur;
-		cur = cur->next;
-		free(prev->str);
-		free(prev->first_half);
-		free(prev->second_half);
-		free(prev);
-	}
+	free(node->oldpwd);
+	free_tokens(node->tokens, node->processes);
+	if (node->std_in != -1)
+		close(node->std_in);
+	if (node->std_out != -1)
+		close(node->std_out);
+	free(node->input_line);
+	if (node->status)
+		free(node->status);
+	node->status = NULL;
+	if (node->pid)
+		free(node->pid);
+	node->pid = NULL;
+	ft_free_array(node->envp);
+	free(node);
 }
 
 void	eof_free(t_data *node)

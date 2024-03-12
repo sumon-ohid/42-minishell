@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 17:31:58 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/11 19:39:17 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/12 11:09:34 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	entry_check2(t_data *node, t_token *head, char *line)
 	else if (ft_strcmp(head->str, "pwd") == 0)
 		ft_pwd(node);
 	else if (ft_strcmp(head->str, "exit") == 0 && node->in_child == 0)
-		exit_with_args(node, ft_lastvalue(node), head, 0);
+		return (exit_with_args(node, ft_lastvalue(node), head, 0));
 	else if (ft_strstr(head->str, "export") != 0)
 		ft_export(node, head, line);
 	else if (ft_strstr(head->str, "unset") != 0)
@@ -38,7 +38,7 @@ int	entry_check2(t_data *node, t_token *head, char *line)
 	else if (ft_strcmp(head->str, "exit") != 0)
 		nocomm_error(head->str);
 	ft_restore(node);
-	return (1);
+	return (0);
 }
 
 void	allocate_fd(int ***fd, int processes, t_data *node)

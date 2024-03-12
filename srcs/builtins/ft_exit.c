@@ -3,33 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 14:41:52 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/11 21:54:09 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/12 10:42:59 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-void	free_node(t_data *node)
-{
-	free(node->oldpwd);
-	free_tokens(node->tokens, node->processes);
-	if (node->std_in != -1)
-		close(node->std_in);
-	if (node->std_out != -1)
-		close(node->std_out);
-	free(node->input_line);
-	if (node->status)
-		free(node->status);
-	node->status = NULL;
-	if (node->pid)
-		free(node->pid);
-	node->pid = NULL;
-	ft_free_array(node->envp);
-	free(node);
-}
 
 int	digit_checker(char *str)
 {
@@ -48,6 +29,14 @@ int	digit_checker(char *str)
 		return (1);
 	else
 		return (0);
+}
+
+int	exit_too_many_args(t_data *node)
+{
+	node->last_return = -1;
+	ft_putstr_fd("exit\n", 1);
+	ft_putstr_fd("minishell: exit: too many arguments\n", 2);
+	return (-1);
 }
 
 int	exit_with_args(t_data *node, int exit_val, t_token *head, int val)
@@ -73,7 +62,7 @@ int	exit_with_args(t_data *node, int exit_val, t_token *head, int val)
 		proxy = proxy->next;
 	}
 	if (counter > 1)
-		return (printf("exit\nminishell: exit: too many arguments\n"));
+		return (exit_too_many_args(node));
 	else if (counter == 0)
 		ft_exit(node, exit_val, NULL);
 	return (ft_exit(node, (unsigned char)val, NULL), 0);
