@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 17:54:33 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/12 20:18:21 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/12 22:44:38 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ static int	survey(const char *str)
 		return (c * -1);
 }
 
-int	ft_atoi(const char *str)
+int	ft_atoll(const char *str)
 {
-	int	nb;
+	long long int	nb;
 	int	sign;
 	int	start;
 
@@ -53,29 +53,36 @@ int	ft_atoi(const char *str)
 		return (nb * -1);
 	return (nb);
 }
-#include<stdint.h>
 
-/*int	check_atoll(char *str)
+int	check_atoll(char *str)
 {
 	char 	*num;
-	char 	*num2;
 	int		i;
 	
-	
-	if (ft_strlen(str) > 20 || (ft_strlen(str) > 19 str[0] != '-'))
-		return (0);
-	num = "9223372036854775807";
-	num2 = "-9223372036854775808";
 	i = 0;
-	while (str[i] <= num[i] && str[i])
-		i++;
-	if (!str[i])
+	if (str && str[0] == '-')
+	{
+		if (ft_strlen(str) > 20)
+			return (0);
+		else if (ft_strlen(str) < 20)
+			return (1);
+		num = "-9223372036854775808";
+	}
+	else
+	{
+		if (ft_strlen(str) > 19)
+			return (0);
+		else if (ft_strlen(str) < 19)
+			return (1);
+		num = "9223372036854775807";
+	}
+	while (str[i] == num[i] && str[i])
+			i++;
+	if (!str[i] || str[i] < num[i])
 		return (1);
-	i = 1;
-	while (str[i] <= num2[i] && str[i])
-		i++;
-	
-}*/
+	return (0);
+}
+
 /*
 #include<stdio.h>
 int	main(void)

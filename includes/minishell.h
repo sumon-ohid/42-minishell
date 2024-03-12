@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/12 21:25:11 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/12 22:35:12 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -311,8 +311,8 @@ int					ft_putnbr(int n);
 int					ft_strchr(char *str, char c);
 int					ft_isspace(int c);
 int					ft_isalnum(int c);
-int					ft_atoi(const char *str);
-int					check_atoll(const char *str);
+int					ft_atoll(const char *str);
+int					check_atoll(char *str);
 int					ft_isalpha(char c);
 void				ft_lstadd_back(t_element **lst, t_element *nw);
 void				env_quit(char **result, t_data *node);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prepare_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 18:06:23 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/12 16:36:11 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/12 22:35:04 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	adjust_shlevel(char **env, t_data *node)
 {
-	int		i;
-	int		shlvl;
-	char	*line;
-	char	*var_value;
+	int				i;
+	long long int	shlvl;
+	char			*line;
+	char			*var_value;
 
 	i = -1;
 	shlvl = 0;
@@ -26,7 +26,7 @@ void	adjust_shlevel(char **env, t_data *node)
 		if (ft_strstr(env[i], "SHLVL="))
 		{
 			var_value = ft_getenv("SHLVL", node);
-			shlvl = ft_atoi(var_value) + 1;
+			shlvl = ft_atoll(var_value) + 1;
 			var_value = ft_itoa(shlvl);
 			if (!var_value)
 				env_quit(env, node);
