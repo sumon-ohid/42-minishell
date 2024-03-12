@@ -1,0 +1,30 @@
+- e$A-hello A="cho" echo should work
+- . - etc should break a varname (parser issue)
+- $nonexist | cat has leaks
+- "" | cat also has a leak
+- cat | ls + CtrlC we need extra newline
+- print segfault message for sigsegv
+DONE - echo should ignore all -n flags after the first (unitl broken by . or something)
+- exit should not have value beyond long max & should work with negatives
+- whatever we unset (PWD etc) should not go back into export, only env
+- PWD should also update like OLDPWD
+- we should not exit if CD fails, + PWD should not be updated in that case
+- unset path -> absolute path should still work
+- always check local executables first
+- access thinks executable with no permissions still exists
+- in path i should not split until : but EOF also
+- export should accept only letters, numbers (ex first char) and _
+- "export" doesnt work, but with flags it does????
+- unset "USER" doesnt work, should work
+DONE - env -i + commands had conditional jump issue
+- unset OLDÜWD + cd - we should have an error msg (or remove cd -)
+- always exit the shell with $? (ctrl + C into newline then exit and we get 0)
+- "$$" expands but only in quotes??
+- echo || echo should be syntax error
+- chmod 000 inflie, cat < infile is not found (should be perm denied)
+- cat << "$USER" -> mhuszar should not be a delim!
+- cd : too many arguments should be handled
+- export VAR="hehe haha" should break into 2 tokens
+- export PIPE="|" then echo $PIPE - WHY DOES IT WORK??
+- cat | cat | cat etc then Ctrl+\ prints a shit ton of QUIT msg
+
