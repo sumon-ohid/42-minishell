@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/12 17:42:49 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/12 18:28:03 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -315,7 +315,7 @@ int					ft_printerr(const char *tipus, ...);
 
 // free memory
 void				ft_free_array(char **str);
-void				free_tokens(t_token **token, int processes);
+void				free_tokens(t_token **token, int processes, int flag);
 void				free_arr(char **arr);
 void				error_quit(int fd, int *tomlo, char *str);
 char				**free_everything(char **arr, int m_ctr);

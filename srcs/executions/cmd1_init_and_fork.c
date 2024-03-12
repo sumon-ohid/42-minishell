@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd1_init_and_fork.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 14:32:03 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/12 13:29:21 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/12 18:36:27 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void	free_resources(int **fd, int processes, t_data *node)
 void	do_child_stuff(char *line, t_data *node, int i, t_token **tokens)
 {
 	mode(node, CHILD);
+	if (!(tokens[i]))
+		exit_builtin(node);
 	if (i != 0)
 	{
 		if (dup2(node->fd[i - 1][0], STDIN_FILENO) == -1)

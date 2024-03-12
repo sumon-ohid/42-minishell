@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 10:03:57 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/12 10:38:44 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/12 18:25:25 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_cleanup(t_data *node, t_token **tokens, char *line)
 {
-	free_tokens(tokens, node->processes);
+	free_tokens(tokens, node->processes, 1);
 	free(line);
 }
 
@@ -58,7 +58,7 @@ void	ft_free_fds(t_data *node)
 void	free_node(t_data *node)
 {
 	free(node->oldpwd);
-	free_tokens(node->tokens, node->processes);
+	free_tokens(node->tokens, node->processes, 1);
 	if (node->std_in != -1)
 		close(node->std_in);
 	if (node->std_out != -1)

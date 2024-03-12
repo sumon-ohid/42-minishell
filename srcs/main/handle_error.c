@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_error.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 14:37:29 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/11 21:44:54 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/12 18:25:18 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	parse_error(t_data *node, int flag, char *msg, int value)
 {
 	if (flag)
 	{
-		free_tokens(node->tokens, node->processes);
+		free_tokens(node->tokens, node->processes, 0);
 		free_elements(node->elements);
 	}
 	if (node->std_in != -1)

@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 17:06:52 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/12 13:59:01 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/12 18:43:50 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	saved_nulltoken(int end, t_data *node, t_token ***origin, int proc)
 		if (!empty)
 			parse_error(node, 1, "malloc failed at parser", -1);
 		create_and_link_token(origin, proc, empty, node);
+		free(empty);
 		return (1);
 	}
 	return (0);
