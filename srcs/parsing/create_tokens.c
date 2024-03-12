@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 10:50:09 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/12 12:20:41 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/12 13:53:17 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,30 +40,6 @@ t_token	*create_token(char *word, t_data *node)
 	node->exported = false;
 	return (new);
 }
-/*
-int	pipe_counter(char *str)
-{
-	int	counter;
-	int	pipes;
-	int	in_quotes;
-
-	if (!str)
-		return (0);
-	counter = 0;
-	pipes = 0;
-	in_quotes = 0;
-	while (str[counter])
-	{
-		if ((str[counter] == '\'' || str[counter] == '\"') && !in_quotes)
-			in_quotes = 1;
-		else if ((str[counter] == '\'' || str[counter] == '\"') && in_quotes)
-			in_quotes = 0;
-		else if (str[counter] == '|' && !in_quotes)
-			pipes++;
-		counter++;
-	}
-	return (pipes + 1);
-}*/
 
 int	pipe_counter(char *str)
 {

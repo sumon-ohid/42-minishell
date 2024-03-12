@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mole_breakertokens.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 17:06:52 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/11 21:55:19 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/12 13:59:01 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ bool	is_breaker(char c, t_data *node)
 int	saved_nulltoken(int end, t_data *node, t_token ***origin, int proc)
 {
 	char	*str;
+	char	*empty;
 
 	str = node->input_line;
 	if (str[end + 2] != '\0' && delim_type(str[end + 2], node) != SPC)
@@ -30,7 +31,10 @@ int	saved_nulltoken(int end, t_data *node, t_token ***origin, int proc)
 	else if ((str[end] == '\"' && str[end + 1] == '\"') || (str[end] == '\''
 			&& str[end + 1] == '\''))
 	{
-		create_and_link_token(origin, proc, "", node);
+		empty = ft_strdup("");
+		if (!empty)
+			parse_error(node, 1, "malloc failed at parser", -1);
+		create_and_link_token(origin, proc, empty, node);
 		return (1);
 	}
 	return (0);
