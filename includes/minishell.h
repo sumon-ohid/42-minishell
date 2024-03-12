@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/12 13:36:59 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/12 17:42:49 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@
 
 //quotes
 # define NO_QUOTE 0
-# define DOUBLE_QUOTE 1
-# define SINGLE_QUOTE 2
+# define DOUBLE_QUOTE 34
+# define SINGLE_QUOTE 39
 
 //export flags
 # define NOT_EXIST 0

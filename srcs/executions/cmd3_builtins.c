@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 17:31:58 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/12 11:09:34 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/12 17:41:07 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ int	entry_check2(t_data *node, t_token *head, char *line)
 		ft_pwd(node);
 	else if (ft_strcmp(head->str, "exit") == 0 && node->in_child == 0)
 		return (exit_with_args(node, ft_lastvalue(node), head, 0));
-	else if (ft_strstr(head->str, "export") != 0)
+	else if (ft_strcmp(head->str, "export") == 0)
 		ft_export(node, head, line);
-	else if (ft_strstr(head->str, "unset") != 0)
+	else if (ft_strcmp(head->str, "unset") == 0)
 		ft_unset(node, head, line);
 	else if (ft_strcmp(head->str, "exit") != 0)
 		nocomm_error(head->str);

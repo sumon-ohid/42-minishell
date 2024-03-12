@@ -14,9 +14,9 @@ DONE - echo + etc doesnt work
 
 DONE (but it doesnt update) -env is one line less than it should be (_=/usr/bin/env)
 
--SHLVL doesnt increase
+DONE -SHLVL doesnt increase
 
-- env -i : we should still have PWD, SHLVL & _=/usr/bin/env
+DONE - env -i : we should still have PWD, SHLVL & _=/usr/bin/env
 
 DONE -exit receives argument (also pay attention to more than 1 argument- when both are int or non-numeric, bigger tahn long int and smaller than min int)
 

@@ -25,6 +25,6 @@ DONE - env -i + commands had conditional jump issue
 - cat << "$USER" -> mhuszar should not be a delim!
 - cd : too many arguments should be handled
 - export VAR="hehe haha" should break into 2 tokens
-- export PIPE="|" then echo $PIPE - WHY DOES IT WORK??
+DONE - export PIPE="|" then echo $PIPE - WHY DOES IT WORK??
 - cat | cat | cat etc then Ctrl+\ prints a shit ton of QUIT msg
 
