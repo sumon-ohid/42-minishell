@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft_helpers3.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 10:43:23 by msumon            #+#    #+#             */
-/*   Updated: 2024/02/08 16:39:58 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/12 18:55:38 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int	ft_isalnum(int c)
 {
 	if ((c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z') || (c >= 'a'
 			&& c <= 'z'))
+		return (1);
+	else if (c == '_')
 		return (1);
 	return (0);
 }

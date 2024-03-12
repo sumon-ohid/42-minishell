@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export_extra.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 09:03:06 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/11 20:40:00 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/12 18:57:06 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	var_name_check(char *var)
 	}
 	while (var_name[i] && var_name[i] != '=')
 	{
-		if (ft_isdigit(var_name[0]) && var_name[i] != '_')
+		if (!ft_isalnum(var_name[i]) || ft_isdigit(var_name[0]))
 		{
 			free(var_name);
 			return (1);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:27:41 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/12 13:44:27 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/12 18:57:47 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,52 +90,45 @@ int	check_if_var_exists(t_data *node, char *var)
 	return (0);
 }
 
-int	handle_export(t_data *node, char **var)
+int	handle_export(t_data *node, char *var)
 {
 	int	var_exists;
-	int	i;
 
-	i = 1;
-	while (var[i])
+	var_exists = check_if_var_exists(node, var);
+	if (ft_strcmp(var, "") == 0 || var_name_check(var) == 1)
 	{
-		var_exists = check_if_var_exists(node, var[i]);
-		if (var_name_check(var[i]) == 1)
-		{
-			ft_printerr("minishell: export: `%s': not a valid identifier\n",
-				var[i]);
-			node->last_return = -99;
-		}
-		else
-		{
-			if (var_exists == NOT_EXIST)
-				handle_var_not_exists(node, var[i]);
-			else if (var_exists == EXIST_ENVP)
-				if (handle_var_exist_in_envp(node, var[i]) == -1)
-					ft_exit(node, -1, "malloc failed at ft_export function");
-		}
-		i++;
+		ft_printerr("minishell: export: `%s': not a valid identifier\n",
+			var);
+		node->last_return = -99;
 	}
-	free_arr(var);
+	else
+	{
+		if (var_exists == EXIST_ENVP)
+		{
+			if (handle_var_exist_in_envp(node, var) == -1)
+				ft_exit(node, -1, "malloc failed at ft_export function");
+		}
+		else if (var_exists == NOT_EXIST)
+			handle_var_not_exists(node, var);
+	}
 	return (0);
 }
 
 int	ft_export(t_data *node, t_token *token, char *str)
 {
-	char	**var;
-
-	(void)token;
-	var = ft_split_special(str, ' ', 'P', 0);
-	if (var == NULL)
-		ft_exit(node, 1, "Malloc failed at ft_export function");
-	if (ft_strcmp(var[0], "export") == 0 && var[1] == NULL)
+	(void)str;
+	if (ft_strcmp(token->str, "export") == 0 && token->next == NULL)
 	{
 		handle_export_no_args(node);
-		free_arr(var);
 		return (0);
 	}
 	else
 	{
-		handle_export(node, var);
+		while (token->next)
+		{
+			handle_export(node, token->next->str);
+			token = token->next;
+		}
 		return (0);
 	}
 	return (1);
