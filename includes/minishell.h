@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/12 12:20:57 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/12 13:34:04 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -226,6 +226,8 @@ int					ft_redirect_checker(t_token *chain, int mode,
 void				ft_set(t_data *node);
 void				ft_restore(t_data *node);
 void				close_all(int ***origin, int max);
+bool				expands_to_multiples(t_token *mark,
+						t_data *node);
 
 // signals
 void				mode(t_data *data, t_mode mode);
