@@ -15,9 +15,9 @@ DONE - we should not exit if CD fails, + PWD should not be updated in that case
 - in path i should not split until : but EOF also
 - export should accept only letters, numbers (ex first char) and _
 - "export" doesnt work, but with flags it does????
-- unset "USER" doesnt work, should work
+DONE - unset "USER" doesnt work, should work
 DONE - env -i + commands had conditional jump issue
-- unset OLDÜWD + cd - we should have an error msg (or remove cd -)
+REMOVED - unset OLDÜWD + cd - we should have an error msg (or remove cd -)
 - always exit the shell with $? (ctrl + C into newline then exit and we get 0)
 - "$$" expands but only in quotes??
 - echo || echo should be syntax error
