@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printerr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 15:58:51 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/12 13:42:02 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/12 14:07:11 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,4 +86,3 @@ int	ft_printerr(const char *tipus, ...)
 	va_end(arg_list);
 	return (len);
 }
-
