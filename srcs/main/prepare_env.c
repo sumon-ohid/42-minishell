@@ -3,94 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   prepare_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 18:06:23 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/11 22:30:46 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/12 16:36:11 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-// void	adjust_shlevel(char **env, t_data *node)
-// {
-// 	int		i;
-// 	int		shlvl;
-// 	char	*line;
-// 	char	*var_value;
-
-// 	i = -1;
-// 	shlvl = 0;
-// 	while (env[++i])
-// 	{
-// 		if (ft_strstr(env[i], "SHLVL="))
-// 		{
-// 			var_value = ft_getenv("SHLVL", node);
-// 			shlvl = ft_atoi(var_value) + 1;
-// 			var_value = ft_itoa(shlvl);
-// 			if (!var_value)
-// 				env_quit(env, node);
-// 			line = ft_strjoin("SHLVL=", var_value, 0);
-// 			free(var_value);
-// 			if (!line)
-// 				env_quit(env, node);
-// 			if (handle_var_exist_in_envp(node, line) == 1)
-// 				env_quit(env, node);
-// 			free(line);
-// 		}
-// 	}
-// }
-
-char	*increment_shlvl(char *env_str, t_data *node, char **env)
-{
-	int		shlvl;
-	char	*var_value;
-
-	var_value = copy_after_char(env_str, '=');
-	if (!var_value)
-		env_quit(env, node);
-	shlvl = ft_atoi(var_value);
-	shlvl++;
-	free(var_value);
-	var_value = ft_itoa(shlvl);
-	if (!var_value)
-		env_quit(env, node);
-	return (var_value);
-}
-
-void	update_env(char **env, int i, char *var, t_data *node)
-{
-	free(env[i]);
-	env[i] = ft_strdup(var);
-	if (!env[i])
-		env_quit(env, node);
-	free(var);
-}
-
 void	adjust_shlevel(char **env, t_data *node)
 {
 	int		i;
-	char	*var_name;
+	int		shlvl;
+	char	*line;
 	char	*var_value;
-	char	*var;
 
-	i = 0;
-	while (env[i])
+	i = -1;
+	shlvl = 0;
+	while (env[++i])
 	{
-		var_name = copy_until_char(env[i], '=');
-		if (!var_name)
-			env_quit(env, node);
-		if (ft_strcmp(var_name, "SHLVL") == 0)
+		if (ft_strstr(env[i], "SHLVL="))
 		{
-			var_value = increment_shlvl(env[i], node, env);
-			var_name = ft_strjoin(var_name, "=", 1);
-			var = ft_strjoin(var_name, var_value, 1);
+			var_value = ft_getenv("SHLVL", node);
+			shlvl = ft_atoi(var_value) + 1;
+			var_value = ft_itoa(shlvl);
+			if (!var_value)
+				env_quit(env, node);
+			line = ft_strjoin("SHLVL=", var_value, 0);
 			free(var_value);
-			update_env(env, i, var, node);
-			break ;
+			if (!line)
+				env_quit(env, node);
+			if (handle_var_exist_in_envp(node, line) == 1)
+				env_quit(env, node);
+			free(line);
 		}
-		free(var_name);
-		i++;
 	}
 }
 
