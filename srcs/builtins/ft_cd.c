@@ -6,7 +6,7 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:24:36 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/12 17:31:45 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/12 17:38:53 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,6 @@ int	change_directory(char *str, t_data *node)
 		}
 		else
 			chdir(node->home);
-		return (0);
-	}
-	else if (ft_strcmp(str, "-") == 0)
-	{
-		chdir(node->oldpwd);
-		printf("%s\n", node->oldpwd);
 		return (0);
 	}
 	else if (chdir(str) == -1)
