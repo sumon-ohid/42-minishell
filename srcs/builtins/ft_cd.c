@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:24:36 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/11 22:08:54 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/12 17:31:45 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	handle_oldpwd_null(t_data *node, char *str, char *pwd, char *line)
 	free(node->oldpwd);
 	node->oldpwd = get_current_directory();
 	if (!node->oldpwd)
-		ft_exit(node, -1, "getcwd failed");
+		return (-1);
 	ret = change_directory(str, node);
 	free(pwd);
 	free(line);
@@ -80,7 +80,7 @@ int	handle_oldpwd_null_old_turn(t_data *node, char *str, char *pwd, char *line)
 	free(node->oldpwd);
 	node->oldpwd = get_current_directory();
 	if (!node->oldpwd)
-		ft_exit(node, -1, "getcwd failed");
+		return (-1);
 	free(pwd);
 	free(line);
 	return (ret);
@@ -104,7 +104,7 @@ int	ft_cd(char *str, t_data *node)
 	ret = change_directory(str, node);
 	pwd = get_current_directory();
 	if (pwd == NULL)
-		ft_exit(node, -1, "getcwd failed");
+		return (-1);
 	ft_setenv(node, "OLDPWD", oldpwd);
 	ft_setenv(node, "PWD", pwd);
 	free(pwd);
