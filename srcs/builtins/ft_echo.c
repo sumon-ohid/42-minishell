@@ -3,70 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:25:07 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/11 21:56:05 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/12 17:06:47 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-void	remove_many_spaces(char *envp)
-{
-	int		i;
-	int		j;
-	char	*tmp;
-
-	i = 0;
-	j = 0;
-	tmp = malloc(sizeof(char) * ft_strlen(envp) + 1);
-	if (!tmp)
-		return ;
-	while (envp[i])
-	{
-		if (envp[i] == ' ' && envp[i + 1] == ' ')
-			i++;
-		else
-		{
-			tmp[j] = envp[i];
-			i++;
-			j++;
-		}
-	}
-	tmp[j] = '\0';
-	ft_strcpy(envp, tmp);
-	free(tmp);
-}
-
-char	*get_env_value(char *arg, t_data *node)
-{
-	char	*env_value;
-	char	*tmp;
-	int		i;
-
-	i = 0;
-	while (node->envp[i])
-	{
-		remove_many_spaces(node->envp[i]);
-		tmp = copy_until_char(node->envp[i], '=');
-		if (!tmp)
-			ft_exit(node, 127, "malloc error in get_env");
-		if (ft_strcmp(tmp, arg) == 0)
-		{
-			if (node->envp[i][ft_strlen(tmp)] == '=')
-				env_value = node->envp[i] + ft_strlen(tmp) + 1;
-			else if (node->envp[i][ft_strlen(tmp)] == '\0')
-				env_value = "";
-			else
-				env_value = arg;
-			return (free(tmp), env_value);
-		}
-		free(tmp);
-		i++;
-	}
-	return ("");
-}
 
 int	flag_check(char *str)
 {
@@ -106,6 +50,36 @@ void	remove_quote_if_inside_no_quotes(char *str)
 	}
 }
 
+void	process_flags(t_token **head, int *newline)
+{
+	if ((*head)->next && flag_check((*head)->next->str))
+	{
+		*newline = 0;
+		while ((*head)->next)
+		{
+			if (!flag_check((*head)->next->str))
+				break ;
+			*head = (*head)->next;
+		}
+	}
+	*head = (*head)->next;
+}
+
+void	process_arguments(t_token *head, t_data *node, int *fl)
+{
+	while (head)
+	{
+		if (head->type == FLAG)
+		{
+			if (*fl)
+				ft_putchar(' ');
+			print_argument(head->str, node);
+			*fl = 1;
+		}
+		head = head->next;
+	}
+}
+
 void	ft_echo(char *line, t_data *node, t_token *head)
 {
 	int	fl;
@@ -114,22 +88,8 @@ void	ft_echo(char *line, t_data *node, t_token *head)
 	newline = 1;
 	fl = 0;
 	(void)line;
-	if (head->next && flag_check(head->next->str))
-	{
-		newline = 0;
-		head = head->next->next;
-	}
-	while (head)
-	{
-		if (head->type == FLAG)
-		{
-			if (fl)
-				ft_putchar(' ');
-			print_argument(head->str, node);
-			fl = 1;
-		}
-		head = head->next;
-	}
+	process_flags(&head, &newline);
+	process_arguments(head, node, &fl);
 	if (newline)
 		ft_putchar('\n');
 }

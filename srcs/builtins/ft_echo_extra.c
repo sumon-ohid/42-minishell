@@ -6,7 +6,7 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 15:32:22 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/07 09:50:29 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/12 17:06:56 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,4 +80,60 @@ char	*copy_after_char(char *str, char c)
 	}
 	output[j] = '\0';
 	return (output);
+}
+
+void	remove_many_spaces(char *envp)
+{
+	int		i;
+	int		j;
+	char	*tmp;
+
+	i = 0;
+	j = 0;
+	tmp = malloc(sizeof(char) * ft_strlen(envp) + 1);
+	if (!tmp)
+		return ;
+	while (envp[i])
+	{
+		if (envp[i] == ' ' && envp[i + 1] == ' ')
+			i++;
+		else
+		{
+			tmp[j] = envp[i];
+			i++;
+			j++;
+		}
+	}
+	tmp[j] = '\0';
+	ft_strcpy(envp, tmp);
+	free(tmp);
+}
+
+char	*get_env_value(char *arg, t_data *node)
+{
+	char	*env_value;
+	char	*tmp;
+	int		i;
+
+	i = 0;
+	while (node->envp[i])
+	{
+		remove_many_spaces(node->envp[i]);
+		tmp = copy_until_char(node->envp[i], '=');
+		if (!tmp)
+			ft_exit(node, 127, "malloc error in get_env");
+		if (ft_strcmp(tmp, arg) == 0)
+		{
+			if (node->envp[i][ft_strlen(tmp)] == '=')
+				env_value = node->envp[i] + ft_strlen(tmp) + 1;
+			else if (node->envp[i][ft_strlen(tmp)] == '\0')
+				env_value = "";
+			else
+				env_value = arg;
+			return (free(tmp), env_value);
+		}
+		free(tmp);
+		i++;
+	}
+	return ("");
 }
