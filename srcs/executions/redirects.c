@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirects.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 18:46:23 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/12 13:30:46 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/12 13:32:11 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,5 +96,5 @@ bool	expands_to_multiples(t_token *mark, t_data *node)
 	if (!str[i])
 		return (false);
 	else
-		return (true);	
+		return (true);
 }
