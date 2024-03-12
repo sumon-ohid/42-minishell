@@ -13,14 +13,14 @@ DONE - we should not exit if CD fails, + PWD should not be updated in that case
 - always check local executables first
 - access thinks executable with no permissions still exists
 - in path i should not split until : but EOF also
-- export should accept only letters, numbers (ex first char) and _
-- "export" doesnt work, but with flags it does????
+DONE - export should accept only letters, numbers (ex first char) and _
+DONE - "export" doesnt work, but with flags it does????
 DONE - unset "USER" doesnt work, should work
 DONE - env -i + commands had conditional jump issue
 REMOVED - unset OLDÜWD + cd - we should have an error msg (or remove cd -)
 - always exit the shell with $? (ctrl + C into newline then exit and we get 0)
-- "$$" expands but only in quotes??
-- echo || echo should be syntax error
+REMOVED - "$$" expands but only in quotes??
+DONE - echo || echo should be syntax error
 - chmod 000 inflie, cat < infile is not found (should be perm denied)
 - cat << "$USER" -> mhuszar should not be a delim!
 - cd : too many arguments should be handled
