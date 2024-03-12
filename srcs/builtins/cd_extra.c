@@ -6,7 +6,7 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 16:38:37 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/11 16:39:35 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/12 17:26:07 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,6 @@ char	*get_current_directory(void)
 
 	dir = getcwd(NULL, 0);
 	if (dir == NULL)
-		perror("getcwd failed");
+		return (NULL);
 	return (dir);
 }

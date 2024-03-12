@@ -6,9 +6,9 @@
 - print segfault message for sigsegv
 DONE - echo should ignore all -n flags after the first (unitl broken by . or something)
 - exit should not have value beyond long max & should work with negatives
-- whatever we unset (PWD etc) should not go back into export, only env
-- PWD should also update like OLDPWD
-- we should not exit if CD fails, + PWD should not be updated in that case
+??? - whatever we unset (PWD etc) should not go back into export, only env
+??? - PWD should also update like OLDPWD
+DONE - we should not exit if CD fails, + PWD should not be updated in that case
 - unset path -> absolute path should still work
 - always check local executables first
 - access thinks executable with no permissions still exists
