@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 18:46:23 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/12 11:30:07 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/12 13:30:46 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,26 @@ int	ft_redirect_checker(t_token *proxy, int mode, t_data *node, int killmode)
 	if (mark)
 		read_from_heredoc(mark, node);
 	return (1);
+}
+
+bool	expands_to_multiples(t_token *mark, t_data *node)
+{
+	char	*str;
+	int		i;
+
+	str = mark->str;
+	i = 0;
+	if (mark->exported == false)
+		return (false);
+	skip(str, &i, 'S', node);
+	if (!str[i])
+		return (false);
+	skip(str, &i, 'X', node);
+	if (!str[i])
+		return (false);
+	skip(str, &i, 'S', node);
+	if (!str[i])
+		return (false);
+	else
+		return (true);	
 }

@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 15:02:36 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/12 12:31:13 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/12 13:30:26 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,28 +104,6 @@ int	redirect_out_append(char *output, int mode, t_data *node)
 	}
 	close(fd2);
 	return (1);
-}
-
-bool	expands_to_multiples(t_token *mark, t_data *node)
-{
-	char	*str;
-	int		i;
-
-	str = mark->str;
-	i = 0;
-	if (mark->exported == false)
-		return (false);
-	skip(str, &i, 'S', node);
-	if (!str[i])
-		return (false);
-	skip(str, &i, 'X', node);
-	if (!str[i])
-		return (false);
-	skip(str, &i, 'S', node);
-	if (!str[i])
-		return (false);
-	else
-		return (true);	
 }
 
 int	ft_redirector(t_token *chain, int file_type, int mode, t_data *node)
