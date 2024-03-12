@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 16:46:56 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/10 16:26:03 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/12 13:46:22 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	wait_for_processes(int *pid, int *status, int processes, t_data *node)
 		else
 		{
 			if (WIFSIGNALED(status[counter]) && WTERMSIG(status[counter]) == 3)
-				printf("Quit (core dumped)\n");
+				ft_printerr("Quit (core dumped)\n");
 			else if (WIFSIGNALED(status[counter]) && counter == processes - 1
 				&& node->mode != HEREDOC)
 				write(STDOUT_FILENO, "\n", 1);

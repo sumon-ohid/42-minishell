@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/12 13:34:04 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/12 13:36:59 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -311,6 +311,7 @@ int					ft_atoi(const char *str);
 int					ft_isalpha(char c);
 void				ft_lstadd_back(t_element **lst, t_element *nw);
 void				env_quit(char **result, t_data *node);
+int					ft_printerr(const char *tipus, ...);
 
 // free memory
 void				ft_free_array(char **str);

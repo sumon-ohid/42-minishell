@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 14:41:52 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/12 10:42:59 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/12 13:41:06 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,25 +41,24 @@ int	exit_too_many_args(t_data *node)
 
 int	exit_with_args(t_data *node, int exit_val, t_token *head, int val)
 {
-	t_token	*proxy;
 	int		counter;
 
-	proxy = head;
 	counter = 0;
-	while (proxy)
+	while (head)
 	{
-		if (proxy->type == FLAG)
+		if (head->type == FLAG)
 		{
-			if (!digit_checker(proxy->str) && counter == 0)
+			if (!digit_checker(head->str) && counter == 0)
 			{
-				printf("exit\nminishell: exit: %s: numeric argument required\n",
-					proxy->str);
+				printf("exit\n");
+				ft_printerr("minishell: exit: %s: numeric %s\n",
+					head->str, "argument required");
 				ft_exit(node, 2, NULL);
 			}
-			val = ft_atoi(proxy->str);
+			val = ft_atoi(head->str);
 			counter++;
 		}
-		proxy = proxy->next;
+		head = head->next;
 	}
 	if (counter > 1)
 		return (exit_too_many_args(node));

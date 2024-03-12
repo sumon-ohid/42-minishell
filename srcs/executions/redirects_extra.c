@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 15:02:36 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/12 13:30:26 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/12 13:44:48 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	redirect_in(char *input, int mode, t_data *node)
 	fd1 = open(input, O_RDONLY);
 	if (fd1 == -1)
 	{
-		printf("minishell: %s: No such file or directory\n", input);
+		ft_printerr("minishell: %s: No such file or directory\n", input);
 		if (mode == 1)
 		{
 			ft_free_fds(node);
@@ -88,7 +88,7 @@ int	redirect_out_append(char *output, int mode, t_data *node)
 	fd2 = open(output, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (fd2 == -1)
 	{
-		printf("minishell: %s: Permission denied\n", output);
+		ft_printerr("minishell: %s: Permission denied\n", output);
 		if (mode == 1)
 		{
 			ft_free_fds(node);

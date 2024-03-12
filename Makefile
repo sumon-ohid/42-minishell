@@ -62,6 +62,7 @@ SRC = 	srcs/main/main.c \
 		srcs/utils/ft_itoa.c \
 		srcs/utils/ft_split_special_edition.c \
 		srcs/utils/ft_split_extra.c \
+		srcs/utils/ft_printerr.c \
 		
 
 OBJ = $(SRC:.c=.o)

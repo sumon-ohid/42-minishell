@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:27:41 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/11 20:41:08 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/12 13:44:27 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,8 @@ int	handle_export(t_data *node, char **var)
 		var_exists = check_if_var_exists(node, var[i]);
 		if (var_name_check(var[i]) == 1)
 		{
-			printf("minishell: export: `%s': not a valid identifier\n", var[i]);
+			ft_printerr("minishell: export: `%s': not a valid identifier\n",
+				var[i]);
 			node->last_return = -99;
 		}
 		else
