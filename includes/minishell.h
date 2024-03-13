@@ -6,7 +6,7 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/13 13:56:58 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/13 14:30:18 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,7 @@ typedef struct s_data
 	char				quote;
 	bool				exported;
 	char				command_flag;
+	int					msg;
 	t_mode				mode;
 	t_token				**tokens;
 	t_element			*elements;
@@ -216,8 +217,8 @@ void				fork_processes(int processes, t_data *node,
 						t_token **tokens, char *line);
 void				wait_for_processes(int *pid, int *status,
 						int processes, t_data *node);
-char				*extract_path(char *comm2, char **poss_paths,
-						char *og_comm, t_data *node);
+char				*extract_path(char **poss_paths, char *og_comm,
+						t_data *node);
 char				*pathfinder(char **envp, char *comm, t_data *node);
 void				extract_find_execute(char **envp, char **comms,
 						t_data *node);
