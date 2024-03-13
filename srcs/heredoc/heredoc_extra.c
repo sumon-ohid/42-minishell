@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_extra.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 14:59:41 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/13 16:10:15 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/13 18:42:45 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-char	*handle_signals(char *line, t_data *node)
+char	*handle_signals(char *line, t_data *node, char *delim)
 {
 	if (g_signal == CTRL_C)
 	{
@@ -23,20 +23,20 @@ char	*handle_signals(char *line, t_data *node)
 	}
 	else if (!line)
 	{
-		write(2, "minishell: warning: here-document delimited by end-of-file\n",
-			59);
+		ft_printerr("minishell: warning: here-document delimited");
+		ft_printerr(" by end-of-file (wanted `%s')\n", delim);
 		g_signal = 0;
 		return (NULL);
 	}
 	return (line);
 }
 
-char	*read_and_handle_line(t_data *node)
+char	*read_and_handle_line(t_data *node, char *delim)
 {
 	char	*line;
 
 	line = readline("> ");
-	return (handle_signals(line, node));
+	return (handle_signals(line, node, delim));
 }
 
 char	*join_line_to_heredoc(char *heredoc, char *line, t_data *node)
@@ -73,7 +73,7 @@ char	*ft_heredoc(t_data *node, t_token *delim)
 	mode(node, HEREDOCS);
 	while (1)
 	{
-		line = read_and_handle_line(node);
+		line = read_and_handle_line(node, delim->str);
 		if (!line || ft_strcmp(line, delim->str) == 0)
 			break ;
 		heredoc = join_line_to_heredoc(heredoc, line, node);

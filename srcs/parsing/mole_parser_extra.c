@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 16:05:17 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/13 18:13:52 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/13 18:44:21 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,12 @@ bool	inside_zone(int **zones, int total, int cur)
 	return (false);
 }
 
+
+/*
 int	**fill_zones(t_data *node, int start, int max)
 {
 	
-}
+}*/
 
 int	**create_zones(t_data *node, int start)
 {
@@ -63,12 +65,13 @@ int	**create_zones(t_data *node, int start)
 			parse_error(node, 1, "malloc in parsing failed", -1);
 		quote_num--;
 	}
-	return (fill_zones(node, start, max));
+	//return (fill_zones(node, start, max));
+	return (NULL);
 }
-
+/*
 void	sever_into_tokens(t_token ***origin, t_data *node, int start, char *res)
 {
 	char 	*str;
 	
 	
-}
+}*/
