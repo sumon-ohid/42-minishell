@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 17:54:33 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/13 11:22:36 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/13 14:35:15 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,31 +54,56 @@ int	ft_atoll(const char *str)
 	return (nb);
 }
 
+// int	check_atoll(char *str)
+// {
+// 	char	*num;
+// 	int		i;
+
+// 	i = 0;
+// 	if (str && str[0] == '-')
+// 	{
+// 		if (ft_strlen(str) > 20)
+// 			return (0);
+// 		else if (ft_strlen(str) < 20)
+// 			return (1);
+// 		num = "-9223372036854775808";
+// 	}
+// 	else
+// 	{
+// 		if (ft_strlen(str) > 19)
+// 			return (0);
+// 		else if (ft_strlen(str) < 19)
+// 			return (1);
+// 		num = "9223372036854775807";
+// 	}
+// 	while (str[i] == num[i] && str[i])
+// 		i++;
+// 	if (!str[i] || str[i] < num[i])
+// 		return (1);
+// 	return (0);
+// }
+
 int	check_atoll(char *str)
 {
 	char	*num;
 	int		i;
 
 	i = 0;
-	if (str && str[0] == '-')
+	num = "9223372036854775807";
+	if (*str == '+' || *str == '-')
+		str++;
+	while (*str == '0')
+		str++;
+	if (ft_strlen(str) > 19)
+		return (0);
+	while (*str == num[i] && *str)
 	{
-		if (ft_strlen(str) > 20)
-			return (0);
-		else if (ft_strlen(str) < 20)
-			return (1);
-		num = "-9223372036854775808";
-	}
-	else
-	{
-		if (ft_strlen(str) > 19)
-			return (0);
-		else if (ft_strlen(str) < 19)
-			return (1);
-		num = "9223372036854775807";
-	}
-	while (str[i] == num[i] && str[i])
 		i++;
-	if (!str[i] || str[i] < num[i])
+		str++;
+	}
+	if (!(*str) || *str < num[i])
+ 		return (1);
+	if (str[0] == '-' && i == 18 && *str == 8)
 		return (1);
 	return (0);
 }
