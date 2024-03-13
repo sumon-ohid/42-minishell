@@ -6,7 +6,7 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 10:06:20 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/13 12:36:42 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/13 14:25:05 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*extract_var_name(char *str)
 	output = malloc(sizeof(char) * (ft_strlen_till_char(str, ' ') + 1));
 	if (!output)
 		handle_error("malloc in extract_var_name failed", 1);
-	while (str[i] && str[i] != ' ' && str[i] != '$'
+	while (str[i] && str[i] != ' ' && str[i] != '$' && str[i] != '\n'
 		&& str[i] != '\"' && str[i] != '\'' && str[i] != '-' && str[i] != '.')
 	{
 		output[i] = str[i];

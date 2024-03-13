@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mole_parser.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:05:04 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/12 12:29:28 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/13 14:27:10 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ void	detach_tokens(int *end, t_token ***origin, t_data *node)
 	result = expand_append(node, end);
 	if (ft_strcmp(result, "") == 0)
 		return (free(result));
-	node->quote = SINGLE_QUOTE;
+	//node->quote = SINGLE_QUOTE;
 	create_and_link_token(origin, node->processes, result, node);
 	free(result);
 }

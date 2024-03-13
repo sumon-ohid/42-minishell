@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/13 13:10:47 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/13 14:30:18 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -240,7 +240,7 @@ void				mode(t_data *data, t_mode mode);
 int					ft_lastvalue(t_data *node);
 
 // heredoc
-char				*ft_heredoc(t_data *node, char *str);
+char				*ft_heredoc(t_data *node, t_token *delim);
 void				*ft_realloc_heredoc(void *ptr, size_t old_size,
 						size_t new_size);
 int					heredocker(char *str);
