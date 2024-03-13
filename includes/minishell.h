@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/13 16:44:51 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/13 17:20:57 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,8 +185,10 @@ void				skip(char *str, int *cur, char mode, t_data *node);
 bool				is_breaker(char c, t_data *node);
 void				detach_tokens(int *end, t_token ***origin, t_data *node);
 int					create_breakertoken(int end, t_data *node, int proc);
-void				create_soft_token(t_data *node, int *end, t_token ***origin);
-void				create_delim_token(int *end, t_data *node, t_token ***origin);
+void				create_soft_token(t_data *node, int *end,
+						t_token ***origin);
+void				create_delim_token(int *end, t_data *node,
+						t_token ***origin);
 int					saved_nulltoken(int end, t_data *node, t_token ***origin,
 						int proc);
 char				*expand_append(t_data *node, int *end);

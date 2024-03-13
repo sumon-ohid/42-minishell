@@ -3,13 +3,11 @@
 /*                                                        :::      ::::::::   */
 /*   mole_parser_extra.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 16:05:17 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/13 16:42:11 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/13 17:20:30 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-
