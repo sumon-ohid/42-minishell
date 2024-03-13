@@ -30,11 +30,11 @@ DONE - export PIPE="|" then echo $PIPE - WHY DOES IT WORK??
 DONE cat | cat | cat etc then Ctrl+\ prints a shit ton of QUIT msg
 
 Benjamin eval
-- lot of children then heredoc delimited with anything - leaks << yy | << zz | << xx
-- export | export doesnt work???
+DONE - lot of children then heredoc delimited with anything - LEAKS << yy | << zz | << xx
+DONE - export | export doesnt work???
 - : at the end or beginning or path or :: anywhere - path is unset & set at the same time?
 DONE - export "'" doesnt work anymore???
-- absolute path needs to be fixed
+DONE - absolute path needs to be fixed
 - extra newline when heredoc is delimited with ctrl+D
 
 Ismayil found:
