@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 16:05:17 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/13 21:47:57 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/13 23:07:57 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ int	adjust_for_env(int *count, int i, char *str, t_data *node)
 	int c;
 	int len;
 
-	tmp[0] = str[i];
-	c = 1;
+	//tmp[0] = str[i];
+	c = 0;
 	i++;
 	while (str[i] && str[i] != ' ' && str[i] != '$' && str[i] != '\n'
 		&& str[i] != '\"' && str[i] != '\'' && str[i] != '-'
@@ -82,7 +82,9 @@ int	adjust_for_env(int *count, int i, char *str, t_data *node)
 	}
 	tmp[c] = '\0';
 	len = ft_strlen(ft_getenv(tmp, node));
+	//printf("tmp is: %s, env is: %s, length of expanded str is: %d\n", tmp, ft_getenv(tmp, node), len);
 	*count = *count - c + len;
+	//printf("count val is %d, c val is: %d\n", *count, c);
 	return (c);
 }
 
@@ -91,7 +93,7 @@ void skip_till_quote(t_data *node, char *str, int *i, int *index)
 	while (delim_type(str[*i], node) != QUOTE && str[*i])
 	{
 		if (str[*i] == '$')
-			*i = adjust_for_env(index, *i, str, node);
+			*i = *i + adjust_for_env(index, *i, str, node);
 		else
 		{
 			(*i)++;
@@ -120,24 +122,29 @@ int	**fill_zones(t_data *node, char *str, int max, int **zones)
 	subtract = 0;
 	index = 0;
 	counter = 0;
+	//printf("value of max is: %d\n", max);
 	while (counter < max)
 	{
 		node->quote = 0;
 		skip_till_quote(node, str, &start, &index);
+		//printf("we are at %c, index is %d\n", str[start], index);
 		zones[counter][0] = index - subtract;
 		subtract++;
 		start++;
 		index++;
+		//printf("we are at %c, index is %d\n", str[start], index);
 		if (str[start - 1] == '\'')
 			skip_in_quote(node, str, &start, &index);
 		else
 			skip_till_quote(node, str, &start, &index);
+		//printf("we are at %c, index is %d\n", str[start], index);
 		zones[counter][1] = index - subtract;
 		subtract++;
 		counter++;
 	}
 	index = index - count_quotes(0, str, node, 'A');
 	node->end_index = index;
+	//printf("end index set to: %d\n", index);
 	return (zones);
 }
 
@@ -208,6 +215,7 @@ void	sever_into_tokens(t_token ***origin, t_data *node, int start, char *res)
 	char	*word;
 	bool	action_flag;
 	
+	//printf("entering function\n");
 	i = 0;
 	j = 0;
 	action_flag = true;
