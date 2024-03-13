@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 20:21:29 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/13 13:09:49 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/13 16:20:47 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	*check_og_comm(char *og_comm, t_data *node)
 		}
 		return (result);
 	}
-	else if (access(og_comm, F_OK) == 0)
+	else if (access(og_comm, F_OK) == 0 && !node->msg)
 		node->msg = ft_printerr("minishell: %s: Permission denied\n", og_comm);
 	return (NULL);
 }
@@ -39,6 +39,8 @@ char	*extract_path(char **poss_paths, char *og_comm, t_data *node)
 	counter = 0;
 	while (poss_paths[counter])
 	{
+		if (ft_strlen(og_comm) >= 2 && og_comm[0] == '.' && og_comm[1] == '/')
+			break ;
 		if (access(poss_paths[counter], X_OK) == 0)
 		{
 			res = ft_strdup(poss_paths[counter]);
@@ -47,7 +49,7 @@ char	*extract_path(char **poss_paths, char *og_comm, t_data *node)
 				ft_exit(node, -1, "malloc failure at pathfinder");
 			return (res);
 		}
-		else if (access(poss_paths[counter], F_OK) == 0)
+		else if (access(poss_paths[counter], F_OK) == 0 && !node->msg)
 		{
 			node->msg = ft_printerr("minishell: %s: Permission denied\n",
 				og_comm);
