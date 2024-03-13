@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mole_parser.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:05:04 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/13 14:27:10 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/13 15:56:41 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,11 +80,51 @@ void	mole_parser(t_token ***origin, char *input, t_data *node)
 	}
 }
 
+void	create_soft_token(t_data *node, int *end, t_token ***origin)
+{
+	char *result;
+
+	result = expand_append(node, end);
+	if (ft_strcmp(result, "") == 0)
+	{
+		free(result);
+		return ;
+	}
+	node->quote = SINGLE_QUOTE; //TO HELL WITH THIS
+	create_and_link_token(origin, node->processes, result, node);
+	free(result);
+}
+
+void	create_delim_token(int *end, t_data *node, t_token ***origin)
+{
+	int		counter;
+	char	*delim;
+	char	*str;
+	char	temp[2048];
+
+	counter = 0;
+	str = node->input_line;
+	while (delim_type(str[*end], node) != SPC && str[*end] && counter < 2046)
+	{
+		if (delim_type(str[*end], node) == QUOTE)
+			node->quote = str[*end];
+		else
+			temp[counter++] = str[*end];
+		(*end)++;
+	}
+	temp[counter] = '\0';
+	delim = ft_strdup(temp);
+	if (!delim)
+		parse_error(node, 1, "malloc error at parser", -1);
+	create_and_link_token(origin, node->processes, delim, node);
+	free(delim);
+	node->delim_turn = false;
+}
+
 void	detach_tokens(int *end, t_token ***origin, t_data *node)
 {
 	char	*str;
 	size_t	chars_left;
-	char	*result;
 
 	str = node->input_line;
 	chars_left = (ft_strlen(str) - *end);
@@ -101,10 +141,10 @@ void	detach_tokens(int *end, t_token ***origin, t_data *node)
 			return ;
 		}
 	}
-	result = expand_append(node, end);
-	if (ft_strcmp(result, "") == 0)
-		return (free(result));
-	//node->quote = SINGLE_QUOTE;
-	create_and_link_token(origin, node->processes, result, node);
-	free(result);
+	if (node->delim_turn)
+	{
+		create_delim_token(end, node, origin);
+		return ;
+	}
+	create_soft_token(node, end, origin);
 }

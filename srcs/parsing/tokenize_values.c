@@ -3,29 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize_values.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:57:30 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/13 14:23:44 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/13 14:45:19 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	determine_type(char *word, int prev_type, int quote, t_data *node)
+int	determine_type(char *word, int prev_type, t_token *cur, t_data *node)
 {
 	if (!word)
 		return (0);
-	else if (ft_strcmp("<", word) == 0 && quote == NO_QUOTE)
+	else if (ft_strcmp("<", word) == 0 && cur->quote == 0 && !(cur->exported))
 		return (REDIR_IN);
 	else if ((ft_strcmp(">", word) == 0 || ft_strcmp(">|", word) == 0)
-		&& quote == NO_QUOTE)
+		&& cur->quote == NO_QUOTE && !(cur->exported))
 		return (REDIR_OUT);
-	else if (ft_strcmp("<<", word) == 0 && quote == NO_QUOTE)
+	else if (ft_strcmp("<<", word) == 0 && cur->quote == 0 && !(cur->exported))
 		return (HEREDOC);
-	else if (ft_strcmp(">>", word) == 0 && quote == NO_QUOTE)
+	else if (ft_strcmp(">>", word) == 0 && cur->quote == 0 && !(cur->exported))
 		return (REDIR_OUT_APPEND);
-	else if (ft_strcmp("|", word) == 0 && quote == NO_QUOTE)
+	else if (ft_strcmp("|", word) == 0 && cur->quote == 0 && !(cur->exported))
 		return (PIPE);
 	else if (check_builtins(word) == 2 && !(node->command_flag))
 	{

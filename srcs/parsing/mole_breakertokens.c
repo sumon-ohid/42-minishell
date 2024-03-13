@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 17:06:52 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/12 18:43:50 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/13 15:45:41 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ void	breakermaker(int proc, int end, t_data *node, int num)
 	char	*result;
 
 	result = ft_substr_clean(node->input_line, end, num, node);
+	if (ft_strcmp(result, "<<") == 0)
+		node->delim_turn = true;
 	create_and_link_token(&(node->tokens), proc, result, node);
 	free(result);
 }

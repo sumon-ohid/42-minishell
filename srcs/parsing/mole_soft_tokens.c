@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 17:05:36 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/12 23:06:24 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/13 15:28:31 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,13 @@ void	create_element(t_element **elements, t_data *node, int start, int end)
 	if (!new)
 		parse_error(node, 1, "error at create_element", -1);
 	data = ft_substr(node->input_line, start, (end - start));
-	new->exported = false;
-	new->quote = node->quote;
 	if (!data)
 	{
 		free(new);
 		parse_error(node, 1, "error at create_element", -1);
 	}
+	new->exported = false;
+	new->quote = node->quote;
 	if (ft_strstr(data, "$") && node->quote != '\'')
 	{
 		new->str = handle_envp(data, node);

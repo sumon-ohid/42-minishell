@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/13 14:30:18 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/13 15:32:22 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ typedef struct s_token
 	char			*str;
 	int				type;
 	char			*heredoc_data;
-	int				quote;
+	char			quote;
 	bool			exported;
 	struct s_token	*previous;
 	struct s_token	*next;
@@ -154,6 +154,7 @@ typedef struct s_data
 	bool				exported;
 	char				command_flag;
 	int					msg;
+	bool				delim_turn;
 	t_mode				mode;
 	t_token				**tokens;
 	t_element			*elements;
@@ -196,7 +197,7 @@ void				free_elements(t_element *elements);
 t_token				**tokenizer(char *str);
 int					ft_strlen_till_char(char *str, char c);
 void				char_append(char **str, char c);
-int					determine_type(char *word, int prev_type, int quote,
+int					determine_type(char *word, int prev_type, t_token *cur,
 						t_data *node);
 int					check_builtins(char *word);
 int					check_prevs(char *word, int prev_type, t_data *node);

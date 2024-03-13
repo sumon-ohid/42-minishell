@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_extra.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 14:59:41 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/13 14:20:14 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/13 15:57:19 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char	*handle_signals(char *line, t_data *node)
 	}
 	return (line);
 }
-
+/*
 char	*append_line_to_heredoc(char *heredoc, char *line, t_token *delim,
 		t_data *node)
 {
@@ -86,7 +86,7 @@ char	*append_line_to_heredoc(char *heredoc, char *line, t_token *delim,
 	}
 	len = ft_strlen(heredoc);
 	return (heredoc);
-}
+}*/
 
 char	*ft_heredoc(t_data *node, t_token *delim)
 {
@@ -113,7 +113,7 @@ char	*ft_heredoc(t_data *node, t_token *delim)
 	mode(node, NON_INTERACTIVE);
 	if (line != NULL)
 		free(line);
-	printf("delim quote is: %d\n", delim->quote);
+	//printf("delim quote is: %d\n", delim->quote);
 	if (ft_strstr(heredoc, "$") && delim->quote == NO_QUOTE)
 	{
 		temp = heredoc;
