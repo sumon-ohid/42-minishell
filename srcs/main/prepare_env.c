@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prepare_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 18:06:23 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/12 22:35:04 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/13 17:51:34 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	**prepare_basic_envs(t_data *node)
 	char	**result;
 	char	*home;
 
-	result = ft_calloc(sizeof(char *), 4);
+	result = ft_calloc(sizeof(char *), 5);
 	if (!result)
 		env_quit(NULL, node);
 	home = ft_strdup(getcwd(NULL, 0));
@@ -57,12 +57,15 @@ char	**prepare_basic_envs(t_data *node)
 	if (!result[0])
 		env_quit(result, node);
 	result[1] = ft_strdup("SHLVL=\"1\"");
-	if (!result[0])
+	if (!result[1])
 		env_quit(result, node);
 	result[2] = ft_strdup("PATH=\"/usr/bin:\"");
-	if (!result[0])
+	if (!result[2])
 		env_quit(result, node);
-	result[3] = NULL;
+	result[3] = ft_strdup("_=/usr/bin/env");
+	if (!result[3])
+		env_quit(result, node);
+	result[4] = NULL;
 	return (result);
 }
 
