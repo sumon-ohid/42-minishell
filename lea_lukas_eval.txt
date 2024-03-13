@@ -11,8 +11,9 @@ DONE - exit should not have value beyond long max & should work with negatives
 DONE - we should not exit if CD fails, + PWD should not be updated in that case
 DONE - unset path -> absolute path should still work
 DONE - always check local executables
-- access thinks executable with no permissions still exists
-- in path i should not split until : but EOF also
+- ./ doesnt work in execution for some reason
+DONE - access thinks executable with no permissions still exists
+??? - in path i should not split until : but EOF also
 DONE - chmod 000 infile, cat < infile is not found (should be perm denied)
 DONE - export should accept only letters, numbers (ex first char) and _
 DONE - "export" doesnt work, but with flags it does????
@@ -25,14 +26,14 @@ DONE - echo || echo should be syntax error
 - cat << "$USER" -> mhuszar should not be a delim!
 - but cat << $USER -> $USER should be delim
 DONE - cd : too many arguments should be handled
-- export VAR="hehe haha" should break into 2 tokens
+??? - export VAR="hehe haha" should break into 2 tokens
 DONE - export PIPE="|" then echo $PIPE - WHY DOES IT WORK??
 DONE cat | cat | cat etc then Ctrl+\ prints a shit ton of QUIT msg
 
 Benjamin eval
 DONE - lot of children then heredoc delimited with anything - LEAKS << yy | << zz | << xx
 DONE - export | export doesnt work???
-- : at the end or beginning or path or :: anywhere - path is unset & set at the same time?
+??? - : at the end or beginning or path or :: anywhere - path is unset & set at the same time?
 DONE - export "'" doesnt work anymore???
 DONE - absolute path needs to be fixed
 ??? - extra newline when heredoc is delimited with ctrl+D
