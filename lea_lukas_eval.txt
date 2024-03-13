@@ -1,5 +1,5 @@
-- e$A-hello A="cho" echo should work
-- . - etc should break a varname (parser issue)
+DONE - e$A-hello A="cho" echo should not work
+DONE - . - etc should break a varname (parser issue)
 DONE - $nonexist | cat has leaks
 DONE - "" | cat also has a leak
 ??? cat | ls + CtrlC we need extra newline

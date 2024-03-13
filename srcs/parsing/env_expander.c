@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_expander.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 10:06:20 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/11 22:02:09 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/13 12:36:42 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*extract_var_name(char *str)
 	if (!output)
 		handle_error("malloc in extract_var_name failed", 1);
 	while (str[i] && str[i] != ' ' && str[i] != '$'
-		&& str[i] != '\"' && str[i] != '\'')
+		&& str[i] != '\"' && str[i] != '\'' && str[i] != '-' && str[i] != '.')
 	{
 		output[i] = str[i];
 		i++;
@@ -84,7 +84,6 @@ char	*handle_env_values(char *str, char *result, t_data *node, int *i)
 		char_append(&result, str[(*i)]);
 	return (result);
 }
-// echo $- don't know if we need to handle
 
 char	*handle_envp(char *str, t_data *node)
 {
