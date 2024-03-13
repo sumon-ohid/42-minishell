@@ -33,7 +33,7 @@ Benjamin eval
 - lot of children then heredoc delimited with anything - leaks << yy | << zz | << xx
 - export | export doesnt work???
 - : at the end or beginning or path or :: anywhere - path is unset & set at the same time?
-- export "'" doesnt work anymore???
+DONE - export "'" doesnt work anymore???
 - absolute path needs to be fixed
 - extra newline when heredoc is delimited with ctrl+D
 
