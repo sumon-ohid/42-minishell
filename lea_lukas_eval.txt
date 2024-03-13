@@ -13,7 +13,7 @@ DONE - unset path -> absolute path should still work
 DONE - always check local executables
 - access thinks executable with no permissions still exists
 - in path i should not split until : but EOF also
-- chmod 000 infile, cat < infile is not found (should be perm denied)
+DONE - chmod 000 infile, cat < infile is not found (should be perm denied)
 DONE - export should accept only letters, numbers (ex first char) and _
 DONE - "export" doesnt work, but with flags it does????
 DONE - unset "USER" doesnt work, should work
@@ -35,7 +35,7 @@ DONE - export | export doesnt work???
 - : at the end or beginning or path or :: anywhere - path is unset & set at the same time?
 DONE - export "'" doesnt work anymore???
 DONE - absolute path needs to be fixed
-- extra newline when heredoc is delimited with ctrl+D
+??? - extra newline when heredoc is delimited with ctrl+D
 
 Ismayil found:
 - 0000000000000000000000000007 should still work for exit

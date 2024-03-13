@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 15:02:36 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/12 13:44:48 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/13 12:43:13 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,10 @@ int	redirect_in(char *input, int mode, t_data *node)
 	fd1 = open(input, O_RDONLY);
 	if (fd1 == -1)
 	{
-		ft_printerr("minishell: %s: No such file or directory\n", input);
+		if (access(input, F_OK) == 0)
+			ft_printerr("minishell: %s: Permission denied\n", input);
+		else
+			ft_printerr("minishell: %s: No such file or directory\n", input);
 		if (mode == 1)
 		{
 			ft_free_fds(node);
