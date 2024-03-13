@@ -24,6 +24,7 @@ SRC = 	srcs/main/main.c \
 		srcs/main/handle_error.c \
 		srcs/parsing/lexer.c \
 		srcs/parsing/mole_parser.c\
+		srcs/parsing/mole_parser_extra.c\
 		srcs/parsing/mole_breakertokens.c\
 		srcs/parsing/mole_soft_tokens.c\
 		srcs/parsing/create_tokens.c\

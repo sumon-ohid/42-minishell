@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 17:54:33 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/13 14:35:15 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/13 16:04:16 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,18 +102,8 @@ int	check_atoll(char *str)
 		str++;
 	}
 	if (!(*str) || *str < num[i])
- 		return (1);
+		return (1);
 	if (str[0] == '-' && i == 18 && *str == 8)
 		return (1);
 	return (0);
 }
-
-/*
-#include <stdio.h>
-
-int	main(void)
-{
-	//printf("%d\n", ft_atoi("  	-123456"));
-	printf("%d", atoi("  		--12345aaa6"));
-	return (0);
-}*/

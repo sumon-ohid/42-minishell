@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/13 15:32:22 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/13 16:06:28 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,6 +192,7 @@ void				create_element(t_element **elements, t_data *node,
 						int start, int end);
 char				*concatenate_elements(t_element *elements, t_data *node);
 void				free_elements(t_element *elements);
+void				init_values(int *end, t_data *node);
 
 // tokenizer
 t_token				**tokenizer(char *str);
