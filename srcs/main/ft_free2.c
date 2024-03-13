@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 10:03:57 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/12 21:21:36 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/13 11:23:05 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,8 @@ void	free_node(t_data *node)
 
 void	eof_free(t_data *node)
 {
-	int val;
-	
+	int	val;
+
 	val = ft_lastvalue(node);
 	printf("exit\n");
 	free(node->oldpwd);

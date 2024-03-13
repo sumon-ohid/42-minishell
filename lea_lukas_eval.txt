@@ -29,7 +29,6 @@ DONE - cd : too many arguments should be handled
 DONE - export PIPE="|" then echo $PIPE - WHY DOES IT WORK??
 DONE cat | cat | cat etc then Ctrl+\ prints a shit ton of QUIT msg
 
-
 Benjamin eval
 - lot of children then heredoc delimited with anything - leaks << yy | << zz | << xx
 - export | export doesnt work???

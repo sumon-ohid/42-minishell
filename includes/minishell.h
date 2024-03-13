@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/12 23:05:56 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/13 11:23:24 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@
 # define RED "\033[31m"
 # define RESET "\033[0m"
 
-#ifndef BUFFER_SIZE
-# define BUFFER_SIZE 100
-#endif
+// #ifndef BUFFER_SIZE
+// # define BUFFER_SIZE 100
+// #endif
 
 // headers
 # include <dirent.h>
