@@ -6,7 +6,7 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:27:41 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/12 18:57:47 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/13 11:20:25 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	sort_env(char **arr, int n)
 int	handle_export_no_args(t_data *node)
 {
 	int		i;
-	char	*var_value;
 	char	*var_name;
 	char	*tmp;
 
@@ -50,13 +49,9 @@ int	handle_export_no_args(t_data *node)
 		tmp = copy_after_char(node->envp[i], '=');
 		if (!tmp)
 			ft_exit(node, -1, "malloc failed at ft_export function");
-		var_value = remove_quote(tmp);
-		if (!var_value)
-			ft_exit(node, -1, "malloc failed at ft_export function");
-		printf("declare -x %s=\"%s\"\n", var_name, var_value);
+		printf("declare -x %s=\"%s\"\n", var_name, tmp);
 		free(var_name);
 		free(tmp);
-		free(var_value);
 		i++;
 	}
 	return (0);

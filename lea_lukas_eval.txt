@@ -28,4 +28,4 @@ DONE - cd : too many arguments should be handled
 - export VAR="hehe haha" should break into 2 tokens
 DONE - export PIPE="|" then echo $PIPE - WHY DOES IT WORK??
 DONE cat | cat | cat etc then Ctrl+\ prints a shit ton of QUIT msg
-
+DONE - export quotations

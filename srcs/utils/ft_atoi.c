@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 17:54:33 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/12 22:44:38 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/13 11:22:36 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ static int	survey(const char *str)
 int	ft_atoll(const char *str)
 {
 	long long int	nb;
-	int	sign;
-	int	start;
+	int				sign;
+	int				start;
 
 	nb = 0;
 	sign = survey(str);
@@ -56,9 +56,9 @@ int	ft_atoll(const char *str)
 
 int	check_atoll(char *str)
 {
-	char 	*num;
+	char	*num;
 	int		i;
-	
+
 	i = 0;
 	if (str && str[0] == '-')
 	{
@@ -77,17 +77,18 @@ int	check_atoll(char *str)
 		num = "9223372036854775807";
 	}
 	while (str[i] == num[i] && str[i])
-			i++;
+		i++;
 	if (!str[i] || str[i] < num[i])
 		return (1);
 	return (0);
 }
 
 /*
-#include<stdio.h>
+#include <stdio.h>
+
 int	main(void)
 {
 	//printf("%d\n", ft_atoi("  	-123456"));
-	printf("%d", atoi("  	 --12345aaa6"));
+	printf("%d", atoi("  		--12345aaa6"));
 	return (0);
 }*/
