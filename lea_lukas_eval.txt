@@ -40,3 +40,6 @@ DONE - absolute path needs to be fixed
 
 Ismayil found:
 DONE - 0000000000000000000000000007 should still work for exit
+
+
+--- env -i has a conditional jump for any commands
