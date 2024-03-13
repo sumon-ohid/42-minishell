@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 20:21:29 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/13 13:09:49 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/13 16:01:12 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	*extract_path(char **poss_paths, char *og_comm, t_data *node)
 		else if (access(poss_paths[counter], F_OK) == 0)
 		{
 			node->msg = ft_printerr("minishell: %s: Permission denied\n",
-				og_comm);
+					og_comm);
 		}
 		counter++;
 	}

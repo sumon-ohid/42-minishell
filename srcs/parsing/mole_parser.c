@@ -3,66 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   mole_parser.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:05:04 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/13 15:56:41 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/13 16:05:50 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-int	delim_type(char c, t_data *node)
-{
-	if (c == ' ' && !(node->quote))
-		return (1);
-	else if (c == '\t' && !(node->quote))
-		return (1);
-	else if (c == '\n' && !(node->quote))
-		return (1);
-	else if (c == '|' && !(node->quote))
-		return (2);
-	else if (c == '<' && !(node->quote))
-		return (3);
-	else if (c == '>' && !(node->quote))
-		return (3);
-	else if (c == '\0')
-		return (4);
-	else if (c == '\"' && node->quote != '\'')
-		return (5);
-	else if (c == '\'' && node->quote != '\"')
-		return (5);
-	else if (c == '$' && !(node->quote))
-		return (6);
-	else
-		return (0);
-}
-
-void	skip(char *str, int *cur, char mode, t_data *node)
-{
-	if (mode == 'S')
-	{
-		while (delim_type(str[*cur], node) == SPC)
-			(*cur)++;
-	}
-	else if (mode == 'C')
-	{
-		while (delim_type(str[*cur], node) == NONE)
-			(*cur)++;
-	}
-	else if (mode == 'X')
-	{
-		while (delim_type(str[*cur], node) != SPC && str[*cur])
-			(*cur)++;
-	}
-}
-
-void	init_values(int *end, t_data *node)
-{
-	*end = 0;
-	node->quote = 0;
-	node->processes = 0;
-}
 
 void	mole_parser(t_token ***origin, char *input, t_data *node)
 {
@@ -82,7 +30,7 @@ void	mole_parser(t_token ***origin, char *input, t_data *node)
 
 void	create_soft_token(t_data *node, int *end, t_token ***origin)
 {
-	char *result;
+	char	*result;
 
 	result = expand_append(node, end);
 	if (ft_strcmp(result, "") == 0)
@@ -90,7 +38,7 @@ void	create_soft_token(t_data *node, int *end, t_token ***origin)
 		free(result);
 		return ;
 	}
-	node->quote = SINGLE_QUOTE; //TO HELL WITH THIS
+	node->quote = SINGLE_QUOTE;
 	create_and_link_token(origin, node->processes, result, node);
 	free(result);
 }
