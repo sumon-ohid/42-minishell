@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/13 17:20:57 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/13 20:40:03 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,6 +155,7 @@ typedef struct s_data
 	char				command_flag;
 	int					msg;
 	bool				delim_turn;
+	int					end_index;
 	t_mode				mode;
 	t_token				**tokens;
 	t_element			*elements;
@@ -197,6 +198,7 @@ void				create_element(t_element **elements, t_data *node,
 char				*concatenate_elements(t_element *elements, t_data *node);
 void				free_elements(t_element *elements);
 void				init_values(int *end, t_data *node);
+void				sever_into_tokens(t_token ***origin, t_data *node, int start, char *res);
 
 // tokenizer
 t_token				**tokenizer(char *str);

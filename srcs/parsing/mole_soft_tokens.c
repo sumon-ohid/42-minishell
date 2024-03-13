@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mole_soft_tokens.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 17:05:36 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/13 17:56:39 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/13 20:54:57 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 void	create_soft_token(t_data *node, int *end, t_token ***origin)
 {
 	char	*result;
+	int		start;
 
+	start = *end;
 	result = expand_append(node, end);
 	if (ft_strcmp(result, "") == 0)
 	{
@@ -23,7 +25,8 @@ void	create_soft_token(t_data *node, int *end, t_token ***origin)
 		return ;
 	}
 	node->quote = SINGLE_QUOTE;
-	create_and_link_token(origin, node->processes, result, node);
+	sever_into_tokens(origin, node, start, result);
+	//create_and_link_token(origin, node->processes, result, node);
 	free(result);
 }
 

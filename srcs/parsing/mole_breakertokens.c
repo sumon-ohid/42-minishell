@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 17:06:52 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/13 16:41:26 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/13 22:14:21 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,11 +84,11 @@ void	create_delim_token(int *end, t_data *node, t_token ***origin)
 	int		counter;
 	char	*delim;
 	char	*str;
-	char	temp[2048];
+	char	temp[4096];
 
 	counter = 0;
 	str = node->input_line;
-	while (delim_type(str[*end], node) != SPC && str[*end] && counter < 2046)
+	while (delim_type(str[*end], node) != SPC && str[*end] && counter < 4093)
 	{
 		if (delim_type(str[*end], node) == QUOTE)
 			node->quote = str[*end];
