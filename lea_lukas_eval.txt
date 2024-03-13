@@ -9,8 +9,8 @@ DONE - exit should not have value beyond long max & should work with negatives
 ??? - whatever we unset (PWD etc) should not go back into export, only env
 ??? - PWD should also update like OLDPWD
 DONE - we should not exit if CD fails, + PWD should not be updated in that case
-- unset path -> absolute path should still work
-- always check local executables first
+DONE - unset path -> absolute path should still work
+DONE - always check local executables
 - access thinks executable with no permissions still exists
 - in path i should not split until : but EOF also
 - chmod 000 infile, cat < infile is not found (should be perm denied)
@@ -18,7 +18,7 @@ DONE - export should accept only letters, numbers (ex first char) and _
 DONE - "export" doesnt work, but with flags it does????
 DONE - unset "USER" doesnt work, should work
 DONE - env -i + commands had conditional jump issue
-REMOVED - unset OLDÜWD + cd - we should have an error msg (or remove cd -)
+REMOVED - unset OLDPWD + cd - we should have an error msg (or remove cd -)
 DONE - always exit the shell with $? (ctrl + C into newline then exit and we get 0)
 REMOVED - "$$" expands but only in quotes??
 DONE - echo || echo should be syntax error
@@ -29,3 +29,14 @@ DONE - cd : too many arguments should be handled
 DONE - export PIPE="|" then echo $PIPE - WHY DOES IT WORK??
 DONE cat | cat | cat etc then Ctrl+\ prints a shit ton of QUIT msg
 
+
+Benjamin eval
+- lot of children then heredoc delimited with anything - leaks << yy | << zz | << xx
+- export | export doesnt work???
+- : at the end or beginning or path or :: anywhere - path is unset & set at the same time?
+- export "'" doesnt work anymore???
+- absolute path needs to be fixed
+- extra newline when heredoc is delimited with ctrl+D
+
+Ismayil found:
+- 0000000000000000000000000007 should still work for exit

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 20:21:29 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/11 21:42:59 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/13 11:20:55 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ char	*check_og_comm(char *og_comm, t_data *node)
 	}
 	else
 		return (NULL);
+		
 }
 
 char	*extract_path(char *comm2, char **poss_paths, char *og_comm,
@@ -74,7 +75,7 @@ char	*pathfinder(char **envp, char *comm, t_data *node)
 			|| ft_strstr(envp[counter], "_PATH")))
 		counter++;
 	if (!envp[counter])
-		return (free(comm2), "faill");
+		return (free(comm2), "empty_path");
 	while (envp[counter][i] && envp[counter][i] != '/')
 		i++;
 	p_paths = ft_split(&envp[counter][i], ':', 0, 0);
@@ -91,12 +92,16 @@ void	extract_find_execute(char **envp, char **comms, t_data *node)
 	char	*path;
 
 	path = pathfinder(envp, comms[0], node);
-	if (ft_strcmp(path, "faill") == 0 || !path)
+	if (ft_strcmp(path, "empty_path") == 0 || !path)
 	{
-		ft_free_fds(node);
-		nocomm_error(comms[0]);
-		free(comms);
-		ft_exit(node, 127, NULL);
+		path = check_og_comm(comms[0], node);
+		if (!path)
+		{
+			ft_free_fds(node);
+			nocomm_error(comms[0]);
+			free(comms);
+			ft_exit(node, 127, NULL);
+		}
 	}
 	close(node->std_in);
 	close(node->std_out);
