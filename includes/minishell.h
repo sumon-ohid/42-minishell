@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/12 22:35:12 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/12 23:05:56 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ typedef struct s_element
 {
 	char				*str;
 	bool				exported;
+	char				quote;
 	struct s_element	*next;
 }					t_element;
 

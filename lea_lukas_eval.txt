@@ -2,7 +2,7 @@
 - . - etc should break a varname (parser issue)
 DONE - $nonexist | cat has leaks
 DONE - "" | cat also has a leak
-- cat | ls + CtrlC we need extra newline
+??? cat | ls + CtrlC we need extra newline
 - print segfault message for sigsegv
 DONE - echo should ignore all -n flags after the first (unitl broken by . or something)
 DONE - exit should not have value beyond long max & should work with negatives
@@ -27,5 +27,5 @@ DONE - echo || echo should be syntax error
 DONE - cd : too many arguments should be handled
 - export VAR="hehe haha" should break into 2 tokens
 DONE - export PIPE="|" then echo $PIPE - WHY DOES IT WORK??
-- cat | cat | cat etc then Ctrl+\ prints a shit ton of QUIT msg
+DONE cat | cat | cat etc then Ctrl+\ prints a shit ton of QUIT msg
 
