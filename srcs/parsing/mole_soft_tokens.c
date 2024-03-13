@@ -6,11 +6,26 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 17:05:36 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/13 15:28:31 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/13 16:40:34 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+void	create_soft_token(t_data *node, int *end, t_token ***origin)
+{
+	char	*result;
+
+	result = expand_append(node, end);
+	if (ft_strcmp(result, "") == 0)
+	{
+		free(result);
+		return ;
+	}
+	node->quote = SINGLE_QUOTE;
+	create_and_link_token(origin, node->processes, result, node);
+	free(result);
+}
 
 char	*expand_append(t_data *node, int *end)
 {

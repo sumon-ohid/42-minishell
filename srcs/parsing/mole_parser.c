@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mole_parser.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:05:04 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/13 16:05:50 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/13 16:41:50 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,47 +26,6 @@ void	mole_parser(t_token ***origin, char *input, t_data *node)
 			detach_tokens(&end, origin, node);
 		node->quote = 0;
 	}
-}
-
-void	create_soft_token(t_data *node, int *end, t_token ***origin)
-{
-	char	*result;
-
-	result = expand_append(node, end);
-	if (ft_strcmp(result, "") == 0)
-	{
-		free(result);
-		return ;
-	}
-	node->quote = SINGLE_QUOTE;
-	create_and_link_token(origin, node->processes, result, node);
-	free(result);
-}
-
-void	create_delim_token(int *end, t_data *node, t_token ***origin)
-{
-	int		counter;
-	char	*delim;
-	char	*str;
-	char	temp[2048];
-
-	counter = 0;
-	str = node->input_line;
-	while (delim_type(str[*end], node) != SPC && str[*end] && counter < 2046)
-	{
-		if (delim_type(str[*end], node) == QUOTE)
-			node->quote = str[*end];
-		else
-			temp[counter++] = str[*end];
-		(*end)++;
-	}
-	temp[counter] = '\0';
-	delim = ft_strdup(temp);
-	if (!delim)
-		parse_error(node, 1, "malloc error at parser", -1);
-	create_and_link_token(origin, node->processes, delim, node);
-	free(delim);
-	node->delim_turn = false;
 }
 
 void	detach_tokens(int *end, t_token ***origin, t_data *node)
@@ -95,4 +54,56 @@ void	detach_tokens(int *end, t_token ***origin, t_data *node)
 		return ;
 	}
 	create_soft_token(node, end, origin);
+}
+
+int	delim_type(char c, t_data *node)
+{
+	if (c == ' ' && !(node->quote))
+		return (1);
+	else if (c == '\t' && !(node->quote))
+		return (1);
+	else if (c == '\n' && !(node->quote))
+		return (1);
+	else if (c == '|' && !(node->quote))
+		return (2);
+	else if (c == '<' && !(node->quote))
+		return (3);
+	else if (c == '>' && !(node->quote))
+		return (3);
+	else if (c == '\0')
+		return (4);
+	else if (c == '\"' && node->quote != '\'')
+		return (5);
+	else if (c == '\'' && node->quote != '\"')
+		return (5);
+	else if (c == '$' && !(node->quote))
+		return (6);
+	else
+		return (0);
+}
+
+void	skip(char *str, int *cur, char mode, t_data *node)
+{
+	if (mode == 'S')
+	{
+		while (delim_type(str[*cur], node) == SPC)
+			(*cur)++;
+	}
+	else if (mode == 'C')
+	{
+		while (delim_type(str[*cur], node) == NONE)
+			(*cur)++;
+	}
+	else if (mode == 'X')
+	{
+		while (delim_type(str[*cur], node) != SPC && str[*cur])
+			(*cur)++;
+	}
+}
+
+void	init_values(int *end, t_data *node)
+{
+	*end = 0;
+	node->quote = 0;
+	node->processes = 0;
 }

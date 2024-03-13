@@ -3,7 +3,7 @@ DONE - . - etc should break a varname (parser issue)
 DONE - $nonexist | cat has leaks
 DONE - "" | cat also has a leak
 ??? cat | ls + CtrlC we need extra newline
-- print segfault message for sigsegv
+??? - print segfault message for sigsegv
 DONE - echo should ignore all -n flags after the first (unitl broken by . or something)
 DONE - exit should not have value beyond long max & should work with negatives
 ??? - whatever we unset (PWD etc) should not go back into export, only env
@@ -11,7 +11,7 @@ DONE - exit should not have value beyond long max & should work with negatives
 DONE - we should not exit if CD fails, + PWD should not be updated in that case
 DONE - unset path -> absolute path should still work
 DONE - always check local executables
-- ./ doesnt work in execution for some reason
+DONE - ./ doesnt work in execution for some reason
 DONE - access thinks executable with no permissions still exists
 ??? - in path i should not split until : but EOF also
 DONE - chmod 000 infile, cat < infile is not found (should be perm denied)
@@ -23,8 +23,8 @@ REMOVED - unset OLDPWD + cd - we should have an error msg (or remove cd -)
 DONE - always exit the shell with $? (ctrl + C into newline then exit and we get 0)
 REMOVED - "$$" expands but only in quotes??
 DONE - echo || echo should be syntax error
-- cat << "$USER" -> mhuszar should not be a delim!
-- but cat << $USER -> $USER should be delim
+DONE - cat << "$USER" -> mhuszar should not be a delim!
+DONE - but cat << $USER -> $USER should be delim
 DONE - cd : too many arguments should be handled
 ??? - export VAR="hehe haha" should break into 2 tokens
 DONE - export PIPE="|" then echo $PIPE - WHY DOES IT WORK??
@@ -39,4 +39,4 @@ DONE - absolute path needs to be fixed
 ??? - extra newline when heredoc is delimited with ctrl+D
 
 Ismayil found:
-- 0000000000000000000000000007 should still work for exit
+DONE - 0000000000000000000000000007 should still work for exit

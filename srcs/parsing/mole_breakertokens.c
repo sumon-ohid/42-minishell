@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 17:06:52 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/13 15:45:41 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/13 16:41:26 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,30 @@ int	create_breakertoken(int end, t_data *node, int proc)
 		return (end + 1);
 	}
 	return (end);
+}
+
+void	create_delim_token(int *end, t_data *node, t_token ***origin)
+{
+	int		counter;
+	char	*delim;
+	char	*str;
+	char	temp[2048];
+
+	counter = 0;
+	str = node->input_line;
+	while (delim_type(str[*end], node) != SPC && str[*end] && counter < 2046)
+	{
+		if (delim_type(str[*end], node) == QUOTE)
+			node->quote = str[*end];
+		else
+			temp[counter++] = str[*end];
+		(*end)++;
+	}
+	temp[counter] = '\0';
+	delim = ft_strdup(temp);
+	if (!delim)
+		parse_error(node, 1, "malloc error at parser", -1);
+	create_and_link_token(origin, node->processes, delim, node);
+	free(delim);
+	node->delim_turn = false;
 }

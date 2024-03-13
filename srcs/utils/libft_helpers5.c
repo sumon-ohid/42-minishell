@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft_helpers5.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 22:03:01 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/13 11:24:13 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/13 16:33:05 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ char	*remove_quote(char *str)
 		return (NULL);
 	while (str[i])
 	{
-		if (str[i] != '\"' && str[i] != '\'')
-		{
+		//if (str[i] != '\"' && str[i] != '\'')
+		//{
 			output[j] = str[i];
 			j++;
-		}
+		//}
 		i++;
 	}
 	output[j] = '\0';
