@@ -6,7 +6,7 @@
 /*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 10:06:20 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/13 14:25:05 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/13 17:19:40 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*extract_var_name(char *str)
 	i = 0;
 	output = malloc(sizeof(char) * (ft_strlen_till_char(str, ' ') + 1));
 	if (!output)
-		handle_error("malloc in extract_var_name failed", 1);
+		return (NULL);
 	while (str[i] && str[i] != ' ' && str[i] != '$' && str[i] != '\n'
 		&& str[i] != '\"' && str[i] != '\'' && str[i] != '-' && str[i] != '.')
 	{
@@ -60,25 +60,23 @@ char	*handle_dollar_dollar(char *result, t_data *node, int *i)
 char	*handle_env_values(char *str, char *result, t_data *node, int *i)
 {
 	char	*var_name;
-	char	*var_value;
 	char	*tmp;
 
 	if ((str[(*i) + 1] >= 'A' && str[(*i) + 1] <= 'Z') || (str[(*i) + 1] >= 'a'
 			&& str[(*i) + 1] <= 'z'))
 	{
 		var_name = extract_var_name(str + (*i) + 1);
+		if (!var_name)
+			ft_exit(node, -1, "malloc failed at handle envp");
 		tmp = get_env_value(var_name, node);
-		var_value = remove_quote(tmp);
-		result = ft_strjoin(result, var_value, 1);
+		result = ft_strjoin(result, tmp, 1);
 		if (!result)
 		{
 			free(var_name);
-			free(var_value);
 			ft_exit(node, -1, "malloc failed at handle envp");
 		}
 		(*i) += ft_strlen(var_name);
 		free(var_name);
-		free(var_value);
 	}
 	else
 		char_append(&result, str[(*i)]);
