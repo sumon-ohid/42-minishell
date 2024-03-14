@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: parallels <parallels@student.42.fr>        +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/14 16:48:44 by parallels        ###   ########.fr       */
+/*   Updated: 2024/03/14 17:25:23 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,23 +162,28 @@ typedef struct s_data
 	struct s_data		*next;
 }						t_data;
 
+//initialization
+char				**dup_envp(char **envp, t_data *node);
+void				adjust_shlevel(char **env, t_data *node);
+void				add_missing_envs(t_data *node);
+void				ft_set(t_data *node);
+void				ft_restore(t_data *node);
+
 // take_input
 int					entry_check(t_data *node, char *line);
 int					ft_lexical_checker(t_data *node, int in_single_quote,
 						int in_double_quote, char prev_char);
 char				*ft_upgrade_spaces(char *line, int i, int j, int in_quotes);
 int					pipe_counter(char *str);
-char				**dup_envp(char **envp, t_data *node);
 char				*handle_envp(char *str, t_data *node);
 void				process_words(t_token ***origin, char **words, char *str,
 						t_data *node);
 int					quote_assigner(char quote);
 void				eof_free(t_data *node);
-void				adjust_shlevel(char **env, t_data *node);
 
 //mole_parser
-
 void				mole_parser(t_token ***origin, char *input, t_data *node);
+void				init_values(int *end, t_data *node);
 int					delim_type(char c, t_data *node);
 void				create_and_link_token(t_token ***origin, int current,
 						char *word, t_data *node);
@@ -197,7 +202,6 @@ void				create_element(t_element **elements, t_data *node,
 						int start, int end);
 char				*concatenate_elements(t_element *elements, t_data *node);
 void				free_elements(t_element *elements);
-void				init_values(int *end, t_data *node);
 void				sever_into_tokens(t_token ***origin, t_data *node,
 						int start, char *res);
 
@@ -238,8 +242,6 @@ int					ft_redirector(t_token *chain, int file_type,
 						int mode, t_data *node);
 int					ft_redirect_checker(t_token *chain, int mode,
 						t_data *node, int killmode);
-void				ft_set(t_data *node);
-void				ft_restore(t_data *node);
 void				close_all(int ***origin, int max);
 bool				expands_to_multiples(t_token *mark,
 						t_data *node);

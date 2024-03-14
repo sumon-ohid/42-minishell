@@ -6,11 +6,28 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 18:46:23 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/14 13:40:19 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/14 17:15:34 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+void	set_pwd(t_data *node)
+{
+	node->old_turn = 0;
+	node->pwd = getenv("PWD");
+	if (!getenv("OLDPWD"))
+		node->oldpwd = ft_strdup("");
+	else
+		node->oldpwd = ft_strdup(getenv("OLDPWD"));
+	if (!node->oldpwd)
+	{
+		close(node->std_in);
+		close(node->std_out);
+		free(node);
+		handle_error("ft_set failed", -1);
+	}
+}
 
 void	ft_set(t_data *node)
 {
@@ -27,18 +44,7 @@ void	ft_set(t_data *node)
 		free(node);
 		handle_error("ft_set failed", -1);
 	}
-	node->old_turn = 0;
-	node->pwd = getenv("PWD");
-	if (!getenv("OLDPWD"))
-		return ;
-	node->oldpwd = ft_strdup(getenv("OLDPWD"));
-	if (!node->oldpwd)
-	{
-		close(node->std_in);
-		close(node->std_out);
-		free(node);
-		handle_error("ft_set failed", -1);
-	}
+	set_pwd(node);
 }
 
 void	ft_restore(t_data *node)

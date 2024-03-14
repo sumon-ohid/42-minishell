@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prepare_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 18:06:23 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/13 17:51:34 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/14 17:47:15 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,33 @@ char	**prepare_basic_envs(t_data *node)
 		env_quit(result, node);
 	result[4] = NULL;
 	return (result);
+}
+
+void	add_missing_envs(t_data *node)
+{
+	char *pwd;
+	char *exp;
+
+	if (!getenv("PATH"))
+		handle_export(node, "PATH=\"/usr/bin:\"");
+	if (!getenv("SHLVL"))
+		handle_export(node, "SHLVL=\"1\"");
+	if (!getenv("_"))
+		handle_export(node, "_=\"/usr/bin/env\"");
+	if (!getenv("PWD"))
+	{
+		pwd = get_current_directory();
+		exp = ft_strjoin("PWD=", pwd, 0);
+		if (!exp)
+		{
+			ft_free_array(node->envp);
+			free(node->oldpwd);
+			free(node);
+			handle_error("env preparation failed", -1);
+		}
+		handle_export(node, exp);
+		free(exp);
+	}
 }
 
 char	**dup_envp(char **envp, t_data *node)
