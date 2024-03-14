@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 16:05:17 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/14 22:24:43 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/14 22:34:04 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,10 @@ void	handle_without_zones(t_data *node, t_token ***origin, char *res)
 		skip(res, &i, 'X', node);
 		word = ft_substr(res, j, i - j);
 		if (!word)
+		{
+			free(res);
 			parse_error(node, 1, "malloc in zone handler failed", -1);
+		}
 		create_and_link_token(origin, node->processes, word, node);
 		free(word);
 	}
@@ -95,52 +98,13 @@ void	creator_loop(t_data *node, char *res, int **zones, char *str)
 	}
 }
 
-// void	creator_loop(t_data *node, char *res, int **zones, char *str)
-// {
-// 	int		i;
-// 	int		j;
-// 	bool	action_flag;
-// 	char	*word;
-// 	int		max;
-
-// 	max = count_quotes(0, str, node, 'A') / 2;
-// 	printf("res is:%sH\n", res);
-// 	init_creator(&i, &j, &action_flag);
-// 	while (node->end_index >= i && res[i])
-// 	{
-// 		node->quote = 0;
-// 		skip(res, &i, 'S', node);
-// 		if (action_flag)
-// 			j = i;
-// 		skip(res, &i, 'X', node);
-// 		if (!res[i] || !inside_zone(zones, max, i))
-// 		{
-// 			action_flag = true;
-// 			if (i - j == 0)
-// 				return ;
-// 			printf("zone range is: %d - %d", zones[0][0], zones[0][1]);
-// 			word = ft_substr(res, j, i - j);
-// 			if (!word)
-// 			{
-// 				free_zone(zones, max);
-// 				free(res);
-// 				parse_error(node, 1, "malloc in expansion split failed", -1);
-// 			}
-// 			create_and_link_token(&(node->tokens), node->processes, word, node);
-// 			free(word);
-// 		}
-// 		else
-// 			action_flag = false;
-// 	}
-// }
-
 void	sever_into_tokens(t_token ***origin, t_data *node, int start, char *res)
 {
 	char	*str;
 	int		**zones;
 
 	str = node->input_line + start;
-	zones = create_zones(node, str);
+	zones = create_zones(node, str, res);
 	if (!zones)
 		return (handle_without_zones(node, origin, res));
 	creator_loop(node, res, zones, str);
@@ -182,4 +146,43 @@ void	sever_into_tokens(t_token ***origin, t_data *node, int start, char *res)
 // 			action_flag = false;
 // 	}
 // 	free_zone(zones, (count_quotes(0, str, node, 'A') / 2));
+// }
+
+// void	creator_loop(t_data *node, char *res, int **zones, char *str)
+// {
+// 	int		i;
+// 	int		j;
+// 	bool	action_flag;
+// 	char	*word;
+// 	int		max;
+
+// 	max = count_quotes(0, str, node, 'A') / 2;
+// 	printf("res is:%sH\n", res);
+// 	init_creator(&i, &j, &action_flag);
+// 	while (node->end_index >= i && res[i])
+// 	{
+// 		node->quote = 0;
+// 		skip(res, &i, 'S', node);
+// 		if (action_flag)
+// 			j = i;
+// 		skip(res, &i, 'X', node);
+// 		if (!res[i] || !inside_zone(zones, max, i))
+// 		{
+// 			action_flag = true;
+// 			if (i - j == 0)
+// 				return ;
+// 			printf("zone range is: %d - %d", zones[0][0], zones[0][1]);
+// 			word = ft_substr(res, j, i - j);
+// 			if (!word)
+// 			{
+// 				free_zone(zones, max);
+// 				free(res);
+// 				parse_error(node, 1, "malloc in expansion split failed", -1);
+// 			}
+// 			create_and_link_token(&(node->tokens), node->processes, word, node);
+// 			free(word);
+// 		}
+// 		else
+// 			action_flag = false;
+// 	}
 // }

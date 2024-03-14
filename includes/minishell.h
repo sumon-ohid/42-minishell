@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/14 22:24:57 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/14 22:33:23 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,7 +203,7 @@ void				sever_into_tokens(t_token ***origin, t_data *node,
 						int start, char *res);
 int					adjust_for_env(int *count, int i, char *str, t_data *node);
 void				free_zone(int **zone, int max);
-int					**create_zones(t_data *node, char *str);
+int					**create_zones(t_data *node, char *str, char *res);
 bool				inside_zone(int **zones, int total, int cur);
 int					count_quotes(int i, char *str, t_data *node, char mode);
 void				skip_till_quote(t_data *node, char *str,

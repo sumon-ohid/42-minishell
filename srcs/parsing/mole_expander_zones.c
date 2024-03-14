@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 18:54:22 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/14 22:24:37 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/14 22:33:04 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	**fill_zones(t_data *node, char *str, int max, int **zones)
 	return (zones);
 }
 
-int	**create_zones(t_data *node, char *str)
+int	**create_zones(t_data *node, char *str, char *res)
 {
 	int		quote_num;
 	int		**zones;
@@ -73,7 +73,10 @@ int	**create_zones(t_data *node, char *str)
 		return (NULL);
 	zones = malloc(sizeof(int *) * quote_num);
 	if (!zones)
+	{
+		free(res);
 		parse_error(node, 1, "malloc in zone creator failed", -1);
+	}
 	max = quote_num;
 	while (quote_num)
 	{
