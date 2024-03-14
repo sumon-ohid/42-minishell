@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirects.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 18:46:23 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/13 17:52:50 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/14 13:40:19 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	ft_redirect_checker(t_token *proxy, int mode, t_data *node, int killmode)
 	return (1);
 }
 
-bool	expands_to_multiples(t_token *mark, t_data *node)
+/*bool	expands_to_multiples(t_token *mark, t_data *node)
 {
 	char	*str;
 	int		i;
@@ -97,4 +97,4 @@ bool	expands_to_multiples(t_token *mark, t_data *node)
 		return (false);
 	else
 		return (true);
-}
+}*/

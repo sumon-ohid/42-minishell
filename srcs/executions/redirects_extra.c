@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 15:02:36 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/13 12:43:13 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/14 13:40:24 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ int	ft_redirector(t_token *chain, int file_type, int mode, t_data *node)
 	t_token	*mark1;
 
 	mark1 = chain;
-	if (!mark1 || expands_to_multiples(mark1, node))
+	if (!mark1)
 	{
 		return (ft_putstr_fd("minishell: ambiguous redirect\n", 2),
 			node->last_return = -99, 0);
