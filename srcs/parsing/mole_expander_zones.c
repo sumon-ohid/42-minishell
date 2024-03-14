@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mole_expander_zones.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 18:54:22 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/14 18:56:10 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/14 19:19:32 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int	**create_zones(t_data *node, char *str)
 
 void	free_zone(int **zone, int max)
 {
-	int counter;
+	int	counter;
 
 	counter = 0;
 	while (counter < max)

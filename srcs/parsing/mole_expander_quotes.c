@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mole_expander_quotes.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 18:52:43 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/14 18:56:38 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/14 19:20:49 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	count_quotes(int i, char *str, t_data *node, char mode)
 {
 	int	quotes;
-	
+
 	quotes = 0;
 	node->quote = 0;
 	while (str[i] && delim_type(str[i], node) != SPC)
@@ -36,7 +36,7 @@ int	count_quotes(int i, char *str, t_data *node, char mode)
 	return (quotes);
 }
 
-void skip_till_quote(t_data *node, char *str, int *i, int *index)
+void	skip_till_quote(t_data *node, char *str, int *i, int *index)
 {
 	while (delim_type(str[*i], node) != QUOTE && str[*i])
 	{
@@ -50,18 +50,18 @@ void skip_till_quote(t_data *node, char *str, int *i, int *index)
 	}
 }
 
-void skip_in_squote(t_data *node, char *str, int *i, int *index)
+void	skip_in_squote(t_data *node, char *str, int *i, int *index)
 {
 	while (delim_type(str[*i], node) != QUOTE && str[*i])
 	{
-			(*i)++;
-			(*index)++;
+		(*i)++;
+		(*index)++;
 	}
 }
 
 int	find_end_index(t_data *node, char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (delim_type(str[i], node) != SPC && str[i])
@@ -69,7 +69,7 @@ int	find_end_index(t_data *node, char *str)
 	return (i);
 }
 
-int check_for_only_dollars(char *str, int i)
+int	check_for_only_dollars(char *str, int i)
 {
 	int	count;
 
@@ -79,9 +79,8 @@ int check_for_only_dollars(char *str, int i)
 		i++;
 		count++;
 	}
-	if (!str[i] || str[i] == ' ' || str[i] == '\n'
-		|| str[i] == '\"' || str[i] == '\''
-			|| str[i] == '-' || str[i] == '.')
+	if (!str[i] || str[i] == ' ' || str[i] == '\n' || str[i] == '\"'
+		|| str[i] == '\'' || str[i] == '-' || str[i] == '.')
 	{
 		return (count);
 	}

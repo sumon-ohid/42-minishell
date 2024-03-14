@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prepare_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 18:06:23 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/14 17:47:15 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/14 19:18:55 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ char	**prepare_basic_envs(t_data *node)
 
 void	add_missing_envs(t_data *node)
 {
-	char *pwd;
-	char *exp;
+	char	*pwd;
+	char	*exp;
 
 	if (!getenv("PATH"))
 		handle_export(node, "PATH=\"/usr/bin:\"");

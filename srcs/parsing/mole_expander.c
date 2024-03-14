@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mole_expander.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 16:05:17 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/14 18:56:20 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/14 19:24:55 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 int	adjust_for_env(int *count, int i, char *str, t_data *node)
 {
-	char tmp[2048];
-	int c;
-	int len;
-	int flag;
+	char	tmp[2048];
+	int		c;
+	int		len;
+	int		flag;
 
 	flag = check_for_only_dollars(str, i);
 	c = 0;
@@ -28,8 +28,8 @@ int	adjust_for_env(int *count, int i, char *str, t_data *node)
 	}
 	i++;
 	while (str[i] && str[i] != ' ' && str[i] != '$' && str[i] != '\n'
-		&& str[i] != '\"' && str[i] != '\'' && str[i] != '-'
-			&& str[i] != '.' && c < 2045)
+		&& str[i] != '\"' && str[i] != '\'' && str[i] != '-' && str[i] != '.'
+		&& c < 2045)
 	{
 		tmp[c++] = str[i++];
 	}
@@ -41,9 +41,9 @@ int	adjust_for_env(int *count, int i, char *str, t_data *node)
 
 void	handle_without_zones(t_data *node, t_token ***origin, char *res)
 {
-	int i;
-	int j;
-	char *word;
+	int		i;
+	int		j;
+	char	*word;
 
 	i = 0;
 	j = 0;
@@ -69,8 +69,8 @@ void	init_creator(int *i, int *j, bool *action_flag)
 
 void	creator_loop(t_data *node, char *res, int **zones, char *str)
 {
-	int 	i;
-	int 	j;
+	int		i;
+	int		j;
 	bool	action_flag;
 	char	*word;
 
@@ -82,7 +82,8 @@ void	creator_loop(t_data *node, char *res, int **zones, char *str)
 		if (action_flag)
 			j = i;
 		skip(res, &i, 'X', node);
-		if (!res[i] || !inside_zone(zones, (count_quotes(0, str, node, 'A') / 2), i))
+		if (!res[i] || !inside_zone(zones, (count_quotes(0, str, node, 'A')
+					/ 2), i))
 		{
 			action_flag = true;
 			word = ft_substr(res, j, i - j);
@@ -98,7 +99,7 @@ void	creator_loop(t_data *node, char *res, int **zones, char *str)
 
 void	sever_into_tokens(t_token ***origin, t_data *node, int start, char *res)
 {
-	char 	*str;
+	char	*str;
 	int		**zones;
 
 	node->end_index = 0;
@@ -118,8 +119,7 @@ void	sever_into_tokens(t_token ***origin, t_data *node, int start, char *res)
 // 	int		j;
 // 	char	*word;
 // 	bool	action_flag;
-
-	
+//
 // 	node->end_index = 0;
 // 	str = node->input_line + start;
 // 	zones = create_zones(node, str);
@@ -132,7 +132,8 @@ void	sever_into_tokens(t_token ***origin, t_data *node, int start, char *res)
 // 		if (action_flag)
 // 			j = i;
 // 		skip(res, &i, 'X', node);
-// 		if (!res[i] || !inside_zone(zones, (count_quotes(0, str, node, 'A') / 2), i))
+// 		if (!res[i] || !inside_zone(zones,
+//			(count_quotes(0, str, node, 'A') / 2), i))
 // 		{
 // 			action_flag = true;
 // 			word = ft_substr(res, j, i - j);

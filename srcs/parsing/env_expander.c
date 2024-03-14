@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_expander.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: parallels <parallels@student.42.fr>        +#+  +:+       +#+        */
+/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 10:06:20 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/14 16:46:23 by parallels        ###   ########.fr       */
+/*   Updated: 2024/03/14 19:22:22 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char	*handle_env_values(char *str, char *result, t_data *node, int *i)
 		var_name = extract_var_name(str + (*i) + 1);
 		if (!var_name)
 			ft_exit(node, -1, "malloc failed at handle envp");
-		tmp = get_env_value(var_name, node);
+		tmp = get_env_value(var_name, node, 0);
 		result = ft_strjoin(result, tmp, 1);
 		if (!result)
 		{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo_extra.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 15:32:22 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/14 12:00:20 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/14 19:22:29 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,13 +125,11 @@ int	remove_only_spaces(char *envp)
 		return (0);
 }
 
-char	*get_env_value(char *arg, t_data *node)
+char	*get_env_value(char *arg, t_data *node, int i)
 {
 	char	*env_value;
 	char	*tmp;
-	int		i;
 
-	i = 0;
 	while (node->envp[i])
 	{
 		if (remove_only_spaces(node->envp[i]))

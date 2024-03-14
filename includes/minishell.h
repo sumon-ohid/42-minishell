@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/14 18:59:36 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/14 19:26:03 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,10 +211,11 @@ void				free_zone(int **zone, int max);
 int					**create_zones(t_data *node, char *str);
 bool				inside_zone(int **zones, int total, int cur);
 int					count_quotes(int i, char *str, t_data *node, char mode);
-void 				skip_till_quote(t_data *node, char *str, int *i, int *index);
-void 				skip_in_squote(t_data *node, char *str, int *i, int *index);
+void				skip_till_quote(t_data *node, char *str,
+						int *i, int *index);
+void				skip_in_squote(t_data *node, char *str, int *i, int *index);
 int					find_end_index(t_data *node, char *str);
-int 				check_for_only_dollars(char *str, int i);
+int					check_for_only_dollars(char *str, int i);
 
 // tokenizer
 t_token				**tokenizer(char *str);
@@ -277,7 +278,7 @@ char				*get_current_directory(void);
 void				ft_echo(char *line, t_data *node, t_token *head);
 void				show_dir(void);
 void				print_argument(char *arg, t_data *node);
-char				*get_env_value(char *arg, t_data *node);
+char				*get_env_value(char *arg, t_data *node, int i);
 char				**ft_env(t_data *node);
 int					ft_export(t_data *node, t_token *token, char *str);
 int					handle_export(t_data *node, char *var);
