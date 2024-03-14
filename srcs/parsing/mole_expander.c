@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 16:05:17 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/14 22:42:00 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/14 23:02:57 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,7 @@ int	adjust_for_env(int *count, int i, char *str, t_data *node)
 		return (flag);
 	}
 	i++;
-	while (str[i] && str[i] != ' ' && str[i] != '$' && str[i] != '\n'
-		&& str[i] != '\"' && str[i] != '\'' && str[i] != '-' && str[i] != '.'
-		&& c < 2045)
+	while (str[i] && ft_isalnum(str[i]) && c < 2045)
 	{
 		tmp[c++] = str[i++];
 	}
@@ -105,6 +103,7 @@ void	sever_into_tokens(t_token ***origin, t_data *node, int start, char *res)
 	char	*str;
 	int		**zones;
 
+	printf("res is: %s\n", res);
 	str = node->input_line + start;
 	zones = create_zones(node, str, res);
 	if (!zones)

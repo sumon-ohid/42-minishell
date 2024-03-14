@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:27:41 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/13 11:20:25 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/14 22:46:42 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ int	ft_export(t_data *node, t_token *token, char *str)
 	(void)str;
 	if (ft_strcmp(token->str, "export") == 0 && token->next == NULL)
 	{
+		printf("we have no args\n");
 		handle_export_no_args(node);
 		return (0);
 	}
