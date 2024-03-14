@@ -6,31 +6,11 @@
 /*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 15:32:22 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/14 19:22:29 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/14 19:31:04 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-// I think this function is not used anywhere in the project
-void	handle_quotes(char *arg, int *i, int len)
-{
-	char	*new_arg;
-
-	if ((arg[0] == '\'' && arg[len - 1] == '\'') || (arg[0] == '\"' && arg[len
-				- 1] == '\"'))
-	{
-		new_arg = ft_substr(arg, 1, len - 2);
-		ft_putstr(new_arg);
-		*i = len;
-	}
-	else if ((arg[0] == '\'' && arg[len - 1] != '\'') || (arg[0] == '\"'
-			&& arg[len - 1] != '\"'))
-		return ;
-	else if ((arg[0] != '\'' && arg[len - 1] == '\'') || (arg[0] != '\"'
-			&& arg[len - 1] == '\"'))
-		return ;
-}
 
 void	print_argument(char *arg, t_data *node)
 {
@@ -81,33 +61,6 @@ char	*copy_after_char(char *str, char c)
 	output[j] = '\0';
 	return (output);
 }
-
-// void	remove_many_spaces(char *envp)
-// {
-// 	int		i;
-// 	int		j;
-// 	char	*tmp;
-
-// 	i = 0;
-// 	j = 0;
-// 	tmp = malloc(sizeof(char) * ft_strlen(envp) + 1);
-// 	if (!tmp)
-// 		return ;
-// 	while (envp[i])
-// 	{
-// 		if (envp[i] == ' ' && envp[i + 1] == ' ')
-// 			i++;
-// 		else
-// 		{
-// 			tmp[j] = envp[i];
-// 			i++;
-// 			j++;
-// 		}
-// 	}
-// 	tmp[j] = '\0';
-// 	ft_strcpy(envp, tmp);
-// 	free(tmp);
-// }
 
 int	remove_only_spaces(char *envp)
 {

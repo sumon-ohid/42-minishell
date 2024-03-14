@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:24:36 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/12 17:38:53 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/14 19:29:57 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,53 +104,3 @@ int	ft_cd(char *str, t_data *node)
 	free(pwd);
 	return (ret);
 }
-
-// int	ft_cd(char *str, t_data *node)
-// {
-// 	char	*oldpwd;
-// 	char	*pwd;
-// 	int		ret;
-// 	char	*line;
-// 	int		var_exists;
-
-// 	var_exists = 0;
-// 	ret = 0;
-// 	pwd = NULL;
-// 	line = NULL;
-// 	oldpwd = ft_strdup(ft_getenv("PWD", node));
-// 	if (oldpwd == NULL && !(node->old_turn))
-// 	{
-// 		ft_unsetenv(node, "OLDPWD");
-// 		node->old_turn = 1;
-// 		free(node->oldpwd);
-// 		node->oldpwd = get_current_directory();
-// 		ret = change_directory(str, node);
-// 		free(pwd);
-// 		free(line);
-// 		return (ret);
-// 	}
-// 	if (oldpwd == NULL && node->old_turn == 1)
-// 	{
-// 		line = ft_strjoin("OLDPWD=", node->oldpwd, 0); //need to protect & free
-// 		var_exists = check_if_var_exists(node, line);
-// 		if (var_exists)
-// 			handle_var_exist_in_envp(node, line);
-// 		else
-// 			handle_var_not_exists(node, line);
-// 		ret = change_directory(str, node);
-// 		free(node->oldpwd);
-// 		node->oldpwd = get_current_directory();
-// 		free(pwd);
-// 		free(line);
-// 		return (ret);
-// 	}
-// 	ret = change_directory(str, node);
-// 	pwd = get_current_directory();
-// 	if (pwd == NULL)
-// 		ft_exit(node, -1, "getcwd failed");
-// 	ft_setenv(node, "OLDPWD", oldpwd);
-// 	ft_setenv(node, "PWD", pwd);
-// 	free(pwd);
-// 	free(oldpwd);
-// 	return (ret);
-// }
