@@ -6,7 +6,7 @@
 /*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 13:00:50 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/14 19:26:55 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/14 19:27:52 by msumon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	handler(int status)
 	{
 		g_signal = CTRL_C;
 		ioctl(STDIN_FILENO, TIOCSTI, "\n");
-		//rl_replace_line("", 0);
+		rl_replace_line("", 0);
 		rl_on_new_line();
 	}
 }
@@ -31,7 +31,7 @@ void	handle_heredoc(int status)
 	{
 		g_signal = CTRL_C;
 		ioctl(STDIN_FILENO, TIOCSTI, "\n");
-		//rl_replace_line("", 0);
+		rl_replace_line("", 0);
 		rl_on_new_line();
 	}
 }
