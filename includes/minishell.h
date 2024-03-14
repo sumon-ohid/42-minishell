@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:19:30 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/14 19:29:11 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/14 22:24:57 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,6 @@ typedef struct s_data
 	char				command_flag;
 	int					msg;
 	bool				delim_turn;
-	int					end_index;
 	t_mode				mode;
 	t_token				**tokens;
 	t_element			*elements;
@@ -210,7 +209,6 @@ int					count_quotes(int i, char *str, t_data *node, char mode);
 void				skip_till_quote(t_data *node, char *str,
 						int *i, int *index);
 void				skip_in_squote(t_data *node, char *str, int *i, int *index);
-int					find_end_index(t_data *node, char *str);
 int					check_for_only_dollars(char *str, int i);
 
 // tokenizer

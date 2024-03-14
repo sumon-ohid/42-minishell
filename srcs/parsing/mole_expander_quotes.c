@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mole_expander_quotes.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 18:52:43 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/14 19:20:49 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/14 22:25:02 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,15 +59,15 @@ void	skip_in_squote(t_data *node, char *str, int *i, int *index)
 	}
 }
 
-int	find_end_index(t_data *node, char *str)
-{
-	int	i;
+// int	find_end_index(t_data *node, char *str)
+// {
+// 	int	i;
 
-	i = 0;
-	while (delim_type(str[i], node) != SPC && str[i])
-		i++;
-	return (i);
-}
+// 	i = 0;
+// 	while (delim_type(str[i], node) != SPC && str[i])
+// 		i++;
+// 	return (i);
+// }
 
 int	check_for_only_dollars(char *str, int i)
 {

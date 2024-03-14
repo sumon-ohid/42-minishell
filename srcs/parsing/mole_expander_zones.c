@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mole_expander_zones.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 18:54:22 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/14 19:19:32 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/14 22:24:37 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ int	**fill_zones(t_data *node, char *str, int max, int **zones)
 		start++;
 		counter++;
 	}
-	node->end_index = index;
 	return (zones);
 }
 

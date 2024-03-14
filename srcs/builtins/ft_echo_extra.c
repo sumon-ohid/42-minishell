@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo_extra.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 15:32:22 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/14 19:31:04 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/14 20:49:44 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,12 @@ int	remove_only_spaces(char *envp)
 	int		i;
 
 	i = 0;
+	if (!envp)
+		return (0);
 	while (envp[i] && envp[i] != '=')
 		i++;
+	if (!envp[i])
+		return (1);
 	i++;
 	while (envp[i] && envp[i] == ' ')
 		i++;

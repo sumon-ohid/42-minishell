@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mole_expander.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon < msumon@student.42vienna.com>      +#+  +:+       +#+        */
+/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 16:05:17 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/14 19:24:55 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/14 22:24:43 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,49 +60,85 @@ void	handle_without_zones(t_data *node, t_token ***origin, char *res)
 	}
 }
 
-void	init_creator(int *i, int *j, bool *action_flag)
+void	init_creator(int *i, int *j)
 {
 	*i = 0;
 	*j = 0;
-	*action_flag = true;
 }
 
 void	creator_loop(t_data *node, char *res, int **zones, char *str)
 {
 	int		i;
 	int		j;
-	bool	action_flag;
 	char	*word;
+	int		max;
 
-	init_creator(&i, &j, &action_flag);
-	while (node->end_index >= i && res[i])
+	max = count_quotes(0, str, node, 'A') / 2;
+	i = 0;
+	j = 0;
+	while (res[i])
 	{
-		node->quote = 0;
-		skip(res, &i, 'S', node);
-		if (action_flag)
-			j = i;
-		skip(res, &i, 'X', node);
-		if (!res[i] || !inside_zone(zones, (count_quotes(0, str, node, 'A')
-					/ 2), i))
+		while (res[i] == ' ' && !inside_zone(zones, max, i))
+			i++;
+		j = i;
+		while (res[i] && (res[i] != ' ' || inside_zone(zones, max, i)))
+			i++;
+		word = ft_substr(res, j, i - j);
+		if (!word)
 		{
-			action_flag = true;
-			word = ft_substr(res, j, i - j);
-			if (!word)
-				parse_error(node, 1, "malloc in expansion split failed", -1);
-			create_and_link_token(&(node->tokens), node->processes, word, node);
-			free(word);
+			free_zone(zones, max);
+			free(res);
+			parse_error(node, 1, "malloc in expansion split failed", -1);
 		}
-		else
-			action_flag = false;
+		create_and_link_token(&(node->tokens), node->processes, word, node);
+		free(word);
 	}
 }
+
+// void	creator_loop(t_data *node, char *res, int **zones, char *str)
+// {
+// 	int		i;
+// 	int		j;
+// 	bool	action_flag;
+// 	char	*word;
+// 	int		max;
+
+// 	max = count_quotes(0, str, node, 'A') / 2;
+// 	printf("res is:%sH\n", res);
+// 	init_creator(&i, &j, &action_flag);
+// 	while (node->end_index >= i && res[i])
+// 	{
+// 		node->quote = 0;
+// 		skip(res, &i, 'S', node);
+// 		if (action_flag)
+// 			j = i;
+// 		skip(res, &i, 'X', node);
+// 		if (!res[i] || !inside_zone(zones, max, i))
+// 		{
+// 			action_flag = true;
+// 			if (i - j == 0)
+// 				return ;
+// 			printf("zone range is: %d - %d", zones[0][0], zones[0][1]);
+// 			word = ft_substr(res, j, i - j);
+// 			if (!word)
+// 			{
+// 				free_zone(zones, max);
+// 				free(res);
+// 				parse_error(node, 1, "malloc in expansion split failed", -1);
+// 			}
+// 			create_and_link_token(&(node->tokens), node->processes, word, node);
+// 			free(word);
+// 		}
+// 		else
+// 			action_flag = false;
+// 	}
+// }
 
 void	sever_into_tokens(t_token ***origin, t_data *node, int start, char *res)
 {
 	char	*str;
 	int		**zones;
 
-	node->end_index = 0;
 	str = node->input_line + start;
 	zones = create_zones(node, str);
 	if (!zones)
