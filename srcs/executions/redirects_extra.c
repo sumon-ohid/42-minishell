@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 15:02:36 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/14 13:40:24 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/14 16:50:46 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 int	str_is_nothing(char *str)
 {
-	int	c;
-
-	c = 0;
 	if (!str)
 		return (1);
 	if (ft_strcmp(str, "") == 0)
