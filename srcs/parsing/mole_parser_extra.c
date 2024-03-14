@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 16:05:17 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/13 23:07:57 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/14 12:50:39 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,40 @@ bool	inside_zone(int **zones, int total, int cur)
 	return (false);
 }
 
+int check_for_only_dollars(char *str, int i)
+{
+	int	count;
+
+	count = 0;
+	while (str[i] == '$')
+	{
+		i++;
+		count++;
+	}
+	if (!str[i] || str[i] == ' ' || str[i] == '\n'
+		|| str[i] == '\"' || str[i] == '\''
+			|| str[i] == '-' || str[i] == '.')
+	{
+		return (count);
+	}
+	else
+		return (0);
+}
+
 int	adjust_for_env(int *count, int i, char *str, t_data *node)
 {
 	char tmp[2048];
 	int c;
 	int len;
+	int flag;
 
-	//tmp[0] = str[i];
+	flag = check_for_only_dollars(str, i);
 	c = 0;
+	if (flag)
+	{
+		*count = *count + flag;
+		return (flag);
+	}
 	i++;
 	while (str[i] && str[i] != ' ' && str[i] != '$' && str[i] != '\n'
 		&& str[i] != '\"' && str[i] != '\'' && str[i] != '-'
@@ -83,9 +109,9 @@ int	adjust_for_env(int *count, int i, char *str, t_data *node)
 	tmp[c] = '\0';
 	len = ft_strlen(ft_getenv(tmp, node));
 	//printf("tmp is: %s, env is: %s, length of expanded str is: %d\n", tmp, ft_getenv(tmp, node), len);
-	*count = *count - c + len;
+	*count = *count + len;
 	//printf("count val is %d, c val is: %d\n", *count, c);
-	return (c);
+	return (c + 1);
 }
 
 void skip_till_quote(t_data *node, char *str, int *i, int *index)
@@ -102,7 +128,7 @@ void skip_till_quote(t_data *node, char *str, int *i, int *index)
 	}
 }
 
-void skip_in_quote(t_data *node, char *str, int *i, int *index)
+void skip_in_squote(t_data *node, char *str, int *i, int *index)
 {
 	while (delim_type(str[*i], node) != QUOTE && str[*i])
 	{
@@ -129,20 +155,21 @@ int	**fill_zones(t_data *node, char *str, int max, int **zones)
 		skip_till_quote(node, str, &start, &index);
 		//printf("we are at %c, index is %d\n", str[start], index);
 		zones[counter][0] = index - subtract;
+		node->quote = str[start];
 		subtract++;
 		start++;
-		index++;
 		//printf("we are at %c, index is %d\n", str[start], index);
-		if (str[start - 1] == '\'')
-			skip_in_quote(node, str, &start, &index);
+		if (node->quote == '\'')
+			skip_in_squote(node, str, &start, &index);
 		else
 			skip_till_quote(node, str, &start, &index);
 		//printf("we are at %c, index is %d\n", str[start], index);
 		zones[counter][1] = index - subtract;
+		start++;
 		subtract++;
 		counter++;
 	}
-	index = index - count_quotes(0, str, node, 'A');
+	//index = index - count_quotes(0, str, node, 'A'); //something is wrong here!!
 	node->end_index = index;
 	//printf("end index set to: %d\n", index);
 	return (zones);
@@ -159,13 +186,13 @@ int	**create_zones(t_data *node, char *str)
 		return (NULL);
 	zones = malloc(sizeof(int *) * quote_num);
 	if (!zones)
-		parse_error(node, 1, "malloc in parsing failed", -1);
+		parse_error(node, 1, "malloc in zone creator failed", -1);
 	max = quote_num;
 	while (quote_num)
 	{
 		zones[quote_num - 1] = malloc(sizeof(int) * 2);
 		if (!zones[quote_num - 1])
-			parse_error(node, 1, "malloc in parsing failed", -1);
+			parse_error(node, 1, "malloc in zone creator failed", -1);
 		quote_num--;
 	}
 	return (fill_zones(node, str, max, zones));
@@ -183,10 +210,11 @@ void	handle_without_zones(t_data *node, t_token ***origin, char *res)
 	{
 		skip(res, &i, 'S', node);
 		j = i;
-		skip(res, &i, 'X', node);
+		skip(res, &i, 'X', node); //bc it expands into spaces and we skip everything BUT spaces!!!
+		//printf("res is: %sH\n", res);
 		word = ft_substr(res, j, i - j);
 		if (!word)
-			parse_error(node, 1, "malloc in parsing failed", -1);
+			parse_error(node, 1, "malloc in zone handler failed", -1);
 		//printf("the new word is: %s\n", word);
 		create_and_link_token(origin, node->processes, word, node);
 		free(word);
@@ -237,7 +265,7 @@ void	sever_into_tokens(t_token ***origin, t_data *node, int start, char *res)
 			action_flag = true;
 			word = ft_substr(res, j, i - j);
 			if (!word)
-				parse_error(node, 1, "malloc in parsing failed", -1);
+				parse_error(node, 1, "malloc in expansion split failed", -1);
 			//printf("the new word is: %s\n", word);
 			create_and_link_token(origin, node->processes, word, node);
 			free(word);
