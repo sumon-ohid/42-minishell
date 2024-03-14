@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 16:05:17 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/14 22:34:04 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/14 22:42:00 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ void	handle_without_zones(t_data *node, t_token ***origin, char *res)
 		skip(res, &i, 'S', node);
 		j = i;
 		skip(res, &i, 'X', node);
+		if (i - j == 0)
+			return ;
 		word = ft_substr(res, j, i - j);
 		if (!word)
 		{

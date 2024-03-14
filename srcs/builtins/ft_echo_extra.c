@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 15:32:22 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/14 20:49:44 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/14 22:41:48 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,6 @@ char	*get_env_value(char *arg, t_data *node, int i)
 
 	while (node->envp[i])
 	{
-		if (remove_only_spaces(node->envp[i]))
-			return ("");
 		tmp = copy_until_char(node->envp[i], '=');
 		if (!tmp)
 			ft_exit(node, 127, "malloc error in get_env");
