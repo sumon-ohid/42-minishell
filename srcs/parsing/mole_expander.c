@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 16:05:17 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/14 23:02:57 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/14 23:08:41 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,6 @@ void	sever_into_tokens(t_token ***origin, t_data *node, int start, char *res)
 	char	*str;
 	int		**zones;
 
-	printf("res is: %s\n", res);
 	str = node->input_line + start;
 	zones = create_zones(node, str, res);
 	if (!zones)
