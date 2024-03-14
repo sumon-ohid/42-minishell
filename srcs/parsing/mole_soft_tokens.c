@@ -6,7 +6,7 @@
 /*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 17:05:36 by mhuszar           #+#    #+#             */
-/*   Updated: 2024/03/13 20:54:57 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/14 18:49:15 by mhuszar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	create_soft_token(t_data *node, int *end, t_token ***origin)
 	}
 	node->quote = SINGLE_QUOTE;
 	sever_into_tokens(origin, node, start, result);
-	//create_and_link_token(origin, node->processes, result, node);
 	free(result);
 }
 
