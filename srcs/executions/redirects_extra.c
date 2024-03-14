@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirects_extra.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhuszar <mhuszar@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: parallels <parallels@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 15:02:36 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/13 12:43:13 by mhuszar          ###   ########.fr       */
+/*   Updated: 2024/03/14 16:46:31 by parallels        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 int	str_is_nothing(char *str)
 {
-	int	c;
-
-	c = 0;
 	if (!str)
 		return (1);
 	if (ft_strcmp(str, "") == 0)

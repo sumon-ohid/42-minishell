@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_expander.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumon <msumon@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: parallels <parallels@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 10:06:20 by msumon            #+#    #+#             */
-/*   Updated: 2024/03/13 17:19:40 by msumon           ###   ########.fr       */
+/*   Updated: 2024/03/14 16:46:23 by parallels        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,19 +36,6 @@ char	*handle_dollar_question(char *result, t_data *node, int *i)
 	char	*var_value;
 
 	var_value = ft_lastval_str(node);
-	result = ft_strjoin(result, var_value, 1);
-	if (!result)
-		ft_exit(node, -1, "malloc failed at handle envp");
-	free(var_value);
-	(*i)++;
-	return (result);
-}
-
-char	*handle_dollar_dollar(char *result, t_data *node, int *i)
-{
-	char	*var_value;
-
-	var_value = ft_itoa(getpid());
 	result = ft_strjoin(result, var_value, 1);
 	if (!result)
 		ft_exit(node, -1, "malloc failed at handle envp");
@@ -99,8 +86,6 @@ char	*handle_envp(char *str, t_data *node)
 		{
 			if (str[i + 1] == '?')
 				result = handle_dollar_question(result, node, &i);
-			else if (str[i + 1] == '$')
-				result = handle_dollar_dollar(result, node, &i);
 			else
 				result = handle_env_values(str, result, node, &i);
 		}
