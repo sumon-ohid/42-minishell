@@ -1,8 +1,6 @@
 NAME = minishell
 CC = cc
-CC1 = clang
-CC2 = gcc
-CFLAGS = -Wall -Werror -Wextra -g #-fsanitize=address
+CFLAGS = -Wall -Werror -Wextra -g
 HEADER = minishell.h
 
 #Colors
@@ -66,9 +64,7 @@ SRC = 	srcs/main/main.c \
 		srcs/utils/ft_split_special_edition.c \
 		srcs/utils/ft_split_extra.c \
 		srcs/utils/ft_printerr.c \
-		#srcs/utils/get_next_line.c \
 		
-
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
@@ -101,15 +97,4 @@ fcelan: celan
 
 clear: celan
 
-strict:
-	@echo "$(GREEN)Compiling with $(YELLOW)$(CC1)$(GREEN)...$(DEF_COLOR)"
-	@$(MAKE) all CC=$(CC1)
-	@echo "$(GREEN)Cleaning up...$(DEF_COLOR)"
-	@$(MAKE) fclean
-	@echo "$(GREEN)Compiling with $(YELLOW)$(CC2)$(GREEN)...$(DEF_COLOR)"
-	@$(MAKE) all CC=$(CC2)
-	@echo "$(GREEN)Cleaning up again...$(DEF_COLOR)"
-	@$(MAKE) clean
-	@echo "$(GREEN)Tested for both compilers.$(DEF_COLOR)"
-
-.PHONY: all clean fclean re bonus strict smooth celan fcelan clear
+.PHONY: all clean fclean re smooth celan fcelan clear
