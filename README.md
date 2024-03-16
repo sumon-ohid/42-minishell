@@ -70,7 +70,7 @@ Here are some examples of commands you can run:
 
 ## Credits
 
-MiniShell was created by [Sumon](https://github.com/sumon-ohid) and [Leske](https://github.com/leske42) . It was inspired by the Bash shell and is intended to provide a lightweight alternative with essential functionalities.
+Created by [Sumon](https://github.com/sumon-ohid) and [Leske](https://github.com/leske42) . 
 
 ## Note
 
