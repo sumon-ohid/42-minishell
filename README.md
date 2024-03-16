@@ -72,6 +72,6 @@ Here are some examples of commands you can run:
 
 MiniShell was created by [Sumon](https://github.com/sumon-ohid) and [Leske](https://github.com/leske42) . It was inspired by the Bash shell and is intended to provide a lightweight alternative with essential functionalities.
 
-## License
+## Note
 
-This project is licensed under the [MIT License](LICENSE). Feel free to modify and distribute it according to your needs. !!!! Please don't use it directly for 42 School projects !!!!
+Feel free to modify and distribute it according to your needs. !!!! Please don't use it directly for 42 School projects !!!!
