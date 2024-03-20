@@ -1,6 +1,6 @@
 # Minishell
 ## As beautiful as a shell
-Minishell is one of the largest project in 42 School. It took us almost 2 months to evaluate the project. But we learnt so much through out this time. Also this is our first team project. Through this project we learnt how computer executes a command, proccesses, builtins (echo , export etc.) and so on. We learnt how to contribute and split problems with others on the same project and come up with a solution. Overall it's a full-stack , real-world, useful, stressful and fun project.
+Minishell is one of the largest project in 42 School. It took us almost 2 months to evaluate the project. But we learnt so much through out this time. Also this is our first team project. Through this project we learnt how computer executes a command, how proccesses work, how some builtins (echo , export etc.) works , how signal works and so on. We learnt how to contribute and split problems with others on the same project, share ideas and knowledge and eventually come up with solution. Overall it's a full-stack , real-world, useful, sometimes stressful and very intersting project.
 
 ## Features
 
