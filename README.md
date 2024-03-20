@@ -1,7 +1,6 @@
-# MiniShell
+# Minishell
 ## As beautiful as a shell
-
-MiniShell is a minimalistic shell program designed to replicate the basic functionalities of the Bash shell. It provides a command-line interface for users to interact with the operating system by executing commands and managing processes.
+Minishell is one of the largest project in 42 School. It took us almost 2 months to evaluate the project. But we learnt so much through out this time. Also this is our first team project. Through this project we learnt how computer executes a command, proccesses, builtins (echo , export etc.) and so on. We learnt how to contribute and split problems with others on the same project and come up with a solution. Overall it's a full-stack , real-world, useful, stressful and fun project.
 
 ## Features
 
@@ -32,16 +31,13 @@ MiniShell is a minimalistic shell program designed to replicate the basic functi
     make
     ```
 
-4. Run MiniShell:
+4. Run Minishell:
 
     ```
     ./minishell
     ```
 
 ## Usage
-
-Once MiniShell is running, you can use it just like any other shell. Enter commands at the prompt and press `Enter` to execute them. MiniShell supports a variety of features common to Unix-like shells, including input/output redirection, pipeline commands, and background processes.
-
 Here are some examples of commands you can run:
 
 - **Executing a command**:
